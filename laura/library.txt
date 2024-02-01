@@ -1,0 +1,434 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    library.txt                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/02/01 13:55:49 by lnunez-t          #+#    #+#              #
+#    Updated: 2024/02/01 17:17:03 by lnunez-t         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+readline : read a line from the terminal and return it, using prompt
+       as a prompt.  If prompt is NULL or the empty string, no prompt  is  is‐
+       sued.   The  line returned is allocated with malloc(3); the caller must
+       free it when finished.  The line returned has  the  final  newline  re‐
+       moved, so only the text of the line remains.
+
+       lit une ligne du terminal et la renvoie, en utilisant prompt
+       comme invite.  Si prompt est NULL ou la chaîne vide, aucun prompt n'est-
+       sued.   La ligne retournée est allouée avec malloc(3) ; l'appelant doit la
+       doit la libérer lorsqu'il a terminé.  La ligne retournée a la dernière nouvelle ligne re
+       de la ligne renvoyée, de sorte que seul le texte de la ligne est conservé.
+
+char *readline (const char *prompt);
+
+--------------------------
+
+rl_clear_history : clear the history list by deleting all of the entries
+
+                   efface l'historique en supprimant toutes les entrées.
+
+void rl_clear_history (void)
+
+--------------------------
+
+rl_on_new_line : Tell the update functions that we have moved onto 
+        a new (empty) line, usually after outputting a newline
+
+        Indiquer aux fonctions de mise à jour que nous sommes passés à 
+        une nouvelle ligne (vide), généralement après avoir affiché une nouvelle ligne.
+
+int rl_on_new_line (void)
+
+--------------------------
+
+rl_replace_line : Replace the contents of rl_line_buffer with text. The point 
+        and mark are preserved, if possible. If clear_undo is non-zero, 
+        the undo list associated with the current line is cleared. 
+
+        Remplacer le contenu de rl_line_buffer par du texte. Le point 
+        et la marque sont préservés, si possible. Si clear_undo est différent de zéro, 
+        la liste d'annulation associée à la ligne courante est effacée.
+
+void rl_replace_line (const char *text, int clear_undo)
+
+--------------------------
+
+rl_redisplay : Change what’s displayed on the screen to reflect the current 
+        contents of rl_line_buffer
+
+        Modifier l'affichage à l'écran pour refléter le contenu actuel de rl_line_buffer 
+        contenu de rl_line_buffer
+
+void rl_redisplay (void)
+
+--------------------------
+
+add_history : Place string at the end of the history list. The associated data field 
+        (if any) is set to NULL. If the maximum number of history entries has been set 
+        using stifle_history(), and the new number of history entries would exceed that maximum, 
+        the oldest history entry is removed.
+
+        Placer la chaîne de caractères à la fin de la liste historique. Le champ de données associé 
+        (le cas échéant) est mis à NULL. Si le nombre maximum d'entrées dans l'historique a été défini 
+        à l'aide de la fonction stifle_history(), et que le nouveau nombre d'entrées de l'historique dépasse ce maximum, 
+        l'entrée la plus ancienne de l'historique est supprimée.
+
+void add_history (const char *string)
+
+--------------------------
+
+access : checks  whether the calling process can access the file path‐
+       name.  If pathname is a symbolic link, it is dereferenced.
+
+       vérifie si le processus appelant peut accéder au chemin d'accès au fichier.
+       nom.  Si le nom du chemin est un lien symbolique, il est déréférencé.
+
+int access(const char *pathname, int mode)
+
+--------------------------
+
+waitpid : suspends execution of the calling thread  until  a  child specified by pid argument 
+        has changed state.
+
+        suspend l'exécution du thread appelant jusqu'à ce qu'un enfant spécifié par l'argument pid 
+        ait changé d'état.
+
+pid_t waitpid(pid_t pid, int *wstatus, int options)
+
+--------------------------
+
+wait3 : waits of any child
+
+        attends n'importe quel enfant
+
+pid_t wait3(int *wstatus, int options, struct rusage *rusage)
+
+--------------------------
+
+wait4 : can  be  used to select a specific child, or children, on which to wait
+
+        peut être utilisé pour sélectionner un ou plusieurs enfants spécifiques pour lesquels il faut attendre.
+
+pid_t wait4(pid_t pid, int *wstatus, int options, struct rusage *rusage)
+
+--------------------------
+
+signal : sets the disposition of the signal signum to handler
+
+        définit la disposition du signum du signal pour le gestionnaire
+        
+sighandler_t signal(int signum, sighandler_t handler)
+
+--------------------------
+
+sigaction : change the action taken by a process on receipt of a specific signal (signum)
+
+            modifier l'action entreprise par un processus à la réception d'un signal spécifique (signum)
+
+int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact)
+
+struct sigaction {
+               void     (*sa_handler)(int);
+               void     (*sa_sigaction)(int, siginfo_t *, void *);
+               sigset_t   sa_mask;
+               int        sa_flags;
+               void     (*sa_restorer)(void);
+           };
+
+
+--------------------------
+
+sigemptyset : initializes the signal set given by set  to  empty,  with all signals excluded 
+        from the set
+        
+              initialise l'ensemble de signaux donné par set à vide, avec tous les signaux exclus 
+        de l'ensemble
+
+int sigemptyset(sigset_t *set)
+
+--------------------------
+
+sigaddset : add the signal signum to the signal set pointed to by set
+
+            ajoute le signal signum à l'ensemble de signaux indiqué par set
+
+int sigaddset(sigset_t *set, int signum)
+
+--------------------------
+
+kill : send a signal to a process
+
+        envoyer un signal à un processus
+
+kill [options] <pid>
+
+--------------------------
+
+getcwd : copies an absolute pathname of the current  working directory 
+        to the array pointed to by buf, which is of length size
+
+        copie un nom de chemin absolu du répertoire de travail actuel 
+        dans le tableau pointé par buf, qui a une longueur de taille
+
+char *getcwd(char *buf, size_t size)
+
+--------------------------
+
+chdir : changes the current working directory of the calling process 
+        to the directory specified in path
+
+        modifie le répertoire de travail actuel du processus appelant 
+        au répertoire spécifié dans path
+
+int chdir(const char *path)
+
+--------------------------
+
+stat : retrieve information about the file pointed to by pathname
+
+        récupérer des informations sur le fichier désigné par pathname
+
+int stat(const char *pathname, struct stat *statbuf)
+
+--------------------------
+
+lstat : identical to stat(), except that if pathname is  a  symbolic
+        link,  then  it returns information about the link itself, 
+        not the file that the link refers to
+
+        identique à stat(), sauf que si pathname est un lien symbolique, elle renvoie des informations sur le lien lui-même.
+        symbolique, elle renvoie des informations sur le lien lui-même, 
+        et non sur le fichier auquel le lien fait référence
+
+int lstat(const char *pathname, struct stat *statbuf)
+
+--------------------------
+
+fstat : identical to stat(), except that the file about which information
+        is to be retrieved is specified by the file descriptor fd
+
+        identique à stat(), sauf que le fichier sur lequel les informations
+        doit être récupéré est spécifié par le descripteur de fichier fd
+
+int fstat(int fd, struct stat *statbuf)
+
+--------------------------
+
+unlink : détruit un nom dans le système de fichiers. Si ce nom était le dernier 
+        lien sur un fichier, et si aucun processus n'a ouvert ce fichier, ce dernier 
+        est effacé, et l'espace qu'il utilisait est rendu disponible. 
+
+int unlink(const char *pathname)
+
+--------------------------
+
+execve : executes the program referred to by pathname.  This causes the
+       program that is currently being run by the calling process  to  be  re‐
+       placed  with  a  new  program,  with newly initialized stack, heap, and
+       (initialized and uninitialized) data segments
+
+       exécute le programme désigné par pathname.  Le programme en cours d'exécution par le processus appelant est alors ré-exécuté.
+       programme en cours d'exécution par le processus appelant.
+       par un nouveau programme, avec une pile, un tas et des segments de données (initialisés et non initialisés) nouvellement initialisés.
+       segments de données (initialisés et non initialisés)
+
+int execve(const char *pathname, char *const argv[], char *const envp[])
+
+--------------------------
+
+dup : creates a copy of the file descriptor oldfd, using the lowest-numbered unused 
+        file descriptor for the new descriptor
+
+        crée une copie du descripteur de fichier oldfd, en utilisant le descripteur de fichier inutilisé le plus bas pour le nouveau descripteur. 
+        le plus bas pour le nouveau descripteur
+
+int dup(int oldfd)
+
+--------------------------
+
+dup2 : performs the same task as dup(), but instead  of using  the lowest-numbered unused 
+        file descriptor, it uses the file descriptor number specified in newfd
+
+        effectue la même tâche que dup(), mais au lieu d'utiliser le plus petit descripteur de fichier inutilisé, il utilise le numéro de descripteur de fichier spécifié dans newfd(). 
+        il utilise le numéro de descripteur de fichier spécifié dans newfd
+
+int dup2(int oldfd, int newfd)
+
+--------------------------
+
+pipe : creates  a pipe, a unidirectional data channel that can be used
+       for interprocess communication
+
+       crée un pipe, un canal de données unidirectionnel qui peut être utilisé
+       pour la communication interprocessus
+
+int pipe(int pipefd[2])
+
+--------------------------
+
+opendir : opens a directory stream corresponding to the directory name, 
+        and returns a pointer to  the  directory  stream
+
+        ouvre un flux de répertoire correspondant au nom du répertoire, 
+        et renvoie un pointeur sur le flux du répertoire
+
+DIR *opendir(const char *name)
+
+--------------------------
+
+readdir : returns a pointer to a dirent structure representing the next 
+        directory entry in the directory stream pointed to  by dirp
+
+        renvoie un pointeur sur une structure dirent représentant l'entrée de répertoire suivante dans le flux de répertoire indiqué par dirp. 
+        dans le flux de répertoires indiqué par dirp
+
+struct dirent *readdir(DIR *dirp)
+
+struct dirent {
+               ino_t          d_ino;       /* Inode number */
+               off_t          d_off;       /* Not an offset; see below */
+               unsigned short d_reclen;    /* Length of this record */
+               unsigned char  d_type;      /* Type of file; not supported
+                                              by all filesystem types */
+               char           d_name[256]; /* Null-terminated filename */
+           };
+
+--------------------------
+
+closedir : closes  the directory stream associated with dirp
+
+           ferme le flux de répertoire associé à dirp
+
+int closedir(DIR *dirp)
+
+--------------------------
+
+strerror : returns a pointer to a  string  that  describes the  error  code  
+        passed  in  the  argument  errnum
+
+        renvoie un pointeur sur une chaîne de caractères décrivant le code d'erreur  
+        transmis dans l'argument errnum
+
+char *strerror(int errnum)
+
+--------------------------
+
+perror : produces a message on standard error describing the last error encountered 
+        during a call to a system or  library  function
+
+        produit un message sur l'erreur standard décrivant la dernière erreur rencontrée 
+        lors d'un appel à une fonction du système ou de la bibliothèque
+
+void perror(const char *s)
+
+--------------------------
+
+isatty : tests whether fd is an open file descriptor referring to a terminal
+
+        teste si fd est un descripteur de fichier ouvert se référant à un terminal
+
+int isatty(int fd)
+
+--------------------------
+
+ttyname : returns a pointer to the null-terminated pathname of the terminal
+        device that is open on the file descriptor fd, or NULL on error
+
+        renvoie un pointeur sur le nom de chemin d'accès à terminaison nulle du terminal ouvert sur le descripteur de fichier fd ou NULL en cas d'erreur.
+        ouvert sur le descripteur de fichier fd, ou NULL en cas d'erreur.
+
+char *ttyname(int fd)
+
+--------------------------
+
+ttyslot : find the slot of the current user's terminal in some file
+
+        trouver l'emplacement du terminal de l'utilisateur actuel dans un fichier quelconque
+
+int ttyslot(void)
+
+--------------------------
+
+ioctl : signifiant input-output control (contrôle d'entrée-sortie), est un 
+        appel système pour des opérations d'entrée-sortie spécifiques à un périphérique 
+        qui ne peuvent être exécutées par un appel système classique
+
+int ioctl(int fd, unsigned long request, ...)
+
+--------------------------
+
+getenv : searches the environment list to find the environment variable name, and returns 
+        a pointer to the corresponding value string
+
+        recherche dans la liste d'environnement le nom de la variable d'environnement et renvoie un pointeur sur la chaîne de valeur correspondante. 
+        un pointeur sur la chaîne de valeur correspondante
+
+char *getenv(const char *name)
+
+--------------------------
+
+tcsetattr : fixe les paramètres du terminal en lisant la structure termios pointée par termios_p
+
+int tcsetattr(int fd, int optional_actions, const struct termios *termios_p)
+
+--------------------------
+
+tcgetattr : récupère les paramètres associés à l'objet référencé par fd et 
+        les stocke dans la structure termios pointée par termios_p
+
+int tcgetattr(int fd, struct termios *termios_p)
+
+--------------------------
+
+tgetent : looks up the termcap entry for name. The emulation ignores the buffer pointer bp
+
+        recherche l'entrée termcap pour le nom. L'émulation ignore le pointeur de tampon bp
+
+int tgetent(char *bp, const char *name)
+
+--------------------------
+
+tgetflag : gets the boolean entry for id
+
+           obtient l'entrée booléenne pour l'id
+
+int tgetflag(char id[2])
+
+--------------------------
+
+tgetnum : gets the numeric entry for id
+
+        obtient la valeur numérique de l'identifiant
+
+int tgetnum(char id[2])
+
+--------------------------
+
+tgetstr : gets the string entry for id. If area is not a null pointer and does not point to a null pointer, 
+        it copies the string entry into the buffer pointed to by *area and advances the variable pointed to 
+        by area to the first byte after the copy of the string entry
+
+        récupère la chaîne de caractères correspondant à id. Si area n'est pas un pointeur nul et ne pointe pas vers un pointeur nul, 
+        il copie l'entrée de la chaîne dans le tampon pointé par *area et avance la variable pointée par area au premier octet après la copie de l'entrée de la chaîne. 
+        par area au premier octet après la copie de l'entrée de la chaîne de caractères
+
+
+char *tgetstr(char id[2], char **area)
+
+--------------------------
+
+tgoto : instantiates the parameters col and row into the capability cap and returns a pointer to the resulting string
+
+        initialise les paramètres col et row dans la capacité cap et renvoie un pointeur vers la chaîne résultante
+
+char *tgoto(char *cap, int col, int row)
+
+--------------------------
+
+tputs : permet d'écrire une chaîne de caractères sur stdout. Ajoute aussi automatiquement un retour à la ligne en fin de chaîne
+
+
+int puts( const char * string )
