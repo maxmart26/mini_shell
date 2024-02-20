@@ -6,9 +6,11 @@
 #    By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/01 13:55:49 by lnunez-t          #+#    #+#              #
-#    Updated: 2024/02/01 17:17:03 by lnunez-t         ###   ########.fr        #
+#    Updated: 2024/02/20 16:48:06 by lnunez-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+AST = abstract syntax tree
 
 readline : read a line from the terminal and return it, using prompt
        as a prompt.  If prompt is NULL or the empty string, no prompt  is  is‐

@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 17:43:51 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/02/01 17:44:22 by lnunez-t         ###   ########.fr       */
+/*   Created: 2023/11/06 12:19:24 by lnunez-t          #+#    #+#             */
+/*   Updated: 2023/11/13 11:38:50 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#include "libft.h"
 
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	size_t	i;
 
-
-#endif
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (i + 1 < n && (*(unsigned char *)(s1 + i) == *(unsigned char *)(s2
+		+ i)))
+		i++;
+	return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
+}
