@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:00:41 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/02/20 17:55:03 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:04:55 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static int	check_quote(int c)
 {
-	if (c == 39)
+	if (c == 92)
+		return (1);
+	else if (c == 39)
 		return (2);
 	else if (c == 34)
 		return (3);

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:27 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/02/20 18:21:19 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:20:07 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	fill_token_list(t_token *token_list, char *str)
 			i++;
 			index++;
 		}
-		else if (ft_strrchr("|><", str[i]))
+		else if (ft_strrchr("|><;", str[i]))
 			get_token(token_list, str, &i, &index);
-		else if (!ft_strrchr("\t |<>", str[i]))
+		else if (!ft_strrchr("\t |<>;", str[i]) || str[i] == '\\')
 			get_word(token_list, str, &i, &index);
 		else
 			i++;

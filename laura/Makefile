@@ -1,6 +1,7 @@
 NAME = parsing
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g3
+LDFLAGS = -lreadline
 
 LIBFT_DIR = libs/libft
 INC_DIR = includes/
@@ -13,7 +14,8 @@ SRC = main.c \
 	  srcs/lexer/get_token.c \
 	  srcs/lexer/get_word.c \
 	  srcs/parser/parser.c \
-	  srcs/lexer/manage_quotes.c
+	  srcs/lexer/manage_quotes.c \
+	  srcs/lexer/manage_sep.c
 
 OBJ = ${SRC:.c=.o}
 INCLUDES = includes/lexer.h includes/parser.h
@@ -23,7 +25,7 @@ LIBFT_PATH = libs/libft/libft.a
 all: ${NAME}
 
 ${NAME}: ${OBJ} ${INCLUDES} ${LIBFT_PATH}
-	${CC} ${CFLAGS} ${OBJ} ${LIBFT_PATH} -o ${NAME} 
+	${CC} ${CFLAGS} ${OBJ} ${LIBFT_PATH} -o ${NAME} ${LDFLAGS}
 
 ${LIBFT_PATH}:
 				${MAKE} -C ${LIBFT_DIR}
