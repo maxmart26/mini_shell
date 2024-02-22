@@ -6,13 +6,13 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:05:11 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/02/21 15:34:54 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:52:04 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lexer.h"
 
-static const char *const g_tab[] = {"<<", ">>", ">", "<", "|", NULL};
+static const char *const	g_tab[] = {"<<", ">>", ">", "<", "|", NULL};
 
 static void	token_not_pipe_semi(t_token *token_list, char *str, int *i, int *j)
 {

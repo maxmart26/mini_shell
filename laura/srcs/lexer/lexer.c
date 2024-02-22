@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:27 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/02/21 15:20:07 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:11:11 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_token	*first_token(void)
 	new_token->next = NULL;
 	new_token->type = NONE;
 	new_token->value = ft_strdup("NONE");
+	new_token->prev = NULL;
 	return (new_token);
 }
 
@@ -36,6 +37,7 @@ void	add_token(t_token *token_list, t_token_type type, char *str, int i)
 	tmp->next->type = type;
 	tmp->next->value = str;
 	tmp->next->next = NULL;
+	tmp->next->prev = tmp;
 }
 
 void	fill_token_list(t_token *token_list, char *str)

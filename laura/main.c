@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/02/21 18:04:36 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:50:39 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,16 @@ char	*what_type(t_token *list)
 
 void	ft_print_lexer(t_token *list)
 {
-	while (list->next)
+	t_token	*tmp;
+
+	tmp = list;
+	while (tmp->next)
 	{
-		printf("%d : [%s] [%s]\n", list->index,
-			what_type(list), list->value);
-		list = list->next;
+		printf("  %d : [%s] [%s]\n", tmp->index,
+			what_type(tmp), tmp->value);
+		tmp = tmp->next;
 	}
+	printf("%c", '\n');
 }
 
 int	main(void)
@@ -81,6 +85,8 @@ int	main(void)
 		free(list);
 		list = tmp;
 		list = remove_sep(list);
+		def_index(list);
+		printf("\n%s\n\n", "Ind : [TYPE] [TOKEN]");
 		ft_print_lexer(list);
 	}
 	return (0);

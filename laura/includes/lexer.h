@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:43:51 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/02/21 18:03:53 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:50:26 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef enum e_token_type
 	NEWL,
 	NONE,
 	CMD,
+	CMD_ABS,
 	SEMI,
 	ARG,
 }	t_token_type;
@@ -47,7 +48,6 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
-
 
 t_token	*first_token(void);
 void	fill_token_list(t_token *token_list, char *str);
@@ -64,5 +64,6 @@ char	*get_q_word(char *line, int *j, int nb_quote);
 char	*what_type(t_token *list);
 char	*other_type(t_token *list, char *type);
 t_token	*remove_sep(t_token *list);
+void	def_index(t_token *list);
 
 #endif
