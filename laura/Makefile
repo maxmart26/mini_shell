@@ -13,12 +13,19 @@ SRC = main.c \
       srcs/lexer/lexer.c \
 	  srcs/lexer/get_token.c \
 	  srcs/lexer/get_word.c \
-	  srcs/parser/parser.c \
 	  srcs/lexer/manage_quotes.c \
-	  srcs/lexer/manage_sep.c
+	  srcs/lexer/manage_sep.c \
+	  srcs/lexer/print_lexer.c \
+	  srcs/lexer/gather_words.c \
+	  srcs/lexer/manage_type.c \
+	  srcs/parser/parser.c \
+	  srcs/expand/expand.c \
+	  srcs/error_handler/ft_error.c \
+	  srcs/utils/utils.c \
+	  srcs/utils/env.c
 
 OBJ = ${SRC:.c=.o}
-INCLUDES = includes/lexer.h includes/parser.h
+INCLUDES = includes/minishell.h includes/lexer.h includes/parser.h includes/error.h
 LIBFT_DIR = libs/libft
 LIBFT_PATH = libs/libft/libft.a
 

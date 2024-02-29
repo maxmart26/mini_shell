@@ -6,10 +6,13 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:44:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/02/22 15:52:31 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:13:14 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
+# include "minishell.h"
+
 #endif
