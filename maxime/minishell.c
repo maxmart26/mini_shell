@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/02/01 16:18:32 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:20:01 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,104 @@
 #include "include/minishell_proto.h"
 #include "include/minishell_struct.h"
 
-int main(int ac, char **av, char **env)
-{
-	s_data *data;
+#include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
-	data = malloc(sizeof(s_data));
+int	ft_main(t_token *token, char **env)
+{
+	// if (ac != 1)
+	// 	return(0);
+	// av[0] = NULL;
+	// while (1)
+	// {
+	// 	char *str = readline("matorgue:~$ ");
+	// 	printf("%s\n", str);
+	// }
+
+	t_data	*data;
+	int	pid;
+	int i;
+	t_token	*tmp;
+
+	data = malloc(sizeof(t_data));
 	if (!data)
-		return(1);
-	data->env = env;
-	
+		return (printf("error de malloc\n"), 0);
+	init_test(token);
+	init_data(token, data, env);
+	data->env = init_env(data);
+	// while(token)
+	// {
+	// 	printf("%s\n",token->value);
+	// 	token = token->next;
+	// }
+	open_fd(data, token);
+	if (data->std_int < 0 || data->std_out < 0)
+		return (printf("probleme d"), 0);
+	while (token)
+	{
+		if (token->type == CMD || token->type == CMD_BULT)
+		{
+			pid = fork();
+			if (pid == 0)
+				redirection_builting(token, data);
+			data->nb_cmd++;
+			waitpid(0, NULL, 0);
+		}
+		tmp = token->next;
+		token = tmp;
+	}
+	i = 0;
+	// while(i < data->nb_pipe)
+	// {
+	// 	close(data->pipe_fd[i][0]);
+	// 	close(data->pipe_fd[i][1]);
+	// 	i++;
+	// }
+	if (data->std_out != 1)
+		close(data->std_out);
+	if (data->std_int != 0)
+		close(data->std_int);
+	return (0);
+}
+
+int	open_file(char *s, int i)
+{
+	int	fd;
+
+	fd = 0;
+	if (i == 1)
+		fd = open(s, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	else if (i == 0)
+		fd = open(s, O_RDONLY);
+	return (fd);
+}
+
+void	open_fd(t_data *data, t_token *token)
+{
+	t_token	*tmp;
+
+	tmp = token->next;
+	while (token)
+	{
+		if (token->type == GREAT)
+		{
+			if (data->std_out != 1)
+			{
+				close(data->std_out);
+				data->std_out = 1;
+			}
+			data->std_out = open_file(token->next->value, 1);
+		}
+		else if (token->type == LESS)
+			data->std_int = open_file(token->next->value, 0);
+		if (data->std_int == -1 || data->std_out == -1)
+		{
+			printf("bash: %s: No such file or directory\n", token->next->value);
+			if (data->nb_pipe == 0)
+				exit(1);
+		}
+		tmp = token->next;
+		token = tmp;
+	}
 }
