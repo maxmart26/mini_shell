@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/05 16:40:30 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:11:45 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_token
 typedef struct s_env
 {
 	char *value;
+	char *name;
+	char *content;
 	struct s_env	*next;
 	struct s_env	*prev;
 }					t_env;

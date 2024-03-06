@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/06 12:17:16 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:13:52 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_export(t_token *token, t_data *data, int i)
 
 	if (i == 0)
 		exit(156);
-	if ()
 	if (!data->env)
 	{
 		data->env = new_env();

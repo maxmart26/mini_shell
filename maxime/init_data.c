@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/05 23:24:35 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:25:46 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_env	*init_env(t_data *data)
 	t_env	*env;
 	t_env	*tmp;
 	t_env	*result;
+	char	**str;
 	int	i;
 
 	if (!data->envp[0])
@@ -109,6 +110,10 @@ t_env	*init_env(t_data *data)
 	while (data->envp[i])
 	{
 		env->value = data->envp[i];
+		str = ft_split(env->value, '=');
+		env->name = str[0];
+		env->content = str[1];
+		free(str);
 		if (data->envp[i + 1])
 		{
 			env->next = new_env();

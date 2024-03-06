@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:23:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/05 23:21:15 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:15:26 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	ft_env(t_data *data)
 	printf("\n\n\n\n\n\n\n");
 	while (init)
 	{
-		printf("%s\n", init->value);
+		printf("%s\n", init->name);
+		printf("%s\n", init->content);
 		tmp = init->next;
 		init = tmp;
 	}
