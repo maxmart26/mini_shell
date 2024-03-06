@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/02/28 21:13:23 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:46:20 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	ft_echo(t_token *token);
 void	ft_pwd(void);
 void	ft_env(t_data *data);
 void	ft_cd(t_token *token);
-void	ft_export(t_token *token, t_data *data);
+void	ft_export(t_token *token, t_data *data, int i);
+void	ft_unset(t_token *token, t_data *data, int i);
 
 //partie laura
 

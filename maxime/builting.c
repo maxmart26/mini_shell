@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:19:11 by matorgue          #+#    #+#             */
-/*   Updated: 2024/02/28 21:13:11 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:53:21 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,8 @@ void	redirection_builting(t_token *token, t_data *data)
 		ft_cd(token);
 	if (ft_strncmp(token->value, "export", 6) == 0
 		&& ft_strlen(token->value) == 6)
-		ft_export(token);
+		ft_export(token, data, data->nb_pipe);
+	if (ft_strncmp(token->value, "unset", 5) == 0
+		&& ft_strlen(token->value) == 5)
+		ft_unset(token, data, data->nb_pipe);
 }

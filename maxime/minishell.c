@@ -6,20 +6,52 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/02/28 20:20:01 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:46:27 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell_include.h"
 #include "include/minishell_proto.h"
 #include "include/minishell_struct.h"
-
-#include <stdio.h>
-#include <readline/readline.h>
 #include <readline/history.h>
+#include <readline/readline.h>
+#include <stdio.h>
+
+void	ft_tmp(t_data *data, t_token *token)
+{
+	pid_t	pid;
+	t_token	*tmp;
+	int		result;
+	int		result2;
+
+	result = -23;
+	while (token)
+	{
+		if (token->type == CMD || token->type == CMD_BULT)
+		{
+			pid = fork();
+			if (pid == 0)
+			{
+				redirection_builting(token, data);
+			}
+			data->nb_cmd++;
+			waitpid(0, &result, 0);
+			result2 = WEXITSTATUS(result);
+			printf("\t\t%d\n", result2);
+			if (result2 == 155)
+				ft_unset(token, data, -1);
+			else if (result2 == 156)
+				ft_export(token, data, -1);
+		}
+		tmp = token->next;
+		token = tmp;
+	}
+}
 
 int	ft_main(t_token *token, char **env)
 {
+	t_data	*data;
+
 	// if (ac != 1)
 	// 	return(0);
 	// av[0] = NULL;
@@ -28,12 +60,6 @@ int	ft_main(t_token *token, char **env)
 	// 	char *str = readline("matorgue:~$ ");
 	// 	printf("%s\n", str);
 	// }
-
-	t_data	*data;
-	int	pid;
-	int i;
-	t_token	*tmp;
-
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (printf("error de malloc\n"), 0);
@@ -48,20 +74,7 @@ int	ft_main(t_token *token, char **env)
 	open_fd(data, token);
 	if (data->std_int < 0 || data->std_out < 0)
 		return (printf("probleme d"), 0);
-	while (token)
-	{
-		if (token->type == CMD || token->type == CMD_BULT)
-		{
-			pid = fork();
-			if (pid == 0)
-				redirection_builting(token, data);
-			data->nb_cmd++;
-			waitpid(0, NULL, 0);
-		}
-		tmp = token->next;
-		token = tmp;
-	}
-	i = 0;
+	ft_tmp(data, token);
 	// while(i < data->nb_pipe)
 	// {
 	// 	close(data->pipe_fd[i][0]);

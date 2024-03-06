@@ -13,6 +13,8 @@ OBJ = minishell.c\
 	  cd.c\
 	  pwd.c\
 	  exec.c\
+	  unset.c\
+	  export.c\
 	  ft_lstnew.c\
 	  srcs/lexer/get_token.c\
 	  srcs/lexer/get_word.c\

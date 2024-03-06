@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:53:44 by matorgue          #+#    #+#             */
-/*   Updated: 2024/02/28 21:10:27 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:13:50 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ void	init_test(t_token *token)
 	token->index = 0;
 	token->next = NULL;
 	token->type = CMD_BULT;
+	token->value = "env";
+
+	token->next = init_token(token);
+	tmp = token->next;
+	token = tmp;
+
+	token->index = 1;
+	token->type = CMD_BULT;
 	token->value = "export";
 
 	token->next = init_token(token);
@@ -30,7 +38,23 @@ void	init_test(t_token *token)
 
 	token->index = 1;
 	token->type = WORD;
-	token->value = "TEST=34";
+	token->value = "a=toto";
+
+	// token->next = init_token(token);
+	// tmp = token->next;
+	// token = tmp;
+
+	// token->index = 1;
+	// token->type = PIPE;
+	// token->value = "|";
+
+	token->next = init_token(token);
+	tmp = token->next;
+	token = tmp;
+
+	token->index = 1;
+	token->type = CMD_BULT;
+	token->value = "env";
 
 	/*token->prev = NULL;
 	token->index = 0;

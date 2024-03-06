@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/02/28 21:10:05 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:24:35 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	init_data(t_token *token, t_data *data, char **envp)
 	data->std_int = 0;
 	nb_pipe(token,data);
 }
+
 t_env	*new_env()
 {
 	t_env *new;
@@ -70,6 +71,28 @@ t_env	*new_env()
 	new->next = NULL;
 	return (new);
 }
+t_env	*init_env_i()
+{
+	t_env	*env;
+	char	*str;
+
+	//printf("test\n");
+	env = new_env();
+	env->prev = NULL;
+	env->next = NULL;
+	str = NULL;
+	str = getcwd(str, _SC_PASS_MAX);
+	str = ft_strjoin("PWD=", str);
+	env->next = new_env();
+	env->next->value = "SHLVL=1";
+	env->next->prev = env;
+	env->value = str;
+	env->next->next = new_env();
+	env->next->next->value = "_=/usr/bin/env";
+	env->next->next->prev = env->next;
+	return (env);
+}
+
 t_env	*init_env(t_data *data)
 {
 	t_env	*env;
@@ -77,9 +100,12 @@ t_env	*init_env(t_data *data)
 	t_env	*result;
 	int	i;
 
+	if (!data->envp[0])
+		return (init_env_i());
 	env = new_env();
 	i = 0;
 	result = env;
+	env->prev = NULL;
 	while (data->envp[i])
 	{
 		env->value = data->envp[i];
@@ -87,6 +113,7 @@ t_env	*init_env(t_data *data)
 		{
 			env->next = new_env();
 			tmp = env->next;
+			tmp->prev = env;
 			env = tmp;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/02/28 20:17:12 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:40:30 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_env
 {
 	char *value;
 	struct s_env	*next;
+	struct s_env	*prev;
 }					t_env;
 
 typedef struct s_data
@@ -67,6 +68,7 @@ typedef struct s_data
 	int	nb_cmd;
 	int	fd_in;
 	int	fd_out;
+	int pid;
 }	t_data;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:23:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/02/28 20:49:41 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:21:15 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,21 @@
 
 void	ft_env(t_data *data)
 {
-	int	i;
+	t_env *tmp;
+	t_env *init;
 
-	i = 0;
+	init = data->env;
+	while (data->env->prev != NULL)
+		data->env = data->env->prev;
 	if (!data->env)
 		exit(0);
-	while (data->envp[i])
+	printf("\n\n\n\n\n\n\n");
+	while (init)
 	{
-		printf("%s\n", data->envp[i]);
-		i++;
+		printf("%s\n", init->value);
+		tmp = init->next;
+		init = tmp;
 	}
+	printf("\n\n\n\n\n\n\n");
+	exit(0);
 }
