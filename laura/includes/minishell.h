@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:09:46 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/02/29 19:13:52 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:58:24 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,16 @@ typedef struct s_parser
 
 typedef struct s_env
 {
-	char			*name;
 	char			*value;
+	char			*name;
+	char			*content;
 	struct s_env	*next;
+	struct s_env	*prev;
 }					t_env;
 
 typedef struct s_tools
 {
+	char			**envp;
 	char			*args;
 	t_token			*lexer_list;
 	t_env			*env;
@@ -105,8 +108,11 @@ int					count_quotes(char *str);
 int					find_matching_quote(char *str, int i, int *nb_q, int q);
 void				list_gathering(t_tools *tools);
 int					ft_error(int error);
-void				init_env(t_env **env_list, char **env);
-t_env				*add_args(char *name, char *value);
-void				add_env_list(t_env **env_list, t_env *var);
+t_env				*init_env(t_tools *env_tool);
+t_env				*new_env(void);
+void				init_tools(t_tools *tools, char **envp);
+void				env_var_expand(t_tools *tools);
+char				*replace_env_var(char *str);
+int					is_env_var(char *str);
 
 #endif

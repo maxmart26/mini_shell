@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/02/29 19:27:41 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:05:16 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	lexer_and_parser(t_tools *tools)
 		manage_type(tools->lexer_list);
 		ft_print_lexer(tools->lexer_list);
 		printf("\n%s\n\n", LEGEND);
+		env_var_expand(tools);
+		ft_print_lexer(tools->lexer_list);
+		printf("\n%s\n\n", LEGEND);
 		list_gathering(tools);
 		ft_print_lexer(tools->lexer_list);
 		free(tools->args);
@@ -37,11 +40,15 @@ void	lexer_and_parser(t_tools *tools)
 		parser(tools);*/
 }
 
-int	minishell(t_tools *tools, char **env)
+void	init_tools(t_tools *tools, char **envp)
 {
-	t_env	*env_list;
+	tools->nb_pipes = 0;
+	tools->envp = envp;
+}
 
-	init_env(&env_list, env);
+int	minishell(t_tools *tools)
+{
+	tools->env = init_env(tools);
 	//printf("%s\n", env_list->name);
 	while (1)
 	{
@@ -66,6 +73,7 @@ int	main(int ac, char **argv, char **env)
 		printf("No arguments accepted.\n");
 		exit(0);
 	}
-	minishell(&tools, env);
+	init_tools(&tools, env);
+	minishell(&tools);
 	return (0);
 }

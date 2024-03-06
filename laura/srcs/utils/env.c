@@ -6,13 +6,13 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:37:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/02/29 19:31:06 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:53:24 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	add_env_list(t_env **env_list, t_env *var)
+/*void	add_env_list(t_env **env_list, t_env *var)
 {
 	t_env	*list;
 
@@ -47,6 +47,7 @@ void	init_env(t_env **env_list, char **env)
 	t_env	*new_var;
 	char	**tab;
 	int		i;
+	t_env	*new;
 
 	new_var = NULL;
 	i = 0;
@@ -63,4 +64,47 @@ void	init_env(t_env **env_list, char **env)
 		free(tab);
 		i++;
 	}
+}*/
+t_env	*new_env(void)
+{
+	t_env *new;
+
+	new = malloc(sizeof(t_env));
+	if (!new)
+		return (NULL);
+	new->next = NULL;
+	return (new);
+}
+
+t_env	*init_env(t_tools *env_tool)
+{
+	t_env	*env;
+	t_env	*tmp;
+	t_env	*result;
+	char	**str;
+	int		i;
+
+	/*if (!data->envp[0])
+		return (init_env_i());*/
+	env = new_env();
+	i = 0;
+	result = env;
+	env->prev = NULL;
+	while (env_tool->envp[i])
+	{
+		env->value = env_tool->envp[i];
+		str = ft_split(env->value, '=');
+		env->name = str[0];
+		env->content = str[1];
+		free(str);
+		if (env_tool->envp[i + 1])
+		{
+			env->next = new_env();
+			tmp = env->next;
+			tmp->prev = env;
+			env = tmp;
+		}
+		i++;
+	}
+	return (result);
 }
