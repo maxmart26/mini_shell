@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/06 18:30:29 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:57:21 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,18 @@ void	count_pipes(t_token *list, t_data *tools)
 			tools->nb_pipe++;
 		tmp = tmp->next;
 	}
+}
+
+int	is_env_var(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			return (1);
+		i++;
+	}
+	return (0);
 }

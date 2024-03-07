@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_type.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:38:37 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/06 18:24:19 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:16:25 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	manage_cmd(t_token *token)
 		token->type = CMD;
 }
 
-void	manage_type(t_token *token)
+void	add_cmd(t_token *token)
 {
 	t_token	*tmp;
 

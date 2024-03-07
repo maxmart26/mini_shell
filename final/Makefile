@@ -25,10 +25,14 @@ OBJ = minishell.c\
 	  srcs/lexer/print_lexer.c \
 	  srcs/lexer/gather_words.c \
 	  srcs/lexer/manage_type.c \
+	  srcs/lexer/manage_type2.c \
+	  srcs/lexer/cmdbuilt_args.c \
+	  srcs/lexer/cmd_args.c \
 	  srcs/parser/parser.c \
 	  srcs/expand/expand.c \
 	  srcs/error_handler/ft_error.c \
 	  srcs/utils/utils.c 
+
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g3
 LDFLAGS = -lreadline
