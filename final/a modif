@@ -1,18 +1,28 @@
-coucou Laura ici on mes toute les petites choses
-que on a vu mais que lon doit faire ok ????????????????????????
+coucou Laura ici on met toutes les petites choses
+que on a vues mais que lon doit faire ok ???????????????????????? ooooookkkkkkkkkkk
 
 -------------------------------------------------------------------
 
 pour laura :
 
-ajouter grep comme une commande exemple :
-matorgue:~$ echo test | grep t
-  0 :                   [CMD_BULT] [echo]
-  1 :                   [WORD] [test]
-  2 :                   [PIPE] [|]
-  3 :                   [WORD] [grep t] <- ici
+grep : ok !
 
+a faire : CTRL-D, CTRL-C et CTRL-\
 
 --------------------------------------------------------------------
 
 pour maxime :
+
+ARG est affiche dans la lexer list des qu'il y a une cmd ou cmd_built, tu peux faire tes tests !
+Attention, ARG est affiche quel que soit ce qui suit la cmd, exemple :
+
+   echo        -n     "je suis la"
+[CMD_BULT]    [ARG]       [ARG]
+
+cat : 
+attention, si on cree : file1 avec toto et file3 avec bonjour 
+puis on execute : cat f1 > f2 f3
+dans f2 on aura : toto bonjour
+dans f1 on aura toto
+dans f3 on aura bonjour
+si f3 existe pas : on aura toto dans f2 + message erreur <file3 does not exist>

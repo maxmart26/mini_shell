@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:38:37 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/07 18:16:25 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/08 14:49:09 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ void	manage_cmd(t_token *token)
 		token->type = CMD;
 	else if (ft_strlen(token->value) == 3
 		&& ft_strncmp(token->value, "cat", 3) == 0)
+		token->type = CMD;
+	else if (ft_strlen(token->value) == 4
+		&& ft_strncmp(token->value, "grep", 4) == 0)
 		token->type = CMD;
 }
 

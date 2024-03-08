@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/07 22:29:26 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:45:10 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,9 @@ void	add_ls_args(t_token *token);
 void	add_wc_args(t_token *token);
 void	add_awk_args(t_token *token);
 void	add_cat_args(t_token *token);
-//void	add_cd_args(t_token *token);
+void	add_cd_args(t_token *token);
 void	add_echo_args(t_token *token);
 void	add_exp_args(t_token *token);
 void	add_unset_args(t_token *token);
+void	word_to_arg(t_token *token);
 #endif
