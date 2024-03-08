@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/06 18:35:11 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/07 22:30:23 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	ft_tmp(t_data *data, t_token *token)
 				ft_unset(token, data, -1);
 			else if (result2 == 156)
 				ft_export(token, data, -1);
+			else if (result2 == 157)
+				ft_cd(token, -1, data);
 		}
 		tmp = token->next;
 		token = tmp;
@@ -63,7 +65,7 @@ int	ft_main(t_data *data)
 	// 	return (printf("error de malloc\n"), 0);
 	//init_test(token);
 	//init_data(token, data, env);
-	data->env = init_env(data);
+	//data->env = init_env(data);
 	// while(token)
 	// {
 	// 	printf("%s\n",token->value);

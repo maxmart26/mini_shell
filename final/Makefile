@@ -7,6 +7,7 @@ OBJ = minishell.c\
 	  init_test.c\
 	  utils_bonus2.c\
 	  init_data.c\
+	  token_init.c\
 	  builting.c\
 	  echo.c\
 	  env.c\
@@ -34,7 +35,7 @@ OBJ = minishell.c\
 	  srcs/utils/utils.c 
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS =  -g3 
 LDFLAGS = -lreadline
 SRCS = ${OBJ}
 OBJS = ${SRCS:.c=.o}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/07 18:55:12 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/07 21:44:05 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,17 @@ int	minishell(t_data *tools, char **env)
 
 int	main(int ac, char **argv, char **env)
 {
-	t_data	tools;
+	t_data	*tools;
 
 	(void)argv;
+	tools = malloc(sizeof(t_data));
+	if (!tools)
+		return(EXIT_FAILURE);
 	if (ac != 1)
 	{
 		printf("No arguments accepted.\n");
 		exit(0);
 	}
-	minishell(&tools, env);
+	minishell(tools, env);
 	return (0);
 }

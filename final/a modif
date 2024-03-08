@@ -1,0 +1,18 @@
+coucou Laura ici on mes toute les petites choses
+que on a vu mais que lon doit faire ok ????????????????????????
+
+-------------------------------------------------------------------
+
+pour laura :
+
+ajouter grep comme une commande exemple :
+matorgue:~$ echo test | grep t
+  0 :                   [CMD_BULT] [echo]
+  1 :                   [WORD] [test]
+  2 :                   [PIPE] [|]
+  3 :                   [WORD] [grep t] <- ici
+
+
+--------------------------------------------------------------------
+
+pour maxime :

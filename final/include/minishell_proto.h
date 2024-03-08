@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/07 18:42:53 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/07 22:29:26 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,17 @@ void	ft_dup2(t_data *data);
 
 void	ft_close_useless(t_data *data, int i, int j);
 
+// token_init.c
+
+t_token	*token_init(char *str, char *st);
+
 // les builting
 
 void	redirection_builting(t_token *token, t_data *data);
 void	ft_echo(t_token *token);
 void	ft_pwd(void);
 void	ft_env(t_data *data);
-void	ft_cd(t_token *token);
+void	ft_cd(t_token *token, int i, t_data *data);
 void	ft_export(t_token *token, t_data *data, int i);
 void	ft_unset(t_token *token, t_data *data, int i);
 
@@ -104,5 +108,12 @@ char	*is_still_env_var(char *str, t_data *tools);
 void	add_args(t_token *token);
 void	add_cmdbuilt_args(t_token *token);
 void	add_cmd_args(t_token *token);
-
+void	add_ls_args(t_token *token);
+void	add_wc_args(t_token *token);
+void	add_awk_args(t_token *token);
+void	add_cat_args(t_token *token);
+//void	add_cd_args(t_token *token);
+void	add_echo_args(t_token *token);
+void	add_exp_args(t_token *token);
+void	add_unset_args(t_token *token);
 #endif

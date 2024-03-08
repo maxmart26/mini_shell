@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/06 16:23:13 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/08 00:12:36 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ int	ft_export_ex(t_token *token, t_data *data, char **str)
 	t_env	*init;
 
 	init = data->env;
+	//printf("%s\n",init->value);
 	while (init->next)
 	{
 		if (ft_strncmp(init->name, str[0], ft_strlen(str[0])) == 0
 			&& ft_strlen(str[0]) == ft_strlen(init->name))
 		{
-			printf("\n\n\n\n\t\ttest\n");
+			//printf("\n\n\n\n\t\ttest\n");
 			ft_export_modif(token, init, str);
 			return (0);
 		}

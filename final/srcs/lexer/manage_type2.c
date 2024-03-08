@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_type2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 18:19:10 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/07 18:42:14 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/07 20:42:56 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	add_cmd_args(t_token *token)
 
 void	add_cmdbuilt_args(t_token *token)
 {
-	if (ft_strncmp(token->value, "cd", 2) == 0)
-		add_cd_args(token);
-	else if (ft_strncmp(token->value, "echo", 4) == 0)
+	//if (ft_strncmp(token->value, "cd", 2) == 0)
+		//add_cd_args(token);
+	if (ft_strncmp(token->value, "echo", 4) == 0)
 		add_echo_args(token);
 	else if (ft_strncmp(token->value, "export", 6) == 0)
 		add_exp_args(token);
