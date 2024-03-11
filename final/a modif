@@ -9,9 +9,15 @@ grep : ok !
 
 a faire : CTRL-D, CTRL-C et CTRL-\
 
+pourquoi a tu tout mis en ARG ca ne m arrange pas du tout je vais pas pouvoir faire la dif entre des arguments et des modif de function comme avec le -n que a bien mis 
+en exemple ;p
+
+
 --------------------------------------------------------------------
 
 pour maxime :
+
+je doit gerer le cas du cd .. je recule de 2 pour rien 
 
 ARG est affiche dans la lexer list des qu'il y a une cmd ou cmd_built, tu peux faire tes tests !
 Attention, ARG est affiche quel que soit ce qui suit la cmd, exemple :

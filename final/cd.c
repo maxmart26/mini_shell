@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/08 01:53:02 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:39:45 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,14 @@ int	ft_count(char *str)
 	return (j);
 }
 
-char	*ft_cut(char *str, int i)
+static char	*ft_cutt(char *str, int i)
 {
 	char	*buffer;
 	int		j;
 
 	j = 0;
+	printf("ici1\t%s\n",str);
+	//printf("ici2\t%s\n",buffer);
 	buffer = malloc(i + 1 * sizeof(char));
 	if (!buffer)
 		exit(EXIT_FAILURE);
@@ -81,7 +83,8 @@ char	*ft_cd_cut(void)
 	buffer = getcwd(buffer, _SC_PASS_MAX);
 	printf("ici\t%s\n",buffer);
 	i = ft_count(buffer);
-	buffer = ft_cut(str, i);
+	str = buffer;
+	buffer = ft_cutt(str, i);
 	printf("ici\t%s\n",buffer);
 	return (buffer);
 }
@@ -110,7 +113,7 @@ void	ft_cd(t_token *token, int i, t_data *data)
 	}
 	// free(buffer);
 	buffer_old = ft_init_oldpwd_cd();
-	if (ft_strncmp(str, "..", 2) == 0 && ft_strlen(token->value) == 2)
+	if (ft_strncmp(str, "..", 2) == 0 && ft_strlen(str) == 2)
 		str = ft_cd_cut();
 	if (chdir(str) == -1)
 	{

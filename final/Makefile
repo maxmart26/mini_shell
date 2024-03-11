@@ -11,6 +11,7 @@ OBJ = minishell.c\
 	  builting.c\
 	  echo.c\
 	  env.c\
+	  herdoc.c\
 	  cd.c\
 	  pwd.c\
 	  exec.c\
@@ -18,6 +19,8 @@ OBJ = minishell.c\
 	  unset.c\
 	  export.c\
 	  ft_lstnew.c\
+	  utilitaire/get_next_line_utils_bonus.c\
+	  utilitaire/get_next_line_bonus.c\
 	  srcs/lexer/lexer.c \
 	  srcs/lexer/get_token.c \
 	  srcs/lexer/get_word.c \

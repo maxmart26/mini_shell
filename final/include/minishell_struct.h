@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/06 18:12:26 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:30:00 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct s_data
 	t_env *env;
 	char			*args;
 	t_token		*lexer_list;
+	int	itoa;
+	int	f1;
 	int std_out;
 	int	std_int;
 	int nb_pipe;

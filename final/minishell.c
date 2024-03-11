@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/07 22:30:23 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:40:30 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,36 +51,11 @@ void	ft_tmp(t_data *data, t_token *token)
 
 int	ft_main(t_data *data)
 {
-
-	// if (ac != 1)
-	// 	return(0);
-	// av[0] = NULL;
-	// while (1)
-	// {
-	// 	char *str = readline("matorgue:~$ ");
-	// 	printf("%s\n", str);
-	// }
-	// data = malloc(sizeof(t_data));
-	// if (!data)
-	// 	return (printf("error de malloc\n"), 0);
-	//init_test(token);
-	//init_data(token, data, env);
-	//data->env = init_env(data);
-	// while(token)
-	// {
-	// 	printf("%s\n",token->value);
-	// 	token = token->next;
-	// }
 	open_fd(data, data->lexer_list);
+	open_heredoc(data);
 	if (data->std_int < 0 || data->std_out < 0)
 		return (printf("probleme d"), 0);
 	ft_tmp(data, data->lexer_list);
-	// while(i < data->nb_pipe)
-	// {
-	// 	close(data->pipe_fd[i][0]);
-	// 	close(data->pipe_fd[i][1]);
-	// 	i++;
-	// }
 	if (data->std_out != 1)
 		close(data->std_out);
 	if (data->std_int != 0)

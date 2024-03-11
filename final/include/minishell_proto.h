@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/08 17:45:10 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:34:31 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 // minishell
 
 int		ft_main(t_data *data);
+
+// herdoc.c
+
+void	open_heredoc(t_data *data);
 
 // exec.c
 

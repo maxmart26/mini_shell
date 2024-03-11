@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:18:21 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/06 18:29:49 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:37:19 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <readline/history.h>
 # include <dirent.h>
 # include "../utilitaire/libft/libft.h"
+# include "../utilitaire/get_next_line_bonus.h"
 
 # define MAX_PRINT 5000
 
