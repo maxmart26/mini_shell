@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/12 14:49:01 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:36:25 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,18 @@ void	lexer_and_parser(t_data *tools)
 
 int	minishell(t_data *tools, char **env)
 {
-	signal(SIGINT, &ft_signal_handler);
-	signal(SIGQUIT, &ft_signal_handler);
+	char	*line;
+	int		status;
+	
+	//signal(SIGINT, &ft_signal_handler);
+	//signal(SIGQUIT, &ft_signal_handler);
 	tools->envp = env;
 	tools->env = init_env(tools);
 	//printf("%s\n", env_list->name);
 	while (1)
 	{
-		tools->args = readline("matorgue:~$ ");
+		rd_line(&line, &status);
+		//tools->args = readline("matorgue:~$ ");
 		if (!tools->args)
 			exit(EXIT_SUCCESS);
 		add_history(tools->args);

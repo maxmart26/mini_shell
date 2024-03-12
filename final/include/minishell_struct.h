@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 14:50:45 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:40:52 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,35 @@ typedef struct s_data
 	int	fd_out;
 	int pid;
 }	t_data;
+
+/******READLINE*******/
+
+# define D_KEY_ESCAPE 27
+# define D_KEY_SPACE 32
+# define D_KEY_UP 4283163
+# define D_KEY_DOWN 4348699
+# define D_KEY_RIGHT 4414235
+# define D_KEY_LEFT 4479771
+# define D_KEY_ENTER 10
+# define D_KEY_BACKSPACE 127
+# define D_KEY_CTRL_C 3
+# define D_KEY_CTRL_D 4
+
+typedef struct s_cursor{
+	int	line_postion;
+	int	col_position;
+}				t_cursor;
+
+typedef struct s_rdline
+{
+	char		*term_type;
+	int			term_fd;
+	int			line_count;
+	int			colums_count;
+	//long		c;
+	char		*path;
+	char		*line;
+	t_cursor	cursor;
+}t_rdline;
 
 #endif

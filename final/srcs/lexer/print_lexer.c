@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_lexer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:35:30 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/06 18:24:37 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:02:02 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	*other_type(t_token *list, char *type)
 		type = "CMD_BULT";
 	else if (list->type == APPEND)
 		type = "APPEND";
+	else if (list->type == OPT)
+		type = "OPT";
 	else
 		type = "NONE";
 	return (type);

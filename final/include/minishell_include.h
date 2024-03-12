@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_include.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:18:21 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/11 14:41:39 by laura            ###   ########.fr       */
+/*   Updated: 2024/03/12 17:41:47 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 # include <readline/history.h>
 # include <dirent.h>
 # include <signal.h>
+# include <termios.h>
+# include <term.h>
+# include <curses.h>
+# include <termcap.h>
 # include "../utilitaire/libft/libft.h"
 # include "../utilitaire/get_next_line_bonus.h"
 

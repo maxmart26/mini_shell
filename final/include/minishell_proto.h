@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/11 15:18:33 by laura            ###   ########.fr       */
+/*   Updated: 2024/03/12 18:27:35 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,4 +123,12 @@ void	add_echo_args(t_token *token);
 void	add_exp_args(t_token *token);
 void	add_unset_args(t_token *token);
 void	word_to_arg(t_token *token);
+
+// readline
+
+void	ft_init_rdline(t_rdline *rdline);
+void	set_term(struct termios *termios, struct termios *old, int fd);
+int		rd_line(char **line, int *status);
+void	reset_term(struct termios old_termios, int fd);
+
 #endif
