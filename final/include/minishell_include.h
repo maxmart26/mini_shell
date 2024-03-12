@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_include.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:18:21 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/11 12:37:19 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:41:39 by laura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <dirent.h>
+# include <signal.h>
 # include "../utilitaire/libft/libft.h"
 # include "../utilitaire/get_next_line_bonus.h"
 

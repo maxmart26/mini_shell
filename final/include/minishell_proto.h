@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/11 12:34:31 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:18:33 by laura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ char	*replace_env_var(char *str, t_data *tools);
 int		is_env_var(char *str);
 char	*find_env_var(char *str, t_env *env);
 char	*is_still_env_var(char *str, t_data *tools);
+void	ft_signal_handler(int signal);
+void	ft_destroy_env(t_env *env_list);
 
 void	add_args(t_token *token);
 void	add_cmdbuilt_args(t_token *token);

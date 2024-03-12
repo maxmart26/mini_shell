@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/08 15:06:17 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:14:38 by laura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	lexer_and_parser(t_data *tools)
 
 int	minishell(t_data *tools, char **env)
 {
+	signal(SIGINT, &ft_signal_handler);
+	signal(SIGQUIT, &ft_signal_handler);
 	tools->envp = env;
 	tools->env = init_env(tools);
 	//printf("%s\n", env_list->name);
@@ -62,6 +64,7 @@ int	minishell(t_data *tools, char **env)
 		init_data(tools->lexer_list, tools, env); // malloc la tools
 		ft_main(tools);
 	}
+	ft_destroy_env(tools->env);
 	return (EXIT_SUCCESS);
 }
 

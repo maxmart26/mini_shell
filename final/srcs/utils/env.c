@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:37:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/07 16:57:15 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:18:00 by laura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,23 @@ t_env	*init_env(t_data *env_tool)
 		i++;
 	}
 	return (result);
+}
+
+void	ft_destroy_env(t_env *env_list)
+{
+	t_env	*tmp;
+	t_env	*new;
+
+	tmp = env_list;
+	if (tmp == NULL)
+		return ;
+	while (tmp)
+	{
+		free(tmp->content);
+		free(tmp->name);
+		free(tmp->value);
+		new = tmp->next;
+		free(tmp);
+		tmp = new;
+	}
 }
