@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 18:44:40 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/08 17:59:23 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:02:15 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	add_ls_args(t_token *token)
 	{
 		if (token->next->value[0] == '/' || token->next->value[0] == '~'
 			|| token->next->value[0] == '.' || token->next->value[0] == '-')
-			token->next->type = ARG;
+			token->next->type = OPT;
 		token = token->next;
 	}
 }
@@ -29,7 +29,10 @@ void	add_wc_args(t_token *token)
 {
 	while (token->next->type == WORD)
 	{
-		token->next->type = ARG;
+		if (token->next->value[0] == '-')
+			token->next->type = OPT;
+		else
+			token->next->type = ARG;
 		token = token->next;
 	}
 }
@@ -38,7 +41,10 @@ void	add_awk_args(t_token *token)
 {
 	while (token->next->type == WORD)
 	{
-		token->next->type = ARG;
+		if (token->next->value[0] == '-')
+			token->next->type = OPT;
+		else
+			token->next->type = ARG;
 		token = token->next;
 	}
 }
@@ -74,8 +80,16 @@ void	word_to_arg(t_token *token)
 
 void	add_cat_args(t_token *token)
 {
-	if (token->next->type == GREAT && token->next->next->type == WORD)
-		token->next->next->type = ARG;
-	else if (token->next->type == WORD)
-		word_to_arg(token);
+	if (token->next->type == WORD && token->next->value[0] == '-')
+	{
+		token->next->type = OPT;
+		token = token->next;
+	}
+	else
+	{
+		if (token->next->type == GREAT && token->next->next->type == WORD)
+			token->next->next->type = ARG;
+		else if (token->next->type == WORD)
+			word_to_arg(token);
+	}
 }

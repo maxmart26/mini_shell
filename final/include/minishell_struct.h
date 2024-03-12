@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_struct.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/11 12:30:00 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:50:45 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ typedef enum e_token_type
 	CMD_ABS, // commande absolu qui commance par un /
 	CMD_BULT, // commande builtins
 	SEMI, // ;
-	ARG, // -l
+	ARG, // file1
+	OPT, // -l
 }					t_token_type;
 
 typedef struct s_token

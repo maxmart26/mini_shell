@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/11 15:14:38 by laura            ###   ########.fr       */
+/*   Updated: 2024/03/12 14:49:01 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,14 @@ void	lexer_and_parser(t_data *tools)
 		tools->lexer_list = tmp;
 		tools->lexer_list = remove_sep(tools->lexer_list);
 		def_index(tools->lexer_list);
-		//printf("\n%s\n\n", LEGEND);
-		//ft_print_lexer(tools->lexer_list);
-		//printf("\n%s\n\n", LEGEND);
 		env_var_expand(tools);
 		add_cmd(tools->lexer_list);
 		add_args(tools->lexer_list);
-		//ft_print_lexer(tools->lexer_list);
-		//printf("\n%s\n\n", LEGEND);
 		list_gathering(tools);
 		ft_print_lexer(tools->lexer_list);
 		free(tools->args);
 		tools->args = NULL;
 	}
-	/*if (tools->lexer_list)
-		parser(tools);*/
 }
 
 
