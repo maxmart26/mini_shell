@@ -17,7 +17,7 @@ en exemple ;p
 
 pour maxime :
 
-je doit gerer le cas du cd .. je recule de 2 pour rien 
+a voir pour le SHLVL
 
 ARG est affiche dans la lexer list des qu'il y a une cmd ou cmd_built, tu peux faire tes tests !
 Attention, ARG est affiche quel que soit ce qui suit la cmd, exemple :

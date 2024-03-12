@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/11 15:14:38 by laura            ###   ########.fr       */
+/*   Updated: 2024/03/12 15:27:43 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	lexer_and_parser(t_data *tools)
 
 int	minishell(t_data *tools, char **env)
 {
-	signal(SIGINT, &ft_signal_handler);
-	signal(SIGQUIT, &ft_signal_handler);
+	//signal(SIGINT, &ft_signal_handler);
+	//signal(SIGQUIT, &ft_signal_handler);
 	tools->envp = env;
 	tools->env = init_env(tools);
 	//printf("%s\n", env_list->name);
@@ -57,7 +57,7 @@ int	minishell(t_data *tools, char **env)
 		tools->args = readline("matorgue:~$ ");
 		if (!tools->args)
 			exit(EXIT_SUCCESS);
-		add_history(tools->args);
+		//add_history(tools->args);
 		if (!count_quotes(tools->args))
 			return (ft_error(0));
 		lexer_and_parser(tools);
