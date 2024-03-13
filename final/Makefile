@@ -38,7 +38,7 @@ OBJ = minishell.c\
 	  srcs/utils/utils.c 
 
 CC = cc
-CFLAGS =  -g3 
+CFLAGS =  -Wextra -Werror -Wall -g3 
 LDFLAGS = -lreadline
 SRCS = ${OBJ}
 OBJS = ${SRCS:.c=.o}

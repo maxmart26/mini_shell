@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 18:27:35 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:07:33 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	word_to_arg(t_token *token);
 // readline
 
 void	ft_init_rdline(t_rdline *rdline);
-void	set_term(struct termios *termios, struct termios *old, int fd);
+void	set_terminal(struct termios *termios, struct termios *old, int fd);
 int		rd_line(char **line, int *status);
 void	reset_term(struct termios old_termios, int fd);
 

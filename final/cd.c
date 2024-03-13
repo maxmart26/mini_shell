@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/11 12:39:45 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:12:49 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*ft_init_pwd_cd(void)
 	char	*buffer;
 
 	str = "PWD=";
+	buffer = NULL;
 	buffer = getcwd(buffer, _SC_PASS_MAX);
 	str = ft_strjoin(str, buffer);
 	return (str);
@@ -31,6 +32,7 @@ char	*ft_init_oldpwd_cd(void)
 	char	*buffer;
 
 	str = "OLDPWD=";
+	buffer = NULL;
 	buffer = getcwd(buffer, _SC_PASS_MAX);
 	str = ft_strjoin(str, buffer);
 	// printf("%s\n", str);
@@ -80,6 +82,7 @@ char	*ft_cd_cut(void)
 	char	*buffer;
 	int		i;
 
+	buffer = NULL;
 	buffer = getcwd(buffer, _SC_PASS_MAX);
 	printf("ici\t%s\n",buffer);
 	i = ft_count(buffer);

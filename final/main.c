@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/12 17:36:25 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:15:55 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	minishell(t_data *tools, char **env)
 {
 	char	*line;
 	int		status;
-	
+
 	//signal(SIGINT, &ft_signal_handler);
 	//signal(SIGQUIT, &ft_signal_handler);
 	tools->envp = env;
@@ -51,7 +51,7 @@ int	minishell(t_data *tools, char **env)
 	while (1)
 	{
 		rd_line(&line, &status);
-		//tools->args = readline("matorgue:~$ ");
+		tools->args = *line;
 		if (!tools->args)
 			exit(EXIT_SUCCESS);
 		add_history(tools->args);

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:45:11 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/12 18:27:26 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:07:05 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_init_rdline(t_rdline *rdline)
 	rdline->line = NULL;
 }
 
-void	set_term(struct termios *termios, struct termios *old, int fd)
+void	set_terminal(struct termios *termios, struct termios *old, int fd)
 {
 	tcgetattr(fd, old);
 	tcgetattr(fd, termios);
