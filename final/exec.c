@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/06 18:37:36 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:19:48 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include "include/minishell_proto.h"
 #include "include/minishell_struct.h"
 
-void	ft_free_tab(char **tab)
+void	ft_free_tab(char **input)
 {
 	size_t	i;
 
 	i = 0;
-	while (tab[i])
+	while (input[i])
 	{
-		free(tab[i]);
+		free(input[i]);
 		i++;
 	}
-	free(tab);
+	free(input);
 }
 
 char	*ft_path(char **envp)

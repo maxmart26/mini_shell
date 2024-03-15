@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/13 16:23:17 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:16:04 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ typedef struct s_env
 	struct s_env		*prev;
 }						t_env;
 
-t_g_vars	g_vars;
-
 typedef struct s_data
 {
 	char				**envp;
@@ -120,7 +118,7 @@ typedef struct s_char_list
 	struct s_char_list	*next;
 }						t_char_list;
 
-typedef struct s_list
+typedef struct s_hist_list
 {
 	char				value;
 	int					history;
@@ -128,9 +126,9 @@ typedef struct s_list
 	int				up_or_down;
 	t_char_list			*char_list;
 	t_char_list			*origin_char_list;
-	struct s_lines_list	*next;
-	struct s_lines_list	*prev;
-}						t_list;
+	struct s_hist_list	*next;
+	struct s_hist_list	*prev;
+}						t_hist_list;
 
 typedef struct s_rdline
 {

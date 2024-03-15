@@ -6,14 +6,13 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/13 15:15:55 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:22:28 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell_include.h"
 #include "include/minishell_proto.h"
 #include "include/minishell_struct.h"
-
 
 void	lexer_and_parser(t_data *tools)
 {
@@ -37,21 +36,21 @@ void	lexer_and_parser(t_data *tools)
 	}
 }
 
-
 int	minishell(t_data *tools, char **env)
 {
-	char	*line;
-	int		status;
+	char		*line;
+	int			status;
+	t_hist_list	*history;
 
-	//signal(SIGINT, &ft_signal_handler);
-	//signal(SIGQUIT, &ft_signal_handler);
+	signal(SIGINT, &ft_signal_handler);
+	signal(SIGQUIT, &ft_signal_handler);
 	tools->envp = env;
 	tools->env = init_env(tools);
-	//printf("%s\n", env_list->name);
+	history = NULL;
 	while (1)
 	{
-		rd_line(&line, &status);
-		tools->args = *line;
+		rd_line(&line, &status, history);
+		tools->args = line;
 		if (!tools->args)
 			exit(EXIT_SUCCESS);
 		add_history(tools->args);
@@ -72,7 +71,7 @@ int	main(int ac, char **argv, char **env)
 	(void)argv;
 	tools = malloc(sizeof(t_data));
 	if (!tools)
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	if (ac != 1)
 	{
 		printf("No arguments accepted.\n");

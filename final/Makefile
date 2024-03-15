@@ -34,12 +34,18 @@ OBJ = minishell.c\
 	  srcs/lexer/cmd_args.c \
 	  srcs/parser/parser.c \
 	  srcs/expand/expand.c \
+	  srcs/readline/get_input.c \
+	  srcs/readline/history.c \
+	  srcs/readline/history2.c \
+	  srcs/readline/readline.c \
+	  srcs/readline/term_actions.c \
 	  srcs/error_handler/ft_error.c \
-	  srcs/utils/utils.c 
+	  srcs/utils/utils.c \
+	  srcs/utils/utils2.c
 
 CC = cc
 CFLAGS =  -Wextra -Werror -Wall -g3 
-LDFLAGS = -lreadline
+LDFLAGS = -lncurses
 SRCS = ${OBJ}
 OBJS = ${SRCS:.c=.o}
 LIBFT_DIR = utilitaire/libft
