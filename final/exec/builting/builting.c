@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:19:11 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 15:02:30 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:30:05 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	redirection_builting(t_token *token, t_data *data)
 		ft_exec(data, token);
 	if (token->type == CMD_ABS)
 		ft_exec_abs(token, data);
-	if (ft_strncmp(token->value, "echo", 5) == 0
-		&& ft_strlen(token->value) == 5)
+	if (ft_strncmp(token->value, "echo", 4) == 0
+		&& ft_strlen(token->value) == 4)
 		ft_echo(token);
 	if (ft_strncmp(token->value, "pwd", 3) == 0 && ft_strlen(token->value) == 3)
 		ft_pwd();
@@ -32,6 +32,9 @@ void	redirection_builting(t_token *token, t_data *data)
 	if (ft_strncmp(token->value, "export", 6) == 0
 		&& ft_strlen(token->value) == 6)
 		ft_export(token, data, data->nb_pipe);
+	if (ft_strncmp(token->value, "exit", 4) == 0
+		&& ft_strlen(token->value) == 4)
+		ft_exit(data->nb_pipe);
 	if (ft_strncmp(token->value, "unset", 5) == 0
 		&& ft_strlen(token->value) == 5)
 		ft_unset(token, data, data->nb_pipe);

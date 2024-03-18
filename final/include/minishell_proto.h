@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/11 15:18:33 by laura            ###   ########.fr       */
+/*   Updated: 2024/03/12 16:28:27 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	open_fd(t_data *data, t_token *token);
 
 // init_data.c
 
-void	init_data(t_token *token, t_data *data, char **envp);
+void	init_data(t_token *token, t_data *data);
 t_env	*init_env(t_data *data);
 t_env	*new_env(void);
 
@@ -73,6 +73,7 @@ void	ft_env(t_data *data);
 void	ft_cd(t_token *token, int i, t_data *data);
 void	ft_export(t_token *token, t_data *data, int i);
 void	ft_unset(t_token *token, t_data *data, int i);
+void	ft_exit(int i);
 
 // partie laura
 

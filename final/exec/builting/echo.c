@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:53:08 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 15:02:21 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:30:29 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	ft_echo(t_token *token)
 	n = 0;
 	if (!token->next)
 		printf("\n");
-	if (token->next->type == ARG && ft_strncmp(token->next->value, "-n", 2) == 0)
+	if (token->next->type == OPT && ft_strncmp(token->next->value, "-n", 2) == 0)
 		n = 1;
 	else if (!token->next && n == 0)
 		printf("\n");
-	if (token->next->type == WORD)
+	if (token->next->type == ARG)
 		ft_print_echo(token->next, n);
-	if (token->next->type == ARG && token->next->next != NULL && \
-	token->next->next->type == WORD)
+	if (token->next->type == OPT && token->next->next != NULL && \
+	token->next->next->type == ARG)
 		ft_print_echo(token->next->next, n);
-
+	exit(0);
 }

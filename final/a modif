@@ -19,16 +19,5 @@ pour maxime :
 
 a voir pour le SHLVL
 
-ARG est affiche dans la lexer list des qu'il y a une cmd ou cmd_built, tu peux faire tes tests !
-Attention, ARG est affiche quel que soit ce qui suit la cmd, exemple :
 
-   echo        -n     "je suis la"
-[CMD_BULT]    [ARG]       [ARG]
-
-cat : 
-attention, si on cree : file1 avec toto et file3 avec bonjour 
-puis on execute : cat f1 > f2 f3
-dans f2 on aura : toto bonjour
-dans f1 on aura toto
-dans f3 on aura bonjour
-si f3 existe pas : on aura toto dans f2 + message erreur <file3 does not exist>
+cat : ok !

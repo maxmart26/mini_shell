@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 15:01:42 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:50:49 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ char	*get_path(t_data *data, t_token *token)
 }
 void	ft_dup2(t_data *data)
 {
-	//printf("%d et %d\n", data->fd_in, data->nb_pipe);
+	printf("\t\t%d ici\n",data->nb_pipe);
+	printf("%d et %d\n", data->fd_in, data->nb_cmd);
 	if (data->nb_pipe > 0)
 	{
 		//printf("test\n");
@@ -97,8 +98,11 @@ void	ft_exec(t_data *data, t_token *token)
 	char	*path_def;
 	char	*tmp;
 	char	**mycmdargs;
+	char	*tmp2;
+	int	i;
 
-	if (token->next != NULL && token->next->type == ARG)
+	i = 0;
+	if (token->next != NULL && token->next->type == OPT)
 	{
 		path_def = ft_strjoin(token->value, " ");
 		tmp = ft_strjoin(path_def, token->next->value);
@@ -108,7 +112,31 @@ void	ft_exec(t_data *data, t_token *token)
 	}
 	else
 	{
-		mycmdargs = ft_split(token->value, ' ');
+		if (token->next->type == ARG)
+		{
+			path_def = ft_strjoin(token->value, " ");
+			tmp = ft_strjoin(path_def, token->next->value);
+			//printf("\t\t%u\n",token->next->next->type);
+			while(token->next->next->type == ARG)
+			{
+				tmp2 = tmp;
+				path_def = ft_strjoin(tmp, " ");
+				tmp = ft_strjoin(path_def, token->next->next->value);
+				printf("%s\n",tmp);
+				free(tmp2);
+				free(path_def);
+				token = token->next;
+				i++;
+			}
+			while(i > 0)
+			{
+				token = token->prev;
+				i--;
+			}
+		}
+		else
+			tmp = token->value;
+		mycmdargs = ft_split(tmp, ' ');
 		path_def = get_path(data, token);
 	}
 	if (!path_def)

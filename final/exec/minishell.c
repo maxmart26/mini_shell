@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 15:01:01 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:34:53 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ void	ft_tmp(t_data *data, t_token *token)
 	t_token	*tmp;
 	int		result;
 	int		result2;
+	t_token	*tmp2;
 
+	tmp2 = token;
 	result = -23;
 	while (token)
 	{
-		if (token->type == CMD || token->type == CMD_BULT || token->type == CMD_ABS)
+		if (token->type == CMD || token->type == CMD_BULT
+			|| token->type == CMD_ABS)
 		{
 			pid = fork();
 			if (pid == 0)
@@ -35,24 +38,60 @@ void	ft_tmp(t_data *data, t_token *token)
 				redirection_builting(token, data);
 			}
 			data->nb_cmd++;
-			waitpid(0, &result, 0);
-			result2 = WEXITSTATUS(result);
-			if (result2 == 155)
-				ft_unset(token, data, -1);
-			else if (result2 == 156)
-				ft_export(token, data, -1);
-			else if (result2 == 157)
-				ft_cd(token, -1, data);
 		}
 		tmp = token->next;
 		token = tmp;
 	}
+	while (tmp2)
+	{
+		if (tmp2->type == CMD || tmp2->type == CMD_BULT
+			|| tmp2->type == CMD_ABS)
+		{
+			waitpid(0, &result, 0);
+			result2 = WEXITSTATUS(result);
+			if (result2 == 155)
+				ft_unset(tmp2, data, -1);
+			else if (result2 == 156)
+				ft_export(tmp2, data, -1);
+			else if (result2 == 157)
+				ft_cd(tmp2, -1, data);
+			else if (result2 == 158)
+				ft_exit(-1);
+		}
+		tmp = tmp2->next;
+		tmp2 = tmp;
+	}
 }
 
+void	new_token_after_fd(t_token *token)
+{
+	t_token	*tmp;
+	t_token	*tmp2;
+
+	while (token->next != NULL)
+	{
+		if (token->type == GREAT || token->type == LESS)
+		{
+			tmp = token;
+			tmp2 = token->next;
+			token->prev->next = token->next->next;
+			token->next->next->prev = token->prev;
+			token = token->next->next;
+			free(tmp);
+			free(tmp2);
+		}
+		else
+			token = token->next;
+	}
+	while (token != NULL)
+		token = token->prev;
+}
 int	ft_main(t_data *data)
 {
 	open_fd(data, data->lexer_list);
+	new_token_after_fd(data->lexer_list);
 	open_heredoc(data);
+	ft_print_lexer(data->lexer_list);
 	if (data->std_int < 0 || data->std_out < 0)
 		return (printf("probleme d"), 0);
 	ft_tmp(data, data->lexer_list);

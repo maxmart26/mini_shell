@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:37:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/11 15:18:00 by laura            ###   ########.fr       */
+/*   Updated: 2024/03/12 16:09:50 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,37 +23,6 @@ t_env	*new_env(void)
 		return (NULL);
 	new->next = NULL;
 	return (new);
-}
-
-t_env	*init_env(t_data *env_tool)
-{
-	t_env	*env;
-	t_env	*tmp;
-	t_env	*result;
-	char	**str;
-	int		i;
-
-	env = new_env();
-	i = 0;
-	result = env;
-	env->prev = NULL;
-	while (env_tool->envp[i])
-	{
-		env->value = env_tool->envp[i];
-		str = ft_split(env->value, '=');
-		env->name = str[0];
-		env->content = str[1];
-		free(str);
-		if (env_tool->envp[i + 1])
-		{
-			env->next = new_env();
-			tmp = env->next;
-			tmp->prev = env;
-			env = tmp;
-		}
-		i++;
-	}
-	return (result);
 }
 
 void	ft_destroy_env(t_env *env_list)

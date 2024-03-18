@@ -14,6 +14,7 @@ OBJ = exec/minishell.c\
 	  exec/herdoc/herdoc.c\
 	  exec/builting/cd.c\
 	  exec/builting/pwd.c\
+	  exec/builting/exit.c\
 	  exec/execution/exec.c\
 	  exec/execution/exec_abs.c\
 	  exec/builting/unset.c\
@@ -38,7 +39,7 @@ OBJ = exec/minishell.c\
 	  srcs/utils/utils.c 
 
 CC = cc
-CFLAGS =  -g3 
+CFLAGS =  -g3 -Wextra -Werror -Wall
 LDFLAGS = -lreadline
 SRCS = ${OBJ}
 OBJS = ${SRCS:.c=.o}
