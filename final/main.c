@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/12 14:49:01 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:52:34 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int	minishell(t_data *tools, char **env)
 		tools->args = readline("matorgue:~$ ");
 		if (!tools->args)
 			exit(EXIT_SUCCESS);
-		add_history(tools->args);
+		//add_history(tools->args);
 		if (!count_quotes(tools->args))
 			return (ft_error(0));
 		lexer_and_parser(tools);
-		init_data(tools->lexer_list, tools, env); // malloc la tools
+		init_data(tools->lexer_list, tools); // malloc la tools
 		ft_main(tools);
 	}
 	ft_destroy_env(tools->env);

@@ -6,13 +6,13 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:53:08 by matorgue          #+#    #+#             */
-/*   Updated: 2024/02/27 08:47:06 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:02:21 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell_include.h"
-#include "include/minishell_proto.h"
-#include "include/minishell_struct.h"
+#include "../../include/minishell_include.h"
+#include "../../include/minishell_proto.h"
+#include "../../include/minishell_struct.h"
 
 void	ft_print_echo(t_token *token, int n)
 {

@@ -6,13 +6,13 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:06:12 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/11 12:33:35 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:01:36 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell_include.h"
-#include "include/minishell_proto.h"
-#include "include/minishell_struct.h"
+#include "../../include/minishell_include.h"
+#include "../../include/minishell_proto.h"
+#include "../../include/minishell_struct.h"
 
 void	ft_here_doc_put_in(t_data *data, char *av)
 {
@@ -40,7 +40,7 @@ int	ft_access(void)
 	i = 0;
 	while (1)
 	{
-		if (access(ft_strjoin(".here_doc", ft_itoa(i)), F_OK) == -1)
+		if (access(ft_strjoin("/tmp/.here_doc", ft_itoa(i)), F_OK) == -1)
 			break ;
 		else
 			i++;
@@ -51,7 +51,7 @@ int	ft_access(void)
 void	ft_herdoc(t_data *data, t_token *tmp, int i)
 {
 	i = ft_access();
-	data->itoa = ft_strjoin(".here_doc", ft_itoa(i));
+	data->itoa = ft_strjoin("/tmp/.here_doc", ft_itoa(i));
 	data->f1 = open((data->itoa),
 			O_CREAT | O_RDWR | O_TRUNC, 0777);
 	if (data->f1 < 0)

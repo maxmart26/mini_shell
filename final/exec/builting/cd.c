@@ -6,13 +6,13 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/11 12:39:45 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:02:26 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell_include.h"
-#include "include/minishell_proto.h"
-#include "include/minishell_struct.h"
+#include "../../include/minishell_include.h"
+#include "../../include/minishell_proto.h"
+#include "../../include/minishell_struct.h"
 #include <dirent.h>
 
 char	*ft_init_pwd_cd(void)

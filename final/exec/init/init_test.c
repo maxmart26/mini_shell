@@ -6,13 +6,13 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:53:44 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/06 17:12:11 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:01:22 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell_include.h"
-#include "include/minishell_proto.h"
-#include "include/minishell_struct.h"
+#include "../../include/minishell_include.h"
+#include "../../include/minishell_proto.h"
+#include "../../include/minishell_struct.h"
 
 void	init_test(t_token *token)
 {

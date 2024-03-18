@@ -6,13 +6,13 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/06 18:37:36 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:01:42 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell_include.h"
-#include "include/minishell_proto.h"
-#include "include/minishell_struct.h"
+#include "../../include/minishell_include.h"
+#include "../../include/minishell_proto.h"
+#include "../../include/minishell_struct.h"
 
 void	ft_free_tab(char **tab)
 {

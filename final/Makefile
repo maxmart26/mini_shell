@@ -2,23 +2,23 @@ NAME = minishell
 INCLUDE = include/minishell_include.h\
 		  include/minishell_proto.h\
 		  include/minishell_struct.h
-OBJ = minishell.c\
+OBJ = exec/minishell.c\
 	  main.c\
-	  init_test.c\
-	  utils_bonus2.c\
-	  init_data.c\
-	  token_init.c\
-	  builting.c\
-	  echo.c\
-	  env.c\
-	  herdoc.c\
-	  cd.c\
-	  pwd.c\
-	  exec.c\
-	  exec_abs.c\
-	  unset.c\
-	  export.c\
-	  ft_lstnew.c\
+	  exec/init/init_test.c\
+	  exec/execution/utils_bonus2.c\
+	  exec/init/init_data.c\
+	  exec/init/token_init.c\
+	  exec/builting/builting.c\
+	  exec/builting/echo.c\
+	  exec/builting/env.c\
+	  exec/herdoc/herdoc.c\
+	  exec/builting/cd.c\
+	  exec/builting/pwd.c\
+	  exec/execution/exec.c\
+	  exec/execution/exec_abs.c\
+	  exec/builting/unset.c\
+	  exec/builting/export.c\
+	  exec/init/ft_lstnew.c\
 	  utilitaire/get_next_line_utils_bonus.c\
 	  utilitaire/get_next_line_bonus.c\
 	  srcs/lexer/lexer.c \
