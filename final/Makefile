@@ -40,7 +40,7 @@ OBJ = minishell.c\
 	  srcs/readline/readline.c \
 	  srcs/readline/term_actions.c \
 	  srcs/readline/node.c \
-	  srcs/readline/charline.c \
+	  srcs/readline/char_line.c \
 	  srcs/error_handler/ft_error.c \
 	  srcs/utils/utils.c \
 	  srcs/utils/utils2.c

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/18 14:47:32 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:08:40 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,10 @@ t_hist_list	*insert_node_history(t_hist_list *history, t_hist_list *new_node,
 t_hist_list	*create_node(void);
 char		*create_line_from_list(t_char_list *list);
 
-void		show_prompt(void);
+void	get_char(long c, t_hist_list *current);
+void	add_non_empty_list(long c, t_char_list **current);
+void	add_char_list(char c, t_char_list **current);
+
+void		show_prompt(t_data *tools);
 
 #endif

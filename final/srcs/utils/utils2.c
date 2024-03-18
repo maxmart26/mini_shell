@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:25:03 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/18 14:47:08 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:59:49 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,13 @@ void	delete_char_list(t_char_list *list)
 	}
 }
 
-void	show_prompt(void)
+void	show_prompt(t_data *tools)
 {
+	char	*str;
+
+	str = is_still_env_var("$USER", tools);
+	str = ft_strjoin(str, ":~$ ");
 	write(1, GREEN, ft_strlen(GREEN));
-	write(1, "minishell$ ", strlen("minishell$ "));
+	write(1, str, ft_strlen(str));
 	write(1, RESET, ft_strlen(RESET));
 }

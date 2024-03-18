@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:30:58 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/18 14:57:04 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:09:21 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_get_input(t_rdline rdline, int *status, struct termios old_term,
 				handle_ctrl_d(status, rdline, old_term);
 		}
 		else if (ft_isprint(c))
-			get_c(&rdline, c, current);
+			get_char(c, current);
 		c = 0;
 	}
 	return (print_line(rdline));

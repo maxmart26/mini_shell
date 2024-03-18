@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/18 14:46:38 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:54:38 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	minishell(t_data *tools, char **env)
 	history = NULL;
 	while (1)
 	{
-		show_prompt();
+		show_prompt(tools);
 		rd_line(&line, &status, history);
 		tools->args = line;
 		if (!tools->args)
