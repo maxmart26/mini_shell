@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/15 18:26:29 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:47:32 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,9 @@ void		reset_term(struct termios old_termios, int fd);
 char		*ft_get_input(t_rdline rdline, int *status, struct termios old_term,
 				t_hist_list *history);
 t_hist_list	*ft_init_history(long *c, int *newline_stop, t_hist_list *history);
-t_hist_list	*handle_history(long c, t_rdline rd_line, t_hist_list *current);
+t_hist_list	*handle_history(long c, t_hist_list *current);
 int			add_node_history(t_rdline *rd_line, t_hist_list *current,
-				t_hist_list *history);
+				t_hist_list **history);
 void		handle_ctrl_d(int *status, t_rdline rd_line,
 				struct termios old_term);
 int			handle_ctrl_c(t_hist_list **current, int *status,
@@ -151,7 +151,15 @@ char		*print_line(t_rdline rd_line);
 int			check_history(t_hist_list **current, t_hist_list *history);
 t_hist_list	*destroy_history(t_hist_list *history);
 void		print_char_list(t_char_list *list);
-t_hist_list	*up_in_history(t_rdline *rd_line, t_hist_list **history);
-t_hist_list	*down_in_history(t_rdline *rd_line, t_hist_list **history);
+t_hist_list	*up_in_history(t_hist_list **history);
+t_hist_list	*down_in_history(t_hist_list **history);
+t_hist_list	*push_node_history(t_hist_list **history, t_hist_list *new_node,
+				int is_hist);
+t_hist_list	*insert_node_history(t_hist_list *history, t_hist_list *new_node,
+				int is_hist);
+t_hist_list	*create_node(void);
+char		*create_line_from_list(t_char_list *list);
+
+void		show_prompt(void);
 
 #endif

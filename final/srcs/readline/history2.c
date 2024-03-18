@@ -6,28 +6,13 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:47:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/15 17:54:48 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:35:51 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_include.h"
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
-
-t_hist_list	*destroy_node(t_hist_list *node)
-{
-	if (node->char_list)
-		delete_char_list(node->char_list);
-	node->char_list = NULL;
-	if (node->origin_char_list)
-		delete_char_list(node->origin_char_list);
-	node->origin_char_list = NULL;
-	node->next = NULL;
-	node->prev = NULL;
-	free(node);
-	node = NULL;
-	return (NULL);
-}
 
 t_char_list	*free_list(t_char_list *list)
 {
@@ -69,11 +54,51 @@ t_hist_list	*destroy_history(t_hist_list *history)
 int	check_history(t_hist_list **current, t_hist_list *history)
 {
 	if (*current && ((*current)->char_list == NULL
-		|| (*current)->char_list->value == 0))
+			|| (*current)->char_list->value == 0))
 	{
 		if (history)
 			history = destroy_history(history);
 		return (1);
 	}
 	return (0);
+}
+
+t_hist_list	*insert_node_history(t_hist_list *history, t_hist_list *new_node,
+		int is_hist)
+{
+	if (!history)
+	{
+		new_node->history = is_hist;
+		new_node->index = 1;
+		history = new_node;
+		history->next = NULL;
+		history->prev = NULL;
+	}
+	else
+		history = push_node_history(&history, new_node, is_hist);
+	return (history);
+}
+
+char	*create_line_from_list(t_char_list *list)
+{
+	t_char_list	*tmp;
+	char		*line;
+	int			len;
+	int			i;
+
+	i = 0;
+	len = list->len;
+	tmp = list;
+	line = (char *)malloc(sizeof(char) * (len + 1));
+	if (!line)
+		return (ft_putstr_fd("Allocation problem", 1), NULL);
+	ft_bzero(line, len + 1);
+	while (tmp)
+	{
+		line[i] = tmp->value;
+		tmp = tmp->next;
+		i++;
+	}
+	line[len] = '\0';
+	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:37:08 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/15 18:25:50 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:37:21 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_char_list(t_char_list *list)
 	}
 }
 
-t_hist_list	*up_in_history(t_rdline *rd_line, t_hist_list **history)
+t_hist_list	*up_in_history(t_hist_list **history)
 {
 	if ((*history)->next)
 	{
@@ -64,7 +64,7 @@ t_hist_list	*up_in_history(t_rdline *rd_line, t_hist_list **history)
 	return (*history);
 }
 
-t_hist_list	*down_in_history(t_rdline *rd_line, t_hist_list **history)
+t_hist_list	*down_in_history(t_hist_list **history)
 {
 	if ((*history))
 	{

@@ -6,30 +6,13 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:58:35 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/15 18:33:24 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:38:40 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_include.h"
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
-
-t_hist_list	*create_node(void)
-{
-	t_hist_list	*node;
-
-	node = (t_hist_list *)malloc(sizeof(t_hist_list));
-	if (!node)
-		return (NULL);
-	node->char_list = NULL;
-	node->origin_char_list = NULL;
-	node->up_or_down = 0;
-	node->next = NULL;
-	node->prev = NULL;
-	node->value = 0;
-	node->history = 0;
-	return (node);
-}
 
 t_hist_list	*ft_init_history(long *c, int *newline_stop, t_hist_list *history)
 {
@@ -52,12 +35,12 @@ t_hist_list	*ft_init_history(long *c, int *newline_stop, t_hist_list *history)
 	return (current);
 }
 
-t_hist_list	*handle_history(long c, t_rdline rd_line, t_hist_list *current)
+t_hist_list	*handle_history(long c, t_hist_list *current)
 {
 	if (current && c == D_KEY_UP)
-		current = up_in_history(&rd_line, &current);
+		current = up_in_history(&current);
 	else if (current && c == D_KEY_DOWN)
-		current = down_in_history(&rd_line, &current);
+		current = down_in_history(&current);
 	return (current);
 }
 

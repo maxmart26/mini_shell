@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:18:21 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 17:41:47 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:48:37 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,8 @@
 \033[0;92m[TYPE]\033[0m \033[0;91m[TOKEN]\033[0m"
 
 # define SYNTAX_ERR "syntax error : no closing quote"
+
+# define GREEN "\e[1;32m"
+# define RESET "\e[0m"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:25:03 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/15 17:56:59 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:47:08 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,11 @@ void	delete_char_list(t_char_list *list)
 		free(tmp1);
 		tmp1 = NULL;
 	}
+}
+
+void	show_prompt(void)
+{
+	write(1, GREEN, ft_strlen(GREEN));
+	write(1, "minishell$ ", strlen("minishell$ "));
+	write(1, RESET, ft_strlen(RESET));
 }

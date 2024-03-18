@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:30:58 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/15 17:50:19 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:57:04 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ char	*ft_get_input(t_rdline rdline, int *status, struct termios old_term,
 	{
 		read(rdline.term_fd, &c, 6);
 		if (current && (c == D_KEY_UP || c == D_KEY_DOWN))
-			current = handle_history(c, rdline, current);
+			current = handle_history(c, current);
 		else if (c == D_KEY_ENTER)
-			newline_stop = add_node_history(&rdline, current, history);
+			newline_stop = add_node_history(&rdline, current, &history);
 		else if (c == D_KEY_CTRL_C)
 			newline_stop = handle_ctrl_c(&current, status, history);
 		else if (c == D_KEY_CTRL_D)
@@ -61,8 +61,8 @@ char	*ft_get_input(t_rdline rdline, int *status, struct termios old_term,
 			if (check_history(&current, history) == 1)
 				handle_ctrl_d(status, rdline, old_term);
 		}
-		/*else if (ft_isprint(c))
-			get_c(&rdline, c, current);*/
+		else if (ft_isprint(c))
+			get_c(&rdline, c, current);
 		c = 0;
 	}
 	return (print_line(rdline));

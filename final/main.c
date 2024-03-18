@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/15 17:22:28 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:46:38 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ int	minishell(t_data *tools, char **env)
 	history = NULL;
 	while (1)
 	{
+		show_prompt();
 		rd_line(&line, &status, history);
 		tools->args = line;
 		if (!tools->args)
 			exit(EXIT_SUCCESS);
-		add_history(tools->args);
+		//add_history(tools->args);
 		if (!count_quotes(tools->args))
 			return (ft_error(0));
 		lexer_and_parser(tools);
