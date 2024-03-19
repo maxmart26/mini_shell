@@ -6,13 +6,15 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/18 15:54:38 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:25:44 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell_include.h"
 #include "include/minishell_proto.h"
 #include "include/minishell_struct.h"
+
+int		g_status;
 
 void	lexer_and_parser(t_data *tools)
 {
@@ -36,30 +38,41 @@ void	lexer_and_parser(t_data *tools)
 	}
 }
 
-int	minishell(t_data *tools, char **env)
+void	init_minishell(t_data *tools, char **env)
 {
-	char		*line;
-	int			status;
-	t_hist_list	*history;
-
-	signal(SIGINT, &ft_signal_handler);
-	signal(SIGQUIT, &ft_signal_handler);
 	tools->envp = env;
 	tools->env = init_env(tools);
-	history = NULL;
-	while (1)
+	g_status = 1;
+	show_ctrl(0);
+	signal(SIGQUIT, &ft_signal_handler);
+	handle_signal();
+}
+
+int	minishell(t_data *tools, char **env)
+{
+	char	*str;
+
+	init_minishell(tools, env);
+	while (g_status)
 	{
-		show_prompt(tools);
-		rd_line(&line, &status, history);
-		tools->args = line;
+		str = show_prompt(tools);
+		tools->args = readline(str);
 		if (!tools->args)
-			exit(EXIT_SUCCESS);
-		//add_history(tools->args);
-		if (!count_quotes(tools->args))
-			return (ft_error(0));
-		lexer_and_parser(tools);
-		init_data(tools->lexer_list, tools, env); // malloc la tools
-		ft_main(tools);
+			ctrl_d();
+		check_new_line();
+		if (tools->nl_error == 0 || tools->nl_error == 2)
+		{
+			add_history(tools->args);
+			if (tools->nl_error == 0)
+			{
+				if (!count_quotes(tools->args))
+					return (ft_error(0));
+				lexer_and_parser(tools);
+				init_data(tools->lexer_list, tools, env);
+				ft_main(tools);
+			}
+		}
+		free(tools->args);
 	}
 	ft_destroy_env(tools->env);
 	return (EXIT_SUCCESS);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:37:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/11 15:18:00 by laura            ###   ########.fr       */
+/*   Updated: 2024/03/19 16:22:25 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
 
-t_env	*new_env(void)
+/*t_env	*new_env(void)
 {
 	t_env	*new;
 
@@ -54,7 +54,7 @@ t_env	*init_env(t_data *env_tool)
 		i++;
 	}
 	return (result);
-}
+}*/
 
 void	ft_destroy_env(t_env *env_list)
 {

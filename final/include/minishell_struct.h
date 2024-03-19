@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/15 17:16:04 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:25:38 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct s_data
 	int					fd_in;
 	int					fd_out;
 	int					pid;
+	int					status;
+	int					nl_error;
 }						t_data;
 
 /******READLINE*******/
@@ -123,7 +125,7 @@ typedef struct s_hist_list
 	char				value;
 	int					history;
 	int					index;
-	int				up_or_down;
+	int					up_or_down;
 	t_char_list			*char_list;
 	t_char_list			*origin_char_list;
 	struct s_hist_list	*next;
@@ -141,5 +143,7 @@ typedef struct s_rdline
 	char				*line;
 	t_cursor			cursor;
 }						t_rdline;
+
+extern int				g_status;
 
 #endif

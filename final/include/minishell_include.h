@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:18:21 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/18 14:48:37 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:17:48 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # include <term.h>
 # include <curses.h>
 # include <termcap.h>
+# include <dirent.h>
+# include <fcntl.h>
 # include "../utilitaire/libft/libft.h"
 # include "../utilitaire/get_next_line_bonus.h"
 

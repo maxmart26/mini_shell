@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/11 15:05:21 by laura            ###   ########.fr       */
+/*   Updated: 2024/03/19 16:00:53 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ int	is_env_var(char *str)
 
 void	ft_signal_handler(int signal)
 {
-	if (signal == SIGINT)
+	if (signal == SIGQUIT)
+	{
 		write(STDOUT_FILENO, "\n", 1);
+		g_status = 0;
+	}
 }
