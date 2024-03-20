@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/19 17:38:39 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:54:52 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ void	open_fd(t_data *data, t_token *token);
 
 void	init_data(t_token *token, t_data *data, char **envp);
 t_env	*init_env(t_data *data);
+
+// env
+
 t_env	*new_env(void);
+char	*prompt_get_sess(void);
+char	*prompt_get_path(t_data *tools);
 
 // utilitaire
 
@@ -132,6 +137,13 @@ int		handle_signal(void);
 void	ft_signal_handler(int signal);
 void	ctrl_d(void);
 char	*show_prompt(t_data *tools);
-void	check_new_line(void);
+void	check_new_line(t_data *tools);
+void	new_line_init(t_data *tools);
+int		new_line_error(t_data *tools);
+int		is_space(char c);
+int		is_quote(char c, char d);
+int		is_spe_char(char c, char d);
+int		is_char(char c, char d);
+void	free_minishell(t_data *tools);
 
 #endif

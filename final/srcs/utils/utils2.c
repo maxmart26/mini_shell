@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:25:03 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/19 16:56:27 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:40:32 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,27 @@ void	delete_char_list(t_char_list *list)
 char	*show_prompt(t_data *tools)
 {
 	char	*str;
+	char	*user;
+	char	*session;
+	char	*path;
 
-	str = is_still_env_var("$USER", tools);
-	str = ft_strjoin(str, ":~$ ");
+	user = is_still_env_var("$USER", tools);
+	str = ft_strjoin(user, "@");
+	session = prompt_get_sess();
+	if (session == NULL)
+	{
+		ft_putstr_fd("Error : no session_manager variabe in env", 1);
+		return (NULL);
+	}
+	str = ft_strjoin(str, session);
+	str = ft_strjoin(str, ":~");
+	path = prompt_get_path(tools);
+	if (path == NULL)
+	{
+		ft_putstr_fd("Error : no path variable in env", 1);
+		return (NULL);
+	}
+	str = ft_strjoin(str, path);
+	str = ft_strjoin(str, "$ ");
 	return (str);
 }

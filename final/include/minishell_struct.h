@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/19 17:25:38 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:48:20 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,27 @@
 
 typedef enum e_token_type
 {
-	HEREDOC,  // >>
+	HEREDOC,
+	APPEND,
+	GREAT,
+	LESS,
+	PIPE,
+	S_QUOTE,
+	D_QUOTE,
+	WORD,
+	SEP,
+	NEWL,
+	NONE,
+	CMD,
+	CMD_ABS,
+	CMD_BULT,
+	SEMI,
+	ARG,
+	OPT,
+}						t_token_type;
+
+/*
+HEREDOC,  // >>
 	APPEND,   // <<
 	GREAT,    // >
 	LESS,     // <
@@ -41,8 +61,7 @@ typedef enum e_token_type
 	CMD_BULT, // commande builtins
 	SEMI,     // ;
 	ARG,      // file1
-	OPT,      // -l
-}						t_token_type;
+	OPT,      // -l*/
 
 typedef struct s_token
 {
@@ -91,8 +110,12 @@ typedef struct s_data
 	int					fd_out;
 	int					pid;
 	int					status;
+	int					exit_status;
 	int					nl_error;
+	int					first_call;
 }						t_data;
+
+extern int				g_status;
 
 /******READLINE*******/
 
@@ -106,12 +129,6 @@ typedef struct s_data
 # define D_KEY_BACKSPACE 127
 # define D_KEY_CTRL_C 3
 # define D_KEY_CTRL_D 4
-
-typedef struct s_cursor
-{
-	int					line_postion;
-	int					col_position;
-}						t_cursor;
 
 typedef struct s_char_list
 {
@@ -131,19 +148,5 @@ typedef struct s_hist_list
 	struct s_hist_list	*next;
 	struct s_hist_list	*prev;
 }						t_hist_list;
-
-typedef struct s_rdline
-{
-	char				*term_type;
-	int					term_fd;
-	int					line_count;
-	int					colums_count;
-	// long		c;
-	char				*path;
-	char				*line;
-	t_cursor			cursor;
-}						t_rdline;
-
-extern int				g_status;
 
 #endif

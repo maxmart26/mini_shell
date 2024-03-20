@@ -37,8 +37,11 @@ OBJ = minishell.c\
 	  srcs/error_handler/ft_error.c \
 	  srcs/utils/utils.c \
 	  srcs/utils/utils2.c \
+	  srcs/utils/utils3.c \
 	  srcs/utils/signals.c \
-	  srcs/utils/env.c
+	  srcs/utils/newline.c \
+	  srcs/utils/env.c \
+	  srcs/utils/free.c
 
 CC = cc
 CFLAGS =  -Wextra -Werror -Wall -g3 
