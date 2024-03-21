@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:18:21 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/19 16:17:48 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:27:53 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@
 # define LEGEND "\033[38;5;214mInd :\033[0m \
 \033[0;92m[TYPE]\033[0m \033[0;91m[TOKEN]\033[0m"
 
-# define SYNTAX_ERR "syntax error : no closing quote"
+# define SYNTAX_ERR "bash: syntax error near unexpected token `"
+# define DIR_ERR ": Is a directory\n"
+# define CMD_ERR ": command not found\n"
 
 # define GREEN "\e[1;32m"
 # define RESET "\e[0m"

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/20 14:54:52 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:09:28 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ char	*get_q_word(char *line, int *j, int nb_quote);
 char	*what_type(t_token *list);
 char	*other_type(t_token *list, char *type);
 t_token	*remove_sep(t_token *list);
+t_token	*index_first(t_token *list);
 void	def_index(t_token *list);
 void	ft_print_lexer(t_token *list);
 void	add_cmd(t_token *token);
@@ -145,5 +146,12 @@ int		is_quote(char c, char d);
 int		is_spe_char(char c, char d);
 int		is_char(char c, char d);
 void	free_minishell(t_data *tools);
+
+// Parsing
+
+void	parsing(t_data *tools);
+int		check_syntax(t_data *tools);
+int		check_error_newline(t_data *tools, t_token *tmp);
+int		check_dir(t_data *tools);
 
 #endif

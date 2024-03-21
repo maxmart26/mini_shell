@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:44 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/06 18:24:19 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:39:04 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,76 @@
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
 
-
-/*t_parser	init_parser(t_token *list, t_data *tools)
+int	check_error_newline(t_data *tools, t_token *tmp)
 {
-	t_parser	parser_tools;
-
-	parser_tools.lexer_list = list;
-	parser_tools.nb_redirs = 0;
-	parser_tools.redirs = NULL;
-	parser_tools.tools = tools;
-	return (parser_tools);
+	if (((tmp->type == GREAT || tmp->type == LESS || tmp->type == APPEND
+				|| tmp->type == HEREDOC) && tmp->next->type == NEWL)
+		|| (tmp->type == LESS && tmp->next->type == GREAT))
+	{
+		printf(SYNTAX_ERR);
+		tools->exit_status = 258;
+		return (1);
+	}
+	return (0);
 }
 
-void	parser(t_data *tools)
+int	check_syntax(t_data *tools)
 {
-	t_parser	parser_tools;
+	t_token	*tmp;
 
-	count_pipes(tools->lexer_list, tools);
-	while (tools->lexer_list)
+	tmp = tools->lexer_list;
+	if (check_error_newline(tools, tmp))
+		return (printf("%s'\n", "newline"), 1);
+	if ((tmp->type == HEREDOC && (tmp->next->type == GREAT
+				|| tmp->next->type == HEREDOC)) || (tmp->type == APPEND
+			&& (tmp->next->type == APPEND || tmp->next->type == LESS)))
 	{
-		parser_tools = init_parser(tools->lexer_list, tools);
-		//body
-		tools->lexer_list = parser_tools.lexer_list;
+		printf(SYNTAX_ERR);
+		tools->exit_status = 258;
+		return (printf("%s'\n", tmp->value), 1);
 	}
-	return (EXIT_SUCCESS);
-}*/
+	else if ((tmp->type == GREAT && tmp->next->type == GREAT)
+		|| (tmp->type == LESS && tmp->next->type == LESS))
+	{
+		printf(SYNTAX_ERR);
+		tools->exit_status = 258;
+		return (printf("%s'\n", tmp->value), 1);
+	}
+	return (0);
+}
+
+int	check_dir(t_data *tools)
+{
+	t_token	*tmp;
+
+	tmp = tools->lexer_list;
+	if ((strncmp(tmp->value, "/", 1) == 0 || strncmp(tmp->value, ".", 1) == 0)
+		&& tmp->next->type == NEWL)
+	{
+		printf("%s %s", "bash: ", tmp->value);
+		tools->exit_status = 258;
+		return (printf(DIR_ERR), 1);
+	}
+	else if ((strncmp(tmp->value, "\\", 1) == 0 || strncmp(tmp->value, "-",
+				1) == 0) && tmp->next->type == NEWL)
+	{
+		printf("%s %s", "bash: ", tmp->value);
+		tools->exit_status = 258;
+		return (printf(CMD_ERR), 1);
+	}
+	else if (strncmp(tmp->value, "|", 1) == 0)
+	{
+		printf(SYNTAX_ERR);
+		tools->exit_status = 258;
+		return (printf("%s'\n", tmp->value), 1);
+	}
+	return (0);
+}
+
+void	parsing(t_data *tools)
+{
+	if (check_syntax(tools))
+		return ;
+	if (check_dir(tools))
+		return ;
+}

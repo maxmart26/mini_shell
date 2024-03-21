@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/19 17:16:09 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:31:10 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,6 @@ void	show_ctrl(int sig)
 
 void	ctrl_d(void)
 {
-	/*int		lvl;
-
-	lvl = check_lvl();
-	if (lvl > 1)
-		return (level_down());
-	free_minishell();*/
 	printf("exit\n");
 	exit(0);
 }

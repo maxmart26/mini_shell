@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/20 14:52:17 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:46:10 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	lexer_and_parser(t_data *tools)
 		add_args(tools->lexer_list);
 		list_gathering(tools);
 		ft_print_lexer(tools->lexer_list);
+		parsing(tools);
 		free(tools->args);
 		tools->args = NULL;
 	}

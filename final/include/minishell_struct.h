@@ -6,12 +6,12 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/20 10:48:20 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:57:32 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef MINISHELL_STRUCT_H
+# define MINISHELL_STRUCT_H
 
 # include <pthread.h>
 # include <stdbool.h>
