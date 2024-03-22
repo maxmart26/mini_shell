@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/21 15:09:28 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:10:41 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,5 +153,8 @@ void	parsing(t_data *tools);
 int		check_syntax(t_data *tools);
 int		check_error_newline(t_data *tools, t_token *tmp);
 int		check_dir(t_data *tools);
+int		check_error_pipe(t_data *tools, t_token *tmp);
+int		check_spe_char(t_data *tools);
+int		check_word_only(t_data *tools);
 
 #endif
