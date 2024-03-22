@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/22 12:57:32 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:28:56 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,7 @@ void	sig_handler_sa(int signal, siginfo_t *info, void *context)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		printf("\n");
-		//new_line();
 		rl_redisplay();
-	}
-	else if (signal == SIGQUIT)
-	{
-		printf("\033[2D  ");
-		printf("\033[2D");
-		return ;
 	}
 }
 
@@ -42,7 +35,7 @@ int	handle_signal(void)
 	sa.sa_sigaction = (void *)sig_handler_sa;
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
+	signal(SIGQUIT, SIG_IGN);
 	return (0);
 }
 
