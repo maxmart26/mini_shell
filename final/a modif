@@ -8,9 +8,7 @@ pour laura :
 grep : ok !
 
 a faire : 
-* CTRL-\
-* ajouter grep et dans la gestion des arguments (cmd_args.c)
-* ajouter clear et tac dans la liste des cmd + gestion des args
+* ajouter tac dans la gestion des args
 * creer fonction pour retirer les " et ' dans un WORD
 
 ----a retenir----

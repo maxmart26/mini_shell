@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 18:19:10 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/08 14:52:06 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/23 11:42:49 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	add_cmd_args(t_token *token)
 		add_awk_args(token);
 	else if (ft_strncmp(token->value, "cat", 3) == 0)
 		add_cat_args(token);
+	else if (ft_strncmp(token->value, "grep", 4) == 0)
+		add_grep_args(token);
 	else
 		return ;
 }

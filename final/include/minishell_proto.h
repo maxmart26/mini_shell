@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/22 12:10:41 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/23 11:44:30 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ void	add_echo_args(t_token *token);
 void	add_exp_args(t_token *token);
 void	add_unset_args(t_token *token);
 void	word_to_arg(t_token *token);
+void	add_grep_args(t_token *token);
+//void	add_tac_args(t_token *token);
 
 // Utils
 

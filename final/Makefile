@@ -32,6 +32,7 @@ OBJ = minishell.c\
 	  srcs/lexer/manage_type2.c \
 	  srcs/lexer/cmdbuilt_args.c \
 	  srcs/lexer/cmd_args.c \
+	  srcs/lexer/cmd_args2.c \
 	  srcs/parser/parser.c \
 	  srcs/expand/expand.c \
 	  srcs/error_handler/ft_error.c \
