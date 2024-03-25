@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 15:01:42 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:57:33 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
 
-void	ft_free_tab(char **tab)
+void	ft_free_tab(char **input)
 {
 	size_t	i;
 
 	i = 0;
-	while (tab[i])
+	while (input[i])
 	{
-		free(tab[i]);
+		free(input[i]);
 		i++;
 	}
-	free(tab);
+	free(input);
 }
 
 char	*ft_path(char **envp)
@@ -71,20 +71,13 @@ char	*get_path(t_data *data, t_token *token)
 }
 void	ft_dup2(t_data *data)
 {
-	//printf("%d et %d\n", data->fd_in, data->nb_pipe);
 	if (data->nb_pipe > 0)
 	{
-		//printf("test\n");
-		//printf("%d et %d\n", data->fd_in, data->fd_out);
+		printf("avant %d et %d\n", data->fd_in, data->fd_out);
 		ft_close_useless(data, data->nb_cmd, data->nb_cmd);
-		//printf("%d et %d\n", data->fd_in, data->fd_out);
+		printf(" apres %d et %d\n", data->fd_in, data->fd_out);
 		dup2(data->fd_out, STDOUT_FILENO);
 		dup2(data->fd_in, STDIN_FILENO);
-		close(data->fd_in);
-		close(data->fd_out);
-		close(data->std_int);
-		close(data->std_out);
-		close(0);
 	}
 	else
 	{
@@ -97,18 +90,45 @@ void	ft_exec(t_data *data, t_token *token)
 	char	*path_def;
 	char	*tmp;
 	char	**mycmdargs;
+	char	*tmp2;
+	int		i;
 
-	if (token->next != NULL && token->next->type == ARG)
+	i = 0;
+	if (token->next != NULL && token->next->type == OPT)
 	{
 		path_def = ft_strjoin(token->value, " ");
 		tmp = ft_strjoin(path_def, token->next->value);
 		mycmdargs = ft_split(tmp, ' ');
 		free(path_def);
 		free(tmp);
+		path_def = get_path(data, token);
 	}
 	else
 	{
-		mycmdargs = ft_split(token->value, ' ');
+		if (token->next->type == ARG)
+		{
+			path_def = ft_strjoin(token->value, " ");
+			tmp = ft_strjoin(path_def, token->next->value);
+			while (token->next->next->type == ARG)
+			{
+				tmp2 = tmp;
+				path_def = ft_strjoin(tmp, " ");
+				tmp = ft_strjoin(path_def, token->next->next->value);
+
+				free(tmp2);
+				free(path_def);
+				token = token->next;
+				i++;
+			}
+			while (i > 0)
+			{
+				token = token->prev;
+				i--;
+			}
+		}
+		else
+			tmp = token->value;
+		mycmdargs = ft_split(tmp, ' ');
 		path_def = get_path(data, token);
 	}
 	if (!path_def)

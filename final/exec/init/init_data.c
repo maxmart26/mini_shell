@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 15:01:29 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/25 12:02:20 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,10 @@ void	nb_pipe(t_token *token, t_data *data)
 		i++;
 	}
 }
-void	init_data(t_token *token, t_data *data, char **envp)
+void	init_data(t_token *token, t_data *data)
 {
 	data->nb_pipe = 0;
 	data->nb_cmd = 0;
-	data->envp = envp;
 	data->std_out = 1;
 	data->std_int = 0;
 	nb_pipe(token,data);
@@ -76,7 +75,7 @@ t_env	*init_env_i()
 	t_env	*env;
 	char	*str;
 
-	//printf("test\n");
+	printf("test\n");
 	env = new_env();
 	env->prev = NULL;
 	env->next = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_sep.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:55:48 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/06 18:24:37 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:43:55 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@ void	def_index(t_token *list)
 	}
 }
 
+t_token	*index_first(t_token *list)
+{
+	t_token	*result;
+
+	while (list->type == SEP)
+		list = list->next;
+	result = list;
+	return (result);
+}
+
 t_token	*remove_sep(t_token *list)
 {
 	t_token	*tmp;
@@ -41,10 +51,7 @@ t_token	*remove_sep(t_token *list)
 		if (list->type == SEP)
 		{
 			if (list->index == 0)
-			{
-				list = list->next;
-				result = list;
-			}
+				result = index_first(list);
 			else
 			{
 				tmp = list->prev;

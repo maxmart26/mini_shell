@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/11 15:18:33 by laura            ###   ########.fr       */
+/*   Updated: 2024/03/25 11:56:43 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@ void	open_fd(t_data *data, t_token *token);
 
 // init_data.c
 
-void	init_data(t_token *token, t_data *data, char **envp);
+void	init_data(t_token *token, t_data *data);
 t_env	*init_env(t_data *data);
+
+// env
+
 t_env	*new_env(void);
+char	*prompt_get_sess(void);
+char	*prompt_get_path(t_data *tools);
 
 // utilitaire
 
@@ -45,6 +50,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 // minishell
 
 int		ft_main(t_data *data);
+void	init_minishell(t_data *tools, char **env);
 
 // herdoc.c
 
@@ -73,6 +79,7 @@ void	ft_env(t_data *data);
 void	ft_cd(t_token *token, int i, t_data *data);
 void	ft_export(t_token *token, t_data *data, int i);
 void	ft_unset(t_token *token, t_data *data, int i);
+void	ft_exit(int i);
 
 // partie laura
 
@@ -90,6 +97,7 @@ char	*get_q_word(char *line, int *j, int nb_quote);
 char	*what_type(t_token *list);
 char	*other_type(t_token *list, char *type);
 t_token	*remove_sep(t_token *list);
+t_token	*index_first(t_token *list);
 void	def_index(t_token *list);
 void	ft_print_lexer(t_token *list);
 void	add_cmd(t_token *token);
@@ -123,4 +131,33 @@ void	add_echo_args(t_token *token);
 void	add_exp_args(t_token *token);
 void	add_unset_args(t_token *token);
 void	word_to_arg(t_token *token);
+void	add_grep_args(t_token *token);
+//void	add_tac_args(t_token *token);
+
+// Utils
+
+void	show_ctrl(int sig);
+int		handle_signal(void);
+void	ft_signal_handler(int signal);
+void	ctrl_d(void);
+char	*show_prompt(t_data *tools);
+void	check_new_line(t_data *tools);
+void	new_line_init(t_data *tools);
+int		new_line_error(t_data *tools);
+int		is_space(char c);
+int		is_quote(char c, char d);
+int		is_spe_char(char c, char d);
+int		is_char(char c, char d);
+void	free_minishell(t_data *tools);
+
+// Parsing
+
+void	parsing(t_data *tools);
+int		check_syntax(t_data *tools);
+int		check_error_newline(t_data *tools, t_token *tmp);
+int		check_dir(t_data *tools);
+int		check_error_pipe(t_data *tools, t_token *tmp);
+int		check_spe_char(t_data *tools);
+int		check_word_only(t_data *tools);
+
 #endif

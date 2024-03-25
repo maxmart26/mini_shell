@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:35:30 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/06 18:24:37 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/25 11:57:51 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	*other_type(t_token *list, char *type)
 		type = "CMD_BULT";
 	else if (list->type == APPEND)
 		type = "APPEND";
+	else if (list->type == OPT)
+		type = "OPT";
 	else
 		type = "NONE";
 	return (type);

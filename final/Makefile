@@ -14,6 +14,7 @@ OBJ = exec/minishell.c\
 	  exec/herdoc/herdoc.c\
 	  exec/builting/cd.c\
 	  exec/builting/pwd.c\
+	  exec/builting/exit.c\
 	  exec/execution/exec.c\
 	  exec/execution/exec_abs.c\
 	  exec/builting/unset.c\
@@ -32,13 +33,20 @@ OBJ = exec/minishell.c\
 	  srcs/lexer/manage_type2.c \
 	  srcs/lexer/cmdbuilt_args.c \
 	  srcs/lexer/cmd_args.c \
+	  srcs/lexer/cmd_args2.c \
 	  srcs/parser/parser.c \
 	  srcs/expand/expand.c \
 	  srcs/error_handler/ft_error.c \
-	  srcs/utils/utils.c 
+	  srcs/utils/utils.c \
+	  srcs/utils/utils2.c \
+	  srcs/utils/utils3.c \
+	  srcs/utils/signals.c \
+	  srcs/utils/newline.c \
+	  srcs/utils/env.c \
+	  srcs/utils/free.c
 
 CC = cc
-CFLAGS =  -g3 
+CFLAGS =  -g3 -Wextra -Werror -Wall
 LDFLAGS = -lreadline
 SRCS = ${OBJ}
 OBJS = ${SRCS:.c=.o}
