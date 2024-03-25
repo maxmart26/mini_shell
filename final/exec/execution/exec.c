@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 13:37:38 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:57:33 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,13 @@ char	*get_path(t_data *data, t_token *token)
 }
 void	ft_dup2(t_data *data)
 {
-	//printf("\t\t%d ici\n",data->nb_pipe);
-	//printf("%d et %d\n", data->fd_in, data->nb_cmd);
 	if (data->nb_pipe > 0)
 	{
-		//printf("test\n");
 		printf("avant %d et %d\n", data->fd_in, data->fd_out);
 		ft_close_useless(data, data->nb_cmd, data->nb_cmd);
 		printf(" apres %d et %d\n", data->fd_in, data->fd_out);
 		dup2(data->fd_out, STDOUT_FILENO);
 		dup2(data->fd_in, STDIN_FILENO);
-		// close(data->fd_in);
-		// close(data->fd_out);
-		// close(data->std_int);
-		// close(data->std_out);
-		//close(0);
 	}
 	else
 	{
@@ -99,7 +91,7 @@ void	ft_exec(t_data *data, t_token *token)
 	char	*tmp;
 	char	**mycmdargs;
 	char	*tmp2;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (token->next != NULL && token->next->type == OPT)
@@ -109,6 +101,7 @@ void	ft_exec(t_data *data, t_token *token)
 		mycmdargs = ft_split(tmp, ' ');
 		free(path_def);
 		free(tmp);
+		path_def = get_path(data, token);
 	}
 	else
 	{
@@ -116,19 +109,18 @@ void	ft_exec(t_data *data, t_token *token)
 		{
 			path_def = ft_strjoin(token->value, " ");
 			tmp = ft_strjoin(path_def, token->next->value);
-			//printf("\t\t%u\n",token->next->next->type);
-			while(token->next->next->type == ARG)
+			while (token->next->next->type == ARG)
 			{
 				tmp2 = tmp;
 				path_def = ft_strjoin(tmp, " ");
 				tmp = ft_strjoin(path_def, token->next->next->value);
-				//printf("%s\n",tmp);
+
 				free(tmp2);
 				free(path_def);
 				token = token->next;
 				i++;
 			}
-			while(i > 0)
+			while (i > 0)
 			{
 				token = token->prev;
 				i--;
