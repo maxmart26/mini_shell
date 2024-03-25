@@ -6,12 +6,12 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 11:42:13 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/25 11:50:23 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef MINISHELL_STRUCT_H
+# define MINISHELL_STRUCT_H
 
 # include <pthread.h>
 # include <stdbool.h>
@@ -38,7 +38,8 @@ typedef enum e_token_type
 	CMD_ABS, // commande absolu qui commance par un /
 	CMD_BULT, // commande builtins
 	SEMI, // ;
-	ARG, // -l
+	ARG, // file1
+	OPT, // -l
 }					t_token_type;
 
 typedef struct s_token

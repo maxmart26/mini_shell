@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/12 15:27:43 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/25 11:47:22 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,14 @@ void	lexer_and_parser(t_data *tools)
 		tools->lexer_list = tmp;
 		tools->lexer_list = remove_sep(tools->lexer_list);
 		def_index(tools->lexer_list);
-		//printf("\n%s\n\n", LEGEND);
-		//ft_print_lexer(tools->lexer_list);
-		//printf("\n%s\n\n", LEGEND);
 		env_var_expand(tools);
 		add_cmd(tools->lexer_list);
 		add_args(tools->lexer_list);
-		//ft_print_lexer(tools->lexer_list);
-		//printf("\n%s\n\n", LEGEND);
 		list_gathering(tools);
 		ft_print_lexer(tools->lexer_list);
 		free(tools->args);
 		tools->args = NULL;
 	}
-	/*if (tools->lexer_list)
-		parser(tools);*/
 }
 
 
