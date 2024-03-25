@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 15:33:42 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:16:34 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void	manage_cmd_buil(t_token *token);
 
 void	count_pipes(t_token *list, t_data *tools);
 int		count_quotes(char *str);
+char	*delete_quotes(char *str);
+void	remove_quotes(t_token *lexer_list);
 int		find_matching_quote(char *str, int i, int *nb_q, int q);
 void	list_gathering(t_data *tools);
 int		ft_error(int error);

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/25 17:31:49 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:49:45 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	lexer_and_parser(t_data *tools)
 		add_args(tools->lexer_list);
 		list_gathering(tools);
 		ft_print_lexer(tools->lexer_list);
+		remove_quotes(tools->lexer_list);
 		parsing(tools);
 		free(tools->args);
 		tools->args = NULL;
@@ -44,7 +45,7 @@ void	init_minishell(t_data *tools, char **env)
 	tools->envp = env;
 	tools->env = init_env(tools);
 	tools->status = 1;
-	g_status = 0;
+	g_status = 1;
 	tools->first_call = 1;
 	show_ctrl(1);
 	signal(SIGQUIT, &ft_signal_handler);
@@ -56,7 +57,7 @@ int	minishell(t_data *tools, char **env)
 	char	*str;
 
 	init_minishell(tools, env);
-	while (tools->status)
+	while (g_status)
 	{
 		str = show_prompt(tools);
 		tools->args = readline(str);
