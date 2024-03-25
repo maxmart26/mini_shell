@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_include.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laura <laura@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:18:21 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/11 14:41:39 by laura            ###   ########.fr       */
+/*   Updated: 2024/03/21 15:27:53 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@
 # include <readline/history.h>
 # include <dirent.h>
 # include <signal.h>
+# include <termios.h>
+# include <term.h>
+# include <curses.h>
+# include <termcap.h>
+# include <dirent.h>
+# include <fcntl.h>
 # include "../utilitaire/libft/libft.h"
 # include "../utilitaire/get_next_line_bonus.h"
 
@@ -36,6 +42,11 @@
 # define LEGEND "\033[38;5;214mInd :\033[0m \
 \033[0;92m[TYPE]\033[0m \033[0;91m[TOKEN]\033[0m"
 
-# define SYNTAX_ERR "syntax error : no closing quote"
+# define SYNTAX_ERR "bash: syntax error near unexpected token `"
+# define DIR_ERR ": Is a directory\n"
+# define CMD_ERR ": command not found\n"
+
+# define GREEN "\e[1;32m"
+# define RESET "\e[0m"
 
 #endif

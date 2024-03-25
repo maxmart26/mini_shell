@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:39:20 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 15:01:39 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:33:48 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_middle_commande(t_data *data, int j)
 
 void	ft_close_useless(t_data *data, int i, int j)
 {
-	printf("%d et ici %d\n", i , j);
+	//printf("%d et ici %d\n", i , j);
 	if (i == 0)
 		ft_first_commande(data);
 	else if (i == data->nb_pipe)

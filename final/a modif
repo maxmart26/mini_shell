@@ -7,11 +7,21 @@ pour laura :
 
 grep : ok !
 
-a faire : CTRL-D, CTRL-C et CTRL-\
+a faire : 
+* ajouter tac dans la gestion des args
+* creer fonction pour retirer les " et ' dans un WORD
 
-pourquoi a tu tout mis en ARG ca ne m arrange pas du tout je vais pas pouvoir faire la dif entre des arguments et des modif de function comme avec le -n que a bien mis 
-en exemple ;p
+----a retenir----
 
+tcgetattr(fd, old); //recuperer la config du old_term
+tcgetattr(fd, termios); //recuperer la config du term actuel
+termios->c_lflag &= ~(ECHO | ICANON | ISIG); //modif de la config du term pour desactiver les options mentionnees
+tcsetattr(fd, TCSANOW, termios); //appliquerlanouvelle config au term
+
+ECHO : affichage des caracteres saisis
+ICANON : quand desactive, permet la disponibilite caractere par caractere de ce qui est saisi dans le term
+ISIG : quand desactive, signaux de controle non generes donctouches de controle comme CTRL-C 
+peuvent etre traitees comme des caracteres normaux
 
 --------------------------------------------------------------------
 

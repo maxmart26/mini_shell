@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/13 16:50:49 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:37:38 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
 
-void	ft_free_tab(char **tab)
+void	ft_free_tab(char **input)
 {
 	size_t	i;
 
 	i = 0;
-	while (tab[i])
+	while (input[i])
 	{
-		free(tab[i]);
+		free(input[i]);
 		i++;
 	}
-	free(tab);
+	free(input);
 }
 
 char	*ft_path(char **envp)
@@ -71,21 +71,21 @@ char	*get_path(t_data *data, t_token *token)
 }
 void	ft_dup2(t_data *data)
 {
-	printf("\t\t%d ici\n",data->nb_pipe);
-	printf("%d et %d\n", data->fd_in, data->nb_cmd);
+	//printf("\t\t%d ici\n",data->nb_pipe);
+	//printf("%d et %d\n", data->fd_in, data->nb_cmd);
 	if (data->nb_pipe > 0)
 	{
 		//printf("test\n");
-		//printf("%d et %d\n", data->fd_in, data->fd_out);
+		printf("avant %d et %d\n", data->fd_in, data->fd_out);
 		ft_close_useless(data, data->nb_cmd, data->nb_cmd);
-		//printf("%d et %d\n", data->fd_in, data->fd_out);
+		printf(" apres %d et %d\n", data->fd_in, data->fd_out);
 		dup2(data->fd_out, STDOUT_FILENO);
 		dup2(data->fd_in, STDIN_FILENO);
-		close(data->fd_in);
-		close(data->fd_out);
-		close(data->std_int);
-		close(data->std_out);
-		close(0);
+		// close(data->fd_in);
+		// close(data->fd_out);
+		// close(data->std_int);
+		// close(data->std_out);
+		//close(0);
 	}
 	else
 	{
@@ -122,7 +122,7 @@ void	ft_exec(t_data *data, t_token *token)
 				tmp2 = tmp;
 				path_def = ft_strjoin(tmp, " ");
 				tmp = ft_strjoin(path_def, token->next->next->value);
-				printf("%s\n",tmp);
+				//printf("%s\n",tmp);
 				free(tmp2);
 				free(path_def);
 				token = token->next;
