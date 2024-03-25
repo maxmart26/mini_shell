@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:18:21 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/21 15:27:53 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:34:52 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@
 # include <termcap.h>
 # include <dirent.h>
 # include <fcntl.h>
-# include "../utilitaire/libft/libft.h"
-# include "../utilitaire/get_next_line_bonus.h"
+# include "libft/libft.h"
 
 # define MAX_PRINT 5000
 

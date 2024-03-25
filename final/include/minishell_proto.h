@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 11:56:43 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:33:42 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,9 +154,9 @@ void	free_minishell(t_data *tools);
 
 void	parsing(t_data *tools);
 int		check_syntax(t_data *tools);
-int		check_error_newline(t_data *tools, t_token *tmp);
+int		check_error_newline(t_token *tmp);
 int		check_dir(t_data *tools);
-int		check_error_pipe(t_data *tools, t_token *tmp);
+int		check_error_pipe(t_token *tmp);
 int		check_spe_char(t_data *tools);
 int		check_word_only(t_data *tools);
 
