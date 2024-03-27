@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:39:20 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 13:33:48 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/27 06:27:11 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,18 @@ void	ft_last_commande(t_data *data)
 
 	i = 0;
 	//close(data->std_int);
-	printf("%d ici\n",data->pipe_fd[data->nb_pipe - 1][0]);
+	//close(4);
+	// printf("%d ici\n",data->pipe_fd[data->nb_pipe - 1][0]);
+	// printf("\t\t la sortie %d\n",  data->std_out);
+	// printf("\t\t la entree %d\n",  data->std_int);
 	data->fd_in = data->pipe_fd[data->nb_pipe - 1][0];
 	data->fd_out = data->std_out;
+	//close(0);
+	//close(1);
+	//close(2);
 	while (i < data->nb_pipe)
 	{
+		//printf("testici\n");
 		close(data->pipe_fd[i][1]);
 		if (i != data->nb_pipe - 1)
 			close(data->pipe_fd[i][0]);

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/13 16:34:53 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/27 06:53:22 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stdio.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 void	ft_tmp(t_data *data, t_token *token)
 {
@@ -47,7 +49,9 @@ void	ft_tmp(t_data *data, t_token *token)
 		if (tmp2->type == CMD || tmp2->type == CMD_BULT
 			|| tmp2->type == CMD_ABS)
 		{
-			waitpid(0, &result, 0);
+			//sleep(2);
+			waitpid(0, &result, 2);
+			//printf("\t\ttest\n");
 			result2 = WEXITSTATUS(result);
 			if (result2 == 155)
 				ft_unset(tmp2, data, -1);
@@ -86,6 +90,18 @@ void	new_token_after_fd(t_token *token)
 	while (token != NULL)
 		token = token->prev;
 }
+void	free_pipe(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_pipe)
+	{
+		free(data->pipe_fd[i]);
+		i++;
+	}
+	free(data->pipe_fd);
+}
 int	ft_main(t_data *data)
 {
 	open_fd(data, data->lexer_list);
@@ -95,10 +111,17 @@ int	ft_main(t_data *data)
 	if (data->std_int < 0 || data->std_out < 0)
 		return (printf("probleme d"), 0);
 	ft_tmp(data, data->lexer_list);
-	if (data->std_out != 1)
+	printf("\t\tici%d\n",data->std_out);
+	printf("\t\tici%d\n",data->std_int);
+	if (data->std_out > 2)
 		close(data->std_out);
-	if (data->std_int != 0)
+	if (data->std_int > 2)
+	{
+		printf("\t\ttestee\n");
 		close(data->std_int);
+	}
+	if (data->nb_pipe > 0)
+		free_pipe(data);
 	return (0);
 }
 

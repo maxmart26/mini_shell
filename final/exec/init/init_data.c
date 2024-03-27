@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 12:02:20 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:39:07 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	nb_pipe(t_token *token, t_data *data)
 		tmp = token->next;
 		token = tmp;
 	}
+	printf("%dici\n",data->nb_pipe);
 	data->pipe_fd = malloc(data->nb_pipe * sizeof(int *));
 	if (!data->pipe_fd)
 		exit(0);

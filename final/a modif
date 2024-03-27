@@ -28,6 +28,11 @@ peuvent etre traitees comme des caracteres normaux
 pour maxime :
 
 a voir pour le SHLVL
-
+valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
 
 cat : ok !
+
+cat | cat | ls
+le cd ou il y a plus de dossier
+"ls | cat"
+faire le export qui vas trier 

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/13 16:21:01 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/27 08:32:56 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,46 @@ char	*ft_modif(char **str)
 		nb = 1;
 	return (ft_itoa(nb));
 }
+void	ft_trie_export(t_data *data)
+{
+	t_env	*tmp;
+	t_env	*init;
+	int		i;
+
+	i = 1;
+	tmp = data->env;
+	printf("iciu la avec %s\n",data->env->value);
+	while (i >= 1)
+	{
+		i = 0;
+		while (data->env)
+		{
+			printf("testla1 %s\n",data->env->value);
+			if (ft_strcmp(data->env->value, data->env->next->value) < 0)
+			{
+				printf("je suis le test\n");
+				init = data->env;
+				init->next = data->env->next->next;
+				init->prev = data->env->next->prev;
+				data->env->next = init;
+				data->env = data->env->next;
+				data->env->prev = data->env->prev;
+				i++;
+			}
+			data->env = data->env->next;
+		}
+		while(data->env->prev)
+			data->env = data->env->prev;
+	}
+	printf("testla%s\n",data->env->next->value);
+	// tmp = tmp->prev;
+	// while(tmp)
+	// {
+
+
+	// 	tmp = tmp->prev;
+	// }
+}
 void	ft_export(t_token *token, t_data *data, int i)
 {
 	char	**str;
@@ -69,10 +109,12 @@ void	ft_export(t_token *token, t_data *data, int i)
 
 	if (i == 0)
 		exit(156);
+	if (token->next->type != 5)
+		ft_trie_export(data);
 	str = ft_split(token->next->value, '=');
 	if (ft_strncmp(str[0], "SHLVL", 5) == 0 && ft_strlen(str[0]) == 5)
 	{
-	 	str[1] = ft_modif(str);
+		str[1] = ft_modif(str);
 		token->next->value = ft_strjoin(str[0], "=");
 		tmp = token->next->value;
 		token->next->value = ft_strjoin(tmp, str[1]);
@@ -105,6 +147,6 @@ void	ft_export(t_token *token, t_data *data, int i)
 		}
 	}
 	if (tmp != NULL)
-	if (i > 0)
-		exit(0);
+		if (i > 0)
+			exit(0);
 }

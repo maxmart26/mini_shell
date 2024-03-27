@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:29:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/12 13:22:06 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/27 07:18:21 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int					ft_toupper(int c);
 int					ft_tolower(int c);
 int					ft_atoi(const char *nptr);
 long				ft_atol(const char *nptr);
+int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 char				*ft_itoa(int n);

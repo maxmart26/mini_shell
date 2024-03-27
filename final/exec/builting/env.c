@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:23:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 15:16:44 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/27 06:10:24 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_env(t_data *data)
 		data->env = data->env->prev;
 	if (!data->env)
 		exit(0);
+	ft_dup2(data);
 	while (init)
 	{
 		printf("%s\n", init->value);
