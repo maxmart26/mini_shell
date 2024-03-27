@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:18:21 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 17:34:52 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:12:24 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define SYNTAX_ERR "bash: syntax error near unexpected token `"
 # define DIR_ERR ": Is a directory\n"
 # define CMD_ERR ": command not found\n"
+# define INV_OPT ": invalid option\n"
 
 # define GREEN "\e[1;32m"
 # define RESET "\e[0m"

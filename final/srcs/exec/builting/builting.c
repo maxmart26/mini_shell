@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:19:11 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 15:23:34 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:14:02 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	redirection_builting(t_token *token, t_data *data)
 		&& ft_strlen(token->value) == 4)
 		ft_echo(token);
 	if (ft_strncmp(token->value, "pwd", 3) == 0 && ft_strlen(token->value) == 3)
-		ft_pwd();
+		ft_pwd(token);
 	if (ft_strncmp(token->value, "env", 3) == 0 && ft_strlen(token->value) == 3)
 		ft_env(data);
 	if (ft_strncmp(token->value, "cd", 2) == 0 && ft_strlen(token->value) == 2)

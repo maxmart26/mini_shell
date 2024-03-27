@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 15:23:45 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:15:41 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,14 @@ void	ft_cd(t_token *token, int i, t_data *data)
 	if (i == 0)
 		exit(157);
 	str = token->next->value;
-	ft_pwd();
+	ft_pwd(token);
 	printf("\t\t%s\n", str);
 	if (!str)
 	{
 		str = "/home/";
 		str = ft_strjoin(str, getenv("LOGNAME"));
 		chdir(str);
-		ft_pwd();
+		ft_pwd(token);
 		exit(EXIT_SUCCESS);
 	}
 	// free(buffer);
@@ -131,7 +131,7 @@ void	ft_cd(t_token *token, int i, t_data *data)
 		//printf("%s\n", buffer);
 		ft_export(token_init("export", buffer), data, -1);
 		// free(buffer);
-		ft_pwd();
+		ft_pwd(token);
 		// exit(EXIT_SUCCESS);
 		ft_test(buffer_old, data);
 	}

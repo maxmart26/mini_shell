@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:53:08 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 15:23:51 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:49:14 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_echo(t_token *token)
 	int	n;
 
 	n = 0;
-	if (!token->next)
+	if (token->next->type == NEWL)
 		printf("\n");
 	if (token->next->type == OPT && ft_strncmp(token->next->value, "-n", 2) == 0)
 		n = 1;

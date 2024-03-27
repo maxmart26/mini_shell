@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:23:02 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/25 18:16:15 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:41:19 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ char	*delete_quotes(char *str)
 	char	*result;
 
 	result = NULL;
-	if (ft_strncmp(&str[0], "\"", 1) == 0)
+	printf("%s\n", str);
+	if (str[0] == '\"')
 		result = ft_strtrim(str, "\"");
-	else if (ft_strncmp(&str[0], "\'", 1) == 0)
+	else if (str[0] == '\'')
 		result = ft_strtrim(str, "\'");
 	else
 		result = str;

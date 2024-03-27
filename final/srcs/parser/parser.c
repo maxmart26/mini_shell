@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:44 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/25 17:32:19 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:22:17 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ int	check_word_only(t_data *tools)
 	tmp = tools->lexer_list;
 	if (tmp->type == WORD && tmp->next->type == NEWL)
 	{
-		printf("%s %s", "bash: ", tmp->value);
+		printf("%s", "bash: ");
+		first_word(tmp->value);
 		g_status = 258;
 		return (printf(CMD_ERR), 1);
 	}
