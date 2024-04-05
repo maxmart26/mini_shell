@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/27 17:21:39 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:54:56 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,11 @@ int		is_space(char c);
 int		is_quote(char c, char d);
 int		is_spe_char(char c, char d);
 int		is_char(char c, char d);
+int		which_quote(char *str);
+int		quote_in_str(char *str);
 void	free_minishell(t_data *tools);
 void	first_word(char *str);
+char	*delete_sep(char *str);
 
 // Parsing
 
