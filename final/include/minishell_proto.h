@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 11:56:43 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:21:39 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_token	*token_init(char *str, char *st);
 
 void	redirection_builting(t_token *token, t_data *data);
 void	ft_echo(t_token *token);
-void	ft_pwd(void);
+int		ft_pwd(t_token *token);
 void	ft_env(t_data *data);
 void	ft_cd(t_token *token, int i, t_data *data);
 void	ft_export(t_token *token, t_data *data, int i);
@@ -106,6 +106,8 @@ void	manage_cmd_buil(t_token *token);
 
 void	count_pipes(t_token *list, t_data *tools);
 int		count_quotes(char *str);
+char	*delete_quotes(char *str);
+void	remove_quotes(t_token *lexer_list);
 int		find_matching_quote(char *str, int i, int *nb_q, int q);
 void	list_gathering(t_data *tools);
 int		ft_error(int error);
@@ -149,14 +151,15 @@ int		is_quote(char c, char d);
 int		is_spe_char(char c, char d);
 int		is_char(char c, char d);
 void	free_minishell(t_data *tools);
+void	first_word(char *str);
 
 // Parsing
 
 void	parsing(t_data *tools);
 int		check_syntax(t_data *tools);
-int		check_error_newline(t_data *tools, t_token *tmp);
+int		check_error_newline(t_token *tmp);
 int		check_dir(t_data *tools);
-int		check_error_pipe(t_data *tools, t_token *tmp);
+int		check_error_pipe(t_token *tmp);
 int		check_spe_char(t_data *tools);
 int		check_word_only(t_data *tools);
 

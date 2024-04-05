@@ -1,77 +1,51 @@
 NAME = minishell
-INCLUDE = include/minishell_include.h\
-		  include/minishell_proto.h\
-		  include/minishell_struct.h
-OBJ = exec/minishell.c\
-	  main.c\
-	  exec/init/init_test.c\
-	  exec/execution/utils_bonus2.c\
-	  exec/init/init_data.c\
-	  exec/init/token_init.c\
-	  exec/builting/builting.c\
-	  exec/builting/echo.c\
-	  exec/builting/env.c\
-	  exec/herdoc/herdoc.c\
-	  exec/builting/cd.c\
-	  exec/builting/pwd.c\
-	  exec/builting/exit.c\
-	  exec/execution/exec.c\
-	  exec/execution/exec_abs.c\
-	  exec/builting/unset.c\
-	  exec/builting/export.c\
-	  exec/init/ft_lstnew.c\
-	  utilitaire/get_next_line_utils_bonus.c\
-	  utilitaire/get_next_line_bonus.c\
-	  srcs/lexer/lexer.c \
-	  srcs/lexer/get_token.c \
-	  srcs/lexer/get_word.c \
-	  srcs/lexer/manage_quotes.c \
-	  srcs/lexer/manage_sep.c \
-	  srcs/lexer/print_lexer.c \
-	  srcs/lexer/gather_words.c \
-	  srcs/lexer/manage_type.c \
-	  srcs/lexer/manage_type2.c \
-	  srcs/lexer/cmdbuilt_args.c \
-	  srcs/lexer/cmd_args.c \
-	  srcs/lexer/cmd_args2.c \
-	  srcs/parser/parser.c \
-	  srcs/expand/expand.c \
-	  srcs/error_handler/ft_error.c \
-	  srcs/utils/utils.c \
-	  srcs/utils/utils2.c \
-	  srcs/utils/utils3.c \
-	  srcs/utils/signals.c \
-	  srcs/utils/newline.c \
-	  srcs/utils/env.c \
-	  srcs/utils/free.c
+
+SRC_DIR = ./srcs
+OBJ_DIR = ./objs
+INC_DIR = ./include
+
+INCLUDES = $(wildcard $(INC_DIR)/*)
+SRCS = $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/*/*.c) $(wildcard $(SRC_DIR)/*/*/*.c)
+OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 
 CC = cc
 CFLAGS =  -g3 -Wextra -Werror -Wall
 LDFLAGS = -lreadline
-SRCS = ${OBJ}
-OBJS = ${SRCS:.c=.o}
-LIBFT_DIR = utilitaire/libft
-LIBFT_PATH = utilitaire/libft/libft.a
+LIB = ${INC_DIR}/libft/libft.a
 
-%.o:%.c ${INCLUDE}
+%.o:%.c ${INCLUDES}
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-${NAME}: ${SRCS} ${LIBFT_PATH}
-	make ${OBJS}
-	cc ${CFLAGS} ${OBJS} ${LIBFT_PATH} -o ${NAME} ${LDFLAGS}
+all: ${NAME} ${LIB}
 
-${LIBFT_PATH}:
-				${MAKE} -C ${LIBFT_DIR}
+${LIB}:
+	@echo "$(GREEN)Compiling libft : $(NC)"
+	@make -s -C ${INC_DIR}/libft/ all
+	@echo "\033[32m[✓] libft succesfully compiled\033[0m"
 
-all: ${NAME}
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDES) | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/*/%.c $(INCLUDES) | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/*/*/%.c $(INCLUDES) | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+	@mkdir -p $@
+
+$(NAME): $(OBJ) ${LIB}
+	@$(CC) $(CFLAGS) $(OBJ) -L$(INC_DIR)/libft -lft -lreadline -o $(NAME)
+	@echo "\033[32m[✓] minishell succesfully compiled\033[0m"
 
 clean:
-	${MAKE} -C ${LIBFT_DIR} clean
-	rm -f ${OBJS}
+	@$(RM) -r $(OBJ_DIR)
+	@make -s -C ${INC_DIR}/libft/ clean
 
-fclean: clean;
-	${MAKE} -C ${LIBFT_DIR} fclean
-	rm -f ${NAME}
+fclean: clean
+	@$(RM) $(NAME)
+	@make -s -C ${INC_DIR}/libft/ fclean
 
 re: fclean all
 

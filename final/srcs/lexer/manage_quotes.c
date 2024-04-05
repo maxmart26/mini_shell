@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:23:02 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/06 18:24:37 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/05 13:19:56 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,37 @@ char	*get_q_word(char *line, int *j, int nb_quote)
 	else if (nb_quote == 3)
 		return (get_dq_word(line, j, ++i));
 	return (word);
+}
+
+char	*delete_quotes(char *str)
+{
+	char	*result;
+	int		i;
+	int		j;
+
+	result = NULL;
+	j = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\"')
+			result = ft_strjoin(result, get_dq_word(str, &j, i));
+		else if (str[i] == '\'')
+			result = ft_strjoin(result, get_q_word(str, &j, i));
+		i++;
+	}
+	return (result);
+}
+
+void	remove_quotes(t_token *lexer_list)
+{
+	t_token	*tmp;
+
+	tmp = lexer_list;
+	while (tmp)
+	{
+		if (tmp->type == WORD)
+			tmp->value = delete_quotes(tmp->value);
+		tmp = tmp->next;
+	}
 }
