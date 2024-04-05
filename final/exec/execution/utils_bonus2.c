@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:39:20 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/27 06:27:11 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/05 12:56:13 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,10 @@ void	ft_last_commande(t_data *data)
 	int	i;
 
 	i = 0;
-	//close(data->std_int);
-	//close(4);
-	// printf("%d ici\n",data->pipe_fd[data->nb_pipe - 1][0]);
-	// printf("\t\t la sortie %d\n",  data->std_out);
-	// printf("\t\t la entree %d\n",  data->std_int);
 	data->fd_in = data->pipe_fd[data->nb_pipe - 1][0];
 	data->fd_out = data->std_out;
-	//close(0);
-	//close(1);
-	//close(2);
 	while (i < data->nb_pipe)
 	{
-		//printf("testici\n");
 		close(data->pipe_fd[i][1]);
 		if (i != data->nb_pipe - 1)
 			close(data->pipe_fd[i][0]);
@@ -63,14 +54,10 @@ void	ft_middle_commande(t_data *data, int j)
 	i = 0;
 	data->fd_out = data->pipe_fd[j][1];
 	data->fd_in = data->pipe_fd[j - 1][0];
-	close(data->std_out);
-	close(data->std_int);
 	while (i < data->nb_pipe)
 	{
-		if (i != j)
-			close(data->pipe_fd[i][1]);
-		if (i != j - 1)
-			close(data->pipe_fd[i][0]);
+		close(data->pipe_fd[i][1]);
+		close(data->pipe_fd[i][0]);
 		i++;
 	}
 }

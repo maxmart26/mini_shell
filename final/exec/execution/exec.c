@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/27 06:53:58 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/05 13:00:41 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,13 @@ void	ft_dup2(t_data *data)
 	{
 		//printf(" le out %d et le in%d\n",data->fd_out,data->fd_in);
 		ft_close_useless(data, data->nb_cmd, data->nb_cmd);
-		//printf(" avant le out %d et le in%d\n",data->fd_out,data->fd_in);
-		dup2(data->fd_out, STDOUT_FILENO);
+		printf(" avant la sorie %d et le entre%d\n",data->fd_out,data->fd_in);
 		dup2(data->fd_in, STDIN_FILENO);
+		dup2(data->fd_out, STDOUT_FILENO);
+		if (data->fd_in > 3)
+			close(data->fd_in);
+		if (data->fd_out > 3)
+			close(data->fd_out);
 	}
 	else
 	{
@@ -143,6 +147,7 @@ void	ft_exec(t_data *data, t_token *token)
 	//close(0);
 	//close(1);
 	//close(2);
+	printf("ici le pipe %d\n",data->nb_pipe);
 	execve(path_def, mycmdargs, data->envp);
 	exit(0);
 }

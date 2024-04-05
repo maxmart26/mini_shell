@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/27 06:53:22 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/05 12:24:50 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	free_pipe(t_data *data)
 int	ft_main(t_data *data)
 {
 	open_fd(data, data->lexer_list);
-	new_token_after_fd(data->lexer_list);
+	//new_token_after_fd(data->lexer_list);
 	open_heredoc(data);
 	ft_print_lexer(data->lexer_list);
 	if (data->std_int < 0 || data->std_out < 0)
