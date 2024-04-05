@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:23:02 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/27 17:41:19 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/05 13:19:56 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,20 @@ char	*get_q_word(char *line, int *j, int nb_quote)
 char	*delete_quotes(char *str)
 {
 	char	*result;
+	int		i;
+	int		j;
 
 	result = NULL;
-	printf("%s\n", str);
-	if (str[0] == '\"')
-		result = ft_strtrim(str, "\"");
-	else if (str[0] == '\'')
-		result = ft_strtrim(str, "\'");
-	else
-		result = str;
+	j = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\"')
+			result = ft_strjoin(result, get_dq_word(str, &j, i));
+		else if (str[i] == '\'')
+			result = ft_strjoin(result, get_q_word(str, &j, i));
+		i++;
+	}
 	return (result);
 }
 
@@ -89,7 +94,8 @@ void	remove_quotes(t_token *lexer_list)
 	tmp = lexer_list;
 	while (tmp)
 	{
-		tmp->value = delete_quotes(tmp->value);
+		if (tmp->type == WORD)
+			tmp->value = delete_quotes(tmp->value);
 		tmp = tmp->next;
 	}
 }

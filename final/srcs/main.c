@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/27 14:48:48 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/05 12:24:43 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	lexer_and_parser(t_data *tools)
 		free(tools->lexer_list);
 		tools->lexer_list = tmp;
 		tools->lexer_list = remove_sep(tools->lexer_list);
-		def_index(tools->lexer_list);
 		env_var_expand(tools);
-		add_cmd(tools->lexer_list);
-		add_args(tools->lexer_list);
+		//add_cmd(tools->lexer_list);
+		//add_args(tools->lexer_list);
 		list_gathering(tools);
-		ft_print_lexer(tools->lexer_list);
+		def_index(tools->lexer_list);
 		remove_quotes(tools->lexer_list);
 		parsing(tools);
+		ft_print_lexer(tools->lexer_list);
 		free(tools->args);
 		tools->args = NULL;
 	}
