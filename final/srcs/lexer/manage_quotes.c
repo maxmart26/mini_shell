@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:23:02 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/05 19:25:18 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 12:08:26 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,82 +102,4 @@ int	which_quote(char *str)
 		i++;
 	}
 	return (quote);
-}
-
-char	*delete_sep(char *str)
-{
-	char	*result;
-	int		i
-	int		j;
-	int		espacePrecedent;
-
-	i = 0;
-	result = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
-	if (!result)
-		return (NULL);
-	j = 0;
-	espacePrecedent = 0;
-	while (str[i])
-	{
-		if (str[i] != ' ')
-		{
-			result[j++] = str[i++];
-			espacePrecedent = 0;
-		}
-		else if (!espacePrecedent)
-		{
-			str[j++] = ' ';
-			espacePrecedent = 1;
-			i++;
-		}
-		else
-		{
-			i++;
-		}
-	}
-	result[j] = '\0';
-	return (result);
-}
-
-char	*delete_quotes(char *str)
-{
-	char	*result;
-	char	**cut;
-	int		i;
-
-	result = NULL;
-	i = 0;
-	cut = malloc(sizeof(char) * (ft_strlen(str) - 2));
-	if (!cut)
-		return (NULL);
-	if (which_quote(str) == 1)
-		cut = ft_split(str, '\"');
-	else if (which_quote(str) == 2)
-		cut = ft_split(str, '\'');
-	while (cut[i])
-	{
-		result = ft_strjoin(result, cut[i]);
-		i++;
-	}
-	return (result);
-}
-
-void	remove_quotes(t_token *lexer_list)
-{
-	t_token	*tmp;
-
-	tmp = lexer_list;
-	while (tmp)
-	{
-		if (tmp->type == WORD)
-		{
-			while (quote_in_str(tmp->value) == 1)
-			{
-				tmp->value = delete_quotes(tmp->value);
-			}
-			printf("%s\n", tmp->value);
-			tmp->value = delete_sep(tmp->value);
-		}
-		tmp = tmp->next;
-	}
 }

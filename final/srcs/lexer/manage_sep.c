@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:55:48 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/21 14:43:55 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 12:06:58 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,38 @@ t_token	*remove_sep(t_token *list)
 		tmp = list->next;
 		list = tmp;
 	}
+	return (result);
+}
+
+char	*delete_sep(char *str)
+{
+	char	*result;
+	int		i;
+	int		j;
+	int		is_space;
+
+	i = 0;
+	result = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
+	if (!result)
+		return (NULL);
+	j = 0;
+	is_space = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ')
+		{
+			result[j++] = str[i++];
+			is_space = 0;
+		}
+		else if (!is_space && str[i + 1] != '\0')
+		{
+			result[j++] = ' ';
+			is_space = 1;
+			i++;
+		}
+		else
+			i++;
+	}
+	result[j] = '\0';
 	return (result);
 }
