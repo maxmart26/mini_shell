@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:52:41 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 15:24:13 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/06 02:03:29 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ void	ft_unset_next(t_data *data)
 	free(tmp);
 }
 
-void	ft_unset(t_token *token, t_data *data, int i)
+void	ft_unset(char **str, t_data *data, int i)
 {
 	if (i == 0)
 		exit(155);
 	while (data->env)
 	{
-		if (ft_strncmp(token->next->value, data->env->value,
-				ft_strlen(token->next->value)) == 0
-			&& data->env->value[ft_strlen(token->next->value)] == '=')
+		if (ft_strncmp(str[1], data->env->value,
+				ft_strlen(str[1])) == 0
+			&& data->env->value[ft_strlen(str[1])] == '=')
 		{
 			ft_unset_next(data);
 			break ;
@@ -62,6 +62,4 @@ void	ft_unset(t_token *token, t_data *data, int i)
 	}
 	while (data->env->prev)
 		data->env = data->env->prev;
-	if (i > 0)
-		exit(0);
 }

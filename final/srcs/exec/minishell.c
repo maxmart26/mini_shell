@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-<<<<<<< HEAD:final/exec/minishell.c
-/*   Updated: 2024/04/05 12:24:50 by matorgue         ###   ########.fr       */
-=======
-/*   Updated: 2024/03/27 11:47:37 by lnunez-t         ###   ########.fr       */
->>>>>>> laura:final/srcs/exec/minishell.c
+/*   Updated: 2024/04/07 13:24:58 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +19,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+/*
 void	ft_tmp(t_data *data, t_token *token)
 {
 	pid_t	pid;
@@ -45,6 +42,8 @@ void	ft_tmp(t_data *data, t_token *token)
 			}
 			data->nb_cmd++;
 		}
+		if (token->type == WORD)
+			data->nb_cmd++;
 		tmp = token->next;
 		token = tmp;
 	}
@@ -54,7 +53,7 @@ void	ft_tmp(t_data *data, t_token *token)
 			|| tmp2->type == CMD_ABS)
 		{
 			//sleep(2);
-			waitpid(0, &result, 2);
+			waitpid(0, &result, 0);
 			//printf("\t\ttest\n");
 			result2 = WEXITSTATUS(result);
 			if (result2 == 155)
@@ -115,8 +114,8 @@ int	ft_main(t_data *data)
 	if (data->std_int < 0 || data->std_out < 0)
 		return (printf("probleme d"), 0);
 	ft_tmp(data, data->lexer_list);
-	printf("\t\tici%d\n",data->std_out);
-	printf("\t\tici%d\n",data->std_int);
+	//printf("\t\tici%d\n",data->std_out);
+	//printf("\t\tici%d\n",data->std_int);
 	if (data->std_out > 2)
 		close(data->std_out);
 	if (data->std_int > 2)
@@ -168,4 +167,79 @@ void	open_fd(t_data *data, t_token *token)
 		tmp = token->next;
 		token = tmp;
 	}
+}
+*/
+
+void	fd_built(t_data *data, t_token *token)
+{
+	char	**str;
+
+	str = ft_split(token->value, ' ');
+	//printf("ici le complet %s\n et la %s\n",token->value, str[0]);
+	if (ft_strncmp(str[0], "echo", 4) == 0 && ft_strlen(str[0]) == 4)
+		ft_echo(str);
+	if (ft_strncmp(str[0], "pwd", 3) == 0 && ft_strlen(str[0]) == 3)
+		ft_pwd(str);
+	if (ft_strncmp(str[0], "env", 3) == 0 && ft_strlen(str[0]) == 3)
+		ft_env(data);
+	if (ft_strncmp(str[0], "cd", 2) == 0 && ft_strlen(str[0]) == 2)
+		ft_cd(str, data->nb_pipe, data);
+	if (ft_strncmp(str[0], "export", 6) == 0 && ft_strlen(str[0]) == 6)
+		ft_export(str, data, data->nb_pipe);
+	if (ft_strncmp(str[0], "exit", 4) == 0 && ft_strlen(str[0]) == 4)
+		ft_exit(data, data->nb_pipe);
+	if (ft_strncmp(str[0], "unset", 5) == 0
+		&& ft_strlen(str[0]) == 5)
+		ft_unset(str, data, data->nb_pipe);
+}
+void	after(t_data *data, t_token *token)
+{
+	fd_built(data, token);
+	ft_exec_abs(token, data);
+	exec(data, token);
+	// fd_access(data, token);
+}
+
+void	ft_retry(t_data *data, int result, char **str)
+{
+	int	result2;
+
+	result2 = WEXITSTATUS(result);
+	if (result2 == 155)
+		ft_unset(str, data, -1);
+	else if (result2 == 156)
+		ft_export(str, data, -1);
+	else if (result2 == 157)
+		ft_cd(str, -1, data);
+	else if (result2 == 158)
+	{
+		free_tab(str);
+		ft_exit(data, -1);
+	}
+}
+void	ft_tmp(t_data *data, t_token *token)
+{
+	pid_t	pid;
+	int		result;
+
+	result = -23;
+	while (token)
+	{
+		if (token->type == WORD)
+		{
+			pid = fork();
+			if (pid == 0)
+				after(data, token);
+			data->nb_cmd++;
+			wait(&result);
+			ft_retry(data, result, ft_split(token->value, ' '));
+		}
+		token = token->next;
+	}
+}
+
+int	ft_main(t_data *data)
+{
+	ft_tmp(data, data->lexer_list);
+	return (0);
 }

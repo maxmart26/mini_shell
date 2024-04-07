@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/05 14:27:29 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/06 01:19:05 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@ void	nb_pipe(t_token *token, t_data *data)
 		tmp = token->next;
 		token = tmp;
 	}
-	printf("%dici\n",data->nb_pipe);
-	data->pipe_fd = malloc(data->nb_pipe * sizeof(int *));
-	if (!data->pipe_fd)
-		exit(0);
+	//printf("%dici\n",data->nb_pipe)
+	if (data->nb_pipe > 0)
+	{
+		data->pipe_fd = malloc(data->nb_pipe * sizeof(int *));
+		if (!data->pipe_fd)
+			exit(0);
+	}
 	while(data->nb_pipe > i)
 	{
 		data->pipe_fd[i] = malloc(2 * sizeof(int));
@@ -123,6 +126,7 @@ t_env	*init_env(t_data *data)
 		}
 		i++;
 	}
+	//env->next = NULL;
 	return (result);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/27 14:15:41 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/06 00:52:38 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_count(char *str)
 
 	i = 0;
 	j = 0;
-	printf("%s\n", str);
+	//printf("%s\n", str);
 	while (str[i])
 	{
 		//printf("%c\n", str[i]);
@@ -56,83 +56,37 @@ int	ft_count(char *str)
 	return (j);
 }
 
-static char	*ft_cutt(char *str, int i)
-{
-	char	*buffer;
-	int		j;
 
-	j = 0;
-	printf("ici1\t%s\n",str);
-	//printf("ici2\t%s\n",buffer);
-	buffer = malloc(i + 1 * sizeof(char));
-	if (!buffer)
-		exit(EXIT_FAILURE);
-	while (j < i)
-	{
-		buffer[j] = str[j];
-		j++;
-	}
-	buffer[++j] = '\0';
-	printf("ici2\t%s\n",buffer);
-	return (buffer);
-}
-char	*ft_cd_cut(void)
-{
-	char	*str;
-	char	*buffer;
-	int		i;
-
-	buffer = NULL;
-	buffer = getcwd(buffer, _SC_PASS_MAX);
-	printf("ici\t%s\n",buffer);
-	i = ft_count(buffer);
-	str = buffer;
-	buffer = ft_cutt(str, i);
-	printf("ici\t%s\n",buffer);
-	return (buffer);
-}
 void	ft_test(char *buffer_old, t_data *data)
 {
 	ft_export(token_init("export", buffer_old), data, -1);
 }
-void	ft_cd(t_token *token, int i, t_data *data)
+void	ft_cd(char **str, int i, t_data *data)
 {
-	char	*str;
 	char	*buffer;
 	char	*buffer_old;
 
 	if (i == 0)
 		exit(157);
-	str = token->next->value;
-	ft_pwd(token);
-	printf("\t\t%s\n", str);
-	if (!str)
+	if (str[1] == NULL)
 	{
-		str = "/home/";
-		str = ft_strjoin(str, getenv("LOGNAME"));
-		chdir(str);
-		ft_pwd(token);
-		exit(EXIT_SUCCESS);
+		buffer = "/home/";
+		buffer = ft_strjoin(buffer, getenv("LOGNAME"));
+		chdir(buffer);
+		free(buffer);
 	}
-	// free(buffer);
+	else if (str[2])
+	{
+			printf("bash: cd: too many argument\n");
+			return ;
+	}
 	buffer_old = ft_init_oldpwd_cd();
-	if (ft_strncmp(str, "..", 2) == 0 && ft_strlen(str) == 2)
-		str = ft_cd_cut();
-	if (chdir(str) == -1)
-	{
-		printf("test\n");
-		// perror("");
-		// exit(EXIT_FAILURE);
-	}
+	if (chdir(str[1]) == -1)
+		perror("error\n");
 	else
 	{
-		chdir(str);
 		buffer = ft_init_pwd_cd();
-		//printf("%s\n", buffer);
 		ft_export(token_init("export", buffer), data, -1);
-		// free(buffer);
-		ft_pwd(token);
-		// exit(EXIT_SUCCESS);
 		ft_test(buffer_old, data);
 	}
 }

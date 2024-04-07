@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/05 14:27:20 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:25:40 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,76 +78,56 @@ void	ft_dup2(t_data *data)
 		printf(" avant la sorie %d et le entre%d\n",data->fd_out,data->fd_in);
 		dup2(data->fd_in, STDIN_FILENO);
 		dup2(data->fd_out, STDOUT_FILENO);
-		if (data->fd_in > 3)
+		if (data->fd_in > 2)
 			close(data->fd_in);
-		if (data->fd_out > 3)
+		if (data->fd_out > 2)
 			close(data->fd_out);
 	}
 	else
 	{
 		dup2(data->std_int, STDIN_FILENO);
 		dup2(data->std_out, STDOUT_FILENO);
+		if (data->std_int > 2)
+			close(data->std_int);
+		if (data->std_out > 2)
+			close(data->std_out);
 	}
 }
-void	ft_exec(t_data *data, t_token *token)
+void	exec(t_data *data, t_token *token)
 {
-	char	*path_def;
-	char	*tmp;
-	char	**mycmdargs;
-	char	*tmp2;
-	int		i;
+	ft_exec(data, token);
+	ft_dup2(data);
+	execve(data->path_def, data->mycmdargs, data->envp);
+	if (data->std_int > 2)
+		close(data->std_int);
+	if (data->std_out > 2)
+		close(data->std_out);
+	printf("bash: %s: No such file or directory\n",data->mycmdargs[0]);
+	free_tab(data->path);
+	free_tab(data->mycmdargs);
+	exit(127);
+}
+char	*ft_exec(t_data *data, t_token *token)
+{
+	int	i;
 
 	i = 0;
-	if (token->next != NULL && token->next->type == OPT)
+	//printf("test\n");
+	data->mycmdargs = ft_split(token->value, ' ');
+	data->path_from_envp = ft_path(data->envp);
+	data->path = ft_split(data->path_from_envp, ':');
+	while (data->path[i])
 	{
-		path_def = ft_strjoin(token->value, " ");
-		tmp = ft_strjoin(path_def, token->next->value);
-		mycmdargs = ft_split(tmp, ' ');
-		free(path_def);
-		free(tmp);
-		path_def = get_path(data, token);
-	}
-	else
-	{
-		if (token->next->type == ARG)
-		{
-			path_def = ft_strjoin(token->value, " ");
-			tmp = ft_strjoin(path_def, token->next->value);
-			while (token->next->next->type == ARG)
-			{
-				tmp2 = tmp;
-				path_def = ft_strjoin(tmp, " ");
-				tmp = ft_strjoin(path_def, token->next->next->value);
-
-				free(tmp2);
-				free(path_def);
-				token = token->next;
-				i++;
-			}
-			while (i > 0)
-			{
-				token = token->prev;
-				i--;
-			}
-		}
+		data->path_temp = ft_strjoin(data->path[i], "/");
+		data->path_def = ft_strjoin(data->path_temp, data->mycmdargs[0]);
+		free(data->path_temp);
+		if (access(data->path_def, 0) == 0)
+			return (data->path_def);
 		else
-			tmp = token->value;
-		mycmdargs = ft_split(tmp, ' ');
-		path_def = get_path(data, token);
+		{
+			free(data->path_def);
+		}
+		i++;
 	}
-	if (!path_def)
-	{
-		printf("%s: command not found\n", token->value);
-		close(data->std_int);
-		close(data->std_out);
-		exit(1);
-	}
-	//printf("%s cmd\n",token->value);
-	ft_dup2(data);
-	//close(0);
-	//close(1);
-	//close(2);
-	printf("ici le pipe %d\n",data->nb_pipe);
-	execve(path_def, mycmdargs, data->envp);
-	exit(0);
+	return (NULL);
 }

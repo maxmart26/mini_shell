@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:39:20 by matorgue          #+#    #+#             */
-<<<<<<< HEAD:final/exec/execution/utils_bonus2.c
-/*   Updated: 2024/04/05 12:56:13 by matorgue         ###   ########.fr       */
-=======
-/*   Updated: 2024/03/25 15:24:30 by lnunez-t         ###   ########.fr       */
->>>>>>> laura:final/srcs/exec/execution/utils_bonus2.c
+/*   Updated: 2024/04/05 14:30:16 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

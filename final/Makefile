@@ -9,7 +9,7 @@ SRCS = $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/*/*.c) $(wildcard $(SRC_
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 
 CC = cc
-CFLAGS =  -g3 -Wextra -Werror -Wall
+CFLAGS =  -g3  -Wextra -Werror -Wall
 LDFLAGS = -lreadline
 LIB = ${INC_DIR}/libft/libft.a
 

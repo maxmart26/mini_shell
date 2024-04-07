@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_abs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 16:56:01 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 15:24:22 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:25:01 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,17 @@
 
 void	ft_exec_abs(t_token *token, t_data *data)
 {
-	char	*path_def;
-	char	*tmp;
-	char	**mycmdargs;
+	char	**str;
 
-	if (token->next && token->next->type == ARG)
+	str = ft_split(token->value,' ');
+	//printf("test2\n");
+	if (access(str[0], 0) == 0)
 	{
-		path_def = ft_strjoin(token->value, " ");
-		tmp = ft_strjoin(path_def, token->next->value);
-		mycmdargs = ft_split(tmp, ' ');
-		free(path_def);
-		free(tmp);
+		ft_dup2(data);
+		execve(token->value, str, data->envp);
 	}
 	else
 	{
-		mycmdargs = ft_split(token->value, ' ');
+		free_tab(str);
 	}
-	ft_dup2(data);
-	if (access(token->value, 0) == 0)
-		execve(token->value, mycmdargs, data->envp);
 }

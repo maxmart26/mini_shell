@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 14:09:11 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 11:43:45 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,11 @@ typedef struct s_data
 	int					std_int;
 	int					nb_pipe;
 	int					**pipe_fd;
+	char	*path_def;
+	char	*path_from_envp;
+	char	**path;
+	char	**mycmdargs;
+	char	*path_temp;
 	int					nb_cmd;
 	int					fd_in;
 	int					fd_out;

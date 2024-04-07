@@ -23,6 +23,14 @@ ICANON : quand desactive, permet la disponibilite caractere par caractere de ce 
 ISIG : quand desactive, signaux de controle non generes donctouches de controle comme CTRL-C 
 peuvent etre traitees comme des caracteres normaux
 
+  0 :                   [WORD] [echo /home/matorgue]
+  1 :                   [PIPE] [|]
+  2 :                   [WORD] [ls]
+  3 :                   [GREAT] [>]
+  4 :                   [WORD] [toto2] a mettre en FILE 
+
+  0 :                   [LESS] [<]
+  1 :                   [WORD] [Makefile cat]
 --------------------------------------------------------------------
 
 pour maxime :
@@ -32,78 +40,9 @@ valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --track-fd
 
 cat : ok !
 
-<<<<<<< HEAD
 cat | cat | ls
 le cd ou il y a plus de dossier
 "ls | cat"
-faire le export qui vas trier 
-=======
+faire le export qui vas trier ok !
+
 cat : ok !
-
-Makefile :
-
-/*INCLUDE = include/minishell_include.h\
-		  include/minishell_proto.h\
-		  include/minishell_struct.h*/
-/*OBJ = exec/minishell.c\
-	  main.c\
-	  exec/init/init_test.c\
-	  exec/execution/utils_bonus2.c\
-	  exec/init/init_data.c\
-	  exec/init/token_init.c\
-	  exec/builting/builting.c\
-	  exec/builting/echo.c\
-	  exec/builting/env.c\
-	  exec/herdoc/herdoc.c\
-	  exec/builting/cd.c\
-	  exec/builting/pwd.c\
-	  exec/builting/exit.c\
-	  exec/execution/exec.c\
-	  exec/execution/exec_abs.c\
-	  exec/builting/unset.c\
-	  exec/builting/export.c\
-	  exec/init/ft_lstnew.c\
-	  utilitaire/get_next_line_utils_bonus.c\
-	  utilitaire/get_next_line_bonus.c\
-	  srcs/lexer/lexer.c \
-	  srcs/lexer/get_token.c \
-	  srcs/lexer/get_word.c \
-	  srcs/lexer/manage_quotes.c \
-	  srcs/lexer/manage_sep.c \
-	  srcs/lexer/print_lexer.c \
-	  srcs/lexer/gather_words.c \
-	  srcs/lexer/manage_type.c \
-	  srcs/lexer/manage_type2.c \
-	  srcs/lexer/cmdbuilt_args.c \
-	  srcs/lexer/cmd_args.c \
-	  srcs/lexer/cmd_args2.c \
-	  srcs/parser/parser.c \
-	  srcs/expand/expand.c \
-	  srcs/error_handler/ft_error.c \
-	  srcs/utils/utils.c \
-	  srcs/utils/utils2.c \
-	  srcs/utils/utils3.c \
-	  srcs/utils/signals.c \
-	  srcs/utils/newline.c \
-	  srcs/utils/env.c \
-	  srcs/utils/free.c*/
-
-      SRCS = ${OBJ}
-OBJS = ${SRCS:.c=.o}
-
-${LIBFT_PATH}:
-				${MAKE} -C ${LIBFT_DIR}
-
-${NAME}: ${SRCS} ${LIBFT_PATH}
-	make ${OBJS}
-	cc ${CFLAGS} ${OBJS} ${LIBFT_PATH} -o ${NAME} ${LDFLAGS}
-
-clean:
-	@$(RM) -r $(OBJ_DIR)
-	${MAKE} -C ${LIBFT_DIR} clean
-	rm -f ${OBJS}
-
-fclean: clean;
-	${MAKE} -C ${LIBFT_DIR} fclean
-	rm -f ${NAME}
->>>>>>> laura

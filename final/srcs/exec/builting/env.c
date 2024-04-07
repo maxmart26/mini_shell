@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:23:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/05 14:23:53 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:35:38 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_env(t_data *data)
 	t_env *init;
 
 	init = data->env;
-	ft_export(token_init("export", "_=env"), data, -1);
+	//ft_export(token_init("export", "_=env"), data, -1);
 	while (data->env->prev != NULL)
 		data->env = data->env->prev;
 	if (!data->env)

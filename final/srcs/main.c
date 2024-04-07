@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/05 14:23:36 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:24:55 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	lexer_and_parser(t_data *tools)
 		//add_args(tools->lexer_list);
 		list_gathering(tools);
 		def_index(tools->lexer_list);
-		remove_quotes(tools->lexer_list);
+		//remove_quotes(tools->lexer_list);
 		parsing(tools);
 		ft_print_lexer(tools->lexer_list);
 		free(tools->args);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/27 17:21:39 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 12:48:20 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	open_heredoc(t_data *data);
 
 // exec.c
 
-void	ft_exec(t_data *data, t_token *token);
+char	*ft_exec(t_data *data, t_token *token);
+void	exec(t_data *data, t_token *token);
 void	ft_exec_abs(t_token *token, t_data *data);
 void	ft_dup2(t_data *data);
 
@@ -68,18 +69,18 @@ void	ft_close_useless(t_data *data, int i, int j);
 
 // token_init.c
 
-t_token	*token_init(char *str, char *st);
+char	**token_init(char *str, char *st);
 
 // les builting
 
 void	redirection_builting(t_token *token, t_data *data);
-void	ft_echo(t_token *token);
-int		ft_pwd(t_token *token);
+void	ft_echo(char **str);
+int		ft_pwd(char **strs);
 void	ft_env(t_data *data);
-void	ft_cd(t_token *token, int i, t_data *data);
-void	ft_export(t_token *token, t_data *data, int i);
-void	ft_unset(t_token *token, t_data *data, int i);
-void	ft_exit(int i);
+void	ft_cd(char **str, int i, t_data *data);
+void	ft_export(char **strs, t_data *data, int i);
+void	ft_unset(char **str, t_data *data, int i);
+void	ft_exit(t_data *data,int i);
 
 // partie laura
 

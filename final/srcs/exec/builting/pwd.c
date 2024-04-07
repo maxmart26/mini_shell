@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:51:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/27 14:17:22 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/05 22:12:10 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 #include "../../../include/minishell_proto.h"
 #include "../../../include/minishell_struct.h"
 
-int	ft_pwd(t_token *token)
+int	ft_pwd(char **strs)
 {
 	char	*str;
-	t_token	*tmp;
 
-	tmp = token;
 	str = NULL;
 	str = getcwd(str, _SC_PASS_MAX);
-	if (strncmp(&tmp->next->value[0], "-", 1) == 0)
+	if (strs[1] && strncmp(strs[1], "-", 1) == 0)
 	{
-		printf("%s %s", "bash: pwd: ", tmp->next->value);
+		printf("%s %s", "bash: pwd: ", strs[1]);
 		g_status = 258;
-		return (printf(INV_OPT), 1);
+		printf(INV_OPT);
+		exit (1);
+
 	}
 	else
 	{
 		printf("%s\n", str);
-		return (0);
+		exit (0);
 	}
 }
