@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:58:16 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/07 18:04:00 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 12:57:14 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*replace_env_var(char *str, t_data *tools)
 
 	value = NULL;
 	value = is_still_env_var(str, tools);
-	while (is_env_var(value) == 1)
+	while (is_env_var(value, tools) == 1)
 		value = is_still_env_var(value, tools);
 	return (value);
 }
@@ -75,7 +75,7 @@ void	env_var_expand(t_data *tools)
 	{
 		if (tmp->type == WORD)
 		{
-			if (tmp->value[0] != '\'' && is_env_var(tmp->value) == 1)
+			if (tmp->value[0] != '\'' && is_env_var(tmp->value, tools) == 1)
 				tmp->value = replace_env_var(tmp->value, tools);
 			tmp = tmp->next;
 		}

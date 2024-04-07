@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/27 11:47:37 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:28:19 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	new_token_after_fd(t_token *token)
 }
 int	ft_main(t_data *data)
 {
-	open_fd(data, data->lexer_list);
-	new_token_after_fd(data->lexer_list);
+	//open_fd(data, data->lexer_list);
+	//new_token_after_fd(data->lexer_list);
 	open_heredoc(data);
 	//ft_print_lexer(data->lexer_list);
 	if (data->std_int < 0 || data->std_out < 0)
