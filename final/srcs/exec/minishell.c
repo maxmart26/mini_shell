@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 13:24:58 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:44:00 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_tmp(t_data *data, t_token *token)
 		tmp = tmp2->next;
 		tmp2 = tmp;
 	}
-}
+}*/
 
 void	new_token_after_fd(t_token *token)
 {
@@ -105,9 +105,9 @@ void	free_pipe(t_data *data)
 	}
 	free(data->pipe_fd);
 }
-int	ft_main(t_data *data)
+/*int	ft_main(t_data *data)
 {
-	open_fd(data, data->lexer_list);
+	//open_fd(data, data->lexer_list);
 	//new_token_after_fd(data->lexer_list);
 	open_heredoc(data);
 	//ft_print_lexer(data->lexer_list);
@@ -126,7 +126,7 @@ int	ft_main(t_data *data)
 	if (data->nb_pipe > 0)
 		free_pipe(data);
 	return (0);
-}
+}*/
 
 int	open_file(char *s, int i)
 {
@@ -168,7 +168,6 @@ void	open_fd(t_data *data, t_token *token)
 		token = tmp;
 	}
 }
-*/
 
 void	fd_built(t_data *data, t_token *token)
 {

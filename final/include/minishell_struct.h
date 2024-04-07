@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_struct.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 11:43:45 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:45:25 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ HEREDOC,  // >>
 	NEWL,     // \n
 	NONE,     // rien
 	CMD,      // commande qui ne commance pas part un /
-	CMD_ABS,  // commande absolu qui commance par un /
+	./,  // commande absolu qui commance par un /
 	CMD_BULT, // commande builtins
 	SEMI,     // ;
 	ARG,      // file1

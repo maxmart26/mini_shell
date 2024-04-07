@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 12:48:20 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:33:58 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 int		ft_main(t_data *data);
 void	init_minishell(t_data *tools, char **env);
+void	new_token_after_fd(t_token *token);
 
 // herdoc.c
 
@@ -116,7 +117,7 @@ t_env	*init_env(t_data *env_tool);
 t_env	*new_env(void);
 void	env_var_expand(t_data *tools);
 char	*replace_env_var(char *str, t_data *tools);
-int		is_env_var(char *str);
+int		is_env_var(char *str, t_data *tools);
 char	*find_env_var(char *str, t_env *env);
 char	*is_still_env_var(char *str, t_data *tools);
 void	ft_signal_handler(int signal);
@@ -151,8 +152,11 @@ int		is_space(char c);
 int		is_quote(char c, char d);
 int		is_spe_char(char c, char d);
 int		is_char(char c, char d);
+int		which_quote(char *str);
+int		quote_in_str(char *str);
 void	free_minishell(t_data *tools);
 void	first_word(char *str);
+char	*delete_sep(char *str);
 
 // Parsing
 

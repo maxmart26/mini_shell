@@ -6,14 +6,13 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/19 16:00:53 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:05:37 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_include.h"
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
-
 
 int	find_matching_quote(char *str, int i, int *nb_q, int q)
 {
@@ -63,15 +62,28 @@ void	count_pipes(t_token *list, t_data *tools)
 	}
 }
 
-int	is_env_var(char *str)
+int	is_env_var(char *str, t_data *tools)
 {
-	int	i;
+	int		i;
+	int		start;
+	char	*env_var;
 
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '$')
-			return (1);
+		{
+			if (!str[i + 1])
+				break ;
+			start = i + 1;
+			while (str[i] != ' ')
+				i++;
+			env_var = ft_substr(str, start, i - start);
+			if (!find_env_var(env_var, tools->env))
+				break ;
+			else
+				return (1);
+		}
 		i++;
 	}
 	return (0);
