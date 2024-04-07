@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:51:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/05 22:12:10 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:04:52 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@ int	ft_pwd(char **strs)
 		printf("%s %s", "bash: pwd: ", strs[1]);
 		g_status = 258;
 		printf(INV_OPT);
-		exit (1);
-
+		exit(1);
 	}
 	else
 	{
 		printf("%s\n", str);
-		exit (0);
+		exit(0);
 	}
 }

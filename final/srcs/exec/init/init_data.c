@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/06 01:19:05 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:06:42 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	nb_pipe(t_token *token, t_data *data)
 {
 	t_token	*tmp;
-	int i;
+	int		i;
 
 	i = 0;
 	data->nb_pipe = 0;
@@ -28,14 +28,13 @@ void	nb_pipe(t_token *token, t_data *data)
 		tmp = token->next;
 		token = tmp;
 	}
-	//printf("%dici\n",data->nb_pipe)
 	if (data->nb_pipe > 0)
 	{
 		data->pipe_fd = malloc(data->nb_pipe * sizeof(int *));
 		if (!data->pipe_fd)
 			exit(0);
 	}
-	while(data->nb_pipe > i)
+	while (data->nb_pipe > i)
 	{
 		data->pipe_fd[i] = malloc(2 * sizeof(int));
 		if (pipe(data->pipe_fd[i]) == -1)
@@ -43,7 +42,7 @@ void	nb_pipe(t_token *token, t_data *data)
 			close(data->std_int);
 			close(data->std_out);
 			i--;
-			while(i >= 0)
+			while (i >= 0)
 			{
 				close(data->pipe_fd[i][0]);
 				close(data->pipe_fd[i][1]);
@@ -55,18 +54,19 @@ void	nb_pipe(t_token *token, t_data *data)
 		i++;
 	}
 }
+
 void	init_data(t_token *token, t_data *data)
 {
 	data->nb_pipe = 0;
 	data->nb_cmd = 0;
 	data->std_out = 1;
 	data->std_int = 0;
-	nb_pipe(token,data);
+	nb_pipe(token, data);
 }
 
-t_env	*new_env()
+t_env	*new_env(void)
 {
-	t_env *new;
+	t_env	*new;
 
 	new = malloc(sizeof(t_env));
 	if (!new)
@@ -74,7 +74,8 @@ t_env	*new_env()
 	new->next = NULL;
 	return (new);
 }
-t_env	*init_env_i()
+
+t_env	*init_env_i(void)
 {
 	t_env	*env;
 	char	*str;
@@ -102,7 +103,7 @@ t_env	*init_env(t_data *data)
 	t_env	*tmp;
 	t_env	*result;
 	char	**str;
-	int	i;
+	int		i;
 
 	if (!data->envp[0])
 		return (init_env_i());
@@ -126,8 +127,5 @@ t_env	*init_env(t_data *data)
 		}
 		i++;
 	}
-	//env->next = NULL;
 	return (result);
 }
-
-

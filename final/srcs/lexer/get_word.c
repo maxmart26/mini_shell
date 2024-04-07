@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_word.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:00:41 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/06 18:24:37 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:08:02 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_include.h"
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
-
 
 static int	check_quote(int c)
 {

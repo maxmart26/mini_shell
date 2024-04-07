@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:06:12 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 15:24:37 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:05:46 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	ft_herdoc(t_data *data, t_token *tmp, int i)
 	free(data->itoa);
 	data->fd_in = data->f1;
 }
+
 void	open_heredoc(t_data *data)
 {
 	t_token	*tmp;

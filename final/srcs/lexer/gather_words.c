@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gather_words.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:01:46 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/06 18:24:19 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:59:53 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_include.h"
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
-
 
 void	list_gathering(t_data *tools)
 {

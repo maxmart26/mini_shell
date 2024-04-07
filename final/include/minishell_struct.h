@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 13:45:25 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:56:42 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,11 @@ typedef struct s_data
 	int					std_int;
 	int					nb_pipe;
 	int					**pipe_fd;
-	char	*path_def;
-	char	*path_from_envp;
-	char	**path;
-	char	**mycmdargs;
-	char	*path_temp;
+	char				*path_def;
+	char				*path_from_envp;
+	char				**path;
+	char				**mycmdargs;
+	char				*path_temp;
 	int					nb_cmd;
 	int					fd_in;
 	int					fd_out;

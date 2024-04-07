@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/04/06 02:46:01 by matorgue         ###   ########.fr       */
+/*   Created: 2024/04/07 14:09:54 by lnunez-t          #+#    #+#             */
+/*   Updated: 2024/04/07 14:10:28 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../../include/minishell_include.h"
 #include "../../../include/minishell_proto.h"
@@ -17,19 +16,17 @@
 
 void	ft_free_env(t_env *env)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
-	while(env)
+	while (env)
 	{
 		if (env->next)
 			tmp = env->next;
 		free(env->name);
-		//free(env->value);
-		//free(env->content);
-		//free(env);
 		env = tmp;
 	}
 }
+
 void	ft_free_pipe(int **fd, int i)
 {
 	while (i > 0)
@@ -39,18 +36,18 @@ void	ft_free_pipe(int **fd, int i)
 	}
 	free(fd);
 }
-void	ft_exit(t_data *data,int i)
+
+void	ft_exit(t_data *data, int i)
 {
 	if (i == 0)
 		exit(158);
 	else
 	{
 		if (data->std_int > 2)
-			close (data->std_int);
+			close(data->std_int);
 		if (data->std_out > 2)
-			close (data->std_out);
+			close(data->std_out);
 		ft_free_env(data->env);
-		//free_tab(data->envp);
 		if (data->nb_pipe > 0)
 			ft_free_pipe(data->pipe_fd, data->nb_pipe);
 		exit(1);

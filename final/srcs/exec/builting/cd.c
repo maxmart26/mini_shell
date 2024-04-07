@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/06 00:52:38 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:09:14 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*ft_init_pwd_cd(void)
 	str = ft_strjoin(str, buffer);
 	return (str);
 }
+
 char	*ft_init_oldpwd_cd(void)
 {
 	char	*str;
@@ -35,9 +36,9 @@ char	*ft_init_oldpwd_cd(void)
 	buffer = NULL;
 	buffer = getcwd(buffer, _SC_PASS_MAX);
 	str = ft_strjoin(str, buffer);
-	// printf("%s\n", str);
 	return (str);
 }
+
 int	ft_count(char *str)
 {
 	int	i;
@@ -45,10 +46,8 @@ int	ft_count(char *str)
 
 	i = 0;
 	j = 0;
-	//printf("%s\n", str);
 	while (str[i])
 	{
-		//printf("%c\n", str[i]);
 		if (str[i] == '/')
 			j = i;
 		i++;
@@ -56,11 +55,11 @@ int	ft_count(char *str)
 	return (j);
 }
 
-
 void	ft_test(char *buffer_old, t_data *data)
 {
 	ft_export(token_init("export", buffer_old), data, -1);
 }
+
 void	ft_cd(char **str, int i, t_data *data)
 {
 	char	*buffer;
@@ -70,15 +69,14 @@ void	ft_cd(char **str, int i, t_data *data)
 		exit(157);
 	if (str[1] == NULL)
 	{
-		buffer = "/home/";
-		buffer = ft_strjoin(buffer, getenv("LOGNAME"));
+		buffer = ft_strjoin("/home/", getenv("LOGNAME"));
 		chdir(buffer);
 		free(buffer);
 	}
 	else if (str[2])
 	{
-			printf("bash: cd: too many argument\n");
-			return ;
+		printf("bash: cd: too many argument\n");
+		return ;
 	}
 	buffer_old = ft_init_oldpwd_cd();
 	if (chdir(str[1]) == -1)

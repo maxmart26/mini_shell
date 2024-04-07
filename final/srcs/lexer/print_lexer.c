@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   print_lexer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:35:30 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/25 11:57:51 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:08:19 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_include.h"
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
-
 
 char	*other_type(t_token *list, char *type)
 {

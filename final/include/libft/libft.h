@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:29:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/05 14:25:48 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:58:23 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,8 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 int					ft_lstsize(t_list *lst);
 
-char	*get_next_line(int fd);
-//char	*ft_new(char *ptr);
-//char	*ft_static(char *ptr);
-char	*ft_strjoin_suite(char *stockage, char *buffer, char *str);
-char	*ft_cut(char *stockage);
+char				*get_next_line(int fd);
+char				*ft_strjoin_suite(char *stockage, char *buffer, char *str);
+char				*ft_cut(char *stockage);
 
 #endif

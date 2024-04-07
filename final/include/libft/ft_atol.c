@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:20:55 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/12 13:21:45 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 13:56:58 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "libft.h"
 
 long	ft_atol(const char *nptr)
 {
-	long		sign;
-	long		nb;
+	long	sign;
+	long	nb;
 	size_t	i;
 
 	i = 0;

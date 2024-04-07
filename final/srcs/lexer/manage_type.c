@@ -6,14 +6,13 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:38:37 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/23 11:41:36 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:08:14 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_include.h"
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
-
 
 void	manage_cmd_buil(t_token *token)
 {

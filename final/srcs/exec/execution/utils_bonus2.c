@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:39:20 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/05 14:30:16 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:11:10 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_first_commande(t_data *data)
 	int	i;
 
 	i = 0;
-	//close(data->std_out);
 	data->fd_in = data->std_int;
 	data->fd_out = data->pipe_fd[0][1];
 	while (i < data->nb_pipe)
@@ -64,7 +63,6 @@ void	ft_middle_commande(t_data *data, int j)
 
 void	ft_close_useless(t_data *data, int i, int j)
 {
-	//printf("%d et ici %d\n", i , j);
 	if (i == 0)
 		ft_first_commande(data);
 	else if (i == data->nb_pipe)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 13:25:40 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:10:53 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ char	*get_path(t_data *data, t_token *token)
 	ft_free_tab(path);
 	return (NULL);
 }
+
 void	ft_dup2(t_data *data)
 {
 	if (data->nb_pipe > 0)
 	{
-		//printf(" le out %d et le in%d\n",data->fd_out,data->fd_in);
 		ft_close_useless(data, data->nb_cmd, data->nb_cmd);
-		printf(" avant la sorie %d et le entre%d\n",data->fd_out,data->fd_in);
+		printf(" avant la sorie %d et le entre%d\n", data->fd_out, data->fd_in);
 		dup2(data->fd_in, STDIN_FILENO);
 		dup2(data->fd_out, STDOUT_FILENO);
 		if (data->fd_in > 2)
@@ -93,6 +93,7 @@ void	ft_dup2(t_data *data)
 			close(data->std_out);
 	}
 }
+
 void	exec(t_data *data, t_token *token)
 {
 	ft_exec(data, token);
@@ -102,17 +103,17 @@ void	exec(t_data *data, t_token *token)
 		close(data->std_int);
 	if (data->std_out > 2)
 		close(data->std_out);
-	printf("bash: %s: No such file or directory\n",data->mycmdargs[0]);
+	printf("bash: %s: No such file or directory\n", data->mycmdargs[0]);
 	free_tab(data->path);
 	free_tab(data->mycmdargs);
 	exit(127);
 }
+
 char	*ft_exec(t_data *data, t_token *token)
 {
 	int	i;
 
 	i = 0;
-	//printf("test\n");
 	data->mycmdargs = ft_split(token->value, ' ');
 	data->path_from_envp = ft_path(data->envp);
 	data->path = ft_split(data->path_from_envp, ':');

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:53:08 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/05 19:34:28 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:09:30 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 
 void	ft_print_echo(char **str, int n)
 {
-	int nb;
+	int	nb;
 
 	nb = n;
-	while(str[n + 1])
+	while (str[n + 1])
 	{
 		printf("%s", str[n + 1]);
-		if(str[n + 2])
+		if (str[n + 2])
 			printf(" ");
 		n++;
 	}
@@ -38,16 +38,17 @@ int	ft_verif_echo(char *str)
 
 	i = 0;
 	nb = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '-')
 			nb++;
-		if ((str[i] != '-' && str[i] != 'n' ) || nb > 1)
+		if ((str[i] != '-' && str[i] != 'n') || nb > 1)
 			return (-1);
 		i++;
 	}
-	return(0);
+	return (0);
 }
+
 void	ft_echo(char **str)
 {
 	int	n;
@@ -55,21 +56,11 @@ void	ft_echo(char **str)
 	n = 0;
 	if (str[1] == NULL)
 		printf("\n");
-	while(ft_verif_echo(str[n + 1]) == 0 && str[n + 1])
+	while (ft_verif_echo(str[n + 1]) == 0 && str[n + 1])
 	{
-		//printf("test\n");
 		n++;
 	}
-	if(str[n + 1])
+	if (str[n + 1])
 		ft_print_echo(str, n);
-	// if (ft_verif_echo(str[1]) == 0)
-	// 	n = 1;
-	// else if (!token->next && n == 0)
-	// 	printf("\n");
-	// if (token->next->type == ARG)
-	// 	ft_print_echo(token->next, n);
-	// if (token->next->type == OPT && token->next->next != NULL && \
-	// token->next->next->type == ARG)
-	// 	ft_print_echo(token->next->next, n);
 	exit(0);
 }

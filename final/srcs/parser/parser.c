@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:44 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 13:00:31 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:00:54 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,6 @@ void	parsing(t_data *tools)
 {
 	if (check_syntax(tools))
 		return ;
-	// if (check_dir(tools))
-	// 	return ;
 	if (check_spe_char(tools))
 		return ;
-	//if (check_word_only(tools))
-		//return ;
 }
