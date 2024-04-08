@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:25:03 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/20 14:40:32 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:49:29 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,25 @@ char	*show_prompt(t_data *tools)
 	char	*path;
 
 	user = is_still_env_var("$USER", tools);
+	if (!user)
+		return (NULL);
 	str = ft_strjoin(user, "@");
+	free(user);
 	session = prompt_get_sess();
 	if (session == NULL)
 	{
 		ft_putstr_fd("Error : no session_manager variabe in env", 1);
+		free(str);
 		return (NULL);
 	}
 	str = ft_strjoin(str, session);
 	str = ft_strjoin(str, ":~");
+	free(session);
 	path = prompt_get_path(tools);
 	if (path == NULL)
 	{
 		ft_putstr_fd("Error : no path variable in env", 1);
+		free(str);
 		return (NULL);
 	}
 	str = ft_strjoin(str, path);

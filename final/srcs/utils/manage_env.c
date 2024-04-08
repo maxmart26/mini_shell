@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:37:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 13:01:31 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:57:27 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,16 @@ char	*prompt_get_path(t_data *tools)
 	path = NULL;
 	home = is_still_env_var("$HOME", tools);
 	str = is_still_env_var("$PWD", tools);
+	if (!home || !str)
+	{
+		free(home);
+		free(str);
+		return (NULL);
+	}
 	while (str[i] == home[i])
 		i++;
 	path = ft_substr(str, i, ft_strlen(str) - i + 1);
+	free(home);
+	free(str);
 	return (path);
 }

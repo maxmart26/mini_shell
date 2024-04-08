@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:23:02 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 12:08:26 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:22:37 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*get_dq_word(char *line, int *j, int i)
 	word = NULL;
 	while (line[i] && line[i] != '"')
 		i++;
-	word = ft_substr(line, *j, i - *j);
+	word = ft_substr(line, *j, i - *j + 1);
 	*j = i + 1;
 	return (word);
 }

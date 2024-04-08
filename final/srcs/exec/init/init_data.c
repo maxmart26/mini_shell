@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 14:06:42 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:47:03 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	nb_pipe(t_token *token, t_data *data)
 				close(data->pipe_fd[i][1]);
 				i--;
 			}
+			free(data->pipe_fd);
 			exit(0);
 		}
-		printf("%d avec %d\n", data->pipe_fd[i][0], data->pipe_fd[i][1]);
 		i++;
 	}
 }
@@ -59,8 +59,6 @@ void	init_data(t_token *token, t_data *data)
 {
 	data->nb_pipe = 0;
 	data->nb_cmd = 0;
-	data->std_out = 1;
-	data->std_int = 0;
 	nb_pipe(token, data);
 }
 
@@ -70,7 +68,7 @@ t_env	*new_env(void)
 
 	new = malloc(sizeof(t_env));
 	if (!new)
-		return (NULL);
+		return (free(new), NULL);
 	new->next = NULL;
 	return (new);
 }
@@ -80,7 +78,6 @@ t_env	*init_env_i(void)
 	t_env	*env;
 	char	*str;
 
-	printf("test\n");
 	env = new_env();
 	env->prev = NULL;
 	env->next = NULL;
@@ -94,6 +91,7 @@ t_env	*init_env_i(void)
 	env->next->next = new_env();
 	env->next->next->value = "_=/usr/bin/env";
 	env->next->next->prev = env->next;
+	free(str);
 	return (env);
 }
 
@@ -117,7 +115,7 @@ t_env	*init_env(t_data *data)
 		str = ft_split(env->value, '=');
 		env->name = str[0];
 		env->content = str[1];
-		free(str);
+		free_env(str);
 		if (data->envp[i + 1])
 		{
 			env->next = new_env();

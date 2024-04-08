@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 14:51:08 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 17:39:54 by lnunez-t         ###   ########.fr       */
+/*   Created: 2024/04/07 16:29:41 by lnunez-t          #+#    #+#             */
+/*   Updated: 2024/04/07 19:37:12 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,17 @@
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
 
-void	free_minishell(t_data *tools)
+void	free_env(char **str)
 {
-	free(tools->args);
-	free_env(tools->envp);
-	ft_destroy_env(tools->env);
-	destroy_token_list(tools->lexer_list);
-	free(tools);
+	int	i;
+
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i] != NULL)
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }

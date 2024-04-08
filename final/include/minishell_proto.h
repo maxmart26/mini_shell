@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 13:56:31 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:33:02 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 int		ft_main(t_data *data);
 void	init_minishell(t_data *tools, char **env);
-void	new_token_after_fd(t_token *token);
+t_token	*new_token_after_fd(t_token *token);
 
 // herdoc.c
 
@@ -167,5 +167,9 @@ int		check_dir(t_data *tools);
 int		check_error_pipe(t_token *tmp);
 int		check_spe_char(t_data *tools);
 int		check_word_only(t_data *tools);
+
+// Gestion erreur
+
+void	free_env(char **str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 14:08:56 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:09:01 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void	new_token_after_fd(t_token *token)
+t_token	*new_token_after_fd(t_token *token)
 {
 	t_token	*tmp;
 	t_token	*tmp2;
 
-	while (token->next != NULL)
+	while (token->next)
 	{
 		if (token->type == GREAT || token->type == LESS)
 		{
@@ -32,15 +32,24 @@ void	new_token_after_fd(t_token *token)
 			tmp2 = token->next;
 			token->prev->next = token->next->next;
 			token->next->next->prev = token->prev;
-			token = token->next->next;
+			if (token->next->next)
+			{
+				token->next->next->prev = token->prev;
+				token = token->next->next;
+			}
 			free(tmp);
 			free(tmp2);
 		}
 		else
 			token = token->next;
 	}
-	while (token != NULL)
+	while (token->prev)
+	{
+		if (token->prev->prev == NULL)
+			break ;
 		token = token->prev;
+	}
+	return (token);
 }
 
 void	free_pipe(t_data *data)
