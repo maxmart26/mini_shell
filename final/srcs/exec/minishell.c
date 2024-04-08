@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 14:14:32 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:20:22 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,38 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void	new_token_after_fd(t_token *token)
+t_token	*new_token_after_fd(t_token *token)
 {
 	t_token	*tmp;
 	t_token	*tmp2;
 
-	while (token->next != NULL)
+	while (token->next)
 	{
-		if (token->type == GREAT || token->type == LESS)
+		if (token->type == GREAT || token->type == LESS
+			|| token->type == HEREDOC)
 		{
 			tmp = token;
 			tmp2 = token->next;
 			token->prev->next = token->next->next;
 			token->next->next->prev = token->prev;
-			token = token->next->next;
+			if (token->next->next)
+			{
+				token->next->next->prev = token->prev;
+				token = token->next->next;
+			}
 			free(tmp);
 			free(tmp2);
 		}
 		else
 			token = token->next;
 	}
-	while (token != NULL)
+	while (token->prev)
+	{
+		if (token->prev->prev == NULL)
+			break ;
 		token = token->prev;
+	}
+	return (token);
 }
 
 void	free_pipe(t_data *data)
@@ -144,20 +154,62 @@ void	ft_retry(t_data *data, int result, char **str)
 
 void	ft_tmp(t_data *data, t_token *token)
 {
-	pid_t	pid;
+	pid_t	*pid;
 	int		result;
+	int		i;
 
+	i = 0;
 	result = -23;
 	while (token)
 	{
 		if (token->type == WORD)
+			i++;
+		token = token->next;
+	}
+	token = data->lexer_list;
+	printf("ici le i %d\n", i);
+	pid = malloc(i * sizeof(pid_t));
+	i = 0;
+	while (token)
+	{
+		if (token->type == WORD)
 		{
-			pid = fork();
-			if (pid == 0)
+			printf("test %d ici\n", data->nb_cmd);
+			pid[i] = fork();
+			if (pid[i] == 0)
 				after(data, token);
 			data->nb_cmd++;
-			wait(&result);
+			i++;
+		}
+		token = token->next;
+	}
+	token = data->lexer_list;
+	i = 0;
+	if (data->std_int > 2)
+	{
+		close(data->std_int);
+	}
+	if (data->std_out > 2)
+	{
+		close(data->std_out);
+	}
+	if (data->nb_pipe > 0)
+	{
+		while (i < data->nb_pipe)
+		{
+			close(data->pipe_fd[i][0]);
+			close(data->pipe_fd[i][1]);
+			i++;
+		}
+	}
+	i = 0;
+	while (token)
+	{
+		if (token->type == WORD)
+		{
+			waitpid(pid[i], &result, 0);
 			ft_retry(data, result, ft_split(token->value, ' '));
+			i++;
 		}
 		token = token->next;
 	}
@@ -166,5 +218,12 @@ void	ft_tmp(t_data *data, t_token *token)
 int	ft_main(t_data *data)
 {
 	ft_tmp(data, data->lexer_list);
+	printf("avec les nb de pipe %d\n", data->nb_pipe);
+	while (data->nb_pipe > 0)
+	{
+		free(data->pipe_fd[data->nb_pipe - 1]);
+		data->nb_pipe--;
+	}
+	free(data->pipe_fd);
 	return (0);
 }

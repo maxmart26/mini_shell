@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:06:12 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 14:05:46 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:26:56 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_herdoc(t_data *data, t_token *tmp, int i)
 	data->f1 = open(data->itoa, O_RDONLY);
 	unlink(data->itoa);
 	free(data->itoa);
-	data->fd_in = data->f1;
+	data->std_int = data->f1;
 }
 
 void	open_heredoc(t_data *data)

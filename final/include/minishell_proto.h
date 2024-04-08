@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 13:56:31 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 15:59:37 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 int		ft_main(t_data *data);
 void	init_minishell(t_data *tools, char **env);
-void	new_token_after_fd(t_token *token);
+t_token	*new_token_after_fd(t_token *token);
 
 // herdoc.c
 

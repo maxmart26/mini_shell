@@ -5,6 +5,7 @@
         "minishell_struct.h": "c",
         "stdlib.h": "c",
         "stdio.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "wait.h": "c"
     }
 }

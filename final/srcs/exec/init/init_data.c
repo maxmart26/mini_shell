@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 14:06:42 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:32:39 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	init_data(t_token *token, t_data *data)
 {
 	data->nb_pipe = 0;
 	data->nb_cmd = 0;
-	data->std_out = 1;
-	data->std_int = 0;
 	nb_pipe(token, data);
 }
 
