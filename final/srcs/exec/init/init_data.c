@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 14:32:39 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:23:34 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	nb_pipe(t_token *token, t_data *data)
 				close(data->pipe_fd[i][1]);
 				i--;
 			}
+			free(data->pipe_fd);
 			exit(0);
 		}
-		printf("%d avec %d\n", data->pipe_fd[i][0], data->pipe_fd[i][1]);
 		i++;
 	}
 }
@@ -78,7 +78,6 @@ t_env	*init_env_i(void)
 	t_env	*env;
 	char	*str;
 
-	printf("test\n");
 	env = new_env();
 	env->prev = NULL;
 	env->next = NULL;
@@ -92,7 +91,20 @@ t_env	*init_env_i(void)
 	env->next->next = new_env();
 	env->next->next->value = "_=/usr/bin/env";
 	env->next->next->prev = env->next;
+	free(str);
 	return (env);
+}
+
+void	free_env_list(t_env *env)
+{
+	t_env	*tmp;
+
+	while(env)
+	{
+		tmp = env;
+		env = env->next;
+		free(tmp);
+	}
 }
 
 t_env	*init_env(t_data *data)
@@ -108,6 +120,7 @@ t_env	*init_env(t_data *data)
 	env = new_env();
 	i = 0;
 	result = env;
+	str = NULL;
 	env->prev = NULL;
 	while (data->envp[i])
 	{
@@ -115,7 +128,6 @@ t_env	*init_env(t_data *data)
 		str = ft_split(env->value, '=');
 		env->name = str[0];
 		env->content = str[1];
-		free(str);
 		if (data->envp[i + 1])
 		{
 			env->next = new_env();
@@ -124,6 +136,8 @@ t_env	*init_env(t_data *data)
 			env = tmp;
 		}
 		i++;
+		free(str);
 	}
+	//free_env_list(result);
 	return (result);
 }

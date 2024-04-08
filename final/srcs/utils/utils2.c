@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:25:03 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/03/20 14:40:32 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:27:19 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,24 +92,30 @@ char	*show_prompt(t_data *tools)
 	char	*user;
 	char	*session;
 	char	*path;
+	char	*tmp;
 
 	user = is_still_env_var("$USER", tools);
+	if (!user)
+		return (NULL);
 	str = ft_strjoin(user, "@");
+	free(user);
 	session = prompt_get_sess();
 	if (session == NULL)
 	{
-		ft_putstr_fd("Error : no session_manager variabe in env", 1);
+		free(str);
+		free(session);
 		return (NULL);
 	}
-	str = ft_strjoin(str, session);
-	str = ft_strjoin(str, ":~");
+	tmp = ft_strjoin(str, session);
+	free(str);
+	free(session);
+	session = ft_strjoin(tmp, ":~");
+	free(tmp);
 	path = prompt_get_path(tools);
-	if (path == NULL)
-	{
-		ft_putstr_fd("Error : no path variable in env", 1);
-		return (NULL);
-	}
-	str = ft_strjoin(str, path);
-	str = ft_strjoin(str, "$ ");
+	tmp = ft_strjoin(session, path);
+	free(session);
+	str = ft_strjoin(tmp, "$ ");
+	free(tmp);
+	free(path);
 	return (str);
 }

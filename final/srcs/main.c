@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/08 15:22:04 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:09:51 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	lexer_and_parser(t_data *tools)
 		tools->std_int = 0;
 		open_fd(tools, tools->lexer_list);
 		open_heredoc(tools);
-		tools->lexer_list =  new_token_after_fd(tools->lexer_list);
+		tools->lexer_list = new_token_after_fd(tools->lexer_list);
 		ft_print_lexer(tools->lexer_list);
 		list_gathering(tools);
 		def_index(tools->lexer_list);
@@ -49,6 +49,7 @@ void	init_minishell(t_data *tools, char **env)
 	tools->envp = env;
 	tools->env = init_env(tools);
 	tools->status = 1;
+	tools->exit_status = 0;
 	g_status = 1;
 	tools->first_call = 1;
 	show_ctrl(1);
@@ -65,6 +66,7 @@ int	minishell(t_data *tools, char **env)
 	{
 		str = show_prompt(tools);
 		tools->args = readline(str);
+		free(str);
 		if (!tools->args)
 			ctrl_d();
 		check_new_line(tools);
@@ -92,10 +94,11 @@ int	main(int ac, char **argv, char **env)
 	(void)argv;
 	tools = malloc(sizeof(t_data));
 	if (!tools)
-		return (EXIT_FAILURE);
+		return (free(tools), EXIT_FAILURE);
 	if (ac != 1)
 	{
 		printf("No arguments accepted.\n");
+		free(tools);
 		exit(0);
 	}
 	minishell(tools, env);

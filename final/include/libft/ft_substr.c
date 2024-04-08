@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:34:46 by lnunez-t          #+#    #+#             */
-/*   Updated: 2023/11/13 11:53:53 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:12:09 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*tab;
 
 	end = 0;
-	if (start >= ft_strlen(s))
-		len = 0;
+	if (start >= ft_strlen(s) || len == 0)
+		return (NULL);
 	if (start < ft_strlen(s))
 		end = ft_strlen(s) - start;
 	if (end > len)

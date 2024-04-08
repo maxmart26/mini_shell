@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:24:20 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/01/30 17:49:29 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:14:08 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@ static void	fill_tab(char *dest, char const *s, char c)
 
 void	free_tab(char **dest)
 {
+	size_t	i;
+
+	i = 0;
+	while (dest[i])
+	{
+		free(dest[i]);
+		i++;
+	}
 	free(dest);
 	return ;
 }
@@ -64,8 +72,13 @@ static void	set_mem(char **dest, char const *s, char c)
 		if (count > 0)
 		{
 			dest[i] = malloc(sizeof(char) * (count + 1));
-			if (!dest)
-				free_tab(dest);
+			if (!dest[i])
+			{
+				while (i > 0)
+					free(dest[--i]);
+				free(dest);
+				return ;
+			}
 			fill_tab(dest[i], (s + index), c);
 			i++;
 			index += count;
@@ -73,7 +86,7 @@ static void	set_mem(char **dest, char const *s, char c)
 		else
 			index++;
 	}
-	dest[i] = 0;
+	dest[i] = NULL;
 }
 
 char	**ft_split(char const *s, char c)
@@ -84,7 +97,7 @@ char	**ft_split(char const *s, char c)
 	words = count_words(c, (char *)s);
 	dest = (char **)malloc((words + 2) * sizeof(char *));
 	if (!dest)
-		return (free(dest), NULL);
+		return (NULL);
 	set_mem(dest, s, c);
 	return (dest);
 }

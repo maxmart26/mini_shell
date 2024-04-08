@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 15:59:37 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:19:16 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,8 @@ void	add_grep_args(t_token *token);
 void	show_ctrl(int sig);
 int		handle_signal(void);
 void	ft_signal_handler(int signal);
-void	ctrl_d(void);
+//void	ctrl_d(t_data *tools);
+void	ctrl_d();
 char	*show_prompt(t_data *tools);
 void	check_new_line(t_data *tools);
 void	new_line_init(t_data *tools);
@@ -167,5 +168,11 @@ int		check_dir(t_data *tools);
 int		check_error_pipe(t_token *tmp);
 int		check_spe_char(t_data *tools);
 int		check_word_only(t_data *tools);
+
+// Gestion erreur
+
+void	free_env(char **str);
+void	ft_free_tab(char **str);
+void	free_env_list(t_env *env);
 
 #endif
