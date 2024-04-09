@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 14:35:31 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:52:52 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	ft_main(t_data *data)
 		free(data->pipe_fd[data->nb_pipe - 1]);
 		data->nb_pipe--;
 	}
-	free(data->pipe_fd);
+	if (data->nb_pipe > 0)
+		free(data->pipe_fd);
 	return (0);
 }

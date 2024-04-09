@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 15:05:10 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:32:23 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ void	init_minishell(t_data *tools, char **env)
 		init_env_shlvl(tools->env, tools);
 	}
 	init_path(tools);
+	tools->nb_pipe = 0;
+	tools->std_int = 1;
+	tools->std_out = 0;
 	tools->status = 1;
 	tools->exit_status = 0;
 	g_status = 1;
@@ -76,7 +79,7 @@ int	minishell(t_data *tools, char **env)
 		tools->args = readline(str);
 		free(str);
 		if (!tools->args)
-			ctrl_d();
+			ctrl_d(tools);
 		check_new_line(tools);
 		if (tools->nl_error == 0 || tools->nl_error == 2)
 		{

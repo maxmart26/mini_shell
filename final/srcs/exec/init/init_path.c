@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:35 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 13:59:31 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:04:08 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	init_env_shlvl(t_env *env, t_data *data)
 {
 	int	a;
 	char *str;
+	char	*stt;
+	char	**st;
 
 	while (env)
 	{
@@ -64,8 +66,12 @@ void	init_env_shlvl(t_env *env, t_data *data)
 		{
 			a = ft_atoi(env->content);
 			a++;
-			str = ft_strjoin("SHLVL=", ft_itoa(a));
-			ft_export(token_init("export", str), data, -1);
+			stt = ft_itoa(a);
+			str = ft_strjoin("SHLVL=", stt);
+			st = token_init("export", str);
+			free(stt);
+			free(str);
+			ft_export(st, data, -1);
 		}
 		env = env->next;
 	}

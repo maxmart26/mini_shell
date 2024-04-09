@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:58:16 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/08 16:14:37 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:41:27 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*find_env_var(char *str, t_env *env)
 {
 	while (env->next)
 	{
-		if (ft_strncmp(str, env->name, ft_strlen(str)) == 0
+		if (ft_strncmp(str, env->name, ft_strlen(str) - 1) == 0
 			&& ft_strlen(str) == ft_strlen(env->name))
 			return (env->content);
 		env = env->next;

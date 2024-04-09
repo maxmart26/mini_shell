@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 15:05:39 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:32:12 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	free_env_str(char **str)
 	int	i;
 
 	i = 2;
-	if (str[2])
+	if (str[2] != NULL)
 	{
 		while (str[i])
 		{
@@ -138,7 +138,7 @@ t_env	*init_env(t_data *data, int i)
 			env = tmp;
 		}
 		i++;
-		free(str);
+		//free(str);
 	}
 	//free_env_list(result);
 	return (result);

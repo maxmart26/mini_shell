@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:09:54 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 14:10:28 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:25:56 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,15 @@ void	ft_free_env(t_env *env)
 
 	while (env)
 	{
-		if (env->next)
-			tmp = env->next;
-		free(env->name);
+		tmp = env->next;
+		if (env->name != NULL)
+			free(env->name);
+		if (env->content != NULL)
+			free(env->content);
+		if (env->value != NULL)
+			free(env->value);
+		tmp = env->next;
+		free(env);
 		env = tmp;
 	}
 }
@@ -50,6 +56,7 @@ void	ft_exit(t_data *data, int i)
 		ft_free_env(data->env);
 		if (data->nb_pipe > 0)
 			ft_free_pipe(data->pipe_fd, data->nb_pipe);
+		free(data);
 		exit(1);
 	}
 }

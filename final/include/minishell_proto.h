@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 14:34:41 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:00:38 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,8 @@ void	add_grep_args(t_token *token);
 void	show_ctrl(int sig);
 int		handle_signal(void);
 void	ft_signal_handler(int signal);
-//void	ctrl_d(t_data *tools);
-void	ctrl_d();
+void	ctrl_d(t_data *tools);
+//void	ctrl_d();
 char	*show_prompt(t_data *tools);
 void	check_new_line(t_data *tools);
 void	new_line_init(t_data *tools);

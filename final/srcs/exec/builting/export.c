@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/08 16:23:53 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:00:35 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,6 @@ void	ft_export(char **strs, t_data *data, int i)
 		ft_trie_export(data);
 	else
 		ft_export_2(strs, data, str);
+	if (strs)
+		free_tab(strs);
 }
