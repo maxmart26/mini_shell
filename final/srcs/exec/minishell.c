@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/08 15:32:00 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:01:23 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_token	*new_token_after_fd(t_token *token)
 				token->next->next->prev = token->prev;
 				token = token->next->next;
 			}
+			else
+				token = token->next;
 			free(tmp);
 			free(tmp2);
 		}
@@ -167,14 +169,12 @@ void	ft_tmp(t_data *data, t_token *token)
 		token = token->next;
 	}
 	token = data->lexer_list;
-	printf("ici le i %d\n", i);
 	pid = malloc(i * sizeof(pid_t));
 	i = 0;
 	while (token)
 	{
 		if (token->type == WORD)
 		{
-			printf("test %d ici\n", data->nb_cmd);
 			pid[i] = fork();
 			if (pid[i] == 0)
 				after(data, token);
@@ -213,12 +213,12 @@ void	ft_tmp(t_data *data, t_token *token)
 		}
 		token = token->next;
 	}
+	free(pid);
 }
 
 int	ft_main(t_data *data)
 {
 	ft_tmp(data, data->lexer_list);
-	printf("avec les nb de pipe %d\n", data->nb_pipe);
 	while (data->nb_pipe > 0)
 	{
 		free(data->pipe_fd[data->nb_pipe - 1]);

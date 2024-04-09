@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:58:16 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/08 16:14:37 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:15:06 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ char	*is_still_env_var(char *str, t_data *tools)
 	if (i > 0)
 	{
 		tmp = ft_substr(str, 0, i);
-		result = ft_strjoin(result, tmp);
-		free(tmp);
+		result = tmp;
 	}
 	if (str[i] == '$')
 	{
