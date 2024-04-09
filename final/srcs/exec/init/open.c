@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 15:08:04 by lnunez-t         ###   ########.fr       */
+/*   Created: 2024/04/08 15:47:28 by matorgue          #+#    #+#             */
+/*   Updated: 2024/04/08 15:52:26 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell_include.h"
-#include "../../include/minishell_proto.h"
-#include "../../include/minishell_struct.h"
+#include "../../../include/minishell_include.h"
+#include "../../../include/minishell_proto.h"
+#include "../../../include/minishell_struct.h"
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+
+t_token	*new_token(t_token *token)
+{
+	while (token->prev)
+	{
+		if (token->prev->prev == NULL)
+			break ;
+		token = token->prev;
+	}
+	return (token);
+}
 
 t_token	*new_token_after_fd(t_token *token)
 {
@@ -38,21 +49,13 @@ t_token	*new_token_after_fd(t_token *token)
 				token->next->next->prev = token->prev;
 				token = token->next->next;
 			}
-			else
-				token = token->next;
 			free(tmp);
 			free(tmp2);
 		}
 		else
 			token = token->next;
 	}
-	while (token->prev)
-	{
-		if (token->prev->prev == NULL)
-			break ;
-		token = token->prev;
-	}
-	return (token);
+	return (new_token(token));
 }
 
 void	free_pipe(t_data *data)
@@ -67,6 +70,7 @@ void	free_pipe(t_data *data)
 	}
 	free(data->pipe_fd);
 }
+
 int	open_file(char *s, int i)
 {
 	int	fd;
@@ -106,63 +110,4 @@ void	open_fd(t_data *data, t_token *token)
 		tmp = token->next;
 		token = tmp;
 	}
-}
-
-void	fd_built(t_data *data, t_token *token)
-{
-	char	**str;
-
-	str = ft_split(token->value, ' ');
-	if (ft_strncmp(str[0], "echo", 4) == 0 && ft_strlen(str[0]) == 4)
-		ft_echo(str);
-	if (ft_strncmp(str[0], "pwd", 3) == 0 && ft_strlen(str[0]) == 3)
-		ft_pwd(str);
-	if (ft_strncmp(str[0], "env", 3) == 0 && ft_strlen(str[0]) == 3)
-		ft_env(data);
-	if (ft_strncmp(str[0], "cd", 2) == 0 && ft_strlen(str[0]) == 2)
-		ft_cd(str, data->nb_pipe, data);
-	if (ft_strncmp(str[0], "export", 6) == 0 && ft_strlen(str[0]) == 6)
-		ft_export(str, data, data->nb_pipe);
-	if (ft_strncmp(str[0], "exit", 4) == 0 && ft_strlen(str[0]) == 4)
-		ft_exit(data, data->nb_pipe);
-	if (ft_strncmp(str[0], "unset", 5) == 0 && ft_strlen(str[0]) == 5)
-		ft_unset(str, data, data->nb_pipe);
-}
-
-void	after(t_data *data, t_token *token)
-{
-	fd_built(data, token);
-	ft_exec_abs(token, data);
-	exec(data, token);
-}
-
-void	ft_retry(t_data *data, int result, char **str)
-{
-	int	result2;
-
-	result2 = WEXITSTATUS(result);
-	if (result2 == 155)
-		ft_unset(str, data, -1);
-	else if (result2 == 156)
-		ft_export(str, data, -1);
-	else if (result2 == 157)
-		ft_cd(str, -1, data);
-	else if (result2 == 158)
-	{
-		free_tab(str);
-		ft_exit(data, -1);
-	}
-}
-
-int	ft_main(t_data *data)
-{
-	printf("test\n");
-	ft_tmp(data, data->lexer_list);
-	while (data->nb_pipe > 0)
-	{
-		free(data->pipe_fd[data->nb_pipe - 1]);
-		data->nb_pipe--;
-	}
-	free(data->pipe_fd);
-	return (0);
 }

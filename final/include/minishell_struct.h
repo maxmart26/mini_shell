@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_struct.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 13:56:42 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:41:05 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ typedef struct s_data
 	char				*args;
 	t_token				*lexer_list;
 	char				*itoa;
+	char				*init_path;
+	bool				r_path;
 	int					f1;
 	int					std_out;
 	int					std_int;

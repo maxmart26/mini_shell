@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:39:20 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/08 14:42:15 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:05:46 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ft_first_commande(t_data *data)
 	i = 0;
 	data->fd_in = data->std_int;
 	data->fd_out = data->pipe_fd[0][1];
-	printf("avec le out %d et le in %d first\n",data->fd_out, data->fd_in);
 	while (i < data->nb_pipe)
 	{
 		if (i != 0)
@@ -38,7 +37,6 @@ void	ft_last_commande(t_data *data)
 	i = 0;
 	data->fd_in = data->pipe_fd[data->nb_pipe - 1][0];
 	data->fd_out = data->std_out;
-	printf("avec le out %d et le in %d last\n",data->fd_out, data->fd_in);
 	while (i < data->nb_pipe)
 	{
 		close(data->pipe_fd[i][1]);
@@ -53,10 +51,8 @@ void	ft_middle_commande(t_data *data, int j)
 	int	i;
 
 	i = 0;
-	printf("je suis nul\n");
 	data->fd_out = data->pipe_fd[j][1];
 	data->fd_in = data->pipe_fd[j - 1][0];
-	printf("avec le out %d et le in %d\n",data->fd_out, data->fd_in);
 	while (i < data->nb_pipe)
 	{
 		if (i != data->nb_cmd)
