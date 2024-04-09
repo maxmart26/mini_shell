@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 15:06:44 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:07:20 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	lexer_and_parser(t_data *tools)
 void	init_minishell(t_data *tools, char **env)
 {
 	tools->envp = env;
-	printf("%s\n",tools->envp[0]);
 	if (tools->envp[0] == NULL)
 		tools->env = init_env_i();
 	else

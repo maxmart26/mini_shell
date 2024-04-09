@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:35 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 13:59:31 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:04:27 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ void	init_end(t_env *env)
 
 void	init_env_shlvl(t_env *env, t_data *data)
 {
-	int	a;
-	char *str;
+	int		a;
+	char	*str;
+	char	**tab_str;
 
 	while (env)
 	{
@@ -66,6 +67,7 @@ void	init_env_shlvl(t_env *env, t_data *data)
 			a++;
 			str = ft_strjoin("SHLVL=", ft_itoa(a));
 			ft_export(token_init("export", str), data, -1);
+			free(str);
 		}
 		env = env->next;
 	}

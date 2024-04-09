@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 15:15:12 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:44:31 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,25 +120,36 @@ t_env	*init_env(t_data *data, int i)
 	char	**str;
 
 	env = new_env();
+	if (!env)
+		return (NULL);
 	result = env;
-	str = NULL;
 	env->prev = NULL;
 	while (data->envp[i])
 	{
 		env->value = data->envp[i];
 		str = ft_split(env->value, '=');
+		if (!str)
+		{
+			ft_destroy_env(result);
+			return (NULL);
+		}
 		env->name = str[0];
 		env->content = str[1];
-		free_env_str(str);
+		if (str[0] && str[1])
+			free_env_str(str);
 		if (data->envp[i + 1])
 		{
 			env->next = new_env();
+			if (!env->next)
+			{
+				ft_destroy_env(result);
+				return (NULL);
+			}
 			tmp = env->next;
 			tmp->prev = env;
 			env = tmp;
 		}
 		i++;
 	}
-	//free_env_list(result);
 	return (result);
 }
