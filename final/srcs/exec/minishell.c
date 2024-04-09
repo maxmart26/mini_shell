@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/08 15:32:00 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:35:31 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,93 +18,6 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-
-t_token	*new_token_after_fd(t_token *token)
-{
-	t_token	*tmp;
-	t_token	*tmp2;
-
-	while (token->next)
-	{
-		if (token->type == GREAT || token->type == LESS
-			|| token->type == HEREDOC)
-		{
-			tmp = token;
-			tmp2 = token->next;
-			token->prev->next = token->next->next;
-			token->next->next->prev = token->prev;
-			if (token->next->next)
-			{
-				token->next->next->prev = token->prev;
-				token = token->next->next;
-			}
-			free(tmp);
-			free(tmp2);
-		}
-		else
-			token = token->next;
-	}
-	while (token->prev)
-	{
-		if (token->prev->prev == NULL)
-			break ;
-		token = token->prev;
-	}
-	return (token);
-}
-
-void	free_pipe(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb_pipe)
-	{
-		free(data->pipe_fd[i]);
-		i++;
-	}
-	free(data->pipe_fd);
-}
-int	open_file(char *s, int i)
-{
-	int	fd;
-
-	fd = 0;
-	if (i == 1)
-		fd = open(s, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	else if (i == 0)
-		fd = open(s, O_RDONLY);
-	return (fd);
-}
-
-void	open_fd(t_data *data, t_token *token)
-{
-	t_token	*tmp;
-
-	tmp = token->next;
-	while (token)
-	{
-		if (token->type == GREAT)
-		{
-			if (data->std_out != 1)
-			{
-				close(data->std_out);
-				data->std_out = 1;
-			}
-			data->std_out = open_file(token->next->value, 1);
-		}
-		else if (token->type == LESS)
-			data->std_int = open_file(token->next->value, 0);
-		if (data->std_int == -1 || data->std_out == -1)
-		{
-			printf("bash: %s: No such file or directory\n", token->next->value);
-			if (data->nb_pipe == 0)
-				exit(1);
-		}
-		tmp = token->next;
-		token = tmp;
-	}
-}
 
 void	fd_built(t_data *data, t_token *token)
 {
@@ -152,73 +65,10 @@ void	ft_retry(t_data *data, int result, char **str)
 	}
 }
 
-void	ft_tmp(t_data *data, t_token *token)
-{
-	pid_t	*pid;
-	int		result;
-	int		i;
-
-	i = 0;
-	result = -23;
-	while (token)
-	{
-		if (token->type == WORD)
-			i++;
-		token = token->next;
-	}
-	token = data->lexer_list;
-	printf("ici le i %d\n", i);
-	pid = malloc(i * sizeof(pid_t));
-	i = 0;
-	while (token)
-	{
-		if (token->type == WORD)
-		{
-			printf("test %d ici\n", data->nb_cmd);
-			pid[i] = fork();
-			if (pid[i] == 0)
-				after(data, token);
-			data->nb_cmd++;
-			i++;
-		}
-		token = token->next;
-	}
-	token = data->lexer_list;
-	i = 0;
-	if (data->std_int > 2)
-	{
-		close(data->std_int);
-	}
-	if (data->std_out > 2)
-	{
-		close(data->std_out);
-	}
-	if (data->nb_pipe > 0)
-	{
-		while (i < data->nb_pipe)
-		{
-			close(data->pipe_fd[i][0]);
-			close(data->pipe_fd[i][1]);
-			i++;
-		}
-	}
-	i = 0;
-	while (token)
-	{
-		if (token->type == WORD)
-		{
-			waitpid(pid[i], &result, 0);
-			ft_retry(data, result, ft_split(token->value, ' '));
-			i++;
-		}
-		token = token->next;
-	}
-}
-
 int	ft_main(t_data *data)
 {
+	printf("test\n");
 	ft_tmp(data, data->lexer_list);
-	printf("avec les nb de pipe %d\n", data->nb_pipe);
 	while (data->nb_pipe > 0)
 	{
 		free(data->pipe_fd[data->nb_pipe - 1]);

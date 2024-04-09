@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/08 14:08:28 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:29:06 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,13 @@ void	ft_free_tab(char **input)
 	free(input);
 }
 
-char	*ft_path(char **envp)
+char	*ft_path(t_env *env)
 {
-	int	i;
-
-	i = 0;
-	while (envp[i])
+	while (env)
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-			return (&envp[i][5]);
-		i++;
+		if (ft_strncmp(env->value, "PATH=", 5) == 0)
+			return (env->content);
+		env = env->next;
 	}
 	return (NULL);
 }
@@ -53,7 +50,7 @@ char	*get_path(t_data *data, t_token *token)
 	{
 		return (NULL);
 	}
-	path_from_envp = ft_path(data->envp);
+	path_from_envp = ft_path(data->env);
 	path = ft_split(path_from_envp, ':');
 	while (path[i])
 	{
@@ -69,55 +66,29 @@ char	*get_path(t_data *data, t_token *token)
 	ft_free_tab(path);
 	return (NULL);
 }
-void	ft_dup2(t_data *data)
-{
-	int	i;
 
-	i = 2;
-	if (data->nb_pipe > 0)
-	{
-		printf(" le out %d et le in%d\n",data->fd_out,data->fd_in);
-		ft_close_useless(data, data->nb_cmd, data->nb_cmd);
-		if (data->fd_in > 2)
-		{
-			dup2(data->fd_in, STDIN_FILENO);
-			close(data->fd_in);
-		}
-		if (data->fd_out > 2)
-		{
-			dup2(data->fd_out, STDOUT_FILENO);
-			close(data->fd_out);
-		}
-	}
-	else
-	{
-		dup2(data->std_int, STDIN_FILENO);
-		dup2(data->std_out, STDOUT_FILENO);
-		if (data->std_int > 2)
-			close(data->std_int);
-		if (data->std_out > 2)
-			close(data->std_out);
-	}
-}
 void	exec(t_data *data, t_token *token)
 {
 	ft_exec(data, token);
 	ft_dup2(data);
-	//printf("data->path_def : %s\n\n  data->mycmdargs : %s\n\n",data->path_def, data->mycmdargs[0]);
 	execve(data->path_def, data->mycmdargs, data->envp);
-	printf("bash: %s: No such file or directory\n",data->mycmdargs[0]);
 	free_tab(data->path);
 	free_tab(data->mycmdargs);
 	exit(127);
 }
+
 char	*ft_exec(t_data *data, t_token *token)
 {
 	int	i;
 
 	i = 0;
-//	printf("test\n");
 	data->mycmdargs = ft_split(token->value, ' ');
-	data->path_from_envp = ft_path(data->envp);
+	if ((data->path_from_envp = ft_path(data->env)) == NULL
+		&& data->r_path == TRUE)
+		return (exec_path(data));
+	else if ((data->path_from_envp = ft_path(data->env)) == NULL
+		&& data->r_path == FALSE)
+		return (perror(CMD_ERR), NULL);
 	data->path = ft_split(data->path_from_envp, ':');
 	while (data->path[i])
 	{

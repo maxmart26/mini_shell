@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:52:41 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/06 02:03:29 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:05:57 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ void	ft_unset(char **str, t_data *data, int i)
 {
 	if (i == 0)
 		exit(155);
+	if (ft_strncmp(str[1], "PATH", 5) == 0)
+		data->r_path = FALSE;
 	while (data->env)
 	{
-		if (ft_strncmp(str[1], data->env->value,
-				ft_strlen(str[1])) == 0
+		if (ft_strncmp(str[1], data->env->value, ft_strlen(str[1])) == 0
 			&& data->env->value[ft_strlen(str[1])] == '=')
 		{
 			ft_unset_next(data);

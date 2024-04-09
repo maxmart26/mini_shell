@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:37:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/08 18:25:53 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:05:17 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ char	*prompt_get_sess(void)
 
 	i = 0;
 	start = 0;
-	str = getenv("SESSION_MANAGER");
+	if ((str = getenv("SESSION_MANAGER")) == NULL)
+		return (NULL);
 	while (str[i])
 	{
 		if (str[i] == '/')
