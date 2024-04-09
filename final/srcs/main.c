@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 17:32:23 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:08:14 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	lexer_and_parser(t_data *tools)
 	{
 		tools->lexer_list = lexer(tools->args);
 		tmp = tools->lexer_list->next;
+		free(tools->lexer_list->value);
 		free(tools->lexer_list);
 		tools->lexer_list = tmp;
 		tools->lexer_list = remove_sep(tools->lexer_list);
@@ -47,7 +48,6 @@ void	lexer_and_parser(t_data *tools)
 void	init_minishell(t_data *tools, char **env)
 {
 	tools->envp = env;
-	printf("%s\n",tools->envp[0]);
 	if (tools->envp[0] == NULL)
 		tools->env = init_env_i();
 	else

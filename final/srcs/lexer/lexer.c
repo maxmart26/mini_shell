@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:27 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 14:08:08 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:06:34 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,17 @@ t_token	*first_token(void)
 	t_token	*new_token;
 
 	new_token = (t_token *)malloc(sizeof(t_token));
+	if (!new_token)
+		return (NULL);
 	new_token->index = 0;
 	new_token->next = NULL;
 	new_token->type = NONE;
 	new_token->value = ft_strdup("NONE");
+	if (!new_token->value)
+	{
+		free(new_token);
+		return (NULL);
+	}
 	new_token->prev = NULL;
 	return (new_token);
 }
@@ -35,9 +42,16 @@ void	add_token(t_token *token_list, t_token_type type, char *str, int i)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = (t_token *)malloc(sizeof(t_token));
+	if (!tmp->next)
+		return ;
 	tmp->next->index = i;
 	tmp->next->type = type;
-	tmp->next->value = str;
+	tmp->next->value = ft_strdup(str);
+	if (!tmp->next->value)
+	{
+		free(tmp->next);
+		return ;
+	}
 	tmp->next->next = NULL;
 	tmp->next->prev = tmp;
 }
@@ -70,9 +84,17 @@ void	fill_token_list(t_token *token_list, char *str)
 void	destroy_token_list(t_token *token_list)
 {
 	t_token	*tmp;
+	t_token	*next_node;
 
-	tmp = NULL;
-	while (token_list->type != NEWL)
+	tmp = token_list;
+	while (tmp)
+	{
+		next_node = tmp->next;
+		free(tmp->value);
+		free(tmp);
+		tmp = next_node;
+	}
+	/*while (token_list->type != NEWL)
 	{
 		tmp = token_list;
 		token_list = token_list->next;
@@ -87,7 +109,7 @@ void	destroy_token_list(t_token *token_list)
 		token_list->value = NULL;
 		free(token_list);
 		token_list = NULL;
-	}
+	}*/
 }
 
 t_token	*lexer(char *str)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 16:00:35 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:08:56 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,20 @@ int	ft_expor_ex(char *tmp, t_data *data, char **str)
 
 void	ft_export_2(char **strs, t_data *data, char **str)
 {
+	char	*name;
+	char	*content;
+
 	str = ft_split(strs[1], '=');
-	if (ft_expor_ex(strs[1], data, str) == 1)
+	if (str && str[0] && str[1] && ft_expor_ex(strs[1], data, str) == 1)
 	{
+		name = strdup(str[0]);
+		content = strdup(str[1]);
 		if (!data->env)
 		{
 			data->env = new_env();
 			data->env->value = strs[1];
-			data->env->content = str[1];
-			data->env->name = str[0];
-			free_tab(str);
+			data->env->content = content;
+			data->env->name = name;
 		}
 		else
 		{
@@ -52,12 +56,14 @@ void	ft_export_2(char **strs, t_data *data, char **str)
 			data->env->next = new_env();
 			data->env->next->value = strs[1];
 			data->env->next->prev = data->env;
-			data->env->next->content = str[1];
-			data->env->next->name = str[0];
-			free_tab(str);
+			data->env->next->content = content;
+			data->env->next->name = name;
 			while (data->env->prev)
 				data->env = data->env->prev;
 		}
+		free(name);
+		free(content);
+		str = NULL;
 	}
 }
 
@@ -71,7 +77,7 @@ void	ft_export(char **strs, t_data *data, int i)
 	if (strs[1] == NULL)
 		ft_trie_export(data);
 	else
+	{
 		ft_export_2(strs, data, str);
-	if (strs)
-		free_tab(strs);
+	}
 }

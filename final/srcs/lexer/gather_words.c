@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:01:46 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 13:59:53 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:26:00 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	list_gathering(t_data *tools)
 	t_token	*tmp;
 	t_token	*result;
 	char	*str;
+	char	*concat;
 
 	token = tools->lexer_list;
 	result = token;
@@ -27,15 +28,17 @@ void	list_gathering(t_data *tools)
 	{
 		if (token->next)
 		{
-			if (token->type == WORD && token->next->type == WORD)
+			if (token->next && token->type == WORD && token->next->type == WORD)
 			{
-				token->value = ft_strjoin(token->value, " ");
-				str = token->value;
-				token->value = ft_strjoin(token->value, token->next->value);
+				str = ft_strjoin(token->value, " ");
+				concat = ft_strjoin(str, token->next->value);
+				free(token->value);
 				free(str);
+				token->value = concat;
 				tmp = token->next;
-				token->next = token->next->next;
-				token->next->prev = token;
+				token->next = tmp->next;
+				if (tmp->next)
+					token->next->prev = token;
 				free(tmp);
 			}
 			else

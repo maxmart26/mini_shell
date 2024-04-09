@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:22:01 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/08 16:22:31 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:58:36 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,14 @@ void	ft_trie_export(t_data *data)
 
 void	ft_export_modif(char *token, t_env *env, char **str)
 {
+	char	*old_name;
+	char	*old_content;
+
+	old_name = env->name;
+	old_content = env->content;
 	env->value = token;
-	free(env->name);
-	free(env->content);
 	env->content = str[1];
 	env->name = str[0];
-	free_tab(str);
+	free(old_name);
+	free(old_content);
 }
