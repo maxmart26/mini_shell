@@ -7,6 +7,8 @@ pour laura :
 
 grep : ok !
 
+faire les wildcard
+
 a faire : 
 * ajouter tac dans la gestion des args
 * creer fonction pour retirer les " et ' dans un WORD
@@ -35,6 +37,8 @@ peuvent etre traitees comme des caracteres normaux
 
 pour maxime :
 
+faire les wildcard
+
 a voir pour le SHLVL
 valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
 
@@ -44,5 +48,7 @@ cat | cat | ls
 le cd ou il y a plus de dossier
 "ls | cat"
 faire le export qui vas trier ok !
-
-cat : ok !
+ cd ~ a revoir 
+ export entree sigsev
+expand sigsev
+cat : ok 90                   

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/08 15:22:04 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:09:13 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	lexer_and_parser(t_data *tools)
 		tools->std_int = 0;
 		open_fd(tools, tools->lexer_list);
 		open_heredoc(tools);
-		tools->lexer_list =  new_token_after_fd(tools->lexer_list);
+		tools->lexer_list = new_token_after_fd(tools->lexer_list);
 		ft_print_lexer(tools->lexer_list);
 		list_gathering(tools);
 		def_index(tools->lexer_list);
@@ -47,7 +47,15 @@ void	lexer_and_parser(t_data *tools)
 void	init_minishell(t_data *tools, char **env)
 {
 	tools->envp = env;
-	tools->env = init_env(tools);
+	printf("%s\n",tools->envp[0]);
+	if (tools->envp[0] == NULL)
+		tools->env = init_env_i();
+	else
+	{
+		tools->env = init_env(tools, 0);
+		init_env_shlvl(tools->env, tools);
+	}
+	init_path(tools);
 	tools->status = 1;
 	g_status = 1;
 	tools->first_call = 1;
