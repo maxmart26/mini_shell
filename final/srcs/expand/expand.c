@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:58:16 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 16:53:15 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:55:21 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ char	*is_still_env_var(char *str, t_data *tools)
 	tmp_result = ft_strjoin(result, tmp);
 	free(result);
 	free(tmp);
+	if (find_var)
+		free(find_var);
 	return (tmp_result);
 }
 

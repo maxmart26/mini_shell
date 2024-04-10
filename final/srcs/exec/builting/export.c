@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 16:45:52 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:27:21 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_export_2(char **strs, t_data *data, char **str)
 {
 	char	*name;
 	char	*content;
+	t_env	*current;
 
 	str = ft_split(strs[1], '=');
 	if (str && str[0] && str[1] && ft_expor_ex(strs[1], data, str) == 1)
@@ -51,20 +52,27 @@ void	ft_export_2(char **strs, t_data *data, char **str)
 		}
 		else
 		{
-			while (data->env->next)
-				data->env = data->env->next;
-			data->env->next = new_env();
-			data->env->next->value = strs[1];
-			data->env->next->prev = data->env;
-			data->env->next->content = content;
-			data->env->next->name = name;
-			while (data->env->prev)
-				data->env = data->env->prev;
+			current = data->env;
+			while (current->next)
+				current = current->next;
+			current->next = new_env();
+			if (!current->next)
+			{
+				free(name);
+				free(content);
+				return ;
+			}
+			current->next->value = strs[1];
+			current->next->prev = current;
+			current->next->content = content;
+			current->next->name = name;
+			/*while (data->env->prev)
+				data->env = data->env->prev;*/
 		}
-		free(name);
-		free(content);
-		str = NULL;
+		ft_free_tab(str);
 	}
+	else
+		ft_free_tab(str);
 }
 
 void	ft_export(char **strs, t_data *data, int i)

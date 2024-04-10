@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:37:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 15:05:17 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:54:42 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
 
-void	ft_destroy_env(t_env *env_list)
+/*void	ft_destroy_env(t_env *env_list)
 {
 	t_env	*tmp;
 	t_env	*new;
@@ -26,10 +26,37 @@ void	ft_destroy_env(t_env *env_list)
 	{
 		free(tmp->content);
 		free(tmp->name);
-		free(tmp->value);
+		//free(tmp->value);
 		new = tmp->next;
 		free(tmp);
 		tmp = new;
+	}
+}*/
+
+void	ft_destroy_env(t_env *env_list)
+{
+	t_env	*next;
+
+	while (env_list)
+	{
+		next = env_list->next;
+		if (env_list->name)
+		{
+			free(env_list->name);
+			env_list->name = NULL;
+		}
+		if (env_list->content)
+		{
+			free(env_list->content);
+			env_list->content = NULL;
+		}
+		if (env_list->value)
+		{
+			free(env_list->value);
+			env_list->value = NULL;
+		}
+		free(env_list);
+		env_list = next;
 	}
 }
 
@@ -42,7 +69,8 @@ char	*prompt_get_sess(void)
 
 	i = 0;
 	start = 0;
-	if ((str = getenv("SESSION_MANAGER")) == NULL)
+	str = getenv("SESSION_MANAGER");
+	if (str == NULL)
 		return (NULL);
 	while (str[i])
 	{
@@ -74,8 +102,8 @@ char	*prompt_get_path(t_data *tools)
 	if (!home)
 	{
 		path = str;
-		free(home);
-		free(str);
+		//free(home);
+		//free(str);
 		return (path);
 	}
 	while (str[i] == home[i])

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 17:44:31 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:00:21 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ t_env	*new_env(void)
 	if (!new)
 		return (NULL);
 	new->next = NULL;
+	new->prev = NULL;
+	new->name = NULL;
+	new->value = NULL;
+	new->content = NULL;
 	return (new);
 }
 
@@ -88,7 +92,7 @@ void	free_env_list(t_env *env)
 {
 	t_env	*tmp;
 
-	while(env)
+	while (env)
 	{
 		tmp = env;
 		env = env->next;
@@ -150,6 +154,8 @@ t_env	*init_env(t_data *data, int i)
 			env = tmp;
 		}
 		i++;
+		ft_free_tab(str);
 	}
+	ft_free_tab(str);
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:27 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 12:06:34 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:41:41 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,22 +94,6 @@ void	destroy_token_list(t_token *token_list)
 		free(tmp);
 		tmp = next_node;
 	}
-	/*while (token_list->type != NEWL)
-	{
-		tmp = token_list;
-		token_list = token_list->next;
-		free(tmp->value);
-		tmp->value = NULL;
-		free(tmp);
-		tmp = NULL;
-	}
-	if (token_list->type == NEWL)
-	{
-		free(token_list->value);
-		token_list->value = NULL;
-		free(token_list);
-		token_list = NULL;
-	}*/
 }
 
 t_token	*lexer(char *str)

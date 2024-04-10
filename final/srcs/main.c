@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 17:07:20 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:51:16 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	minishell(t_data *tools, char **env)
 		tools->args = readline(str);
 		free(str);
 		if (!tools->args)
-			ctrl_d();
+			ctrl_d(tools);
 		check_new_line(tools);
 		if (tools->nl_error == 0 || tools->nl_error == 2)
 		{

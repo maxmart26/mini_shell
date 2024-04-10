@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/08 16:10:34 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:26:24 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void	show_ctrl(int sig)
 	tcsetattr(0, TCSANOW, &new);
 }
 
-/*void	ctrl_d(t_data *tools)
+void	ctrl_d(t_data *tools)
 {
 	printf("exit\n");
 	ft_exit(tools, 1);
-}*/
+}
 
-void	ctrl_d()
+/*void	ctrl_d()
 {
 	printf("exit\n");
 	exit(0);
-}
+}*/
