@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/10 17:27:21 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:39:51 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	ft_export_2(char **strs, t_data *data, char **str)
 			current->next->prev = current;
 			current->next->content = content;
 			current->next->name = name;
-			/*while (data->env->prev)
-				data->env = data->env->prev;*/
+			while (data->env->prev)
+				data->env = data->env->prev;
 		}
 		ft_free_tab(str);
 	}

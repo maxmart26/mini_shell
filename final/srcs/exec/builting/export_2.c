@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:22:01 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 17:58:36 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:21:56 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@ void	ft_trie_export(t_data *data)
 
 void	ft_export_modif(char *token, t_env *env, char **str)
 {
-	char	*old_name;
-	char	*old_content;
+	//char	*old_name;
+	//char	*old_content;
 
-	old_name = env->name;
-	old_content = env->content;
+	//old_name = env->name;
+	//old_content = env->content;
 	env->value = token;
 	env->content = str[1];
 	env->name = str[0];
-	free(old_name);
-	free(old_content);
+	//free(old_name);
+	//free(old_content);
 }

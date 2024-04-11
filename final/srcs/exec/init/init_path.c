@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:35 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/10 13:24:18 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:49:12 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ void	init_env_shlvl(t_env *env, t_data *data)
 
 	while (env)
 	{
-		if (strncmp(env->name, "SHLVL", 6) == 0)
+		if (ft_strncmp(env->name, "SHLVL", 6) == 0)
 		{
 			a = ft_atoi(env->content);
+			if (a < 0)
+				return ;
 			a++;
 			tmp = ft_itoa(a);
 			str = ft_strjoin("SHLVL=", tmp);

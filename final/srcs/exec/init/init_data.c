@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/10 18:00:21 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:22:47 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ t_env	*new_env(void)
 	t_env	*new;
 
 	new = malloc(sizeof(t_env));
-	if (!new)
-		return (NULL);
-	new->next = NULL;
-	new->prev = NULL;
-	new->name = NULL;
-	new->value = NULL;
-	new->content = NULL;
+	if (new)
+	{
+		new->next = NULL;
+		new->name = NULL;
+		new->value = NULL;
+		new->content = NULL;
+	}
 	return (new);
 }
 
@@ -85,6 +85,7 @@ t_env	*init_env_i(void)
 	env->next->next->value = "_=/usr/bin/env";
 	env->next->next->prev = env->next;
 	init_end(env);
+	free(str);
 	return (env);
 }
 
@@ -153,9 +154,8 @@ t_env	*init_env(t_data *data, int i)
 			tmp->prev = env;
 			env = tmp;
 		}
-		i++;
 		ft_free_tab(str);
+		i++;
 	}
-	ft_free_tab(str);
 	return (result);
 }

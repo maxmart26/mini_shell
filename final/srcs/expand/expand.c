@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:58:16 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/10 17:55:21 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:18:15 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*find_env_var(char *str, t_env *env)
 	return (NULL);
 }
 
-char	*is_still_env_var(char *str, t_data *tools)
+char	*is_still_env_var(char *var, t_data *tools)
 {
 	char	*result;
 	char	*env_var;
@@ -38,22 +38,22 @@ char	*is_still_env_var(char *str, t_data *tools)
 
 	i = 0;
 	result = NULL;
-	while (str[i] && str[i] != '$')
+	while (var[i] && var[i] != '$')
 	{
 		i++;
 	}
 	if (i > 0)
 	{
-		tmp = ft_substr(str, 0, i);
+		tmp = ft_substr(var, 0, i);
 		result = tmp;
 	}
-	if (str[i] == '$')
+	if (var[i] == '$' && var[i + 1])
 	{
 		i++;
 		start = i;
-		while ((str[i] >= 'A' && str[i] <= 'Z') || str[i] == '_')
+		while ((var[i] >= 'A' && var[i] <= 'Z') || var[i] == '_')
 			i++;
-		env_var = ft_substr(str, start, i - start);
+		env_var = ft_substr(var, start, i - start);
 		find_var = find_env_var(env_var, tools->env);
 		free(env_var);
 		if (find_var)
@@ -63,7 +63,13 @@ char	*is_still_env_var(char *str, t_data *tools)
 			result = tmp;
 		}
 	}
-	tmp = ft_substr(str, i, ft_strlen(str) - i);
+	if (!var[i + 1])
+	{
+		tmp_result = "$";
+		free(result);
+		return (tmp_result);
+	}
+	tmp = ft_substr(var, i, ft_strlen(var) - i);
 	if (!tmp)
 		return (result);
 	tmp_result = ft_strjoin(result, tmp);
