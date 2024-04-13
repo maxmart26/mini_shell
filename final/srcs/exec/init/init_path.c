@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:35 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/11 17:49:12 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/13 17:50:59 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void	init_env_shlvl(t_env *env, t_data *data)
 	char	*tmp;
 	char	**token;
 
+	if (!env)
+	{
+		ft_destroy_env(env);
+		return ;
+	}
 	while (env)
 	{
 		if (ft_strncmp(env->name, "SHLVL", 6) == 0)

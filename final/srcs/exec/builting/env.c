@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:23:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 14:03:36 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/13 17:36:35 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_env(t_data *data)
 {
 	t_env	*tmp;
 	t_env	*init;
+	int i = 0;
 
 	init = data->env;
 	while (data->env->prev != NULL)
@@ -27,7 +28,7 @@ void	ft_env(t_data *data)
 	ft_dup2(data);
 	while (init)
 	{
-		printf("%s\n", init->value);
+		i++;
 		tmp = init->next;
 		init = tmp;
 	}

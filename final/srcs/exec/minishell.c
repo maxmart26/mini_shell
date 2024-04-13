@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 15:08:04 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/13 17:53:02 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,6 @@ void	ft_retry(t_data *data, int result, char **str)
 
 int	ft_main(t_data *data)
 {
-	printf("test\n");
 	ft_tmp(data, data->lexer_list);
 	while (data->nb_pipe > 0)
 	{

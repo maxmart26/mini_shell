@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/11 17:50:37 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:42:30 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	lexer_and_parser(t_data *tools)
 		open_fd(tools, tools->lexer_list);
 		open_heredoc(tools);
 		tools->lexer_list = new_token_after_fd(tools->lexer_list);
-		ft_print_lexer(tools->lexer_list);
+		//ft_print_lexer(tools->lexer_list);
 		list_gathering(tools);
 		def_index(tools->lexer_list);
 		remove_quotes(tools->lexer_list);

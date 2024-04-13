@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:58:16 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/11 16:18:15 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/13 14:39:44 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 char	*find_env_var(char *str, t_env *env)
 {
-	while (env->next)
+	while (env)
 	{
 		if (ft_strncmp(str, env->name, ft_strlen(str)) == 0
 			&& ft_strlen(str) == ft_strlen(env->name))
@@ -63,7 +63,7 @@ char	*is_still_env_var(char *var, t_data *tools)
 			result = tmp;
 		}
 	}
-	if (!var[i + 1])
+	else if (var[i] == '$' && !var[i + 1])
 	{
 		tmp_result = "$";
 		free(result);
@@ -87,7 +87,9 @@ char	*replace_env_var(char *str, t_data *tools)
 	value = NULL;
 	value = is_still_env_var(str, tools);
 	while (is_env_var(value, tools) == 1)
+	{
 		value = is_still_env_var(value, tools);
+	}
 	return (value);
 }
 
@@ -101,7 +103,9 @@ void	env_var_expand(t_data *tools)
 		if (tmp->type == WORD)
 		{
 			if (tmp->value[0] != '\'' && is_env_var(tmp->value, tools) == 1)
+			{
 				tmp->value = replace_env_var(tmp->value, tools);
+			}
 			tmp = tmp->next;
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/11 15:39:51 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/13 18:33:15 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_export_2(char **strs, t_data *data, char **str)
 		if (!data->env)
 		{
 			data->env = new_env();
-			data->env->value = strs[1];
+			data->env->value = ft_strdup(strs[1]);
 			data->env->content = content;
 			data->env->name = name;
 		}
@@ -62,7 +62,7 @@ void	ft_export_2(char **strs, t_data *data, char **str)
 				free(content);
 				return ;
 			}
-			current->next->value = strs[1];
+			current->next->value = ft_strdup(strs[1]);
 			current->next->prev = current;
 			current->next->content = content;
 			current->next->name = name;
@@ -71,8 +71,6 @@ void	ft_export_2(char **strs, t_data *data, char **str)
 		}
 		ft_free_tab(str);
 	}
-	else
-		ft_free_tab(str);
 }
 
 void	ft_export(char **strs, t_data *data, int i)
