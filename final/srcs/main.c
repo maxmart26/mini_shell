@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 17:32:23 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:33:26 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	lexer_and_parser(t_data *tools)
 void	init_minishell(t_data *tools, char **env)
 {
 	tools->envp = env;
-	printf("%s\n",tools->envp[0]);
 	if (tools->envp[0] == NULL)
 		tools->env = init_env_i();
 	else
@@ -108,7 +107,7 @@ int	main(int ac, char **argv, char **env)
 		return (free(tools), EXIT_FAILURE);
 	if (ac != 1)
 	{
-		printf("No arguments accepted.\n");
+		ft_printf_error("No arguments accepted.\n");
 		free(tools);
 		exit(0);
 	}

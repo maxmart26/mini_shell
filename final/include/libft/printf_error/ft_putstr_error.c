@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_abs.c                                         :+:      :+:    :+:   */
+/*   ft_putstr_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 16:56:01 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/10 15:36:33 by matorgue         ###   ########.fr       */
+/*   Created: 2024/04/10 18:26:15 by matorgue          #+#    #+#             */
+/*   Updated: 2024/04/10 18:26:54 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell_include.h"
-#include "../../../include/minishell_proto.h"
-#include "../../../include/minishell_struct.h"
+#include "../libft.h"
 
-void	ft_exec_abs(t_token *token, t_data *data)
+void	ft_putstr_error(char *str, int *len)
 {
-	char	**str;
+	int	i;
 
-	str = ft_split(token->value, ' ');
-	if (access(str[0], 0) == 0)
+	i = 0;
+	if (!str)
 	{
-		ft_dup2(data);
-		execve(str[0], str, data->envp);
+		write(2, "(null)", 6);
+		(*len) += 6;
+		return ;
 	}
-	else
+	while (str[i])
 	{
-		free_tab(str);
+		ft_putchar_error(str[i], len);
+		i++;
 	}
 }

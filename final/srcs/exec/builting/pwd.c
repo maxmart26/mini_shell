@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:51:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 14:04:52 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:41:23 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 #include "../../../include/minishell_proto.h"
 #include "../../../include/minishell_struct.h"
 
-int	ft_pwd(char **strs)
+int	ft_pwd(char **strs, t_data *data)
 {
 	char	*str;
 
+	ft_dup2(data);
 	str = NULL;
 	str = getcwd(str, _SC_PASS_MAX);
 	if (strs[1] && strncmp(strs[1], "-", 1) == 0)
