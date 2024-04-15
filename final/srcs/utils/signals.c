@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/10 15:48:27 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:07:38 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	show_ctrl(int sig)
 void	ctrl_d(t_data *tools)
 {
 	printf("exit\n");
-	ft_exit(tools, 1, NULL);
+	ft_exit(tools, 1);
 }
 
 // void	ctrl_d()

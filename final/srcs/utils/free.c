@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 14:51:08 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/08 17:49:15 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/13 18:22:40 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,12 @@ void	free_minishell(t_data *tools)
 	free_env(tools->envp);
 	ft_destroy_env(tools->env);
 	destroy_token_list(tools->lexer_list);
+	free(tools);
+}
+
+void	free_minishell_ctrld(t_data *tools)
+{
+	ft_destroy_env(tools->env);
+	free(tools->args);
 	free(tools);
 }

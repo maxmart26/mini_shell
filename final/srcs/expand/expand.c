@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:58:16 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 16:41:27 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:07:24 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 char	*find_env_var(char *str, t_env *env)
 {
-	while (env->next)
+	while (env)
 	{
 		if (ft_strncmp(str, env->name, ft_strlen(str) - 1) == 0
 			&& ft_strlen(str) == ft_strlen(env->name))
@@ -26,7 +26,7 @@ char	*find_env_var(char *str, t_env *env)
 	return (NULL);
 }
 
-char	*is_still_env_var(char *str, t_data *tools)
+char	*is_still_env_var(char *var, t_data *tools)
 {
 	char	*result;
 	char	*env_var;
@@ -38,23 +38,22 @@ char	*is_still_env_var(char *str, t_data *tools)
 
 	i = 0;
 	result = NULL;
-	while (str[i] && str[i] != '$')
+	while (var[i] && var[i] != '$')
 	{
 		i++;
 	}
 	if (i > 0)
 	{
-		tmp = ft_substr(str, 0, i);
-		result = ft_strjoin(result, tmp);
-		free(tmp);
+		tmp = ft_substr(var, 0, i);
+		result = tmp;
 	}
-	if (str[i] == '$')
+	if (var[i] == '$' && var[i + 1])
 	{
 		i++;
 		start = i;
-		while ((str[i] >= 'A' && str[i] <= 'Z') || str[i] == '_')
+		while ((var[i] >= 'A' && var[i] <= 'Z') || var[i] == '_')
 			i++;
-		env_var = ft_substr(str, start, i - start);
+		env_var = ft_substr(var, start, i - start);
 		find_var = find_env_var(env_var, tools->env);
 		free(env_var);
 		if (find_var)
@@ -64,12 +63,20 @@ char	*is_still_env_var(char *str, t_data *tools)
 			result = tmp;
 		}
 	}
-	tmp = ft_substr(str, i, ft_strlen(str) - i);
+	else if (var[i] == '$' && !var[i + 1])
+	{
+		tmp_result = "$";
+		free(result);
+		return (tmp_result);
+	}
+	tmp = ft_substr(var, i, ft_strlen(var) - i);
 	if (!tmp)
 		return (result);
 	tmp_result = ft_strjoin(result, tmp);
 	free(result);
 	free(tmp);
+	if (find_var)
+		free(find_var);
 	return (tmp_result);
 }
 
@@ -80,7 +87,9 @@ char	*replace_env_var(char *str, t_data *tools)
 	value = NULL;
 	value = is_still_env_var(str, tools);
 	while (is_env_var(value, tools) == 1)
+	{
 		value = is_still_env_var(value, tools);
+	}
 	return (value);
 }
 
@@ -94,7 +103,9 @@ void	env_var_expand(t_data *tools)
 		if (tmp->type == WORD)
 		{
 			if (tmp->value[0] != '\'' && is_env_var(tmp->value, tools) == 1)
+			{
 				tmp->value = replace_env_var(tmp->value, tools);
+			}
 			tmp = tmp->next;
 		}
 		else

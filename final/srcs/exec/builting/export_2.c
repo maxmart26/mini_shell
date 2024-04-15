@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:22:01 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/10 13:42:32 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:06:01 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,14 @@ void	ft_trie_export(t_data *data)
 
 void	ft_export_modif(char *token, t_env *env, char **str)
 {
+	//char	*old_name;
+	//char	*old_content;
+
+	//old_name = env->name;
+	//old_content = env->content;
 	env->value = token;
-	free(env->name);
-	free(env->content);
 	env->content = str[1];
 	env->name = str[0];
-	free_tab(str);
+	//free(old_name);
+	//free(old_content);
 }

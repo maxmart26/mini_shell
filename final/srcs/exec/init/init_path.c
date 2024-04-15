@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:35 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 16:04:08 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:07:19 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,31 @@ void	init_end(t_env *env)
 
 void	init_env_shlvl(t_env *env, t_data *data)
 {
-	int	a;
-	char *str;
-	char	*stt;
-	char	**st;
+	int		a;
+	char	*str;
+	char	*tmp;
+	char	**token;
 
+	if (!env)
+	{
+		ft_destroy_env(env);
+		return ;
+	}
 	while (env)
 	{
-		if (strncmp(env->name, "SHLVL", 6) == 0)
+		if (ft_strncmp(env->name, "SHLVL", 6) == 0)
 		{
 			a = ft_atoi(env->content);
+			if (a < 0)
+				return ;
 			a++;
-			stt = ft_itoa(a);
-			str = ft_strjoin("SHLVL=", stt);
-			st = token_init("export", str);
-			free(stt);
+			tmp = ft_itoa(a);
+			str = ft_strjoin("SHLVL=", tmp);
+			free(tmp);
+			token = token_init("export", str);
+			ft_export(token, data, -1);
 			free(str);
-			ft_export(st, data, -1);
+			ft_free_tab(token);
 		}
 		env = env->next;
 	}

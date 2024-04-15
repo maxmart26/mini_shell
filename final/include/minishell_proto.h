@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/12 14:41:38 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:04:44 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_env(t_data *data);
 int		ft_cd(char **str, int i, t_data *data);
 void	ft_export(char **strs, t_data *data, int i);
 void	ft_unset(char **str, t_data *data, int i);
-void	ft_exit(t_data *data, int i, char **str);
+void	ft_exit(t_data *data, int i);
 void	ft_trie_export(t_data *data);
 void	ft_export_modif(char *token, t_env *env, char **str);
 
@@ -187,5 +187,6 @@ int		check_word_only(t_data *tools);
 void	free_env(char **str);
 void	ft_free_tab(char **str);
 void	free_env_list(t_env *env);
+void	free_minishell_ctrld(t_data *tools);
 
 #endif

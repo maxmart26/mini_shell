@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/10 18:35:18 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:05:55 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,42 @@ int	ft_expor_ex(char *tmp, t_data *data, char **str)
 
 void	ft_export_2(char **strs, t_data *data, char **str)
 {
+	char	*name;
+	char	*content;
+	t_env	*current;
+
 	str = ft_split(strs[1], '=');
-	if (ft_expor_ex(strs[1], data, str) == 1)
+	if (str && str[0] && str[1] && ft_expor_ex(strs[1], data, str) == 1)
 	{
+		name = strdup(str[0]);
+		content = strdup(str[1]);
 		if (!data->env)
 		{
 			data->env = new_env();
-			data->env->value = strs[1];
-			data->env->content = str[1];
-			data->env->name = str[0];
-			free_tab(str);
+			data->env->value = ft_strdup(strs[1]);
+			data->env->content = content;
+			data->env->name = name;
 		}
 		else
 		{
-			while (data->env->next)
-				data->env = data->env->next;
-			data->env->next = new_env();
-			data->env->next->value = strs[1];
-			data->env->next->prev = data->env;
-			data->env->next->content = str[1];
-			data->env->next->name = str[0];
-			free(str);
+			current = data->env;
+			while (current->next)
+				current = current->next;
+			current->next = new_env();
+			if (!current->next)
+			{
+				free(name);
+				free(content);
+				return ;
+			}
+			current->next->value = ft_strdup(strs[1]);
+			current->next->prev = current;
+			current->next->content = content;
+			current->next->name = name;
 			while (data->env->prev)
 				data->env = data->env->prev;
 		}
+		ft_free_tab(str);
 	}
 }
 
@@ -93,7 +105,7 @@ void	ft_export(char **strs, t_data *data, int i)
 	else if (verif_export(strs) == 1)
 		return ;
 	else
+	{
 		ft_export_2(strs, data, str);
-	// if (strs)
-	// 	free_tab(strs);
+	}
 }
