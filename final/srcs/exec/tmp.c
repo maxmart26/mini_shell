@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:00:02 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/08 16:04:50 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:32:04 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,26 +73,24 @@ int	ft_cmd(t_token *token)
 
 void	ft_tmp(t_data *data, t_token *token)
 {
-	pid_t	*pid;
 	int		result;
-	int		i;
 
-	i = ft_cmd(token);
+	data->nb_com = ft_cmd(token);
 	result = -23;
-	pid = malloc(i * sizeof(pid_t));
-	i = 0;
+	data->pid = malloc(data->nb_com * sizeof(pid_t));
+	data->nb_com = 0;
 	while (token)
 	{
 		if (token->type == WORD)
 		{
-			pid[i] = fork();
-			if (pid[i] == 0)
+			data->pid[data->nb_com] = fork();
+			if (data->pid[data->nb_com] == 0)
 				after(data, token);
 			data->nb_cmd++;
-			i++;
+			data->nb_com++;
 		}
 		token = token->next;
 	}
 	token = data->lexer_list;
-	ft_tmp2(data, token, result, pid);
+	ft_tmp2(data, token, result, data->pid);
 }

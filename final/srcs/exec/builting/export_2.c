@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:22:01 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 17:58:36 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:27:30 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../../include/minishell_proto.h"
 #include "../../../include/minishell_struct.h"
 
-void	ft_swap(char **env, int i)
+void	ft_swap(char **env, int i,t_data *data)
 {
 	int		nb;
 	char	*tmp;
@@ -38,6 +38,7 @@ void	ft_swap(char **env, int i)
 		}
 	}
 	i = -1;
+	ft_dup2(data);
 	while (env[i++ + 1])
 		printf("declare -x %s\n", env[i]);
 }
@@ -71,19 +72,19 @@ void	ft_trie_export(t_data *data)
 		envp = envp->next;
 		i++;
 	}
-	ft_swap(env, i);
+	ft_swap(env, i, data);
 }
 
-void	ft_export_modif(char *token, t_env *env, char **str)
+void	ft_export_modif(char *token, t_env *env)
 {
-	char	*old_name;
-	char	*old_content;
+	//char	*old_name;
+	//char	*old_content;
 
-	old_name = env->name;
-	old_content = env->content;
+	//old_name = env->name;
+	//old_content = env->content;
 	env->value = token;
-	env->content = str[1];
-	env->name = str[0];
-	free(old_name);
-	free(old_content);
+	// env->content = str[1];
+	// env->name = str[0];
+	//free(old_name);
+	//free(old_content);
 }

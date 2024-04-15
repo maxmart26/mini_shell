@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:35 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 18:10:09 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:51:01 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ char	*exec_path(t_data *data)
 
 void	init_end(t_env *env)
 {
-	env->name = "PWD";
-	env->content = getcwd(env->content, _SC_PASS_MAX);
-	env->next->name = "SHLVL";
-	env->next->content = "1";
-	env->next->next->name = "_";
-	env->next->next->content = "/usr/bin/env";
+	(void)env;
+	//env->name = "PWD";
+	//env->content = getcwd(env->content, _SC_PASS_MAX);
+	//env->next->name = "SHLVL";
+	//env->next->content = "1";
+	//env->next->next->name = "_";
+	//env->next->next->content = "/usr/bin/env";
 }
 
 void	init_env_shlvl(t_env *env, t_data *data)
@@ -60,11 +61,18 @@ void	init_env_shlvl(t_env *env, t_data *data)
 	char	*stt;
 	char	**st;
 
+	if (!env)
+	{
+		ft_destroy_env(env);
+		return ;
+	}
 	while (env)
 	{
-		if (strncmp(env->name, "SHLVL", 6) == 0)
+		if (ft_strncmp(env->value, "SHLVL", 6) == 0)
 		{
-			a = ft_atoi(env->content);
+			a = ft_atoi(&env->value[6]);
+			if (a < 0)
+				return ;
 			a++;
 			stt = ft_itoa(a);
 			str = ft_strjoin("SHLVL=", stt);

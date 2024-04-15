@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 18:08:25 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:49:37 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_token	*new_token_after_fd(t_token *token)
 		else
 			token = token->next;
 	}
-	while (token->prev)
+	while (token->prev->prev)
 	{
 		if (token->prev->prev == NULL)
 			break ;
@@ -114,9 +114,9 @@ void	fd_built(t_data *data, t_token *token)
 
 	str = ft_split(token->value, ' ');
 	if (ft_strncmp(str[0], "echo", 4) == 0 && ft_strlen(str[0]) == 4)
-		ft_echo(str);
+		ft_echo(str, data);
 	if (ft_strncmp(str[0], "pwd", 3) == 0 && ft_strlen(str[0]) == 3)
-		ft_pwd(str);
+		ft_pwd(str, data);
 	if (ft_strncmp(str[0], "env", 3) == 0 && ft_strlen(str[0]) == 3)
 		ft_env(data);
 	if (ft_strncmp(str[0], "cd", 2) == 0 && ft_strlen(str[0]) == 2)
@@ -156,7 +156,6 @@ void	ft_retry(t_data *data, int result, char **str)
 
 int	ft_main(t_data *data)
 {
-	printf("test\n");
 	ft_tmp(data, data->lexer_list);
 	while (data->nb_pipe > 0)
 	{

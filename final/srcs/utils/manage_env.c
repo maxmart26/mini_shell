@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:37:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 15:05:17 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:35:55 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_destroy_env(t_env *env_list)
 		return ;
 	while (tmp)
 	{
-		free(tmp->content);
-		free(tmp->name);
+		// free(tmp->content);
+		// free(tmp->name);
 		free(tmp->value);
 		new = tmp->next;
 		free(tmp);
@@ -42,7 +42,8 @@ char	*prompt_get_sess(void)
 
 	i = 0;
 	start = 0;
-	if ((str = getenv("SESSION_MANAGER")) == NULL)
+	str = getenv("SESSION_MANAGER");
+	if (str == NULL)
 		return (NULL);
 	while (str[i])
 	{
@@ -74,8 +75,6 @@ char	*prompt_get_path(t_data *tools)
 	if (!home)
 	{
 		path = str;
-		free(home);
-		free(str);
 		return (path);
 	}
 	while (str[i] == home[i])

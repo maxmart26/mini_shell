@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:29:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 13:58:23 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:29:32 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,16 @@ int					ft_lstsize(t_list *lst);
 char				*get_next_line(int fd);
 char				*ft_strjoin_suite(char *stockage, char *buffer, char *str);
 char				*ft_cut(char *stockage);
+
+// printf_error
+
+int					ft_printf_error(const char *fmt, ...);
+void				ft_putchar_error(char c, int *len);
+void				ft_putnbr_base_error(unsigned long nbr, char *base,
+						int *len);
+void				ft_putnbr_dec_error(int nbr, int *len);
+void				ft_putnbr_un_error(unsigned long nbr, int *len);
+void				ft_putptr_error(void *p, int *len);
+void				ft_putstr_error(char *str, int *len);
 
 #endif

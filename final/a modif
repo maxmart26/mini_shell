@@ -40,7 +40,7 @@ pour maxime :
 faire les wildcard
 
 a voir pour le SHLVL
-valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
+valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=supp.supp ./minishell
 
 cat : ok !
 
@@ -52,3 +52,5 @@ faire le export qui vas trier ok !
  export entree sigsev
 expand sigsev
 cat : ok 90                   
+
+a faire un printf sur la sortie 2;

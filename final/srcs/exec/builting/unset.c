@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:52:41 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/08 18:05:57 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:27:07 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,13 @@ void	ft_unset_next(t_data *data)
 		data->env->prev->next = data->env->next;
 		data->env->next->prev = data->env->prev;
 	}
-	free(tmp->content);
-	free(tmp->name);
+	// free(tmp->content);
+	// free(tmp->name);
 	free(tmp);
 }
 
-void	ft_unset(char **str, t_data *data, int i)
+void	ft_unset_end(char **str, t_data *data)
 {
-	if (i == 0)
-		exit(155);
-	if (ft_strncmp(str[1], "PATH", 5) == 0)
-		data->r_path = FALSE;
 	while (data->env)
 	{
 		if (ft_strncmp(str[1], data->env->value, ft_strlen(str[1])) == 0
@@ -57,10 +53,32 @@ void	ft_unset(char **str, t_data *data, int i)
 		else
 		{
 			if (!data->env->next)
+			{
+				ft_printf_error("bash: unset: %s :not valid identifier\n", str[1]);
 				break ;
+			}
 			data->env = data->env->next;
 		}
 	}
 	while (data->env->prev)
 		data->env = data->env->prev;
+	free_tab(str);
+}
+
+void	ft_unset(char **str, t_data *data, int i)
+{
+	if (i == 0)
+		exit(155);
+	if (!str[1])
+	{
+		ft_printf_error("bash: unset: `': not a valid identifier\n");
+		free_tab(str);
+		return ;
+	}
+	else
+	{
+		if (ft_strncmp(str[1], "PATH", 5) == 0)
+			data->r_path = FALSE;
+		ft_unset_end(str, data);
+	}
 }

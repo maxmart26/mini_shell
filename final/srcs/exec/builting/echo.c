@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:53:08 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/07 14:09:30 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:07:04 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ft_print_echo(char **str, int n)
 	}
 	if (nb == 0)
 		printf("\n");
-	exit(0);
 }
 
 int	ft_verif_echo(char *str)
@@ -49,11 +48,12 @@ int	ft_verif_echo(char *str)
 	return (0);
 }
 
-void	ft_echo(char **str)
+void	ft_echo(char **str, t_data *data)
 {
 	int	n;
 
 	n = 0;
+	ft_dup2(data);
 	if (str[1] == NULL)
 		printf("\n");
 	while (ft_verif_echo(str[n + 1]) == 0 && str[n + 1])
@@ -62,5 +62,7 @@ void	ft_echo(char **str)
 	}
 	if (str[n + 1])
 		ft_print_echo(str, n);
+	ft_free_tab(str);
+	ft_exit(data, -1);
 	exit(0);
 }

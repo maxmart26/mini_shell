@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 18:08:18 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:49:33 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,15 @@ char	**token_init(char *str, char *st);
 // les builting
 
 void	redirection_builting(t_token *token, t_data *data);
-void	ft_echo(char **str);
-int		ft_pwd(char **strs);
+void	ft_echo(char **str, t_data *data);
+int		ft_pwd(char **strs, t_data *data);
 void	ft_env(t_data *data);
 int		ft_cd(char **str, int i, t_data *data);
 void	ft_export(char **strs, t_data *data, int i);
 void	ft_unset(char **str, t_data *data, int i);
 void	ft_exit(t_data *data, int i);
 void	ft_trie_export(t_data *data);
-void	ft_export_modif(char *token, t_env *env, char **str);
+void	ft_export_modif(char *token, t_env *env);
 
 // partie laura
 
@@ -158,7 +158,7 @@ int		handle_signal(void);
 void	ft_signal_handler(int signal);
 void	ctrl_d(t_data *tools);
 //void	ctrl_d();
-char	*show_prompt(t_data *tools);
+char	*show_prompt();
 void	check_new_line(t_data *tools);
 void	new_line_init(t_data *tools);
 int		new_line_error(t_data *tools);
@@ -187,5 +187,6 @@ int		check_word_only(t_data *tools);
 void	free_env(char **str);
 void	ft_free_tab(char **str);
 void	free_env_list(t_env *env);
+void	free_minishell_ctrld(t_data *tools);
 
 #endif

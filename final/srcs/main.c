@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 18:08:14 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:49:27 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	lexer_and_parser(t_data *tools)
 	{
 		tools->lexer_list = lexer(tools->args);
 		tmp = tools->lexer_list->next;
-		free(tools->lexer_list->value);
-		free(tools->lexer_list);
+		//free(tools->lexer_list->value);
+		//free(tools->lexer_list);
 		tools->lexer_list = tmp;
 		tools->lexer_list = remove_sep(tools->lexer_list);
 		env_var_expand(tools);
@@ -33,8 +33,9 @@ void	lexer_and_parser(t_data *tools)
 		tools->std_int = 0;
 		open_fd(tools, tools->lexer_list);
 		open_heredoc(tools);
-		tools->lexer_list = new_token_after_fd(tools->lexer_list);
-		ft_print_lexer(tools->lexer_list);
+		if (tools->std_int > 2 || tools->std_out > 2)
+			tools->lexer_list = new_token_after_fd(tools->lexer_list);
+		//ft_print_lexer(tools->lexer_list);
 		list_gathering(tools);
 		def_index(tools->lexer_list);
 		remove_quotes(tools->lexer_list);
@@ -75,7 +76,7 @@ int	minishell(t_data *tools, char **env)
 	init_minishell(tools, env);
 	while (g_status)
 	{
-		str = show_prompt(tools);
+		str = show_prompt();
 		tools->args = readline(str);
 		free(str);
 		if (!tools->args)
@@ -108,7 +109,7 @@ int	main(int ac, char **argv, char **env)
 		return (free(tools), EXIT_FAILURE);
 	if (ac != 1)
 	{
-		printf("No arguments accepted.\n");
+		ft_printf_error("No arguments accepted.\n");
 		free(tools);
 		exit(0);
 	}

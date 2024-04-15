@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/08 17:41:05 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:09:38 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ typedef struct s_parser
 typedef struct s_env
 {
 	char				*value;
-	char				*name;
-	char				*content;
 	struct s_env		*next;
 	struct s_env		*prev;
 }						t_env;
@@ -113,9 +111,11 @@ typedef struct s_data
 	char				**mycmdargs;
 	char				*path_temp;
 	int					nb_cmd;
+	pid_t	*pid;
+	int					nb_com;
 	int					fd_in;
 	int					fd_out;
-	int					pid;
+	int					pide;
 	int					status;
 	int					exit_status;
 	int					nl_error;

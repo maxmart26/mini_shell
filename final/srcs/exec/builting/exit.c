@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:09:54 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 18:13:53 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:49:43 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@ void	ft_free_env(t_env *env)
 	while (env)
 	{
 		tmp = env->next;
-		if (env->name != NULL)
-			free(env->name);
-		if (env->content != NULL)
-			free(env->content);
 		if (env->value != NULL)
 			free(env->value);
 		tmp = env->next;
@@ -45,18 +41,18 @@ void	ft_free_pipe(int **fd, int i)
 
 void	ft_exit(t_data *data, int i)
 {
+	(void)data;
 	if (i == 0)
 		exit(158);
 	else
 	{
-		if (data->std_int > 2)
+		/*if (data->std_int > 2)
 			close(data->std_int);
 		if (data->std_out > 2)
 			close(data->std_out);
-		ft_free_env(data->env);
 		if (data->nb_pipe > 0)
-			ft_free_pipe(data->pipe_fd, data->nb_pipe);
-		free(data);
+			ft_free_pipe(data->pipe_fd, data->nb_pipe);*/
+		free_minishell_ctrld(data);
 		exit(1);
 	}
 }

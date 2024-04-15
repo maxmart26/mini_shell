@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/09 14:31:01 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:11:27 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ char	*ft_env_pwd(t_env *env)
 {
 	while (env)
 	{
-		if (strncmp(env->name, "PWD", 3) == 0)
-			return (env->content);
+		if (strncmp(env->value, "PWD", 3) == 0)
+			return (&env->value[4]);
 		env = env->next;
 	}
 	return (NULL);
@@ -85,7 +85,7 @@ void	ft_cd_end(char **str, char *buffer, t_data *data, int k)
 	if (k == 1)
 	{
 		if (chdir(str[1]) == -1)
-			perror("error\n");
+			ft_printf_error("bash: cd: %s: not a directory\n", str[1]);
 		else
 		{
 			buffer = ft_init_pwd_cd(data->env);
@@ -103,8 +103,14 @@ int	ft_cd(char **str, int i, t_data *data)
 	k = 1;
 	buffer = NULL;
 	if (i == 0)
+	{
+		ft_free_tab(str);
+		ft_exit(data, -1);
 		exit(157);
-	if (str[1] == NULL)
+	}
+	if (str[2])
+		return (ft_printf_error("bash: cd: too many argument\n"), 1);
+	if (str[1] == NULL || (str[1][0] == '~' && strlen(str[1]) == 1))
 	{
 		buffer = ft_strjoin("/home/", getenv("LOGNAME"));
 		chdir(buffer);
@@ -114,8 +120,6 @@ int	ft_cd(char **str, int i, t_data *data)
 		free(buffer);
 		k = 0;
 	}
-	else if (str[2])
-		return (printf("bash: cd: too many argument\n"), 1);
 	ft_cd_end(str, buffer, data, k);
 	return (0);
 }
