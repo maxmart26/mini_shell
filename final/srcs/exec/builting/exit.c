@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:09:54 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/10 15:43:04 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:04:35 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,15 @@ void	ft_free_env(t_env *env)
 
 	while (env)
 	{
-		if (env->next)
-			tmp = env->next;
-		free(env->name);
+		tmp = env->next;
+		if (env->name != NULL)
+			free(env->name);
+		if (env->content != NULL)
+			free(env->content);
+		if (env->value != NULL)
+			free(env->value);
+		tmp = env->next;
+		free(env);
 		env = tmp;
 	}
 }

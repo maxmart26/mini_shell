@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/11 17:51:08 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:04:44 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ char	**token_init(char *str, char *st);
 // les builting
 
 void	redirection_builting(t_token *token, t_data *data);
-void	ft_echo(char **str);
-int		ft_pwd(char **strs);
+void	ft_echo(char **str, t_data *data);
+int		ft_pwd(char **strs, t_data *data);
 void	ft_env(t_data *data);
 int		ft_cd(char **str, int i, t_data *data);
 void	ft_export(char **strs, t_data *data, int i);
@@ -156,8 +156,8 @@ void	add_grep_args(t_token *token);
 void	show_ctrl(int sig);
 int		handle_signal(void);
 void	ft_signal_handler(int signal);
-//void	ctrl_d(t_data *tools);
 void	ctrl_d(t_data *tools);
+//void	ctrl_d();
 char	*show_prompt(t_data *tools);
 void	check_new_line(t_data *tools);
 void	new_line_init(t_data *tools);

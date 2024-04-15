@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_init.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_un_error.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 22:14:38 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 13:06:55 by matorgue         ###   ########.fr       */
+/*   Created: 2024/04/10 17:52:31 by matorgue          #+#    #+#             */
+/*   Updated: 2024/04/10 18:27:28 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell_include.h"
-#include "../../../include/minishell_proto.h"
-#include "../../../include/minishell_struct.h"
+#include "../libft.h"
 
-char	**token_init(char *str, char *st)
+void	ft_putnbr_un_error(unsigned long nbr, int *len)
 {
-	char	*tmp;
-	char	*tmp2;
-	char	**strs;
-
-	tmp = ft_strjoin(str, " ");
-	tmp2 = ft_strjoin(tmp, st);
-	free(tmp);
-	//free(st);
-	strs = ft_split(tmp2, ' ');
-	free(tmp2);
-	return (strs);
+	if (nbr > 9)
+	{
+		ft_putnbr_un_error((nbr / 10), len);
+		ft_putnbr_un_error((nbr % 10), len);
+	}
+	else if (nbr < 10 && nbr >= 0)
+	{
+		ft_putchar_error((nbr + '0'), len);
+	}
 }

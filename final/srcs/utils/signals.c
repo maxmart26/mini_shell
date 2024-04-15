@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/13 17:56:09 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:07:38 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,9 @@ void	ctrl_d(t_data *tools)
 	printf("exit\n");
 	ft_exit(tools, 1);
 }
+
+// void	ctrl_d()
+// {
+// 	printf("exit\n");
+// 	exit(0);
+// }

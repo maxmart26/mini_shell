@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/13 17:53:02 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:05:05 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ void	fd_built(t_data *data, t_token *token)
 
 	str = ft_split(token->value, ' ');
 	if (ft_strncmp(str[0], "echo", 4) == 0 && ft_strlen(str[0]) == 4)
-		ft_echo(str);
+		ft_echo(str, data);
 	if (ft_strncmp(str[0], "pwd", 3) == 0 && ft_strlen(str[0]) == 3)
-		ft_pwd(str);
+		ft_pwd(str, data);
 	if (ft_strncmp(str[0], "env", 3) == 0 && ft_strlen(str[0]) == 3)
 		ft_env(data);
 	if (ft_strncmp(str[0], "cd", 2) == 0 && ft_strlen(str[0]) == 2)
@@ -162,6 +162,7 @@ int	ft_main(t_data *data)
 		free(data->pipe_fd[data->nb_pipe - 1]);
 		data->nb_pipe--;
 	}
-	free(data->pipe_fd);
+	if (data->nb_pipe > 0)
+		free(data->pipe_fd);
 	return (0);
 }

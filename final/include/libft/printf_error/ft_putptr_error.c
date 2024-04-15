@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_init.c                                       :+:      :+:    :+:   */
+/*   ft_putptr_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 22:14:38 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 13:06:55 by matorgue         ###   ########.fr       */
+/*   Created: 2024/04/10 18:24:34 by matorgue          #+#    #+#             */
+/*   Updated: 2024/04/10 18:25:54 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell_include.h"
-#include "../../../include/minishell_proto.h"
-#include "../../../include/minishell_struct.h"
+#include "../libft.h"
 
-char	**token_init(char *str, char *st)
+
+void	ft_putptr_error(void *p, int *len)
 {
-	char	*tmp;
-	char	*tmp2;
-	char	**strs;
-
-	tmp = ft_strjoin(str, " ");
-	tmp2 = ft_strjoin(tmp, st);
-	free(tmp);
-	//free(st);
-	strs = ft_split(tmp2, ' ');
-	free(tmp2);
-	return (strs);
+	if (p == NULL)
+	{
+		write(2, "(nil)", 5);
+		(*len) += 5;
+		return ;
+	}
+	ft_putstr_error("0x", len);
+	ft_putnbr_base_error((unsigned long) p, HEX_LOW_FMT, len);
 }

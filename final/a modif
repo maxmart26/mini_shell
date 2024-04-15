@@ -52,3 +52,5 @@ faire le export qui vas trier ok !
  export entree sigsev
 expand sigsev
 cat : ok 90                   
+
+a faire un printf sur la sortie 2;

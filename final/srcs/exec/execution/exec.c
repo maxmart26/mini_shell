@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/13 12:47:30 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:06:06 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_path(t_env *env)
 {
 	while (env)
 	{
-		if (ft_strncmp(env->value, "PATH=", 5) == 0)
+		if (ft_strncmp(env->value, "PATH=", 6) == 0)
 			return (env->content);
 		env = env->next;
 	}
@@ -72,6 +72,7 @@ void	exec(t_data *data, t_token *token)
 	ft_exec(data, token);
 	ft_dup2(data);
 	execve(data->path_def, data->mycmdargs, data->envp);
+	ft_printf_error("bash: %s: commande not found\n", data->mycmdargs[0]);
 	free_tab(data->path);
 	free_tab(data->mycmdargs);
 	exit(127);

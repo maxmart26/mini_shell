@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_init.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 22:14:38 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 13:06:55 by matorgue         ###   ########.fr       */
+/*   Created: 2024/04/10 18:26:15 by matorgue          #+#    #+#             */
+/*   Updated: 2024/04/10 18:26:54 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell_include.h"
-#include "../../../include/minishell_proto.h"
-#include "../../../include/minishell_struct.h"
+#include "../libft.h"
 
-char	**token_init(char *str, char *st)
+void	ft_putstr_error(char *str, int *len)
 {
-	char	*tmp;
-	char	*tmp2;
-	char	**strs;
+	int	i;
 
-	tmp = ft_strjoin(str, " ");
-	tmp2 = ft_strjoin(tmp, st);
-	free(tmp);
-	//free(st);
-	strs = ft_split(tmp2, ' ');
-	free(tmp2);
-	return (strs);
+	i = 0;
+	if (!str)
+	{
+		write(2, "(null)", 6);
+		(*len) += 6;
+		return ;
+	}
+	while (str[i])
+	{
+		ft_putchar_error(str[i], len);
+		i++;
+	}
 }

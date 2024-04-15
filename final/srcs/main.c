@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/13 14:42:30 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:03:04 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ void	init_minishell(t_data *tools, char **env)
 		init_env_shlvl(tools->env, tools);
 	}
 	init_path(tools);
+	tools->nb_pipe = 0;
+	tools->std_int = 1;
+	tools->std_out = 0;
 	tools->status = 1;
 	tools->exit_status = 0;
 	g_status = 1;
@@ -105,7 +108,7 @@ int	main(int ac, char **argv, char **env)
 		return (free(tools), EXIT_FAILURE);
 	if (ac != 1)
 	{
-		printf("No arguments accepted.\n");
+		ft_printf_error("No arguments accepted.\n");
 		free(tools);
 		exit(0);
 	}
