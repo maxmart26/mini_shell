@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 13:05:05 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:29:19 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_token	*new_token_after_fd(t_token *token)
 		else
 			token = token->next;
 	}
-	while (token->prev)
+	while (token->prev->prev)
 	{
 		if (token->prev->prev == NULL)
 			break ;

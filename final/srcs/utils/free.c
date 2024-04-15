@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 14:51:08 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/13 18:22:40 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:25:46 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	free_minishell(t_data *tools)
 
 void	free_minishell_ctrld(t_data *tools)
 {
-	ft_destroy_env(tools->env);
+	if (tools->envp)
+		ft_destroy_env(tools->env);
 	free(tools->args);
 	free(tools);
 }

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:52:41 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/10 18:35:37 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:27:07 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	ft_unset_next(t_data *data)
 		data->env->prev->next = data->env->next;
 		data->env->next->prev = data->env->prev;
 	}
-	free(tmp->content);
-	free(tmp->name);
+	// free(tmp->content);
+	// free(tmp->name);
 	free(tmp);
 }
 

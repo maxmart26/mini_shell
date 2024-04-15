@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:37:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/13 18:32:23 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:35:55 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	ft_destroy_env(t_env *env_list)
 	tmp = env_list;
 	if (tmp == NULL)
 		return ;
-	while (tmp->next)
+	while (tmp)
 	{
-		free(tmp->content);
-		free(tmp->name);
-		//free(tmp->value);
+		// free(tmp->content);
+		// free(tmp->name);
+		free(tmp->value);
 		new = tmp->next;
 		free(tmp);
 		tmp = new;

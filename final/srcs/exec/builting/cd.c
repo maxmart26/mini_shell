@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/12 12:23:22 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:11:27 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ char	*ft_env_pwd(t_env *env)
 {
 	while (env)
 	{
-		if (strncmp(env->name, "PWD", 3) == 0)
-			return (env->content);
+		if (strncmp(env->value, "PWD", 3) == 0)
+			return (&env->value[4]);
 		env = env->next;
 	}
 	return (NULL);
@@ -103,7 +103,11 @@ int	ft_cd(char **str, int i, t_data *data)
 	k = 1;
 	buffer = NULL;
 	if (i == 0)
+	{
+		ft_free_tab(str);
+		ft_exit(data, -1);
 		exit(157);
+	}
 	if (str[2])
 		return (ft_printf_error("bash: cd: too many argument\n"), 1);
 	if (str[1] == NULL || (str[1][0] == '~' && strlen(str[1]) == 1))

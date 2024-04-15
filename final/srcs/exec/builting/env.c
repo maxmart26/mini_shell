@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:23:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/13 17:36:35 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:08:12 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ void	ft_env(t_data *data)
 		tmp = init->next;
 		init = tmp;
 	}
+	
+	ft_exit(data, -1);
 	exit(0);
 }

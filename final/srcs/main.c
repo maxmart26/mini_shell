@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/15 13:03:04 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:30:54 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	lexer_and_parser(t_data *tools)
 	{
 		tools->lexer_list = lexer(tools->args);
 		tmp = tools->lexer_list->next;
-		free(tools->lexer_list->value);
-		free(tools->lexer_list);
+		//free(tools->lexer_list->value);
+		//free(tools->lexer_list);
 		tools->lexer_list = tmp;
 		tools->lexer_list = remove_sep(tools->lexer_list);
 		env_var_expand(tools);
@@ -33,7 +33,8 @@ void	lexer_and_parser(t_data *tools)
 		tools->std_int = 0;
 		open_fd(tools, tools->lexer_list);
 		open_heredoc(tools);
-		tools->lexer_list = new_token_after_fd(tools->lexer_list);
+		if (tools->std_int > 2 || tools->std_out > 2)
+			tools->lexer_list = new_token_after_fd(tools->lexer_list);
 		//ft_print_lexer(tools->lexer_list);
 		list_gathering(tools);
 		def_index(tools->lexer_list);
@@ -75,7 +76,7 @@ int	minishell(t_data *tools, char **env)
 	init_minishell(tools, env);
 	while (g_status)
 	{
-		str = show_prompt(tools);
+		str = show_prompt();
 		tools->args = readline(str);
 		free(str);
 		if (!tools->args)

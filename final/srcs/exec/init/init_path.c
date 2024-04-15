@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:35 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 13:07:19 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:30:33 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ char	*exec_path(t_data *data)
 
 void	init_end(t_env *env)
 {
-	env->name = "PWD";
-	env->content = getcwd(env->content, _SC_PASS_MAX);
-	env->next->name = "SHLVL";
-	env->next->content = "1";
-	env->next->next->name = "_";
-	env->next->next->content = "/usr/bin/env";
+	(void)env;
+	//env->name = "PWD";
+	//env->content = getcwd(env->content, _SC_PASS_MAX);
+	//env->next->name = "SHLVL";
+	//env->next->content = "1";
+	//env->next->next->name = "_";
+	//env->next->next->content = "/usr/bin/env";
 }
 
 void	init_env_shlvl(t_env *env, t_data *data)
@@ -67,9 +68,9 @@ void	init_env_shlvl(t_env *env, t_data *data)
 	}
 	while (env)
 	{
-		if (ft_strncmp(env->name, "SHLVL", 6) == 0)
+		if (ft_strncmp(env->value, "SHLVL", 6) == 0)
 		{
-			a = ft_atoi(env->content);
+			a = ft_atoi(&env->value[6]);
 			if (a < 0)
 				return ;
 			a++;
@@ -79,7 +80,7 @@ void	init_env_shlvl(t_env *env, t_data *data)
 			token = token_init("export", str);
 			ft_export(token, data, -1);
 			free(str);
-			ft_free_tab(token);
+			//ft_free_tab(token);
 		}
 		env = env->next;
 	}

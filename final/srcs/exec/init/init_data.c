@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 13:06:50 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:29:20 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ t_env	*new_env(void)
 	if (new)
 	{
 		new->next = NULL;
-		new->name = NULL;
+		//new->name = NULL;
 		new->value = NULL;
-		new->content = NULL;
+		//new->content = NULL;
 	}
 	return (new);
 }
@@ -77,11 +77,17 @@ t_env	*init_env_i(void)
 	str = NULL;
 	str = getcwd(str, _SC_PASS_MAX);
 	str = ft_strjoin("PWD=", str);
+	//env->content = str;
+	//env->name = ft_strdup("PWD");
 	env->next = new_env();
 	env->next->value = ft_strdup("SHLVL=1");
+	//env->next->name = ft_strdup("SHLVL");
+	//env->next->content = ft_strdup("1");
 	env->next->prev = env;
 	env->value = str;
 	env->next->next = new_env();
+	//env->next->next->name = ft_strdup("_");
+	//env->next->next->content = ft_strdup("/usr/bin/env");
 	env->next->next->value = ft_strdup("_=/usr/bin/env");
 	env->next->next->prev = env->next;
 	init_end(env);
@@ -136,15 +142,13 @@ t_env	*init_env(t_data *data, int i)
 	env->prev = NULL;
 	while (data->envp[i])
 	{
-		env->value = data->envp[i];
+		env->value = ft_strdup(data->envp[i]);
 		str = ft_split(env->value, '=');
 		if (!str)
 		{
 			ft_destroy_env(result);
 			return (NULL);
 		}
-		env->name = ft_strdup(str[0]);
-		env->content = ft_strdup(str[1]);
 		ft_free_tab(str);
 		if (data->envp[i + 1])
 		{

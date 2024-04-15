@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:09:54 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/15 13:04:35 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:11:41 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@ void	ft_free_env(t_env *env)
 	while (env)
 	{
 		tmp = env->next;
-		if (env->name != NULL)
-			free(env->name);
-		if (env->content != NULL)
-			free(env->content);
 		if (env->value != NULL)
 			free(env->value);
 		tmp = env->next;

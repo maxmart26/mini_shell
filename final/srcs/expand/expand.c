@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:58:16 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/15 13:07:24 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:44:40 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ char	*find_env_var(char *str, t_env *env)
 {
 	while (env)
 	{
-		if (ft_strncmp(str, env->name, ft_strlen(str) - 1) == 0
-			&& ft_strlen(str) == ft_strlen(env->name))
-			return (env->content);
+		printf("%s\n", env->value);
+		if (ft_strncmp(str, env->value, ft_strlen(str) - 1) == 0
+			&& env->value[ft_strlen(str)] == '=')
+			return (&env->value[ft_strlen(str) + 1]);
 		env = env->next;
 	}
 	return (NULL);
@@ -98,12 +99,16 @@ void	env_var_expand(t_data *tools)
 	t_token	*tmp;
 
 	tmp = tools->lexer_list;
-	while (tmp->next)
+	printf("test\n");
+	while (tmp)
 	{
+		printf("test1\n");
 		if (tmp->type == WORD)
 		{
+			printf("test2\n");
 			if (tmp->value[0] != '\'' && is_env_var(tmp->value, tools) == 1)
 			{
+				printf("test3\n");
 				tmp->value = replace_env_var(tmp->value, tools);
 			}
 			tmp = tmp->next;

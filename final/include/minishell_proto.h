@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 13:04:44 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:27:51 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_export(char **strs, t_data *data, int i);
 void	ft_unset(char **str, t_data *data, int i);
 void	ft_exit(t_data *data, int i);
 void	ft_trie_export(t_data *data);
-void	ft_export_modif(char *token, t_env *env, char **str);
+void	ft_export_modif(char *token, t_env *env);
 
 // partie laura
 
@@ -158,7 +158,7 @@ int		handle_signal(void);
 void	ft_signal_handler(int signal);
 void	ctrl_d(t_data *tools);
 //void	ctrl_d();
-char	*show_prompt(t_data *tools);
+char	*show_prompt();
 void	check_new_line(t_data *tools);
 void	new_line_init(t_data *tools);
 int		new_line_error(t_data *tools);

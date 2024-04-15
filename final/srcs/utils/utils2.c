@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:25:03 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/13 15:57:16 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:22:45 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	delete_char_list(t_char_list *list)
 	}
 }
 
-char	*show_prompt(t_data *tools)
+char	*show_prompt()
 {
 	char	*str;
 	char	*user;
@@ -94,11 +94,11 @@ char	*show_prompt(t_data *tools)
 	char	*path;
 	char	*tmp;*/
 
-	user = is_still_env_var("$USER", tools);
-	if (!user)
-		return (NULL);
+	// user = is_still_env_var("$USER", tools);
+	// if (!user)
+	user = "lnunez-t";
 	str = ft_strjoin(user, "$");
-	free(user);
+	//free(user);
 	/*session = prompt_get_sess();
 	if (session == NULL)
 	{

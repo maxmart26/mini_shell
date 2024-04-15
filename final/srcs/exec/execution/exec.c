@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 13:06:06 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:28:55 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ char	*ft_path(t_env *env)
 {
 	while (env)
 	{
-		if (ft_strncmp(env->value, "PATH=", 6) == 0)
-			return (env->content);
+		if (ft_strncmp(env->value, "PATH=", 5) == 0)
+		{
+			return (&env->value[5]);
+		}
 		env = env->next;
 	}
 	return (NULL);
