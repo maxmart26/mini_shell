@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 17:49:33 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:58:08 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int		ft_pwd(char **strs, t_data *data);
 void	ft_env(t_data *data);
 int		ft_cd(char **str, int i, t_data *data);
 void	ft_export(char **strs, t_data *data, int i);
+void	ft_export_2(char **strs, t_data *data, char **str);
 void	ft_unset(char **str, t_data *data, int i);
 void	ft_exit(t_data *data, int i);
 void	ft_trie_export(t_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:37:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/15 17:35:55 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:03:11 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,16 @@
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
 
-void	ft_destroy_env(t_env *env_list)
+void	ft_destroy_env(t_env *env)
 {
-	t_env	*tmp;
-	t_env	*new;
+	t_env	*temp;
 
-	tmp = env_list;
-	if (tmp == NULL)
-		return ;
-	while (tmp)
+	while (env)
 	{
-		// free(tmp->content);
-		// free(tmp->name);
-		free(tmp->value);
-		new = tmp->next;
-		free(tmp);
-		tmp = new;
+		temp = env;
+		env = env->next;
+		free(temp->value);
+		free(temp);
 	}
 }
 

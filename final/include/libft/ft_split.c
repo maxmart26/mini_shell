@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:24:20 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/08 19:14:08 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:28:23 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	**ft_split(char const *s, char c)
 	words = count_words(c, (char *)s);
 	dest = (char **)malloc((words + 2) * sizeof(char *));
 	if (!dest)
-		return (NULL);
+		return (free(dest), NULL);
 	set_mem(dest, s, c);
 	return (dest);
 }

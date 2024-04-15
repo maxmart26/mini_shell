@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:35 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 17:51:01 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:00:00 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,7 @@ void	init_env_shlvl(t_env *env, t_data *data)
 			ft_export(st, data, -1);
 		}
 		env = env->next;
+		/*if (token)
+			ft_free_tab(token);*/
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 17:50:31 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:59:40 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,9 @@ t_env	*init_env(t_data *data, int i)
 	t_env	*result;
 	char	**str;
 
+	env = NULL;
 	env = new_env();
+	str = NULL;
 	if (!env)
 		return (NULL);
 	result = env;
