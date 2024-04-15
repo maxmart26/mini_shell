@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/13 17:56:09 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:39:23 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ void	show_ctrl(int sig)
 void	ctrl_d(t_data *tools)
 {
 	printf("exit\n");
-	ft_exit(tools, 1);
+	free_minishell_ctrld(tools);
+	exit (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:35 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/13 17:50:59 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:18:13 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	init_env_shlvl(t_env *env, t_data *data)
 	char	*tmp;
 	char	**token;
 
+	token = NULL;
 	if (!env)
 	{
 		ft_destroy_env(env);
@@ -79,8 +80,9 @@ void	init_env_shlvl(t_env *env, t_data *data)
 			token = token_init("export", str);
 			ft_export(token, data, -1);
 			free(str);
-			ft_free_tab(token);
 		}
 		env = env->next;
+		/*if (token)
+			ft_free_tab(token);*/
 	}
 }

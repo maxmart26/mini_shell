@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/13 17:53:02 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:13:26 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ int	ft_main(t_data *data)
 		free(data->pipe_fd[data->nb_pipe - 1]);
 		data->nb_pipe--;
 	}
-	free(data->pipe_fd);
+	if (data->nb_pipe > 0)
+		free(data->pipe_fd);
 	return (0);
 }

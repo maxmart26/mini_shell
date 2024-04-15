@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/13 18:33:15 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:27:39 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ int	ft_expor_ex(char *tmp, t_data *data, char **str)
 	return (1);
 }
 
-void	ft_export_2(char **strs, t_data *data, char **str)
+void	ft_export_2(char **strs, t_data *data)
 {
 	char	*name;
+	char	**str;
 	char	*content;
 	t_env	*current;
 
+	str = NULL;
 	str = ft_split(strs[1], '=');
 	if (str && str[0] && str[1] && ft_expor_ex(strs[1], data, str) == 1)
 	{
@@ -49,6 +51,10 @@ void	ft_export_2(char **strs, t_data *data, char **str)
 			data->env->value = ft_strdup(strs[1]);
 			data->env->content = content;
 			data->env->name = name;
+			free(name);
+			free(content);
+			ft_free_tab(str);
+			return ;
 		}
 		else
 		{
@@ -69,21 +75,19 @@ void	ft_export_2(char **strs, t_data *data, char **str)
 			while (data->env->prev)
 				data->env = data->env->prev;
 		}
-		ft_free_tab(str);
 	}
+	if (str)
+		ft_free_tab(str);
 }
 
 void	ft_export(char **strs, t_data *data, int i)
 {
-	char	**str;
-
-	str = NULL;
 	if (i == 0)
 		exit(156);
 	if (strs[1] == NULL)
 		ft_trie_export(data);
 	else
 	{
-		ft_export_2(strs, data, str);
+		ft_export_2(strs, data);
 	}
 }

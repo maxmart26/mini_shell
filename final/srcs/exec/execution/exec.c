@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/13 12:47:30 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:58:20 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	*get_path(t_data *data, t_token *token)
 	int		i;
 
 	i = 0;
+	path = NULL;
 	if (data == NULL)
 	{
 		return (NULL);

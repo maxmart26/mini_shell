@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/13 17:57:19 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:47:32 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,13 @@ t_env	*init_env(t_data *data, int i)
 	t_env	*env;
 	t_env	*tmp;
 	t_env	*result;
+	char	*name;
+	char	*content;
 	char	**str;
 
+	env = NULL;
 	env = new_env();
+	str = NULL;
 	if (!env)
 		return (NULL);
 	result = env;
@@ -143,8 +147,10 @@ t_env	*init_env(t_data *data, int i)
 			ft_destroy_env(result);
 			return (NULL);
 		}
-		env->name = ft_strdup(str[0]);
-		env->content = ft_strdup(str[1]);
+		name = ft_strdup(str[0]);
+		content = ft_strdup(str[1]);
+		env->name = name;
+		env->content = content;
 		ft_free_tab(str);
 		if (data->envp[i + 1])
 		{
