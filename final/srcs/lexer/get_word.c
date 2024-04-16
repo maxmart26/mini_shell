@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:00:41 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 16:23:10 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/16 11:52:28 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void	get_word(t_token *token_list, char *str, int *i, int *index)
 	add_token(token_list, WORD, word, *index);
 	*i = *i + ft_strlen(word);
 	(*index)++;
+	free(word);
 }
