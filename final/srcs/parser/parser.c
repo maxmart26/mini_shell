@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:44 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 14:00:54 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:30:13 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	check_syntax(t_data *tools)
 	t_token	*tmp;
 
 	tmp = tools->lexer_list;
-	if (check_error_newline(tmp))
-		return (printf("%s'\n", "newline"), 1);
+	/*if (check_error_newline(tmp))
+		return (printf("%s'\n", "newline"), 1);*/
 	if ((tmp->type == HEREDOC && (tmp->next->type == GREAT
 				|| tmp->next->type == HEREDOC)) || (tmp->type == APPEND
 			&& (tmp->next->type == APPEND || tmp->next->type == LESS)))

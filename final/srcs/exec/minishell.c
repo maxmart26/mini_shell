@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 17:54:46 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:47:05 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,12 @@ void	open_fd(t_data *data, t_token *token)
 	{
 		if (token->type == GREAT)
 		{
+			if (token->next)
+			{
+				printf(SYNTAX_ERR "%s'\n", "newline");
+				g_status = 258;
+				return ;
+			}
 			if (data->std_out != 1)
 			{
 				close(data->std_out);
