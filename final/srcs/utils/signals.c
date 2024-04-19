@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/15 18:01:01 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:41:15 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void	sig_handler_sa(int signal, siginfo_t *info, void *context)
 		printf("\n");
 		rl_redisplay();
 	}
+	if (signal == SIGQUIT)
+	{
+		printf("Quit (core dumped)\n");
+		rl_redisplay();
+	}
 }
 
 int	handle_signal(void)
@@ -35,7 +40,8 @@ int	handle_signal(void)
 	sa.sa_sigaction = (void *)sig_handler_sa;
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGINT, &sa, NULL);
-	signal(SIGQUIT, SIG_IGN);
+	sigaction(SIGQUIT, &sa, NULL);
+	//signal(SIGQUIT, SIG_IGN);
 	return (0);
 }
 
@@ -57,9 +63,3 @@ void	ctrl_d(t_data *tools)
 	free_minishell_ctrld(tools);
 	exit (1);
 }
-
-/*void	ctrl_d()
-{
-	printf("exit\n");
-	exit(0);
-}*/
