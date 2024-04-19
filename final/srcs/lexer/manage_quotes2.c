@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 12:08:14 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 12:10:45 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:48:40 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,19 @@ void	remove_quotes(t_token *lexer_list)
 		}
 		tmp = tmp->next;
 	}
+}
+
+int	check_end_quote(char *str, int i, char c)
+{
+	i++;
+	if (str[i])
+	{
+		while (str[i])
+		{
+			if (str[i] == c)
+				return (1);
+			i++;
+		}
+	}
+	return (0);
 }

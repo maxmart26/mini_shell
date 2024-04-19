@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/19 13:36:38 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:49:18 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	count_pipes(t_token *list, t_data *tools);
 int		count_quotes(char *str);
 char	*delete_quotes(char *str);
 void	remove_quotes(t_token *lexer_list);
+int		check_end_quote(char *str, int i, char c);
 int		find_matching_quote(char *str, int i, int *nb_q, int q);
 void	list_gathering(t_data *tools);
 int		ft_error(int error);

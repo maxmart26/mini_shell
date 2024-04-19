@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:58:16 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/19 13:37:08 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:30:22 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ char	*is_still_env_var(char *var, t_data *tools)
 	if (result)
 		free(result);
 	free(tmp);
-	if (find_var)
-		free(find_var);
 	return (tmp_result);
 }
 
@@ -119,17 +117,21 @@ char	*replace_exit_status(char *str, t_data *tools)
 		exit_status = ft_itoa(tools->exit);
 		result = ft_strjoin(result, exit_status);
 		free(exit_status);
-		i = i + 2;
+		i++;
 	}
-	j = i;
-	while (str[j])
-		j++;
-	free(tmp);
-	if (str[j])
+	if (str[i + 1])
 	{
-		tmp = ft_substr(str, i, j - i + 1);
-		result = ft_strjoin(result, tmp);
+		j = i;
+		while (str[j])
+			j++;
 		free(tmp);
+		j--;
+		if (str[j])
+		{
+			tmp = ft_substr(str, i + 1, j - i + 1);
+			result = ft_strjoin(result, tmp);
+			free(tmp);
+		}
 	}
 	return (result);
 }
@@ -143,7 +145,9 @@ void	env_var_expand(t_data *tools)
 	tmp = tools->lexer_list;
 	while (tmp)
 	{
-		if (tmp->type == WORD)
+		if (tmp->type == PIPE)
+			break ;
+		else if (tmp->type == WORD)
 		{
 			if (ft_strnstr(tmp->value, "$?", 2))
 			{

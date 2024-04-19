@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:23:02 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 16:22:37 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:48:11 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	quote_in_str(char *str)
 	while (str[i])
 	{
 		if (str[i] == '\"' || str[i] == '\'')
-			return (1);
+			if (check_end_quote(str, i, str[i]) == 1)
+				return (1);
 		i++;
 	}
 	return (0);

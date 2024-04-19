@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/19 11:31:45 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:07:31 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ int	is_env_var(char *str, t_data *tools)
 			if (!str[i + 1])
 				break ;
 			start = i + 1;
-			while (str[i] && str[i] != ' ')
+			while (str[i] && (str[i] != ' ' || str[i] != '\"'))
 				i++;
+			i--;
 			env_var = ft_substr(str, start, i - start);
 			if (!find_env_var(env_var, tools->env))
 			{
