@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/19 17:18:49 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:48:16 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	open_fd(t_data *data, t_token *token)
 	{
 		if (token->type == GREAT)
 		{
-			if (token->next)
+			if (!token->next)
 			{
 				printf(SYNTAX_ERR "%s'\n", "newline");
 				g_status = 258;
