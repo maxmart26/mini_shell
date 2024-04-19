@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/16 18:41:19 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 13:36:38 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ void	list_gathering(t_data *tools);
 int		ft_error(int error);
 t_env	*new_env(void);
 void	env_var_expand(t_data *tools);
+char	*replace_exit_status(char *str, t_data *tools);
+char	*replace_exit_status(char *str, t_data *tools);
 char	*replace_env_var(char *str, t_data *tools);
 int		is_env_var(char *str, t_data *tools);
 char	*find_env_var(char *str, t_env *env);
@@ -160,7 +162,6 @@ void	show_ctrl(int sig);
 int		handle_signal(void);
 void	ft_signal_handler(int signal);
 void	ctrl_d(t_data *tools);
-//void	ctrl_d();
 char	*show_prompt();
 void	check_new_line(t_data *tools);
 void	new_line_init(t_data *tools);

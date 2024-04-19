@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:35:30 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 14:08:19 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:49:06 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_print_lexer(t_token *list)
 	t_token	*tmp;
 
 	tmp = list;
-	while (tmp->next)
+	while (tmp)
 	{
 		printf("  \033[38;5;214m%d :\033[0m \
 			\033[0;92m[%s]\033[0m \033[0;91m[%s]\033[0m\n",
