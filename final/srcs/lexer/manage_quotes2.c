@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 12:08:14 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/19 15:48:40 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:44:01 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ char	*delete_quotes(char *str)
 		cut = ft_split(str, '\"');
 	else if (which_quote(str) == 2)
 		cut = ft_split(str, '\'');
+	if (!cut[0])
+	{
+		result = "";
+		return (result);
+	}
 	while (cut[i])
 	{
 		result = ft_strjoin(result, cut[i]);
@@ -46,11 +51,12 @@ void	remove_quotes(t_token *lexer_list)
 	{
 		if (tmp->type == WORD)
 		{
-			while (quote_in_str(tmp->value) == 1)
+			while (tmp->value && quote_in_str(tmp->value) == 1)
 			{
 				tmp->value = delete_quotes(tmp->value);
 			}
-			tmp->value = delete_sep(tmp->value);
+			if (tmp->value[0])
+				tmp->value = delete_sep(tmp->value);
 		}
 		tmp = tmp->next;
 	}
