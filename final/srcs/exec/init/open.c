@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:47:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/08 15:52:26 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:18:46 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,34 +28,6 @@ t_token	*new_token(t_token *token)
 		token = token->prev;
 	}
 	return (token);
-}
-
-t_token	*new_token_after_fd(t_token *token)
-{
-	t_token	*tmp;
-	t_token	*tmp2;
-
-	while (token->next)
-	{
-		if (token->type == GREAT || token->type == LESS
-			|| token->type == HEREDOC)
-		{
-			tmp = token;
-			tmp2 = token->next;
-			token->prev->next = token->next->next;
-			token->next->next->prev = token->prev;
-			if (token->next->next)
-			{
-				token->next->next->prev = token->prev;
-				token = token->next->next;
-			}
-			free(tmp);
-			free(tmp2);
-		}
-		else
-			token = token->next;
-	}
-	return (new_token(token));
 }
 
 void	free_pipe(t_data *data)

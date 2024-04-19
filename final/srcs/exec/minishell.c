@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/19 15:27:30 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:19:11 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_token	*new_token_after_fd(t_token *token)
 			tmp = token;
 			tmp2 = token->next;
 			token->prev->next = token->next->next;
-			token->next->next->prev = token->prev;
 			if (token->next->next)
 			{
 				token->next->next->prev = token->prev;

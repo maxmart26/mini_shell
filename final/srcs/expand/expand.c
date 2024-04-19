@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:58:16 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/19 15:30:22 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:22:35 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ void	env_var_expand(t_data *tools)
 			break ;
 		else if (tmp->type == WORD)
 		{
+			printf("%s\n", tmp->value);
 			if (ft_strnstr(tmp->value, "$?", 2))
 			{
 				tmp->value = replace_exit_status(tmp->value, tools);
