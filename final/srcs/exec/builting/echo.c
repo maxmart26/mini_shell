@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:53:08 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 16:07:04 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:10:28 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,14 @@ void	ft_echo(char **str, t_data *data)
 	{
 		n++;
 	}
+
 	if (str[n + 1])
 		ft_print_echo(str, n);
-	ft_free_tab(str);
-	ft_exit(data, -1);
+	else
+	{
+		ft_end(data, str);
+		exit(1);
+	}
+	ft_end(data, str);
 	exit(0);
 }

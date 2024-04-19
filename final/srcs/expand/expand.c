@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:58:16 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/15 18:00:05 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/16 13:25:55 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,12 @@ void	env_var_expand(t_data *tools)
 	t_token	*tmp;
 
 	tmp = tools->lexer_list;
-	printf("test\n");
 	while (tmp)
 	{
-		printf("test1\n");
 		if (tmp->type == WORD)
 		{
-			printf("test2\n");
 			if (tmp->value[0] != '\'' && is_env_var(tmp->value, tools) == 1)
 			{
-				printf("test3\n");
 				tmp->value = replace_env_var(tmp->value, tools);
 			}
 			tmp = tmp->next;

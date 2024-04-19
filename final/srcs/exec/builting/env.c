@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:23:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 16:08:12 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:48:56 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 #include "../../../include/minishell_proto.h"
 #include "../../../include/minishell_struct.h"
 
-void	ft_env(t_data *data)
+void	ft_env(t_data *data, char **str)
 {
 	t_env	*tmp;
 	t_env	*init;
-	int i = 0;
 
 	init = data->env;
 	while (data->env->prev != NULL)
@@ -28,11 +27,10 @@ void	ft_env(t_data *data)
 	ft_dup2(data);
 	while (init)
 	{
-		i++;
+		printf("%s\n",init->value);
 		tmp = init->next;
 		init = tmp;
 	}
-	
-	ft_exit(data, -1);
+	ft_end(data, str);
 	exit(0);
 }

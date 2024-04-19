@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 17:11:27 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:14:39 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*ft_init_pwd_cd(t_env *env)
 	if (!buffer)
 		buffer = ft_env_pwd(env);
 	str = ft_strjoin(str, buffer);
+	free(buffer);
 	return (str);
 }
 
@@ -53,6 +54,7 @@ char	*ft_init_oldpwd_cd(t_env *env)
 	if (!buffer)
 		buffer = ft_env_pwd(env);
 	str = ft_strjoin(str, buffer);
+	free(buffer);
 	return (str);
 }
 
@@ -74,26 +76,39 @@ int	ft_count(char *str)
 
 void	ft_test(char *buffer_old, t_data *data)
 {
-	ft_export(token_init("export", buffer_old), data, -1);
+	char **str;
+
+	str = token_init("export", buffer_old);
+	ft_export(str , data, -1);
+	free(buffer_old);
+	ft_free_tab(str);
 }
 
 void	ft_cd_end(char **str, char *buffer, t_data *data, int k)
 {
 	char	*buffer_old;
+	char	**buf;
 
 	buffer_old = ft_init_oldpwd_cd(data->env);
 	if (k == 1)
 	{
 		if (chdir(str[1]) == -1)
+		{
+			data->exit = 1;
 			ft_printf_error("bash: cd: %s: not a directory\n", str[1]);
+		}
 		else
 		{
 			buffer = ft_init_pwd_cd(data->env);
-			ft_export(token_init("export", buffer), data, -1);
+			buf = token_init("export", buffer);
+			ft_export(buf, data, -1);
+			//free(buffer);
+			ft_free_tab(buf);
 			ft_test(buffer_old, data);
 			free(buffer);
 		}
 	}
+
 }
 int	ft_cd(char **str, int i, t_data *data)
 {
@@ -104,12 +119,14 @@ int	ft_cd(char **str, int i, t_data *data)
 	buffer = NULL;
 	if (i == 0)
 	{
-		ft_free_tab(str);
-		ft_exit(data, -1);
+		ft_end(data, str);
 		exit(157);
 	}
 	if (str[2])
+	{
+		data->exit = 1;
 		return (ft_printf_error("bash: cd: too many argument\n"), 1);
+	}
 	if (str[1] == NULL || (str[1][0] == '~' && strlen(str[1]) == 1))
 	{
 		buffer = ft_strjoin("/home/", getenv("LOGNAME"));
@@ -119,6 +136,7 @@ int	ft_cd(char **str, int i, t_data *data)
 		ft_export(token_init("export", buffer), data, -1);
 		free(buffer);
 		k = 0;
+		data->exit = 134;
 	}
 	ft_cd_end(str, buffer, data, k);
 	return (0);

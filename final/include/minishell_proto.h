@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 17:58:08 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/16 18:41:19 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,16 @@ char	**token_init(char *str, char *st);
 void	redirection_builting(t_token *token, t_data *data);
 void	ft_echo(char **str, t_data *data);
 int		ft_pwd(char **strs, t_data *data);
-void	ft_env(t_data *data);
+void	ft_env(t_data *data, char **str);
 int		ft_cd(char **str, int i, t_data *data);
 void	ft_export(char **strs, t_data *data, int i);
-void	ft_export_2(char **strs, t_data *data, char **str);
+void	ft_export_2(char **strs, t_data *data);
 void	ft_unset(char **str, t_data *data, int i);
-void	ft_exit(t_data *data, int i);
+void	ft_exit(t_data *data, int i, char **str);
 void	ft_trie_export(t_data *data);
 void	ft_export_modif(char *token, t_env *env);
+void	ft_end(t_data *data, char **str);
+int	ft_strlen_export(char *str, char c);
 
 // partie laura
 

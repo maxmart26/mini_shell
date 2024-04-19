@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_sep.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:55:48 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 14:08:24 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/16 13:36:08 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ char	*delete_sep(char *str)
 		else
 			i++;
 	}
+	free(str);
 	result[j] = '\0';
 	return (result);
 }

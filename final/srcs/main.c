@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/15 17:54:36 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:58:29 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	lexer_and_parser(t_data *tools)
 	{
 		tools->lexer_list = lexer(tools->args);
 		tmp = tools->lexer_list->next;
-		//free(tools->lexer_list->value);
-		//free(tools->lexer_list);
+		free(tools->lexer_list->value);
+		free(tools->lexer_list);
 		tools->lexer_list = tmp;
 		tools->lexer_list = remove_sep(tools->lexer_list);
 		env_var_expand(tools);
@@ -41,8 +41,8 @@ void	lexer_and_parser(t_data *tools)
 		remove_quotes(tools->lexer_list);
 		parsing(tools);
 		ft_print_lexer(tools->lexer_list);
-		free(tools->args);
-		tools->args = NULL;
+		//free(tools->args);
+		//tools->args = NULL;
 	}
 }
 
@@ -57,10 +57,13 @@ void	init_minishell(t_data *tools, char **env)
 		init_env_shlvl(tools->env, tools);
 	}
 	init_path(tools);
+	tools->lexer_list = NULL;
+	tools->pid = NULL;
 	tools->nb_pipe = 0;
 	tools->std_int = 1;
 	tools->std_out = 0;
 	tools->status = 1;
+	tools->exit = 0;
 	tools->exit_status = 0;
 	g_status = 1;
 	tools->first_call = 1;

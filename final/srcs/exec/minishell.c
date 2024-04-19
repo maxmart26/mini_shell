@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 17:54:46 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:10:13 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,13 +118,13 @@ void	fd_built(t_data *data, t_token *token)
 	if (ft_strncmp(str[0], "pwd", 3) == 0 && ft_strlen(str[0]) == 3)
 		ft_pwd(str, data);
 	if (ft_strncmp(str[0], "env", 3) == 0 && ft_strlen(str[0]) == 3)
-		ft_env(data);
+		ft_env(data, str);
 	if (ft_strncmp(str[0], "cd", 2) == 0 && ft_strlen(str[0]) == 2)
 		ft_cd(str, data->nb_pipe, data);
 	if (ft_strncmp(str[0], "export", 6) == 0 && ft_strlen(str[0]) == 6)
 		ft_export(str, data, data->nb_pipe);
 	if (ft_strncmp(str[0], "exit", 4) == 0 && ft_strlen(str[0]) == 4)
-		ft_exit(data, data->nb_pipe);
+		ft_exit(data, data->nb_pipe, str);
 	if (ft_strncmp(str[0], "unset", 5) == 0 && ft_strlen(str[0]) == 5)
 		ft_unset(str, data, data->nb_pipe);
 }
@@ -141,6 +141,7 @@ void	ft_retry(t_data *data, int result, char **str)
 	int	result2;
 
 	result2 = WEXITSTATUS(result);
+	data->exit = result2;
 	if (result2 == 155)
 		ft_unset(str, data, -1);
 	else if (result2 == 156)
@@ -150,7 +151,7 @@ void	ft_retry(t_data *data, int result, char **str)
 	else if (result2 == 158)
 	{
 		free_tab(str);
-		ft_exit(data, -1);
+		ft_exit(data, -1, str);
 	}
 }
 

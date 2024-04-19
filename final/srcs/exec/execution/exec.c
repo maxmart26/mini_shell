@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 17:59:06 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:11:03 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	exec(t_data *data, t_token *token)
 	ft_exec(data, token);
 	ft_dup2(data);
 	execve(data->path_def, data->mycmdargs, data->envp);
-	ft_printf_error("bash: %s: commande not found\n", data->mycmdargs[0]);
+	ft_printf_error("bash: %s: command not found\n", data->mycmdargs[0]);
 	free_tab(data->path);
 	free_tab(data->mycmdargs);
 	exit(127);

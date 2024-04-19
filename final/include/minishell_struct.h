@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 17:09:38 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:56:18 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct s_data
 	int					exit_status;
 	int					nl_error;
 	int					first_call;
+	int					exit;
 }						t_data;
 
 extern int				g_status;

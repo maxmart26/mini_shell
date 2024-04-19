@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:51:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 16:35:44 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:19:28 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,25 @@
 #include "../../../include/minishell_proto.h"
 #include "../../../include/minishell_struct.h"
 
+void	ft_free_enve(t_env	*env)
+{
+	t_env	*tmp;
+
+	while (env)
+	{
+		tmp = env->next;
+		free(env->value);
+		free(env);
+		env = tmp;
+	}
+}
+
 void	ft_end(t_data *data, char **str)
 {
 	t_token	*token;
 	t_token	*tmp;
 
 	token = data->lexer_list;
-
-	while (token)
-		token = token->prev;
 	ft_free_tab(str);
 	free(data->pid);
 	if (data->std_int > 2)
@@ -36,8 +46,10 @@ void	ft_end(t_data *data, char **str)
 		free(token);
 		token = tmp;
 	}
+	ft_free_enve(data->env);
 	free(data);
 }
+
 int	ft_pwd(char **strs, t_data *data)
 {
 	char	*str;

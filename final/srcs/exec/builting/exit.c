@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:09:54 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/15 17:54:51 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/19 12:17:25 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,19 @@ void	ft_free_pipe(int **fd, int i)
 	free(fd);
 }
 
-void	ft_exit(t_data *data, int i)
+void	ft_exit(t_data *data, int i, char **str)
 {
-	(void)data;
 	if (i == 0)
+	{
+		ft_end(data, str);
 		exit(158);
+	}
 	else
 	{
-		exit(1);
+		data->exit = ft_atoi(str[1]);
+		if (data->exit < 0)
+			data->exit = 156;
+		ft_end(data, str);
+		exit(data->exit);
 	}
 }
