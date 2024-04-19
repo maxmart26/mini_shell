@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/19 13:39:04 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:38:22 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	lexer_and_parser(t_data *tools)
 		tools->lexer_list = tmp;
 		tools->lexer_list = remove_sep(tools->lexer_list);
 		env_var_expand(tools);
-		//ft_print_lexer(tools->lexer_list);
+		remove_quotes(tools->lexer_list);
+		ft_print_lexer(tools->lexer_list);
 		tools->std_out = 1;
 		tools->std_int = 0;
 		open_fd(tools, tools->lexer_list);
@@ -40,11 +41,7 @@ void	lexer_and_parser(t_data *tools)
 			tools->lexer_list = new_token_after_fd(tools->lexer_list);
 		list_gathering(tools);
 		def_index(tools->lexer_list);
-		remove_quotes(tools->lexer_list);
 		parsing(tools);
-		//ft_print_lexer(tools->lexer_list);
-		//free(tools->args);
-		//tools->args = NULL;
 	}
 }
 
