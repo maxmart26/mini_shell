@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/19 15:27:30 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:18:49 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_token	*new_token_after_fd(t_token *token)
 			tmp = token;
 			tmp2 = token->next;
 			token->prev->next = token->next->next;
-			token->next->next->prev = token->prev;
 			if (token->next->next)
 			{
 				token->next->next->prev = token->prev;
@@ -105,7 +104,7 @@ void	open_fd(t_data *data, t_token *token)
 			data->std_int = open_file(token->next->value, 0);
 		if (data->std_int == -1 || data->std_out == -1)
 		{
-			printf("bash: %s: No such file or directory\n", token->next->value);
+			ft_printf_error("bash: %s: No such file or directory\n", token->next->value);
 			if (data->nb_pipe == 0)
 				exit(1);
 		}

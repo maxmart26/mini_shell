@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:47:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/08 15:52:26 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:18:39 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,34 +28,6 @@ t_token	*new_token(t_token *token)
 		token = token->prev;
 	}
 	return (token);
-}
-
-t_token	*new_token_after_fd(t_token *token)
-{
-	t_token	*tmp;
-	t_token	*tmp2;
-
-	while (token->next)
-	{
-		if (token->type == GREAT || token->type == LESS
-			|| token->type == HEREDOC)
-		{
-			tmp = token;
-			tmp2 = token->next;
-			token->prev->next = token->next->next;
-			token->next->next->prev = token->prev;
-			if (token->next->next)
-			{
-				token->next->next->prev = token->prev;
-				token = token->next->next;
-			}
-			free(tmp);
-			free(tmp2);
-		}
-		else
-			token = token->next;
-	}
-	return (new_token(token));
 }
 
 void	free_pipe(t_data *data)
@@ -103,7 +75,7 @@ void	open_fd(t_data *data, t_token *token)
 			data->std_int = open_file(token->next->value, 0);
 		if (data->std_int == -1 || data->std_out == -1)
 		{
-			printf("bash: %s: No such file or directory\n", token->next->value);
+			ft_printf_error("bash: %s: No such file or directory\n", token->next->value);
 			if (data->nb_pipe == 0)
 				exit(1);
 		}
