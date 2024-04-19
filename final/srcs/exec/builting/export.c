@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/16 18:33:29 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:17:56 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,37 @@ void	ft_export_2(char **strs, t_data *data)
 	}
 }
 
-int	verif_export(char **str)
+int	verif_export(char **str, t_data *data)
 {
-	int	i;
+	int		i;
+	char	**strs;
 
+	strs = ft_split(str[1], '=');
 	i = 0;
-	while (str[1][i])
+	if (strs[0] == NULL)
 	{
-		if (str[1][i] == '@' || str[1][i] == '_'
-			|| str[1][i] == '\\' || str[1][i] == '%' || str[1][i] == '+'
-			|| (str[1][i] == '=' && str[1][i + 1] == '\0'))
+		ft_printf_error(" not a valid identifier\n");
+		ft_free_tab(strs);
+		free_tab(str);
+		data->exit = 1;
+		return (1);
+	}
+	while (strs[0][i])
+	{
+		if (strs[0][i] == '@' || strs[0][i] == '_' || strs[0][i] == '-'
+			|| strs[0][i] == '\\' || strs[0][i] == '%' || strs[0][i] == '+'
+			|| (strs[0][i] == '=' && strs[0][i + 1] == '\0') || (strs[0][i] <= '9' && strs[0][i] >= '0'))
 		{
-			ft_printf_error("bash: export: `%s': not a valid identifier\n", str[1]);
+			ft_printf_error("bash: export: `%s': not a valid identifier\n",
+				str[1]);
+			ft_free_tab(strs);
 			free_tab(str);
+			data->exit = 1;
 			return (1);
 		}
 		i++;
 	}
-
+	ft_free_tab(strs);
 	return (0);
 }
 
@@ -104,10 +117,11 @@ void	ft_export(char **strs, t_data *data, int i)
 	}
 	if (strs[1] == NULL)
 		ft_trie_export(data);
-	else if (verif_export(strs) == 1)
+	else if (verif_export(strs, data) == 1)
 		return ;
 	else
 	{
 		ft_export_2(strs, data);
 	}
+	data->exit = 0;
 }

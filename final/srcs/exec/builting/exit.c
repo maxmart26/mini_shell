@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:09:54 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/19 12:17:25 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:44:33 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ void	ft_free_pipe(int **fd, int i)
 	free(fd);
 }
 
+int	verif(char	*str)
+{
+	int	i;
+
+	i = 0;
+	while(str[i])
+	{
+		if ((str[i] > '9' || str[i] < '0') && str[i] != '-' && str[i] != '+')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 void	ft_exit(t_data *data, int i, char **str)
 {
 	if (i == 0)
@@ -46,12 +59,25 @@ void	ft_exit(t_data *data, int i, char **str)
 		ft_end(data, str);
 		exit(158);
 	}
+	else if (str[2])
+	{
+		ft_printf_error(" too many arguments\n");
+		ft_end(data, str);
+		exit(1);
+	}
+	else if (verif(str[1]) == 1)
+	{
+		ft_printf_error(" numeric argument required\n");
+		ft_end(data, str);
+		exit(2);
+	}
 	else
 	{
 		data->exit = ft_atoi(str[1]);
 		if (data->exit < 0)
 			data->exit = 156;
+		i = data->exit;
 		ft_end(data, str);
-		exit(data->exit);
+		exit(i);
 	}
 }

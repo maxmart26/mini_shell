@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 17:59:40 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:43:20 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	nb_pipe(t_token *token, t_data *data)
 		data->pipe_fd[i] = malloc(2 * sizeof(int));
 		if (pipe(data->pipe_fd[i]) == -1)
 			exit(0);
-		printf("%d avec %d\n", data->pipe_fd[i][0], data->pipe_fd[i][1]);
 		i++;
 	}
 }

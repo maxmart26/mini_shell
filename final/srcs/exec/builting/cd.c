@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/19 12:14:39 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:23:54 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_cd_end(char **str, char *buffer, t_data *data, int k)
 		if (chdir(str[1]) == -1)
 		{
 			data->exit = 1;
-			ft_printf_error("bash: cd: %s: not a directory\n", str[1]);
+			ft_printf_error("bash: cd: %s: No such file or directory\n", str[1]);
 		}
 		else
 		{
@@ -125,7 +125,7 @@ int	ft_cd(char **str, int i, t_data *data)
 	if (str[2])
 	{
 		data->exit = 1;
-		return (ft_printf_error("bash: cd: too many argument\n"), 1);
+		return (ft_printf_error("bash: cd: too many arguments\n"), 1);
 	}
 	if (str[1] == NULL || (str[1][0] == '~' && strlen(str[1]) == 1))
 	{

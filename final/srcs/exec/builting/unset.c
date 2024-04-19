@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:52:41 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/19 12:12:06 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:22:34 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ void	ft_unset_end(char **str, t_data *data)
 		{
 			if (!env->next)
 			{
-				ft_printf_error("bash: unset: %s :not valid identifier\n", str[1]);
 				break ;
 			}
 		}
 		tmp = env->next;
 		env = tmp;
 	}
+	data->exit = 0;
 	free_tab(str);
 }
 
@@ -71,11 +71,10 @@ void	ft_unset(char **str, t_data *data, int i)
 		ft_end(data, str);
 		exit(155);
 	}
+	data->exit = 0;
 	if (!str[1])
 	{
-		ft_printf_error("bash: unset: `': not a valid identifier\n");
 		free_tab(str);
-		data->exit = 0;
 		return ;
 	}
 	else
@@ -83,6 +82,5 @@ void	ft_unset(char **str, t_data *data, int i)
 		if (ft_strncmp(str[1], "PATH", 5) == 0)
 			data->r_path = FALSE;
 		ft_unset_end(str, data);
-		data->exit = 0;
 	}
 }
