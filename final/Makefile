@@ -15,6 +15,8 @@ SRCS = srcs/main.c \
 		srcs/exec/herdoc/herdoc.c \
 		srcs/exec/init/init_data.c srcs/exec/init/token_init.c srcs/exec/init/init_path.c \
 		srcs/expand/expand.c \
+		srcs/exec/init/open_fd.c\
+		srcs/exec/init/init_data_env.c\
 		srcs/lexer/cmd_args.c srcs/lexer/cmd_args2.c srcs/lexer/cmdbuilt_args.c srcs/lexer/gather_words.c srcs/lexer/get_token.c \
 		srcs/lexer/get_word.c srcs/lexer/lexer.c srcs/lexer/manage_quotes.c srcs/lexer/manage_quotes2.c srcs/lexer/manage_sep.c \
 		srcs/lexer/manage_type.c srcs/lexer/manage_type2.c srcs/lexer/print_lexer.c \

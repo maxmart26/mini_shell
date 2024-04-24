@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/19 18:15:18 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:27:39 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ char	*get_path(t_data *data, t_token *token)
 	i = 0;
 	path = NULL;
 	if (data == NULL)
-	{
 		return (NULL);
-	}
 	path_from_envp = ft_path(data->env);
 	path = ft_split(path_from_envp, ':');
 	while (path[i])
@@ -94,11 +92,10 @@ char	*ft_exec(t_data *data, t_token *token)
 
 	i = 0;
 	data->mycmdargs = ft_split(token->value, ' ');
-	if ((data->path_from_envp = ft_path(data->env)) == NULL
-		&& data->r_path == TRUE)
+	data->path_from_envp = ft_path(data->env);
+	if (data->path_from_envp == NULL && data->r_path == TRUE)
 		return (exec_path(data));
-	else if ((data->path_from_envp = ft_path(data->env)) == NULL
-		&& data->r_path == FALSE)
+	else if (data->path_from_envp == NULL && data->r_path == FALSE)
 		return (perror(CMD_ERR), NULL);
 	data->path = ft_split(data->path_from_envp, ':');
 	while (data->path[i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:35 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/15 18:00:00 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:25:48 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,11 @@ char	*exec_path(t_data *data)
 void	init_end(t_env *env)
 {
 	(void)env;
-	//env->name = "PWD";
-	//env->content = getcwd(env->content, _SC_PASS_MAX);
-	//env->next->name = "SHLVL";
-	//env->next->content = "1";
-	//env->next->next->name = "_";
-	//env->next->next->content = "/usr/bin/env";
 }
 
-void	init_env_shlvl(t_env *env, t_data *data)
+void	init_env_shlvl(t_env *env, t_data *data, char *str, char *stt)
 {
-	int	a;
-	char *str;
-	char	*stt;
+	int		a;
 	char	**st;
 
 	if (!env)
@@ -82,7 +74,5 @@ void	init_env_shlvl(t_env *env, t_data *data)
 			ft_export(st, data, -1);
 		}
 		env = env->next;
-		/*if (token)
-			ft_free_tab(token);*/
 	}
 }

@@ -54,3 +54,19 @@ expand sigsev
 cat : ok 90                   
 
 a faire un printf sur la sortie 2;
+
+
+---------------------------------------------------------------------------
+
+a finir 
+
+
+echo hi | cat < Makefile segfault 
+
+rocess terminating with default action of signal 11 (SIGSEGV)
+==3684412==  Access not within mapped region at address 0x18
+==3684412==    at 0x406794: remove_sep (manage_sep.c:58)
+==3684412==    by 0x401389: lexer_and_parser (main.c:30)
+==3684412==    by 0x40165C: minishell (main.c:95)
+==3684412==    by 0x40173F: main (main.c:121)
+

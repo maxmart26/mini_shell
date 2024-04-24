@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:24:20 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/15 17:28:23 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:39:19 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,7 @@ static void	set_mem(char **dest, char const *s, char c)
 		{
 			dest[i] = malloc(sizeof(char) * (count + 1));
 			if (!dest[i])
-			{
-				while (i > 0)
-					free(dest[--i]);
-				free(dest);
-				return ;
-			}
+				return (free_tab(dest));
 			fill_tab(dest[i], (s + index), c);
 			i++;
 			index += count;

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:22:01 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/16 17:23:37 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:45:19 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../../include/minishell_proto.h"
 #include "../../../include/minishell_struct.h"
 
-void	ft_swap(char **env, int i,t_data *data)
+void	ft_swap(char **env, int i, t_data *data)
 {
 	int		nb;
 	char	*tmp;
@@ -79,4 +79,18 @@ void	ft_export_modif(char *token, t_env *env)
 {
 	free(env->value);
 	env->value = ft_strdup(token);
+}
+
+int	verif_export_acsii(unsigned int i, char **str, t_data *data)
+{
+	if (i == '@' || i == '_' || i == '-' || i == '\\' || i == '%' || i == '+'
+		|| (i == '=' && i == '\0') || (i <= '9' && i >= '0'))
+	{
+		ft_printf_error("bash: export: `%s': not a valid identifier\n", str[1]);
+		data->exit = 1;
+		free_tab(str);
+		return (1);
+	}
+	else
+		return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:00:02 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/16 18:34:18 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:36:13 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	ft_tmp2(t_data *data, t_token *token, int result, pid_t *pid)
 			i++;
 		}
 		token = token->next;
-		//ft_free_tab(str);
 	}
 }
 

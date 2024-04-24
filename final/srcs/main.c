@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/19 17:27:41 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:25:12 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	init_minishell(t_data *tools, char **env)
 	else
 	{
 		tools->env = init_env(tools, 0);
-		init_env_shlvl(tools->env, tools);
+		init_env_shlvl(tools->env, tools, NULL, NULL);
 	}
 	init_path(tools);
 	tools->lexer_list = NULL;

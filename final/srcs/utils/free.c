@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 14:51:08 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/16 14:01:55 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:36:43 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	free_minishell_ctrld(t_data *tools)
 	token = tools->lexer_list;
 	if (token != NULL)
 	{
-	while (token)
-	{
-		tmp = token->next;
-		free(token->value);
-		free(token);
-		token = tmp;
-	}
+		while (token)
+		{
+			tmp = token->next;
+			free(token->value);
+			free(token);
+			token = tmp;
+		}
 	}
 	if (tools->envp)
 		ft_destroy_env(tools->env);
