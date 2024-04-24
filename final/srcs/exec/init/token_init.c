@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:14:38 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/16 15:23:43 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:22:36 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	**token_init(char *str, char *st)
 	tmp = ft_strjoin(str, " ");
 	tmp2 = ft_strjoin(tmp, st);
 	free(tmp);
-	//free(st);
 	strs = ft_split(tmp2, ' ');
 	free(tmp2);
 	return (strs);

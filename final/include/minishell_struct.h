@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/19 13:35:05 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/24 12:16:35 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef enum e_token_type
 }						t_token_type;
 
 /*
-HEREDOC,  // >>
-	APPEND,   // <<
+HEREDOC,  // <<
+	APPEND,   // >>
 	GREAT,    // >
 	LESS,     // <
 	PIPE,     // |
@@ -111,7 +111,7 @@ typedef struct s_data
 	char				**mycmdargs;
 	char				*path_temp;
 	int					nb_cmd;
-	pid_t	*pid;
+	pid_t				*pid;
 	int					nb_com;
 	int					fd_in;
 	int					fd_out;

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/19 15:23:54 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/24 12:33:11 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,32 +58,6 @@ char	*ft_init_oldpwd_cd(t_env *env)
 	return (str);
 }
 
-int	ft_count(char *str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (str[i] == '/')
-			j = i;
-		i++;
-	}
-	return (j);
-}
-
-void	ft_test(char *buffer_old, t_data *data)
-{
-	char **str;
-
-	str = token_init("export", buffer_old);
-	ft_export(str , data, -1);
-	free(buffer_old);
-	ft_free_tab(str);
-}
-
 void	ft_cd_end(char **str, char *buffer, t_data *data, int k)
 {
 	char	*buffer_old;
@@ -95,33 +69,28 @@ void	ft_cd_end(char **str, char *buffer, t_data *data, int k)
 		if (chdir(str[1]) == -1)
 		{
 			data->exit = 1;
-			ft_printf_error("bash: cd: %s: No such file or directory\n", str[1]);
+			ft_printf_error("bash: cd: %s: No such file or directory\n",
+				str[1]);
 		}
 		else
 		{
 			buffer = ft_init_pwd_cd(data->env);
 			buf = token_init("export", buffer);
 			ft_export(buf, data, -1);
-			//free(buffer);
 			ft_free_tab(buf);
 			ft_test(buffer_old, data);
 			free(buffer);
 		}
 	}
-
 }
-int	ft_cd(char **str, int i, t_data *data)
+
+int	ft_cd(char **str, int i, t_data *data, int k)
 {
 	char	*buffer;
-	int	k;
 
-	k = 1;
 	buffer = NULL;
 	if (i == 0)
-	{
-		ft_end(data, str);
-		exit(157);
-	}
+		cd_end(data, str);
 	if (str[2])
 	{
 		data->exit = 1;

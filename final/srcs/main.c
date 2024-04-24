@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/24 14:47:52 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:14:27 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	init_minishell(t_data *tools, char **env)
 	else
 	{
 		tools->env = init_env(tools, 0);
-		init_env_shlvl(tools->env, tools);
+		init_env_shlvl(tools->env, tools, NULL, NULL);
 	}
 	init_path(tools);
 	tools->lexer_list = NULL;

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:53:08 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 14:53:51 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:16:02 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,15 @@ void	ft_echo(char **str, t_data *data)
 	n = 0;
 	ft_dup2(data);
 	if (str[1] == NULL)
+	{
 		printf("\n");
+		ft_end(data, str);
+		exit(0);
+	}
 	while (ft_verif_echo(str[n + 1]) == 0 && str[n + 1])
 	{
 		n++;
 	}
-
 	if (str[n + 1])
 		ft_print_echo(str, n);
 	else

@@ -6,12 +6,11 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:01:49 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/10 18:27:14 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:37:18 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
-
 
 void	ft_putchar_error(char c, int *len)
 {

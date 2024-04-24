@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/19 15:49:18 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:31:53 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_env	*init_env(t_data *data, int i);
 // init_path.c
 
 void	init_end(t_env *env);
-void	init_env_shlvl(t_env *env, t_data *data);
+void	init_env_shlvl(t_env *env, t_data *data, char *str, char *stt);
 char	*exec_path(t_data *data);
 void	init_path(t_data *data);
 
@@ -57,6 +57,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 // minishell
 
+void	fd_built(t_data *data, t_token *token);
 int		ft_main(t_data *data);
 void	after(t_data *data, t_token *token);
 void	ft_retry(t_data *data, int result, char **str);
@@ -90,15 +91,18 @@ void	redirection_builting(t_token *token, t_data *data);
 void	ft_echo(char **str, t_data *data);
 int		ft_pwd(char **strs, t_data *data);
 void	ft_env(t_data *data, char **str);
-int		ft_cd(char **str, int i, t_data *data);
+void	cd_end(t_data *data, char **str);
+int		ft_cd(char **str, int i, t_data *data, int k);
 void	ft_export(char **strs, t_data *data, int i);
 void	ft_export_2(char **strs, t_data *data);
+int		verif_export_acsii(unsigned int i, char **str, t_data *data);
 void	ft_unset(char **str, t_data *data, int i);
+void	ft_test(char *buffer_old, t_data *data);
 void	ft_exit(t_data *data, int i, char **str);
 void	ft_trie_export(t_data *data);
 void	ft_export_modif(char *token, t_env *env);
 void	ft_end(t_data *data, char **str);
-int	ft_strlen_export(char *str, char c);
+int		ft_strlen_export(char *str, char c);
 
 // partie laura
 
@@ -155,7 +159,7 @@ void	add_exp_args(t_token *token);
 void	add_unset_args(t_token *token);
 void	word_to_arg(t_token *token);
 void	add_grep_args(t_token *token);
-//void	add_tac_args(t_token *token);
+// void	add_tac_args(t_token *token);
 
 // Utils
 
@@ -163,7 +167,7 @@ void	show_ctrl(int sig);
 int		handle_signal(void);
 void	ft_signal_handler(int signal);
 void	ctrl_d(t_data *tools);
-char	*show_prompt();
+char	*show_prompt(void);
 void	check_new_line(t_data *tools);
 void	new_line_init(t_data *tools);
 int		new_line_error(t_data *tools);

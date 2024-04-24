@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:47:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/19 17:18:46 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/24 12:35:08 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	open_fd(t_data *data, t_token *token)
 {
 	t_token	*tmp;
 
-	tmp = token->next;
 	while (token)
 	{
 		if (token->type == GREAT)
@@ -75,7 +74,8 @@ void	open_fd(t_data *data, t_token *token)
 			data->std_int = open_file(token->next->value, 0);
 		if (data->std_int == -1 || data->std_out == -1)
 		{
-			printf("bash: %s: No such file or directory\n", token->next->value);
+			ft_printf_error("bash: %s: No such file or directory\n",
+				token->next->value);
 			if (data->nb_pipe == 0)
 				exit(1);
 		}
