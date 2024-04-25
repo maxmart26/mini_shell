@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:28:38 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 13:20:50 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:18:20 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ void	open_fd(t_data *data, t_token *token)
 		{
 			ft_printf_error("bash: %s: No such file or directory\n",
 				token->next->value);
-			if (data->nb_pipe == 0)
-				exit(1);
+			if (data->std_int == -1)
+				data->std_int = 0;
+			if (data->std_out == -1)
+				data->std_out = 1;
+			break;
 		}
 		tmp = token->next;
 		token = tmp;
@@ -63,13 +66,15 @@ t_token	*new_token(t_token *token)
 	if (token->next->next)
 	{
 		token->next->next->prev = token->prev;
+		if (token->prev)
+			token->prev->next = token->next->next;
 		token = token->next->next;
 		free(tmp2->value);
 		free(tmp2);
 	}
 	else
 	{
-		token->prev->next = token->next->next;
+		token->prev->next = NULL;
 		token = token->prev;
 	}
 	free(tmp->value);

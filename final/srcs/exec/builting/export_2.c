@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:22:01 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 13:08:04 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:17:10 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../../include/minishell_proto.h"
 #include "../../../include/minishell_struct.h"
 
-void	ft_swap(char **env, int i, t_data *data)
+void	ft_swap(char **env, int i, t_data *data, t_token *token)
 {
 	int		nb;
 	char	*tmp;
@@ -38,7 +38,7 @@ void	ft_swap(char **env, int i, t_data *data)
 		}
 	}
 	i = -1;
-	ft_dup2(data);
+	ft_dup2(data, token);
 	while (env[i++ + 1])
 		printf("declare -x %s\n", env[i]);
 }
@@ -56,7 +56,7 @@ int	ft_lstsizee(t_env *lst)
 	return (size);
 }
 
-void	ft_trie_export(t_data *data)
+void	ft_trie_export(t_data *data, t_token *token)
 {
 	char	**env;
 	int		i;
@@ -72,7 +72,7 @@ void	ft_trie_export(t_data *data)
 		envp = envp->next;
 		i++;
 	}
-	ft_swap(env, i, data);
+	ft_swap(env, i, data, token);
 }
 
 void	ft_export_modif(char *token, t_env *env)

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:53:08 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 12:33:57 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:14:00 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ int	ft_verif_echo(char *str)
 	return (0);
 }
 
-void	ft_echo(char **str, t_data *data)
+void	ft_echo(char **str, t_data *data, t_token *token)
 {
 	int	n;
 
 	n = 0;
-	ft_dup2(data);
+	ft_dup2(data, token);
 	if (str[1] == NULL)
 	{
 		printf("\n");

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:19:11 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 14:31:38 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:22:30 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	fd_built(t_data *data, t_token *token)
 
 	str = ft_split(token->value, ' ');
 	if (ft_strncmp(str[0], "echo", 4) == 0 && ft_strlen(str[0]) == 4)
-		ft_echo(str, data);
+		ft_echo(str, data, token);
 	if (ft_strncmp(str[0], "pwd", 3) == 0 && ft_strlen(str[0]) == 3)
-		ft_pwd(str, data);
+		ft_pwd(str, data,  token);
 	if (ft_strncmp(str[0], "env", 3) == 0 && ft_strlen(str[0]) == 3)
-		ft_env(data, str);
+		ft_env(data, str, token);
 	if (ft_strncmp(str[0], "cd", 2) == 0 && ft_strlen(str[0]) == 2)
-		ft_cd(str, data->nb_pipe, data, 1);
+		ft_cd(str, data->nb_pipe, data, 1, token);
 	if (ft_strncmp(str[0], "export", 6) == 0 && ft_strlen(str[0]) == 6)
-		ft_export(str, data, data->nb_pipe);
+		ft_export(str, data, data->nb_pipe,  token);
 	if (ft_strncmp(str[0], "exit", 4) == 0 && ft_strlen(str[0]) == 4)
 		ft_exit(data, data->nb_pipe, str);
 	if (ft_strncmp(str[0], "unset", 5) == 0 && ft_strlen(str[0]) == 5)
@@ -43,12 +43,12 @@ void	redirection_builting(t_token *token, t_data *data)
 		ft_exec_abs(token, data);
 }
 
-void	ft_test(char *buffer_old, t_data *data)
+void	ft_test(char *buffer_old, t_data *data , t_token *token)
 {
 	char	**str;
 
 	str = token_init("export", buffer_old);
-	ft_export(str, data, -1);
+	ft_export(str, data, -1, token);
 	free(buffer_old);
 	ft_free_tab(str);
 }

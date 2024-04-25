@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 12:08:14 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/24 17:37:07 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:26:24 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	remove_quotes(t_token *lexer_list)
 	{
 		if (tmp->type == WORD)
 		{
+			tmp->value = delete_sep(tmp->value);
 			while (quote_in_str(tmp->value) == 1)
 			{
 				tmp->value = delete_quotes(tmp->value);
 			}
-			tmp->value = delete_sep(tmp->value);
 		}
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:47:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 12:35:08 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:42:56 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-t_token	*new_token(t_token *token)
-{
-	while (token->prev)
-	{
-		if (token->prev->prev == NULL)
-			break ;
-		token = token->prev;
-	}
-	return (token);
-}
+// t_token	*new_token(t_token *token)
+// {
+// 	while (token->prev)
+// 	{
+// 		if (token->prev->prev == NULL)
+// 			break ;
+// 		token = token->prev;
+// 	}
+// 	return (token);
+// }
 
 void	free_pipe(t_data *data)
 {
@@ -76,8 +76,6 @@ void	open_fd(t_data *data, t_token *token)
 		{
 			ft_printf_error("bash: %s: No such file or directory\n",
 				token->next->value);
-			if (data->nb_pipe == 0)
-				exit(1);
 		}
 		tmp = token->next;
 		token = tmp;

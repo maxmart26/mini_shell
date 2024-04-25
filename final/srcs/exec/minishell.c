@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 18:50:44 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:17:57 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,34 @@ int	open_file(char *s, int i)
 		fd = open(s, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	else if (i == 0)
 		fd = open(s, O_RDONLY);
+	else if (i == 3)
+		fd = open(s, O_CREAT | O_RDWR | O_APPEND, 0644);
 	return (fd);
 }
 
 void	after(t_data *data, t_token *token)
 {
+	if (token->fd_int == -1 || token->fd_out == -1)
+	{
+		ft_destroy_env(data->env);
+		while (data->nb_pipe >= 1)
+		{
+			free(data->pipe_fd[data->nb_pipe - 1]);
+			if (data->nb_pipe == 1)
+				break ;
+			data->nb_pipe--;
+		}
+		if (data->nb_pipe > 0)
+			free(data->pipe_fd);
+		free(data);
+		exit(1);
+	}
 	fd_built(data, token);
 	ft_exec_abs(token, data);
 	exec(data, token);
 }
 
-void	ft_retry(t_data *data, int result, char **str)
+void	ft_retry(t_data *data, int result, char **str, t_token *token)
 {
 	int	result2;
 
@@ -60,9 +77,9 @@ void	ft_retry(t_data *data, int result, char **str)
 	if (result2 == 155)
 		ft_unset(str, data, -1);
 	else if (result2 == 156)
-		ft_export(str, data, -1);
+		ft_export(str, data, -1, token);
 	else if (result2 == 157)
-		ft_cd(str, -1, data, 1);
+		ft_cd(str, -1, data, 1, token);
 	else if (result2 == 158)
 	{
 		ft_exit(data, -1, str);
@@ -71,8 +88,8 @@ void	ft_retry(t_data *data, int result, char **str)
 
 int	ft_main(t_data *data)
 {
-	t_token *token;
-	t_token *tmp;
+	t_token	*token;
+	t_token	*tmp;
 
 	token = data->lexer_list;
 	ft_tmp(data, data->lexer_list);

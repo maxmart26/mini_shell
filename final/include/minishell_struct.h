@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 12:16:35 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:45:31 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_token
 	int					index;
 	t_token_type		type;
 	char				*value;
+	int					fd_out;
+	int					fd_int;
 	struct s_token		*next;
 	struct s_token		*prev;
 }						t_token;

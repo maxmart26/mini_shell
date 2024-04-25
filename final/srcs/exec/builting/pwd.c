@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:51:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/16 15:19:28 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:16:26 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	ft_end(t_data *data, char **str)
 	free(data);
 }
 
-int	ft_pwd(char **strs, t_data *data)
+int	ft_pwd(char **strs, t_data *data, t_token *token)
 {
 	char	*str;
 
-	ft_dup2(data);
+	ft_dup2(data, token);
 	str = NULL;
 	str = getcwd(str, _SC_PASS_MAX);
 	if (strs[1] && strncmp(strs[1], "-", 1) == 0)

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 14:31:53 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:24:35 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 // minishell
 
+t_token	*new_token(t_token *token);
 void	fd_built(t_data *data, t_token *token);
 int		ft_main(t_data *data);
 void	after(t_data *data, t_token *token);
-void	ft_retry(t_data *data, int result, char **str);
+void	ft_retry(t_data *data, int result, char **str, t_token *token);
 void	ft_tmp(t_data *data, t_token *token);
 void	init_minishell(t_data *tools, char **env);
 t_token	*new_token_after_fd(t_token *token);
@@ -72,10 +73,9 @@ void	open_heredoc(t_data *data);
 // exec.c
 
 char	*ft_exec(t_data *data, t_token *token);
-void	ft_dup2(t_data *data);
+void	ft_dup2(t_data *data, t_token *token);
 void	exec(t_data *data, t_token *token);
 void	ft_exec_abs(t_token *token, t_data *data);
-void	ft_dup2(t_data *data);
 
 // utils_bonus2.c
 
@@ -88,18 +88,18 @@ char	**token_init(char *str, char *st);
 // les builting
 
 void	redirection_builting(t_token *token, t_data *data);
-void	ft_echo(char **str, t_data *data);
-int		ft_pwd(char **strs, t_data *data);
-void	ft_env(t_data *data, char **str);
+void	ft_echo(char **str, t_data *data, t_token *token);
+int		ft_pwd(char **strs, t_data *data, t_token *token);
+void	ft_env(t_data *data, char **str, t_token *token);
 void	cd_end(t_data *data, char **str);
-int		ft_cd(char **str, int i, t_data *data, int k);
-void	ft_export(char **strs, t_data *data, int i);
+int		ft_cd(char **str, int i, t_data *data, int k, t_token *token);
+void	ft_export(char **strs, t_data *data, int i, t_token *token);
 void	ft_export_2(char **strs, t_data *data);
 int		verif_export_acsii(unsigned int i, char **str, t_data *data);
 void	ft_unset(char **str, t_data *data, int i);
-void	ft_test(char *buffer_old, t_data *data);
+void	ft_test(char *buffer_old, t_data *data, t_token *token);
 void	ft_exit(t_data *data, int i, char **str);
-void	ft_trie_export(t_data *data);
+void	ft_trie_export(t_data *data, t_token *token);
 void	ft_export_modif(char *token, t_env *env);
 void	ft_end(t_data *data, char **str);
 int		ft_strlen_export(char *str, char c);
