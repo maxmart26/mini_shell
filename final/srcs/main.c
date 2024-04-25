@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/25 13:27:41 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:51:05 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	minishell(t_data *tools, char **env)
 	init_minishell(tools, env);
 	while (g_status)
 	{
+		handle_signal();
 		str = show_prompt();
 		tools->args = readline(str);
 		free(str);
@@ -100,6 +101,7 @@ int	minishell(t_data *tools, char **env)
 			}
 		}
 		free(tools->args);
+		free(tools->pid);
 	}
 	free_minishell(tools);
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/25 13:17:50 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:51:39 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,7 @@ int	is_env_var(char *str, t_data *tools)
 
 void	ft_signal_handler(int signal)
 {
-	if (signal == SIGQUIT)
-	{
-		ft_putstr_fd("Quit: ", STDERR_FILENO);
-		ft_putnbr_fd(signal, STDERR_FILENO);
-		ft_putchar_fd('\n', STDERR_FILENO);
-		g_status = 0;
-	}
+	ft_putstr_fd("Quit (core dumped)", STDERR_FILENO);
+	ft_putchar_fd('\n', STDERR_FILENO);
+	(void)signal;
 }

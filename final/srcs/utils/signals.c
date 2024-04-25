@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/25 13:23:04 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:29:59 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,21 @@ void	sig_handler_sa(int signal, siginfo_t *info, void *context)
 {
 	(void)context;
 	(void)info;
-	if (signal == SIGINT)
+	if (!g_status)
+		ft_putstr_fd("\n", STDERR_FILENO);
+	if (g_status == 2)
 	{
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		printf("\n");
 		rl_redisplay();
+		return ;
 	}
-	if (signal == SIGQUIT)
-	{
-		printf("Quit (core dumped)\n");
-		rl_redisplay();
-	}
-}
-
-int	which_signal(t_data *tools)
-{
-	int	signal;
-
-	if (!tools->in_heredoc)
-		ft_putstr_fd("\n", STDERR_FILENO);
-	if (tools->in_cmd)
-	{
-		signal = 1;
-		return (signal);
-	}
-	signal = 0;
-	return (signal);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	printf("\n");
+	rl_redisplay();
+	(void)signal;
 }
 
 int	handle_signal(void)
@@ -55,7 +43,6 @@ int	handle_signal(void)
 	sa.sa_sigaction = (void *)sig_handler_sa;
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGINT, &sa, NULL);
-	//sigaction(SIGQUIT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
 	return (0);
 }
@@ -76,5 +63,5 @@ void	ctrl_d(t_data *tools)
 {
 	printf("exit\n");
 	free_minishell_ctrld(tools);
-	exit (1);
+	exit (0);
 }

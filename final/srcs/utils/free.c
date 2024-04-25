@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 14:51:08 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/24 18:51:15 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:52:08 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,11 @@ void	free_minishell(t_data *tools)
 
 void	free_minishell_ctrld(t_data *tools)
 {
-	//t_token	*tmp;
 	t_token	*token;
 
 	token = tools->lexer_list;
-	// if (token != NULL)
-	// {
-	// 	while (token)
-	// 	{
-	// 		tmp = token->next;
-	// 		free(token->value);
-	// 		free(token);
-	// 		token = tmp;
-	// 	}
-	// }
 	if (tools->envp)
 		ft_destroy_env(tools->env);
 	free(tools->args);
-	// if (tools->pid != NULL)
-	// 	free(tools->pid);
 	free(tools);
 }

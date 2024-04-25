@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:27 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/24 17:28:22 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:54:09 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ void	fill_token_list(t_token *token_list, char *str)
 		else
 			i++;
 	}
-
-	//add_token(token_list, NEWL, "newline", index);
 }
 
 void	destroy_token_list(t_token *token_list)
