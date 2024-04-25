@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/25 15:51:39 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:24:45 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,9 @@ void	count_pipes(t_token *list, t_data *tools)
 
 int	is_env_var(char *str, t_data *tools)
 {
-	int		i;
 	int		start;
-	char	*env_var;
 
-	i = 0;
+	int (i) = 0;
 	while (str[i])
 	{
 		if (str[i] == '$')
@@ -80,17 +78,10 @@ int	is_env_var(char *str, t_data *tools)
 				i++;
 			if (str[i - 1] == '\"')
 				i--;
-			env_var = ft_substr(str, start, i - start);
-			if (!find_env_var(env_var, tools->env))
-			{
-				free(env_var);
+			if (!find_env_var(str, start, i - start, tools->env))
 				break ;
-			}
 			else
-			{
-				free(env_var);
 				return (1);
-			}
 		}
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:05:11 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/24 17:26:39 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:17:28 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static const char *const	g_tab[] = {"<<", ">>", ">", "<", "|", NULL};
 
 static void	token_not_pipe_semi(t_token *token_list, char *str, int *i, int *j)
 {
-	int	index;
+	int		index;
 	char	*token;
 
 	index = 0;

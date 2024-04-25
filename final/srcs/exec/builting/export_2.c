@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:22:01 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 13:08:04 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:14:52 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	verif_export_acsii(unsigned int i, char **str, t_data *data)
 	{
 		ft_printf_error("bash: export: `%s': not a valid identifier\n", str[1]);
 		data->exit = 1;
-		//free_tab(str);
 		return (1);
 	}
 	else

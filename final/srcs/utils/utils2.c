@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:25:03 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/15 13:22:45 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:15:52 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,36 +86,12 @@ void	delete_char_list(t_char_list *list)
 	}
 }
 
-char	*show_prompt()
+char	*show_prompt(void)
 {
 	char	*str;
 	char	*user;
-	/*char	*session;
-	char	*path;
-	char	*tmp;*/
 
-	// user = is_still_env_var("$USER", tools);
-	// if (!user)
 	user = "lnunez-t";
 	str = ft_strjoin(user, "$");
-	//free(user);
-	/*session = prompt_get_sess();
-	if (session == NULL)
-	{
-		free(str);
-		free(session);
-		return (NULL);
-	}
-	tmp = ft_strjoin(str, session);
-	free(str);
-	free(session);
-	session = ft_strjoin(tmp, ":~");
-	free(tmp);
-	path = prompt_get_path(tools);
-	tmp = ft_strjoin(session, path);
-	free(session);
-	str = ft_strjoin(str, "$ ");
-	free(tmp);
-	free(path);*/
 	return (str);
 }

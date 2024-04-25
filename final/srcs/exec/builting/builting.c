@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:19:11 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 15:30:17 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:20:59 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,7 @@ void	fd_built(t_data *data, t_token *token)
 	}
 	else
 		str = ft_split(token->value, ' ');
-	if (ft_strncmp(str[0], "echo", 4) == 0 && ft_strlen(str[0]) == 4)
-		ft_echo(str, data);
-	if (ft_strncmp(str[0], "pwd", 3) == 0 && ft_strlen(str[0]) == 3)
-		ft_pwd(str, data);
-	if (ft_strncmp(str[0], "env", 3) == 0 && ft_strlen(str[0]) == 3)
-		ft_env(data, str);
-	if (ft_strncmp(str[0], "cd", 2) == 0 && ft_strlen(str[0]) == 2)
-		ft_cd(str, data->nb_pipe, data, 1);
-	if (ft_strncmp(str[0], "export", 6) == 0 && ft_strlen(str[0]) == 6)
-		ft_export(str, data, data->nb_pipe);
-	if (ft_strncmp(str[0], "exit", 4) == 0 && ft_strlen(str[0]) == 4)
-		ft_exit(data, data->nb_pipe, str);
-	if (ft_strncmp(str[0], "unset", 5) == 0 && ft_strlen(str[0]) == 5)
-		ft_unset(str, data, data->nb_pipe);
+	which_built(data, str);
 }
 
 void	redirection_builting(t_token *token, t_data *data)

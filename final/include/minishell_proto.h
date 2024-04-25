@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 14:31:53 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:29:03 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	ft_trie_export(t_data *data);
 void	ft_export_modif(char *token, t_env *env);
 void	ft_end(t_data *data, char **str);
 int		ft_strlen_export(char *str, char c);
+void	which_built(t_data *data, char **str);
 
 // partie laura
 
@@ -134,6 +135,7 @@ void	remove_quotes(t_token *lexer_list);
 int		check_end_quote(char *str, int i, char c);
 int		find_matching_quote(char *str, int i, int *nb_q, int q);
 void	list_gathering(t_data *tools);
+char	*add_whats_next(char *str, int i, char *result);
 int		ft_error(int error);
 t_env	*new_env(void);
 void	env_var_expand(t_data *tools);
@@ -141,8 +143,12 @@ char	*replace_exit_status(char *str, t_data *tools);
 char	*replace_exit_status(char *str, t_data *tools);
 char	*replace_env_var(char *str, t_data *tools);
 int		is_env_var(char *str, t_data *tools);
-char	*find_env_var(char *str, t_env *env);
+char	*find_env_var(char *var, int i, int start, t_env *env);
 char	*is_still_env_var(char *str, t_data *tools);
+char	*is_empty_var(char *result);
+char	*add_env_var(char *result, char *find_var);
+char	*ft_exit_status(t_data *tools);
+char	*add_env_var_next(char *var, int i, char *result);
 void	ft_signal_handler(int signal);
 void	ft_destroy_env(t_env *env_list);
 
@@ -159,7 +165,6 @@ void	add_exp_args(t_token *token);
 void	add_unset_args(t_token *token);
 void	word_to_arg(t_token *token);
 void	add_grep_args(t_token *token);
-// void	add_tac_args(t_token *token);
 
 // Utils
 
@@ -180,6 +185,8 @@ int		quote_in_str(char *str);
 void	free_minishell(t_data *tools);
 void	first_word(char *str);
 char	*delete_sep(char *str);
+void	parse_and_execute(t_data *tools);
+void	init_values(t_data *tools);
 
 // Parsing
 

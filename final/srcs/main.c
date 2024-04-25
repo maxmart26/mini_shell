@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/25 15:51:05 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:28:46 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,18 @@ void	init_minishell(t_data *tools, char **env)
 		init_env_shlvl(tools->env, tools, NULL, NULL);
 	}
 	init_path(tools);
-	tools->lexer_list = NULL;
-	tools->pid = NULL;
-	tools->nb_pipe = 0;
-	tools->std_int = 1;
-	tools->lexer_list = NULL;
-	tools->pid = 0;
-	tools->std_out = 0;
-	tools->status = 1;
-	tools->exit = 0;
-	tools->exit_status = 0;
-	tools->exit = 0;
-	tools->in_cmd = 0;
-	tools->in_heredoc = 0;
+	init_values(tools);
 	g_status = 1;
-	tools->first_call = 1;
 	show_ctrl(1);
 	handle_signal();
+}
+
+void	parse_and_execute(t_data *tools)
+{
+	lexer_and_parser(tools);
+	init_data(tools->lexer_list, tools);
+	if (g_status != 258)
+		ft_main(tools);
 }
 
 int	minishell(t_data *tools, char **env)
@@ -92,13 +87,7 @@ int	minishell(t_data *tools, char **env)
 		{
 			add_history(tools->args);
 			if (tools->nl_error == 0)
-			{
-				lexer_and_parser(tools);
-				init_data(tools->lexer_list, tools);
-				//ft_print_lexer(tools->lexer_list);
-				if (g_status != 258)
-					ft_main(tools);
-			}
+				parse_and_execute(tools);
 		}
 		free(tools->args);
 		free(tools->pid);
