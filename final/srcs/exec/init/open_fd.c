@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_fd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:28:38 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 15:09:05 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:39:02 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,10 @@ t_token	*new_token_after_fd(t_token *token)
 		else
 			token = token->next;
 	}
-	while (token)
+	while (token->prev->prev)
 	{
+		if (!token->prev->prev)
+			break ;
 		token = token->prev;
 	}
 	return (token);

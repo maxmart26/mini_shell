@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/19 11:41:15 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:23:04 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,21 @@ void	sig_handler_sa(int signal, siginfo_t *info, void *context)
 	}
 }
 
+int	which_signal(t_data *tools)
+{
+	int	signal;
+
+	if (!tools->in_heredoc)
+		ft_putstr_fd("\n", STDERR_FILENO);
+	if (tools->in_cmd)
+	{
+		signal = 1;
+		return (signal);
+	}
+	signal = 0;
+	return (signal);
+}
+
 int	handle_signal(void)
 {
 	struct sigaction	sa;
@@ -40,8 +55,8 @@ int	handle_signal(void)
 	sa.sa_sigaction = (void *)sig_handler_sa;
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
-	//signal(SIGQUIT, SIG_IGN);
+	//sigaction(SIGQUIT, &sa, NULL);
+	signal(SIGQUIT, SIG_IGN);
 	return (0);
 }
 

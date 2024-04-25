@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/19 17:47:30 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:17:50 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ void	ft_signal_handler(int signal)
 {
 	if (signal == SIGQUIT)
 	{
-		write(STDOUT_FILENO, "\n", 1);
+		ft_putstr_fd("Quit: ", STDERR_FILENO);
+		ft_putnbr_fd(signal, STDERR_FILENO);
+		ft_putchar_fd('\n', STDERR_FILENO);
 		g_status = 0;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/24 15:14:27 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:12:59 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ void	init_minishell(t_data *tools, char **env)
 	tools->exit = 0;
 	tools->exit_status = 0;
 	tools->exit = 0;
+	tools->in_cmd = 0;
+	tools->in_heredoc = 0;
 	g_status = 1;
 	tools->first_call = 1;
 	show_ctrl(1);
-	signal(SIGQUIT, &ft_signal_handler);
 	handle_signal();
 }
 

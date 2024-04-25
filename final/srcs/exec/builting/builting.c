@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:19:11 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 14:31:38 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:30:17 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,21 @@
 void	fd_built(t_data *data, t_token *token)
 {
 	char	**str;
+	int		len;
+	int		i;
 
-	str = ft_split(token->value, ' ');
+	i = 0;
+	len = ft_strlen(token->value);
+	if (token->value[len - 1] == ' ')
+	{
+		str = ft_split(token->value, ' ');
+		while (str[i])
+			i++;
+		i--;
+		str[i] = ft_strjoin(str[i], " ");
+	}
+	else
+		str = ft_split(token->value, ' ');
 	if (ft_strncmp(str[0], "echo", 4) == 0 && ft_strlen(str[0]) == 4)
 		ft_echo(str, data);
 	if (ft_strncmp(str[0], "pwd", 3) == 0 && ft_strlen(str[0]) == 3)
