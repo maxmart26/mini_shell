@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:35 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 14:25:48 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:25:43 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	init_env_shlvl(t_env *env, t_data *data, char *str, char *stt)
 			st = token_init("export", str);
 			free(stt);
 			free(str);
-			ft_export(st, data, -1);
+			ft_export(st, data, -1, NULL);
 		}
 		env = env->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/25 18:28:46 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:38:36 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,93 @@
 
 int		g_status;
 
+void	open_fd_great(t_token *token)
+{
+	int	fd;
+
+	if (token->type == GREAT)
+		fd = open_file(token->next->value, 1);
+	else
+		fd = open_file(token->next->value, 3);
+	if (fd == -1)
+	{
+		ft_printf_error("bash: %s: No such file or directory\n",
+			token->next->value);
+	}
+	token = new_token(token);
+	while (token->prev && token->prev->type != PIPE)
+		token = token->prev;
+	if (token->fd_out > 2)
+		close(fd);
+	if (token->fd_out == -1)
+	{
+		close(fd);
+		fd = -1;
+	}
+	while (token && token->type != PIPE)
+	{
+		token->fd_out = fd;
+		token = token->next;
+	}
+}
+
+void	open_fd_less(t_token *token)
+{
+	int	fd;
+
+	fd = open_file(token->next->value, 0);
+	if (fd == -1)
+	{
+		ft_printf_error("bash: %s: No such file or directory\n",
+			token->next->value);
+	}
+	token = new_token(token);
+	while (token->prev && token->prev->type != PIPE)
+		token = token->prev;
+	if (token->fd_int > 2)
+		close(fd);
+	if (token->fd_int == -1)
+	{
+		close(fd);
+		fd = -1;
+	}
+	while (token && token->type != PIPE)
+	{
+		token->fd_int = fd;
+		token = token->next;
+	}
+}
+t_token	*open_fd_test(t_data *data)
+{
+	t_token	*result;
+	t_token	*tmp;
+
+	result = data->lexer_list;
+	while (data->lexer_list)
+	{
+		if ((data->lexer_list->type == GREAT || data->lexer_list->type == LESS)
+			&& !data->lexer_list->next)
+			result = data->lexer_list->next->next;
+		if (data->lexer_list->type == GREAT || data->lexer_list->type == APPEND)
+			open_fd_great(data->lexer_list);
+		if (data->lexer_list->type == LESS)
+			open_fd_less(data->lexer_list);
+		if (!data->lexer_list->next)
+			break;
+		tmp = data->lexer_list->next;
+		data->lexer_list = tmp;
+	}
+	return (result);
+}
+void	init_fd(t_token *token)
+{
+	while (token)
+	{
+		token->fd_int = 0;
+		token->fd_out = 1;
+		token = token->next;
+	}
+}
 void	lexer_and_parser(t_data *tools)
 {
 	t_token	*tmp;
@@ -33,12 +120,10 @@ void	lexer_and_parser(t_data *tools)
 		remove_quotes(tools->lexer_list);
 		tools->std_out = 1;
 		tools->std_int = 0;
-		open_fd(tools, tools->lexer_list);
-		open_heredoc(tools);
 		if (g_status == 258)
 			return ;
-		if (tools->std_int > 2 || tools->std_out > 2)
-			tools->lexer_list = new_token_after_fd(tools->lexer_list);
+		init_fd(tools->lexer_list);
+		tools->lexer_list = open_fd_test(tools);
 		list_gathering(tools);
 		parsing(tools);
 	}

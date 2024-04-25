@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 14:27:39 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:23:18 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ void	ft_free_tab(char **input)
 	while (input[i])
 	{
 		free(input[i]);
+		input[i] = NULL;
 		i++;
 	}
 	free(input);
+	input = NULL;
 }
 
 char	*ft_path(t_env *env)
@@ -71,7 +73,7 @@ char	*get_path(t_data *data, t_token *token)
 void	exec(t_data *data, t_token *token)
 {
 	ft_exec(data, token);
-	ft_dup2(data);
+	ft_dup2(data, token);
 	execve(data->path_def, data->mycmdargs, data->envp);
 	if (access(data->mycmdargs[0], 0) == 0)
 	{
@@ -81,8 +83,20 @@ void	exec(t_data *data, t_token *token)
 		exit(126);
 	}
 	ft_printf_error("bash: %s: command not found\n", data->mycmdargs[0]);
+	ft_destroy_env(data->env);
 	free_tab(data->path);
 	free_tab(data->mycmdargs);
+	while (data->nb_pipe >= 1)
+	{
+		printf("test\n\n");
+		free(data->pipe_fd[data->nb_pipe - 1]);
+		if (data->nb_pipe == 1)
+			break ;
+		data->nb_pipe--;
+	}
+	if (data->nb_pipe > 0)
+		free(data->pipe_fd);
+	free(data);
 	exit(127);
 }
 

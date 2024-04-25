@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:55:48 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/25 13:29:18 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:45:13 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,14 @@ t_token	*remove_sep(t_token *list)
 	{
 		if (list->type == SEP)
 		{
-			if (list->index == 0)
+			if (!list->next)
+			{
+				if (list->prev)
+					list->prev->next = NULL;
+				free(list->value);
+				free(list);
+			}
+			else if (list->index == 0)
 				result = index_first(list);
 			else
 			{

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:53:08 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 15:16:02 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:42:23 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ int	ft_verif_echo(char *str)
 	return (0);
 }
 
-void	ft_echo(char **str, t_data *data)
+void	ft_echo(char **str, t_data *data, t_token *token)
 {
 	int	n;
 
 	n = 0;
-	ft_dup2(data);
+	ft_dup2(data, token);
 	if (str[1] == NULL)
 	{
 		printf("\n");

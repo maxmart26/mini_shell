@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 12:33:11 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:21:47 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_init_oldpwd_cd(t_env *env)
 	return (str);
 }
 
-void	ft_cd_end(char **str, char *buffer, t_data *data, int k)
+void	ft_cd_end(char **str, char *buffer, t_data *data, int k , t_token *token)
 {
 	char	*buffer_old;
 	char	**buf;
@@ -76,15 +76,15 @@ void	ft_cd_end(char **str, char *buffer, t_data *data, int k)
 		{
 			buffer = ft_init_pwd_cd(data->env);
 			buf = token_init("export", buffer);
-			ft_export(buf, data, -1);
+			ft_export(buf, data, -1, token);
 			ft_free_tab(buf);
-			ft_test(buffer_old, data);
+			ft_test(buffer_old, data, token);
 			free(buffer);
 		}
 	}
 }
 
-int	ft_cd(char **str, int i, t_data *data, int k)
+int	ft_cd(char **str, int i, t_data *data, int k, t_token *token)
 {
 	char	*buffer;
 
@@ -102,11 +102,11 @@ int	ft_cd(char **str, int i, t_data *data, int k)
 		chdir(buffer);
 		free(buffer);
 		buffer = ft_init_pwd_cd(data->env);
-		ft_export(token_init("export", buffer), data, -1);
+		ft_export(token_init("export", buffer), data, -1, token);
 		free(buffer);
 		k = 0;
 		data->exit = 134;
 	}
-	ft_cd_end(str, buffer, data, k);
+	ft_cd_end(str, buffer, data, k, token);
 	return (0);
 }

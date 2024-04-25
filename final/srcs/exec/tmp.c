@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:00:02 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 15:14:11 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:42:00 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,19 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void	ft_tmp_close(t_data *data)
+void	ft_tmp_close(t_data *data, t_token *token)
 {
 	int	i;
 
 	i = 0;
+	while(token)
+	{
+		if (token->fd_int > 2)
+			close(token->fd_int);
+		if (token->fd_out > 2)
+			close(token->fd_out);
+		token = token->next;
+	}
 	if (data->std_int > 2)
 		close(data->std_int);
 	if (data->std_out > 2)
@@ -45,7 +53,7 @@ void	ft_tmp2(t_data *data, t_token *token, int result, pid_t *pid)
 	char	**str;
 
 	str = NULL;
-	ft_tmp_close(data);
+	ft_tmp_close(data, token);
 	i = 0;
 	while (token)
 	{
@@ -53,7 +61,7 @@ void	ft_tmp2(t_data *data, t_token *token, int result, pid_t *pid)
 		{
 			waitpid(pid[i], &result, 0);
 			str = ft_split(token->value, ' ');
-			ft_retry(data, result, str);
+			ft_retry(data, result, str, token);
 			ft_free_tab(str);
 			i++;
 		}

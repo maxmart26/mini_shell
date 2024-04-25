@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:19:11 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 16:20:59 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:42:17 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	redirection_builting(t_token *token, t_data *data)
 		ft_exec_abs(token, data);
 }
 
-void	ft_test(char *buffer_old, t_data *data)
+void	ft_test(char *buffer_old, t_data *data , t_token *token)
 {
 	char	**str;
 
 	str = token_init("export", buffer_old);
-	ft_export(str, data, -1);
+	ft_export(str, data, -1, token);
 	free(buffer_old);
 	ft_free_tab(str);
 }

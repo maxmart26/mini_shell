@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 13:06:45 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:38:23 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_token
 	int					index;
 	t_token_type		type;
 	char				*value;
+	int					fd_out;
+	int					fd_int;
 	struct s_token		*next;
 	struct s_token		*prev;
 }						t_token;
