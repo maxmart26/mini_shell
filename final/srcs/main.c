@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/24 14:25:12 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:20:23 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	lexer_and_parser(t_data *tools)
 		tmp = tools->lexer_list->next;
 		free(tools->lexer_list->value);
 		free(tools->lexer_list);
+		tmp->prev = NULL;
 		tools->lexer_list = tmp;
 		tools->lexer_list = remove_sep(tools->lexer_list);
 		env_var_expand(tools);
 		remove_quotes(tools->lexer_list);
-		//ft_print_lexer(tools->lexer_list);
 		tools->std_out = 1;
 		tools->std_int = 0;
 		open_fd(tools, tools->lexer_list);
@@ -40,7 +40,6 @@ void	lexer_and_parser(t_data *tools)
 		if (tools->std_int > 2 || tools->std_out > 2)
 			tools->lexer_list = new_token_after_fd(tools->lexer_list);
 		list_gathering(tools);
-		def_index(tools->lexer_list);
 		parsing(tools);
 	}
 }
@@ -94,6 +93,7 @@ int	minishell(t_data *tools, char **env)
 			{
 				lexer_and_parser(tools);
 				init_data(tools->lexer_list, tools);
+				//ft_print_lexer(tools->lexer_list);
 				if (g_status != 258)
 					ft_main(tools);
 			}

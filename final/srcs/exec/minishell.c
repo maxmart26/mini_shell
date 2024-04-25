@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 14:36:07 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/24 18:50:44 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,27 @@ void	ft_retry(t_data *data, int result, char **str)
 
 int	ft_main(t_data *data)
 {
+	t_token *token;
+	t_token *tmp;
+
+	token = data->lexer_list;
 	ft_tmp(data, data->lexer_list);
-	while (data->nb_pipe > 0)
+	while (data->nb_pipe >= 1)
 	{
 		free(data->pipe_fd[data->nb_pipe - 1]);
+		if (data->nb_pipe == 1)
+			break ;
 		data->nb_pipe--;
 	}
 	if (data->nb_pipe > 0)
 		free(data->pipe_fd);
+	free(data->pid);
+	while (token)
+	{
+		tmp = token->next;
+		free(token->value);
+		free(token);
+		token = tmp;
+	}
 	return (0);
 }

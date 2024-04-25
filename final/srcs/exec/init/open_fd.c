@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:28:38 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 15:09:05 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:20:50 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,19 @@ t_token	*new_token(t_token *token)
 
 	tmp = token;
 	tmp2 = token->next;
-	token->prev->next = token->next->next;
 	if (token->next->next)
 	{
 		token->next->next->prev = token->prev;
 		token = token->next->next;
+		free(tmp2->value);
 		free(tmp2);
 	}
 	else
-		token = token->next;
+	{
+		token->prev->next = token->next->next;
+		token = token->prev;
+	}
+	free(tmp->value);
 	free(tmp);
 	return (token);
 }
@@ -83,9 +87,11 @@ t_token	*new_token_after_fd(t_token *token)
 		else
 			token = token->next;
 	}
-	while (token)
+	while (token->prev)
 	{
 		token = token->prev;
 	}
+	if (strncmp(token->value, "NONE", 4) == 0)
+		token = token->next;
 	return (token);
 }
