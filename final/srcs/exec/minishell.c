@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 13:14:06 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:28:08 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,11 @@ int	ft_main(t_data *data)
 	signal(SIGQUIT, &ft_signal_handler);
 	data->in_cmd = 1;
 	ft_tmp(data, data->lexer_list);
-	while (data->nb_pipe > 0)
+	while (data->nb_pipe >= 1)
 	{
 		free(data->pipe_fd[data->nb_pipe - 1]);
+		if (data->nb_pipe == 1)
+			break ;
 		data->nb_pipe--;
 	}
 	if (data->nb_pipe > 0)

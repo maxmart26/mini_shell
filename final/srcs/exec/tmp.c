@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:00:02 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/24 15:15:55 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:28:50 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_tmp2(t_data *data, t_token *token, int result, pid_t *pid)
 			waitpid(pid[i], &result, 0);
 			str = ft_split(token->value, ' ');
 			ft_retry(data, result, str);
+			//ft_free_tab(str);
 			i++;
 		}
 		token = token->next;
@@ -81,6 +82,8 @@ void	ft_tmp(t_data *data, t_token *token)
 	data->nb_com = ft_cmd(token);
 	result = -23;
 	data->pid = malloc(data->nb_com * sizeof(pid_t));
+	if (!data->pid)
+		return ;
 	data->nb_com = 0;
 	while (token)
 	{

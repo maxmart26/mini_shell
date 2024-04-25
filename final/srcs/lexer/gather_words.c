@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gather_words.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:01:46 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/09 14:26:00 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/24 18:54:32 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	list_gathering(t_data *tools)
 				token->next = tmp->next;
 				if (tmp->next)
 					token->next->prev = token;
+				free(tmp->value);
 				free(tmp);
 			}
 			else
