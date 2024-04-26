@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:55:48 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/25 18:45:13 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/26 11:51:51 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ char	*delete_sep(char *str)
 		else if (!is_space && str[i + 1] != '\0')
 		{
 			result[j++] = ' ';
-			is_space = 1;
+			if (str[0] == '\'' || str[0] == '\"')
+				is_space = 0;
+			else
+				is_space = 1;
 			i++;
 		}
 		else if (!is_space && str[i + 1] == '\0')

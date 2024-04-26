@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 12:08:14 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/25 18:45:09 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/26 11:52:44 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void	remove_quotes(t_token *lexer_list)
 	{
 		if (tmp->type == WORD)
 		{
+			if (tmp->value[0])
+				tmp->value = delete_sep(tmp->value);
 			while (tmp->value && quote_in_str(tmp->value) == 1)
 			{
 				tmp->value = delete_quotes(tmp->value);
 			}
-			if (tmp->value[0])
-				tmp->value = delete_sep(tmp->value);
 		}
 		tmp = tmp->next;
 	}
