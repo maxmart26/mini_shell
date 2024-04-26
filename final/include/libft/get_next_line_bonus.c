@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 09:50:41 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/25 16:11:03 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:02:40 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	stockage[fd] = ft_clean(stockage[fd], 0, 0);
+	free(stockage[fd]);
+	stockage[fd] = NULL;
 	return (line);
 }

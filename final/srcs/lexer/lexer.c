@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:27 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/24 17:28:22 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:51:10 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ void	fill_token_list(t_token *token_list, char *str)
 		else
 			i++;
 	}
-
-	//add_token(token_list, NEWL, "newline", index);
 }
 
 void	destroy_token_list(t_token *token_list)

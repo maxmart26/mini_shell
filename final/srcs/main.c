@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/25 18:31:31 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:45:46 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int		g_status;
 
-void	open_fd_great(t_token *token)
+t_token	*open_fd_great(t_token *token)
 {
 	int	fd;
 
@@ -33,7 +33,7 @@ void	open_fd_great(t_token *token)
 	while (token->prev && token->prev->type != PIPE)
 		token = token->prev;
 	if (token->fd_out > 2)
-		close(fd);
+		close(token->fd_out);
 	if (token->fd_out == -1)
 	{
 		close(fd);
@@ -44,9 +44,10 @@ void	open_fd_great(t_token *token)
 		token->fd_out = fd;
 		token = token->next;
 	}
+	return (token);
 }
 
-void	open_fd_less(t_token *token)
+t_token	*open_fd_less(t_token *token)
 {
 	int	fd;
 
@@ -71,26 +72,34 @@ void	open_fd_less(t_token *token)
 		token->fd_int = fd;
 		token = token->next;
 	}
+	return (token);
 }
+
 t_token	*open_fd_test(t_data *data)
 {
 	t_token	*result;
 	t_token	*tmp;
 
 	result = data->lexer_list;
-	while (data->lexer_list)
+	while (data->lexer_list->next)
 	{
-		if ((data->lexer_list->type == GREAT || data->lexer_list->type == LESS)
-			&& !data->lexer_list->next)
+		if ((data->lexer_list->type == GREAT || data->lexer_list->type == LESS
+				|| data->lexer_list->type == HEREDOC
+				|| data->lexer_list->type == APPEND) && !data->lexer_list->prev)
 			result = data->lexer_list->next->next;
 		if (data->lexer_list->type == GREAT || data->lexer_list->type == APPEND)
-			open_fd_great(data->lexer_list);
-		if (data->lexer_list->type == LESS)
-			open_fd_less(data->lexer_list);
-		if (!data->lexer_list->next)
-			break;
-		tmp = data->lexer_list->next;
-		data->lexer_list = tmp;
+			data->lexer_list = open_fd_great(data->lexer_list);
+		else if (data->lexer_list->type == LESS)
+			data->lexer_list = open_fd_less(data->lexer_list);
+		else if (data->lexer_list->type == HEREDOC)
+			data->lexer_list = open_heredoc(data, data->lexer_list);
+		else if (data->lexer_list->next)
+		{
+			tmp = data->lexer_list->next;
+			data->lexer_list = tmp;
+		}
+		if (!data->lexer_list || !data->lexer_list->next)
+			break ;
 	}
 	return (result);
 }
@@ -102,6 +111,17 @@ void	init_fd(t_token *token)
 		token->fd_out = 1;
 		token = token->next;
 	}
+}
+int	verif_open(t_token *token)
+{
+	while (token)
+	{
+		if (token->type == APPEND || token->type == GREAT || token->type == LESS
+			|| token->type == HEREDOC)
+			return (1);
+		token = token->next;
+	}
+	return (0);
 }
 void	lexer_and_parser(t_data *tools)
 {
@@ -123,7 +143,8 @@ void	lexer_and_parser(t_data *tools)
 		if (g_status == 258)
 			return ;
 		init_fd(tools->lexer_list);
-		tools->lexer_list = open_fd_test(tools);
+		while (verif_open(tools->lexer_list) == 1)
+			tools->lexer_list = open_fd_test(tools);
 		list_gathering(tools);
 		parsing(tools);
 	}
@@ -178,7 +199,6 @@ int	minishell(t_data *tools, char **env)
 			{
 				lexer_and_parser(tools);
 				init_data(tools->lexer_list, tools);
-				// ft_print_lexer(tools->lexer_list);
 				if (g_status != 258)
 					ft_main(tools);
 			}

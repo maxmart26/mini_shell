@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:52:41 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 18:35:56 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:39:40 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	ft_unset_end(char **str, t_data *data)
 		env = tmp;
 	}
 	data->exit = 0;
-	free_tab(str);
 }
 
 void	ft_unset(char **str, t_data *data, int i)
@@ -75,7 +74,6 @@ void	ft_unset(char **str, t_data *data, int i)
 	data->exit = 0;
 	if (!str[1])
 	{
-		free_tab(str);
 		return ;
 	}
 	else

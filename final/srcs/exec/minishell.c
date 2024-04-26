@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 18:17:57 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:34:26 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ int	open_file(char *s, int i)
 {
 	int	fd;
 
-	fd = 0;
 	if (i == 1)
 		fd = open(s, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	else if (i == 0)
 		fd = open(s, O_RDONLY);
-	else if (i == 3)
+	else 
 		fd = open(s, O_CREAT | O_RDWR | O_APPEND, 0644);
 	return (fd);
 }

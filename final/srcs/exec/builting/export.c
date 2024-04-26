@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 16:18:30 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:58:04 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	verif_export(char **str, t_data *data)
 	{
 		ft_printf_error(" not a valid identifier\n");
 		ft_free_tab(strs);
-		free_tab(str);
 		data->exit = 1;
 		return (1);
 	}
@@ -118,4 +117,9 @@ void	ft_export(char **strs, t_data *data, int i, t_token *token)
 		ft_export_2(strs, data);
 	}
 	data->exit = 0;
+	if (i > 0)
+	{
+		ft_end(data, strs);
+		exit (0);
+	}
 }

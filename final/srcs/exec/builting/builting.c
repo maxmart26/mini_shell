@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:19:11 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 16:22:30 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:22:53 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,12 @@ void	fd_built(t_data *data, t_token *token)
 	if (ft_strncmp(str[0], "cd", 2) == 0 && ft_strlen(str[0]) == 2)
 		ft_cd(str, data->nb_pipe, data, 1, token);
 	if (ft_strncmp(str[0], "export", 6) == 0 && ft_strlen(str[0]) == 6)
-		ft_export(str, data, data->nb_pipe,  token);
+		ft_export(str, data, data->nb_pipe, token);
 	if (ft_strncmp(str[0], "exit", 4) == 0 && ft_strlen(str[0]) == 4)
 		ft_exit(data, data->nb_pipe, str);
 	if (ft_strncmp(str[0], "unset", 5) == 0 && ft_strlen(str[0]) == 5)
 		ft_unset(str, data, data->nb_pipe);
-}
-
-void	redirection_builting(t_token *token, t_data *data)
-{
-	if (token->type == CMD)
-		ft_exec(data, token);
-	if (token->type == CMD_ABS)
-		ft_exec_abs(token, data);
+	free_tab(str);
 }
 
 void	ft_test(char *buffer_old, t_data *data , t_token *token)

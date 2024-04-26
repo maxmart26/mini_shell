@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 16:24:35 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:23:30 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_token	*new_token_after_fd(t_token *token);
 
 // herdoc.c
 
-void	open_heredoc(t_data *data);
+t_token	*open_heredoc(t_data *data, t_token *token);
 
 // exec.c
 

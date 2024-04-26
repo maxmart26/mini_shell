@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:29:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/10 18:29:32 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:52:14 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 1000000
 # endif
 
 # define HEX_LOW_FMT "0123456789abcdef"

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:00:02 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 18:25:06 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:04:05 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	ft_tmp2(t_data *data, t_token *token, int result, pid_t *pid)
 			waitpid(pid[i], &result, 0);
 			str = ft_split(token->value, ' ');
 			ft_retry(data, result, str, token);
-			// if(str != NULL)
-			// 	ft_free_tab(str);
+			if (str != NULL)
+				ft_free_tab(str);
 			i++;
 		}
 		token = token->next;
