@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 16:21:47 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:18:17 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_init_oldpwd_cd(t_env *env)
 	return (str);
 }
 
-void	ft_cd_end(char **str, char *buffer, t_data *data, int k , t_token *token)
+void	ft_cd_end(char **str, char *buffer, t_data *data, int k, t_token *token)
 {
 	char	*buffer_old;
 	char	**buf;

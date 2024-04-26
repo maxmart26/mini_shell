@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:55:48 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/26 11:51:51 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:52:52 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ t_token	*index_first(t_token *list)
 	return (result);
 }
 
+t_token	*delete_space(t_token *list)
+{
+	t_token	*tmp;
+
+	tmp = list->prev;
+	tmp->next = list->next;
+	tmp->next->prev = tmp;
+	free(list->value);
+	free(list);
+	list = tmp;
+	return (list);
+}
+
 t_token	*remove_sep(t_token *list)
 {
 	t_token	*tmp;
@@ -56,17 +69,10 @@ t_token	*remove_sep(t_token *list)
 				free(list->value);
 				free(list);
 			}
-			else if (list->index == 0)
+			if (list->index == 0)
 				result = index_first(list);
 			else
-			{
-				tmp = list->prev;
-				tmp->next = list->next;
-				tmp->next->prev = tmp;
-				free(list->value);
-				free(list);
-				list = tmp;
-			}
+				list = delete_space(list);
 		}
 		tmp = list->next;
 		list = tmp;
@@ -77,42 +83,12 @@ t_token	*remove_sep(t_token *list)
 char	*delete_sep(char *str)
 {
 	char	*result;
-	int		i;
-	int		j;
-	int		is_space;
 
-	i = 0;
+	int (i) = 0;
+	int (j) = 0;
 	result = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
-	j = 0;
-	is_space = 0;
-	while (str[i])
-	{
-		if (str[i] != ' ')
-		{
-			result[j++] = str[i++];
-			is_space = 0;
-		}
-		else if (!is_space && str[i + 1] != '\0')
-		{
-			result[j++] = ' ';
-			if (str[0] == '\'' || str[0] == '\"')
-				is_space = 0;
-			else
-				is_space = 1;
-			i++;
-		}
-		else if (!is_space && str[i + 1] == '\0')
-		{
-			result[j] = ' ';
-			j++;
-			break ;
-		}
-		else
-			i++;
-	}
-	free(str);
-	result[j] = '\0';
-	return (result);
+	result = manage_sep2(str, result, i, j);
+	return (free(str), result);
 }

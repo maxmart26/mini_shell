@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:28:38 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 18:44:48 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:18:28 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	open_fd(t_data *data, t_token *token)
 				data->std_int = 0;
 			if (data->std_out == -1)
 				data->std_out = 1;
-			break;
+			break ;
 		}
 		tmp = token->next;
 		token = tmp;

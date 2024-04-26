@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:00:02 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 18:42:00 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:17:57 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_tmp_close(t_data *data, t_token *token)
 	int	i;
 
 	i = 0;
-	while(token)
+	while (token)
 	{
 		if (token->fd_int > 2)
 			close(token->fd_int);
@@ -85,7 +85,7 @@ int	ft_cmd(t_token *token)
 
 void	ft_tmp(t_data *data, t_token *token)
 {
-	int		result;
+	int	result;
 
 	data->nb_com = ft_cmd(token);
 	result = -23;

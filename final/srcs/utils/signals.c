@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/25 15:29:59 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:35:27 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	sig_handler_sa(int signal, siginfo_t *info, void *context)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		printf("\n");
-		rl_redisplay();
 		return ;
 	}
 	rl_on_new_line();

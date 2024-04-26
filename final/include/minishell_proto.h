@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 18:38:14 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:53:35 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@
 
 // pour les tests
 
-void	init_test(t_token *token);
-t_token	*init_token(t_token *prev);
 int		open_file(char *s, int i);
 void	open_fd(t_data *data, t_token *token);
+void	open_fd_great(t_token *token);
+void	open_fd_less(t_token *token);
+t_token	*open_fd_test(t_data *data);
+void	init_fd(t_token *token);
+void	manage_no_pipe(t_data *data, t_token *token);
 
 // init_data.c
 
@@ -127,6 +130,7 @@ void	ft_print_lexer(t_token *list);
 void	add_cmd(t_token *token);
 void	manage_cmd(t_token *token);
 void	manage_cmd_buil(t_token *token);
+t_token	*delete_space(t_token *list);
 
 void	count_pipes(t_token *list, t_data *tools);
 int		count_quotes(char *str);
@@ -135,6 +139,9 @@ void	remove_quotes(t_token *lexer_list);
 int		check_end_quote(char *str, int i, char c);
 int		find_matching_quote(char *str, int i, int *nb_q, int q);
 void	list_gathering(t_data *tools);
+t_token	*consecutive_words(t_token *token);
+char	*manage_sep2(char *str, char *result, int i, int j);
+int		word_with_quote(char *str);
 char	*add_whats_next(char *str, int i, char *result);
 int		ft_error(int error);
 t_env	*new_env(void);

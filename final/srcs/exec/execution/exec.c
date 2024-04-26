@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 18:23:18 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:22:35 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	exec(t_data *data, t_token *token)
 	free_tab(data->mycmdargs);
 	while (data->nb_pipe >= 1)
 	{
-		printf("test\n\n");
 		free(data->pipe_fd[data->nb_pipe - 1]);
 		if (data->nb_pipe == 1)
 			break ;
