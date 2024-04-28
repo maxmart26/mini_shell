@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/26 15:25:14 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/28 14:28:14 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,20 @@ void	exec(t_data *data, t_token *token)
 		ft_printf_error(" Is a directory\n");
 		free_tab(data->path);
 		free_tab(data->mycmdargs);
+		destroy_token_list(data->lexer_list);
+		ft_destroy_env(data->env);
+		while (data->nb_pipe >= 1)
+		{
+			printf("test\n\n");
+			free(data->pipe_fd[data->nb_pipe - 1]);
+			if (data->nb_pipe == 1)
+				break ;
+			data->nb_pipe--;
+		}
+		if (data->nb_pipe > 0)
+			free(data->pipe_fd);
+		free(data->pid);
+		free(data);
 		exit(126);
 	}
 	ft_printf_error("bash: %s: command not found\n", data->mycmdargs[0]);

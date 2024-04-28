@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:44 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/16 15:30:13 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/28 14:19:12 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	check_syntax(t_data *tools)
 	tmp = tools->lexer_list;
 	/*if (check_error_newline(tmp))
 		return (printf("%s'\n", "newline"), 1);*/
+	if (!tmp)
+		return (0);
 	if ((tmp->type == HEREDOC && (tmp->next->type == GREAT
 				|| tmp->next->type == HEREDOC)) || (tmp->type == APPEND
 			&& (tmp->next->type == APPEND || tmp->next->type == LESS)))
@@ -99,6 +101,8 @@ int	check_spe_char(t_data *tools)
 	t_token	*tmp;
 
 	tmp = tools->lexer_list;
+	if (!tmp)
+		return (0);
 	if (strncmp(tmp->value, "&", 1) == 0)
 	{
 		printf(SYNTAX_ERR);

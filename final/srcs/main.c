@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/26 17:45:46 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/28 14:17:52 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_token	*open_fd_great(t_token *token)
 			token->next->value);
 	}
 	token = new_token(token);
+	if (!token)
+		return (NULL);
 	while (token->prev && token->prev->type != PIPE)
 		token = token->prev;
 	if (token->fd_out > 2)
@@ -92,7 +94,11 @@ t_token	*open_fd_test(t_data *data)
 		else if (data->lexer_list->type == LESS)
 			data->lexer_list = open_fd_less(data->lexer_list);
 		else if (data->lexer_list->type == HEREDOC)
+		{
 			data->lexer_list = open_heredoc(data, data->lexer_list);
+			if (g_status ==  258)
+				break;
+		}
 		else if (data->lexer_list->next)
 		{
 			tmp = data->lexer_list->next;
@@ -114,6 +120,8 @@ void	init_fd(t_token *token)
 }
 int	verif_open(t_token *token)
 {
+	if (g_status == 258)
+		return (0);
 	while (token)
 	{
 		if (token->type == APPEND || token->type == GREAT || token->type == LESS
@@ -145,6 +153,8 @@ void	lexer_and_parser(t_data *tools)
 		init_fd(tools->lexer_list);
 		while (verif_open(tools->lexer_list) == 1)
 			tools->lexer_list = open_fd_test(tools);
+		if (g_status == 258)
+			return ;
 		list_gathering(tools);
 		parsing(tools);
 	}
@@ -175,7 +185,6 @@ void	init_minishell(t_data *tools, char **env)
 	g_status = 1;
 	tools->first_call = 1;
 	show_ctrl(1);
-	signal(SIGQUIT, &ft_signal_handler);
 	handle_signal();
 }
 
@@ -186,6 +195,7 @@ int	minishell(t_data *tools, char **env)
 	init_minishell(tools, env);
 	while (g_status)
 	{
+		handle_signal();
 		str = show_prompt();
 		tools->args = readline(str);
 		free(str);
@@ -200,7 +210,16 @@ int	minishell(t_data *tools, char **env)
 				lexer_and_parser(tools);
 				init_data(tools->lexer_list, tools);
 				if (g_status != 258)
+				{
+					printf("%d\n", g_status);
 					ft_main(tools);
+					printf("%d\n", g_status);
+				}
+				else
+				{
+					destroy_token_list(tools->lexer_list);
+					g_status = 1;
+				}
 			}
 		}
 		free(tools->args);

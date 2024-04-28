@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:00:02 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/26 15:04:05 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/28 14:27:31 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_tmp_close(t_data *data, t_token *token)
 	int	i;
 
 	i = 0;
-	while(token)
+	while (token)
 	{
 		if (token->fd_int > 2)
 			close(token->fd_int);
@@ -86,13 +86,16 @@ int	ft_cmd(t_token *token)
 
 void	ft_tmp(t_data *data, t_token *token)
 {
-	int		result;
+	int	result;
 
 	data->nb_com = ft_cmd(token);
 	result = -23;
-	data->pid = malloc(data->nb_com * sizeof(pid_t));
-	if (!data->pid)
-		return ;
+	if (data->nb_com > 0)
+	{
+		data->pid = malloc(data->nb_com * sizeof(pid_t));
+		if (!data->pid)
+			return ;
+	}
 	data->nb_com = 0;
 	while (token)
 	{

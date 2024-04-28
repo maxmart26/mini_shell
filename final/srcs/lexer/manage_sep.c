@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:55:48 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/25 14:06:47 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/28 11:31:33 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_token	*remove_sep(t_token *list)
 					list->prev->next = NULL;
 				free(list->value);
 				free(list);
+				break;
 			}
 			else if (list->index == 0)
 				result = index_first(list);

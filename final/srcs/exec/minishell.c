@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/26 16:34:26 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/28 11:46:22 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	open_file(char *s, int i)
 		fd = open(s, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	else if (i == 0)
 		fd = open(s, O_RDONLY);
-	else 
+	else
 		fd = open(s, O_CREAT | O_RDWR | O_APPEND, 0644);
 	return (fd);
 }
@@ -87,10 +87,8 @@ void	ft_retry(t_data *data, int result, char **str, t_token *token)
 
 int	ft_main(t_data *data)
 {
-	t_token	*token;
-	t_token	*tmp;
-
-	token = data->lexer_list;
+	signal(SIGQUIT, &ft_signal_handler);
+	g_status = 2;
 	ft_tmp(data, data->lexer_list);
 	while (data->nb_pipe >= 1)
 	{
@@ -102,12 +100,7 @@ int	ft_main(t_data *data)
 	if (data->nb_pipe > 0)
 		free(data->pipe_fd);
 	free(data->pid);
-	while (token)
-	{
-		tmp = token->next;
-		free(token->value);
-		free(token);
-		token = tmp;
-	}
+	destroy_token_list(data->lexer_list);
+	g_status = 1;
 	return (0);
 }

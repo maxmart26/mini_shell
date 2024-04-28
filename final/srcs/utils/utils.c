@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/19 16:47:04 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/28 11:51:16 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,7 @@ int	is_env_var(char *str, t_data *tools)
 
 void	ft_signal_handler(int signal)
 {
-	if (signal == SIGQUIT)
-	{
-		write(STDOUT_FILENO, "\n", 1);
-		g_status = 0;
-	}
+	ft_putstr_fd("Quit (core dumped)", STDERR_FILENO);
+	ft_putchar_fd('\n', STDERR_FILENO);
+	(void)signal;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/19 11:41:15 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/28 14:08:16 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,20 @@ void	sig_handler_sa(int signal, siginfo_t *info, void *context)
 {
 	(void)context;
 	(void)info;
-	if (signal == SIGINT)
+	if (!g_status)
+		ft_putstr_fd("\n", STDERR_FILENO);
+	if (g_status == 2)
 	{
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		printf("\n");
-		rl_redisplay();
+		return ;
 	}
-	if (signal == SIGQUIT)
-	{
-		printf("Quit (core dumped)\n");
-		rl_redisplay();
-	}
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	printf("\n");
+	rl_redisplay();
+	(void)signal;
 }
 
 int	handle_signal(void)
@@ -40,8 +42,7 @@ int	handle_signal(void)
 	sa.sa_sigaction = (void *)sig_handler_sa;
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
-	//signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	return (0);
 }
 
