@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   expand3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 14:51:08 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/28 18:07:12 by matorgue         ###   ########.fr       */
+/*   Created: 2024/04/29 16:54:00 by matorgue          #+#    #+#             */
+/*   Updated: 2024/04/29 17:00:11 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,29 @@
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
 
-void	free_minishell(t_data *tools)
+void	env_var_expand(t_data *tools)
 {
-	free(tools->args);
-	free_env(tools->envp);
-	ft_destroy_env(tools->env);
-	destroy_token_list(tools->lexer_list);
-	free(tools->pid);
-	free(tools);
-}
+	t_token	*tmp;
+	char	*str;
 
-void	free_minishell_ctrld(t_data *tools)
-{
-	t_token	*token;
-
-	token = tools->lexer_list;
-	if (tools->envp)
-		ft_destroy_env(tools->env);
-	free(tools->args);
-	free(tools);
+	str = NULL;
+	tmp = tools->lexer_list;
+	while (tmp)
+	{
+		if (tmp->type == PIPE)
+			break ;
+		else if (tmp->type == WORD)
+		{
+			if (ft_strnstr(tmp->value, "$?", 2))
+			{
+				tmp->value = replace_exit_status(tmp->value, tools, 0, NULL);
+			}
+			else if (tmp->value[0] != '\'' && tmp->value[0] != '\\'
+				&& is_env_var(tmp->value, tools, NULL) == 1)
+				tmp->value = replace_env_var(tmp->value, tools);
+			tmp = tmp->next;
+		}
+		else
+			tmp = tmp->next;
+	}
 }

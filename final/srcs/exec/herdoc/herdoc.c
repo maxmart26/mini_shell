@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:06:12 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/28 14:21:40 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:04:00 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ void	ft_here_doc_put_in(t_data *data, char *av)
 
 	while (1)
 	{
-		//ft_putstr_fd(">", 2);
-		ret = readline(">");
+		ft_putstr_fd(">", 2);
+		ret = get_next_line(0);
 		if (!ret)
 		{
 			g_status = 258;
+			printf("\n");
 			return ;
 		}
 		if (ft_strncmp(ret, av, ft_strlen(av)) == 0
-			&& ft_strlen(av) == ft_strlen(ret))
+			&& ft_strlen(av) == ft_strlen(ret + 1))
 		{
 			free(ret);
 			return ;
@@ -40,7 +41,7 @@ void	ft_here_doc_put_in(t_data *data, char *av)
 
 int	ft_access(void)
 {
-	int	i;
+	int		i;
 	char	*c;
 	char	*str;
 
@@ -68,15 +69,13 @@ void	ft_herdoc(t_data *data, t_token *tmp, int i)
 	i = ft_access();
 	c = ft_itoa(i);
 	data->itoa = ft_strjoin("/tmp/.here_doc", c);
-	data->f1 = open((data->itoa),
-			O_CREAT | O_RDWR | O_TRUNC, 0777);
+	data->f1 = open((data->itoa), O_CREAT | O_RDWR | O_TRUNC, 0777);
 	free(c);
 	if (data->f1 < 0)
 		return ;
 	ft_here_doc_put_in(data, tmp->next->value);
 	close(data->f1);
-	if (g_status != 258)
-		data->f1 = open(data->itoa, O_RDONLY);
+	data->f1 = open(data->itoa, O_RDONLY);
 	unlink(data->itoa);
 	free(data->itoa);
 	data->std_int = data->f1;
@@ -84,12 +83,9 @@ void	ft_herdoc(t_data *data, t_token *tmp, int i)
 
 t_token	*open_heredoc(t_data *data, t_token *token)
 {
-	printf("%d\n", g_status);
-	//g_status = 3;
+	signal(SIGQUIT, &ft_signal_handler);
+	g_status = 5;
 	ft_herdoc(data, token, 0);
-	printf("%d\n", g_status);
-	if (g_status == 258)
-		return (token);
 	token = new_token(token);
 	if (!token)
 		return (NULL);
@@ -108,4 +104,3 @@ t_token	*open_heredoc(t_data *data, t_token *token)
 	g_status = 1;
 	return (token);
 }
-

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 20:13:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/26 17:58:04 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/28 15:07:13 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_export(char **strs, t_data *data, int i, t_token *token)
 	if (i == 0)
 	{
 		ft_end(data, strs);
-		exit(156);
+		exit(199);
 	}
 	if (strs[1] == NULL)
 		ft_trie_export(data, token);

@@ -6,28 +6,13 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/28 14:28:14 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:06:40 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell_include.h"
 #include "../../../include/minishell_proto.h"
 #include "../../../include/minishell_struct.h"
-
-void	ft_free_tab(char **input)
-{
-	size_t	i;
-
-	i = 0;
-	while (input[i])
-	{
-		free(input[i]);
-		input[i] = NULL;
-		i++;
-	}
-	free(input);
-	input = NULL;
-}
 
 char	*ft_path(t_env *env)
 {
@@ -70,6 +55,27 @@ char	*get_path(t_data *data, t_token *token)
 	return (NULL);
 }
 
+void	exec_no_acc(t_data *data)
+{
+	ft_printf_error(" Is a directory\n");
+	free_tab(data->path);
+	free_tab(data->mycmdargs);
+	destroy_token_list(data->lexer_list);
+	ft_destroy_env(data->env);
+	while (data->nb_pipe >= 1)
+	{
+		free(data->pipe_fd[data->nb_pipe - 1]);
+		if (data->nb_pipe == 1)
+			break ;
+		data->nb_pipe--;
+	}
+	if (data->nb_pipe > 0)
+		free(data->pipe_fd);
+	free(data->pid);
+	free(data);
+	exit(126);
+}
+
 void	exec(t_data *data, t_token *token)
 {
 	if (ft_exec(data, token) != NULL)
@@ -78,35 +84,16 @@ void	exec(t_data *data, t_token *token)
 		execve(data->path_def, data->mycmdargs, data->envp);
 	}
 	if (access(data->mycmdargs[0], 0) == 0)
-	{
-		ft_printf_error(" Is a directory\n");
-		free_tab(data->path);
-		free_tab(data->mycmdargs);
-		destroy_token_list(data->lexer_list);
-		ft_destroy_env(data->env);
-		while (data->nb_pipe >= 1)
-		{
-			printf("test\n\n");
-			free(data->pipe_fd[data->nb_pipe - 1]);
-			if (data->nb_pipe == 1)
-				break ;
-			data->nb_pipe--;
-		}
-		if (data->nb_pipe > 0)
-			free(data->pipe_fd);
-		free(data->pid);
-		free(data);
-		exit(126);
-	}
+		exec_no_acc(data);
 	ft_printf_error("bash: %s: command not found\n", data->mycmdargs[0]);
 	ft_destroy_env(data->env);
 	free(data->pid);
-	free_tab(data->path);
+	if (data->path != NULL)
+		free_tab(data->path);
 	destroy_token_list(data->lexer_list);
 	free_tab(data->mycmdargs);
 	while (data->nb_pipe >= 1)
 	{
-		printf("test\n\n");
 		free(data->pipe_fd[data->nb_pipe - 1]);
 		if (data->nb_pipe == 1)
 			break ;
@@ -128,7 +115,10 @@ char	*ft_exec(t_data *data, t_token *token)
 	if (data->path_from_envp == NULL && data->r_path == TRUE)
 		return (exec_path(data));
 	else if (data->path_from_envp == NULL && data->r_path == FALSE)
-		return (perror(CMD_ERR), NULL);
+	{
+		data->path = NULL;
+		return (NULL);
+	}
 	data->path = ft_split(data->path_from_envp, ':');
 	while (data->path[i])
 	{
@@ -138,9 +128,7 @@ char	*ft_exec(t_data *data, t_token *token)
 		if (access(data->path_def, 0) == 0)
 			return (data->path_def);
 		else
-		{
 			free(data->path_def);
-		}
 		i++;
 	}
 	return (NULL);

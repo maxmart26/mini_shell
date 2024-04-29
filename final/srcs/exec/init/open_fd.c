@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:28:38 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/28 14:17:07 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:16:42 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,13 @@ void	open_fd(t_data *data, t_token *token)
 				data->std_int = 0;
 			if (data->std_out == -1)
 				data->std_out = 1;
-			break;
+			break ;
 		}
 		tmp = token->next;
 		token = tmp;
 	}
 }
+
 t_token	*new_tokenn(t_token *token)
 {
 	t_token	*new;
@@ -73,6 +74,7 @@ t_token	*new_tokenn(t_token *token)
 		new->index = 0;
 	return (new);
 }
+
 t_token	*new_token(t_token *token)
 {
 	t_token	*tmp;

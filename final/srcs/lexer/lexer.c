@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:27 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/26 17:51:10 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:47:43 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	add_token(t_token *token_list, t_token_type type, char *str, int i)
 	{
 		free(tmp->next->value);
 		free(tmp->next);
+		free(str);
 		return ;
 	}
 	tmp->next->next = NULL;

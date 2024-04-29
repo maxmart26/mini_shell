@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/26 15:23:30 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:09:22 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ void	init_test(t_token *token);
 t_token	*init_token(t_token *prev);
 int		open_file(char *s, int i);
 void	open_fd(t_data *data, t_token *token);
+void	parse_and_execute(t_data *tools);
+void	ft_cd_pasta(char *buffer, t_data *data, char **buff, t_token *token);
+int		ft_cd(char **str, int i, t_data *data, t_token *token);
+void	ft_cd_vague(char *buffer, t_data *data, char **buff, t_token *token);
+char	*ft_init_pwd_cd(t_env *env);
+void	ft_cd_end(char **str, char *buffer, t_data *data, t_token *token);
+char	*check_before_env_var(char *result, int i, char *var);
+char	*find_var_env(char *var, int start, int i, t_data *tools);
+char	*print_result(char *tmp, char *result, char *var, int i);
+char	*only_dollar(char *result);
+char	*display_exit_status(t_data *tools, char *result);
+char	*check_after_exit_status(char *str, int j, char *result, int i);
 
 // init_data.c
 
@@ -35,6 +47,19 @@ void	init_end(t_env *env);
 void	init_env_shlvl(t_env *env, t_data *data, char *str, char *stt);
 char	*exec_path(t_data *data);
 void	init_path(t_data *data);
+
+// open_next.c
+
+void	close_fd_next(int i, int fd, t_token *token);
+t_token	*open_fd_great(t_token *token);
+t_token	*open_fd_less(t_token *token);
+int		verif_type(t_token *token);
+t_token	*open_fd_test(t_data *data);
+
+// open_next2.c
+
+void	init_fd(t_token *token);
+int		verif_open(t_token *token);
 
 // env
 
@@ -92,7 +117,7 @@ void	ft_echo(char **str, t_data *data, t_token *token);
 int		ft_pwd(char **strs, t_data *data, t_token *token);
 void	ft_env(t_data *data, char **str, t_token *token);
 void	cd_end(t_data *data, char **str);
-int		ft_cd(char **str, int i, t_data *data, int k, t_token *token);
+int		ft_cd(char **str, int i, t_data *data, t_token *token);
 void	ft_export(char **strs, t_data *data, int i, t_token *token);
 void	ft_export_2(char **strs, t_data *data);
 int		verif_export_acsii(unsigned int i, char **str, t_data *data);
@@ -137,12 +162,11 @@ void	list_gathering(t_data *tools);
 int		ft_error(int error);
 t_env	*new_env(void);
 void	env_var_expand(t_data *tools);
-char	*replace_exit_status(char *str, t_data *tools);
-char	*replace_exit_status(char *str, t_data *tools);
+char	*replace_exit_status(char *str, t_data *tools, int i, char *tmp);
 char	*replace_env_var(char *str, t_data *tools);
-int		is_env_var(char *str, t_data *tools);
+int		is_env_var(char *str, t_data *tools, char *env_var);
 char	*find_env_var(char *str, t_env *env);
-char	*is_still_env_var(char *str, t_data *tools);
+char	*is_still_env_var(char *str, t_data *tools, char *tmp);
 void	ft_signal_handler(int signal);
 void	ft_destroy_env(t_env *env_list);
 
@@ -179,7 +203,7 @@ int		which_quote(char *str);
 int		quote_in_str(char *str);
 void	free_minishell(t_data *tools);
 void	first_word(char *str);
-char	*delete_sep(char *str);
+char	*delete_sep(char *str, char *result);
 
 // Parsing
 

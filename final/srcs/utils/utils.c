@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/28 11:51:16 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:57:09 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,16 @@ int	count_quotes(char *str)
 	int	nb_sq;
 	int	nb_dq;
 
-	i = -1;
+	i = 0;
 	nb_sq = 0;
 	nb_dq = 0;
-	while (str[++i])
+	while (str[i] && str[i + 1])
 	{
 		if (str[i] == 34)
 			i += find_matching_quote(str, i, &nb_dq, 34);
 		if (str[i] == 39)
 			i += find_matching_quote(str, i, &nb_sq, 39);
+		i++;
 	}
 	if ((nb_dq > 0 && nb_dq % 2 != 0) || (nb_sq > 0 && nb_sq % 2 != 0))
 		return (0);
@@ -62,13 +63,10 @@ void	count_pipes(t_token *list, t_data *tools)
 	}
 }
 
-int	is_env_var(char *str, t_data *tools)
+int	is_env_var(char *str, t_data *tools, char *env_var)
 {
-	int		i;
-	int		start;
-	char	*env_var;
-
-	i = 0;
+	int (start) = 0;
+	int (i) = 0;
 	while (str[i])
 	{
 		if (str[i] == '$')
@@ -87,10 +85,7 @@ int	is_env_var(char *str, t_data *tools)
 				break ;
 			}
 			else
-			{
-				free(env_var);
-				return (1);
-			}
+				return (free(env_var), 1);
 		}
 		i++;
 	}

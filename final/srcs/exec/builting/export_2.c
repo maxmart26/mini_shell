@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:22:01 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/26 17:27:22 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:56:51 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ void	ft_swap(char **env, int i, t_data *data, t_token *token)
 	i = -1;
 	ft_dup2(data, token);
 	while (env[i++ + 1])
-	{
 		printf("declare -x %s\n", env[i]);
-	}
 }
 
 int	ft_lstsizee(t_env *lst)
@@ -93,7 +91,6 @@ int	verif_export_acsii(unsigned int i, char **str, t_data *data)
 	{
 		ft_printf_error("bash: export: `%s': not a valid identifier\n", str[1]);
 		data->exit = 1;
-		// free_tab(str);
 		return (1);
 	}
 	else

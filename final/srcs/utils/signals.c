@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/28 14:08:16 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:06:11 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,24 @@ void	sig_handler_sa(int signal, siginfo_t *info, void *context)
 	(void)info;
 	if (!g_status)
 		ft_putstr_fd("\n", STDERR_FILENO);
-	if (g_status == 2)
+	if (g_status == 2 || (g_status == 5 && signal == SIGINT))
 	{
 		rl_replace_line("", 0);
 		rl_on_new_line();
-		printf("\n");
+		if (g_status == 2)
+			printf("\n");
 		return ;
+	}
+	if (g_status == 5 && signal == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		printf("\n");
 	}
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	printf("\n");
 	rl_redisplay();
-	(void)signal;
 }
 
 int	handle_signal(void)

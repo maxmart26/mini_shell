@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_word.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:00:41 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/16 11:52:28 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:47:34 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	get_word(t_token *token_list, char *str, int *i, int *index)
 	{
 		nb_quote = check_quote(str[j]);
 		word = get_str(str, &j, word, &nb_quote);
+		if (str[j - 1] == '\0')
+			break ;
 		if (ft_strrchr("\t ><|", str[j]))
 			break ;
 	}

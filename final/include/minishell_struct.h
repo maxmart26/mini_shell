@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 14:45:31 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:44:53 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_data
 	int					fd_in;
 	int					fd_out;
 	int					pide;
+	int					k;
 	int					status;
 	int					exit_status;
 	int					nl_error;

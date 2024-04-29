@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:37:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/15 18:03:11 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:42:15 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char	*prompt_get_path(t_data *tools)
 
 	i = 0;
 	path = NULL;
-	home = is_still_env_var("$HOME", tools);
-	str = is_still_env_var("$PWD", tools);
+	home = is_still_env_var("$HOME", tools, NULL);
+	str = is_still_env_var("$PWD", tools, NULL);
 	if (!home)
 	{
 		path = str;

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:55:48 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/28 11:31:33 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:24:01 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,17 @@ t_token	*index_first(t_token *list)
 	return (result);
 }
 
+t_token	*removee(t_token *tmp, t_token *list)
+{
+	tmp = list->prev;
+	tmp->next = list->next;
+	tmp->next->prev = tmp;
+	free(list->value);
+	free(list);
+	list = tmp;
+	return (list);
+}
+
 t_token	*remove_sep(t_token *list)
 {
 	t_token	*tmp;
@@ -55,19 +66,12 @@ t_token	*remove_sep(t_token *list)
 					list->prev->next = NULL;
 				free(list->value);
 				free(list);
-				break;
+				break ;
 			}
 			else if (list->index == 0)
 				result = index_first(list);
 			else
-			{
-				tmp = list->prev;
-				tmp->next = list->next;
-				tmp->next->prev = tmp;
-				free(list->value);
-				free(list);
-				list = tmp;
-			}
+				list = removee(tmp, list);
 		}
 		tmp = list->next;
 		list = tmp;
@@ -75,19 +79,14 @@ t_token	*remove_sep(t_token *list)
 	return (result);
 }
 
-char	*delete_sep(char *str)
+char	*delete_sep(char *str, char *result)
 {
-	char	*result;
-	int		i;
-	int		j;
-	int		is_space;
-
-	i = 0;
+	int (i) = 0;
+	int (j) = 0;
+	int (is_space) = 0;
 	result = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
-	j = 0;
-	is_space = 0;
 	while (str[i])
 	{
 		if (str[i] != ' ')

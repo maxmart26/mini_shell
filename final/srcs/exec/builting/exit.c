@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:09:54 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/26 18:00:44 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:56:28 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,19 @@ int	verif(char *str)
 	return (0);
 }
 
+void	ft_end_exit(char **str, t_data *data, int i)
+{
+	if (!str[1])
+		data->exit = 0;
+	else
+		data->exit = ft_atoi(str[1]);
+	if (data->exit < 0)
+		data->exit = 156;
+	i = data->exit;
+	ft_end(data, str);
+	exit(i);
+}
+
 void	ft_exit(t_data *data, int i, char **str)
 {
 	if (i == 0)
@@ -77,13 +90,5 @@ void	ft_exit(t_data *data, int i, char **str)
 		ft_end(data, str);
 		exit(2);
 	}
-	if (!str)
-		data->exit = 0;
-	else
-		data->exit = ft_atoi(str[1]);
-	if (data->exit < 0)
-		data->exit = 156;
-	i = data->exit;
-	ft_end(data, str);
-	exit(i);
+	ft_end_exit(str, data, i);
 }

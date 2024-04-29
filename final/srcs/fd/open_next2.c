@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   open_next2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 14:51:08 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/28 18:07:12 by matorgue         ###   ########.fr       */
+/*   Created: 2024/04/28 17:52:51 by matorgue          #+#    #+#             */
+/*   Updated: 2024/04/28 18:10:33 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,26 @@
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
 
-void	free_minishell(t_data *tools)
+void	init_fd(t_token *token)
 {
-	free(tools->args);
-	free_env(tools->envp);
-	ft_destroy_env(tools->env);
-	destroy_token_list(tools->lexer_list);
-	free(tools->pid);
-	free(tools);
+	while (token)
+	{
+		token->fd_int = 0;
+		token->fd_out = 1;
+		token = token->next;
+	}
 }
 
-void	free_minishell_ctrld(t_data *tools)
+int	verif_open(t_token *token)
 {
-	t_token	*token;
-
-	token = tools->lexer_list;
-	if (tools->envp)
-		ft_destroy_env(tools->env);
-	free(tools->args);
-	free(tools);
+	if (g_status == 258)
+		return (0);
+	while (token)
+	{
+		if (token->type == APPEND || token->type == GREAT || token->type == LESS
+			|| token->type == HEREDOC)
+			return (1);
+		token = token->next;
+	}
+	return (0);
 }

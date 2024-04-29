@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/28 11:46:22 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:20:29 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	after(t_data *data, t_token *token)
 	if (token->fd_int == -1 || token->fd_out == -1)
 	{
 		ft_destroy_env(data->env);
+		destroy_token_list(data->lexer_list);
 		while (data->nb_pipe >= 1)
 		{
 			free(data->pipe_fd[data->nb_pipe - 1]);
@@ -59,6 +60,7 @@ void	after(t_data *data, t_token *token)
 		}
 		if (data->nb_pipe > 0)
 			free(data->pipe_fd);
+		free(data->pid);
 		free(data);
 		exit(1);
 	}
@@ -75,10 +77,10 @@ void	ft_retry(t_data *data, int result, char **str, t_token *token)
 	data->exit = result2;
 	if (result2 == 155)
 		ft_unset(str, data, -1);
-	else if (result2 == 156)
+	else if (result2 == 199)
 		ft_export(str, data, -1, token);
 	else if (result2 == 157)
-		ft_cd(str, -1, data, 1, token);
+		ft_cd(str, -1, data, token);
 	else if (result2 == 158)
 	{
 		ft_exit(data, -1, str);

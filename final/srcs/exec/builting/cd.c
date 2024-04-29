@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 16:21:47 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:11:25 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,23 @@ char	*ft_init_oldpwd_cd(t_env *env)
 	buffer = NULL;
 	buffer = getcwd(buffer, _SC_PASS_MAX);
 	if (!buffer)
+	{
 		buffer = ft_env_pwd(env);
-	str = ft_strjoin(str, buffer);
-	free(buffer);
+		str = ft_strjoin(str, buffer);
+	}
+	else
+	{
+		str = ft_strjoin(str, buffer);
+		free(buffer);
+	}
 	return (str);
 }
 
-void	ft_cd_end(char **str, char *buffer, t_data *data, int k , t_token *token)
+void	ft_cd_end(char **str, char *buffer, t_data *data, t_token *token)
 {
-	char	*buffer_old;
-	char	**buf;
-
-	buffer_old = ft_init_oldpwd_cd(data->env);
-	if (k == 1)
+	char *(buffer_old) = ft_init_oldpwd_cd(data->env);
+	char **(buf) = NULL;
+	if (data->k == 1)
 	{
 		if (chdir(str[1]) == -1)
 		{
@@ -82,31 +86,20 @@ void	ft_cd_end(char **str, char *buffer, t_data *data, int k , t_token *token)
 			free(buffer);
 		}
 	}
+	else
+		free(buffer_old);
 }
 
-int	ft_cd(char **str, int i, t_data *data, int k, t_token *token)
+void	ft_cd_vague(char *buffer, t_data *data, char **buff, t_token *token)
 {
-	char	*buffer;
-
-	buffer = NULL;
-	if (i == 0)
-		cd_end(data, str);
-	if (str[2])
-	{
-		data->exit = 1;
-		return (ft_printf_error("bash: cd: too many arguments\n"), 1);
-	}
-	if (str[1] == NULL || (str[1][0] == '~' && strlen(str[1]) == 1))
-	{
-		buffer = ft_strjoin("/home/", getenv("LOGNAME"));
-		chdir(buffer);
-		free(buffer);
-		buffer = ft_init_pwd_cd(data->env);
-		ft_export(token_init("export", buffer), data, -1, token);
-		free(buffer);
-		k = 0;
-		data->exit = 134;
-	}
-	ft_cd_end(str, buffer, data, k, token);
-	return (0);
+	buffer = ft_strjoin("/home/", getenv("LOGNAME"));
+	chdir(buffer);
+	free(buffer);
+	buffer = ft_init_pwd_cd(data->env);
+	buff = token_init("export", buffer);
+	ft_export(buff, data, -1, token);
+	free_tab(buff);
+	free(buffer);
+	data->k = 0;
+	data->exit = 134;
 }

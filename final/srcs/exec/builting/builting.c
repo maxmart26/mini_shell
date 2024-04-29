@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:19:11 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/26 15:22:53 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/04/28 17:59:37 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	fd_built(t_data *data, t_token *token)
 	if (ft_strncmp(str[0], "echo", 4) == 0 && ft_strlen(str[0]) == 4)
 		ft_echo(str, data, token);
 	if (ft_strncmp(str[0], "pwd", 3) == 0 && ft_strlen(str[0]) == 3)
-		ft_pwd(str, data,  token);
+		ft_pwd(str, data, token);
 	if (ft_strncmp(str[0], "env", 3) == 0 && ft_strlen(str[0]) == 3)
 		ft_env(data, str, token);
 	if (ft_strncmp(str[0], "cd", 2) == 0 && ft_strlen(str[0]) == 2)
-		ft_cd(str, data->nb_pipe, data, 1, token);
+		ft_cd(str, data->nb_pipe, data, token);
 	if (ft_strncmp(str[0], "export", 6) == 0 && ft_strlen(str[0]) == 6)
 		ft_export(str, data, data->nb_pipe, token);
 	if (ft_strncmp(str[0], "exit", 4) == 0 && ft_strlen(str[0]) == 4)
@@ -36,7 +36,7 @@ void	fd_built(t_data *data, t_token *token)
 	free_tab(str);
 }
 
-void	ft_test(char *buffer_old, t_data *data , t_token *token)
+void	ft_test(char *buffer_old, t_data *data, t_token *token)
 {
 	char	**str;
 
