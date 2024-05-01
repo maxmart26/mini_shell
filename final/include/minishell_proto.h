@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/29 17:09:22 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:03:50 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*print_result(char *tmp, char *result, char *var, int i);
 char	*only_dollar(char *result);
 char	*display_exit_status(t_data *tools, char *result);
 char	*check_after_exit_status(char *str, int j, char *result, int i);
+void	close_end(int  fd, int  fd2);
+void	ft_print_lexer_str(t_token *list);
 
 // init_data.c
 
@@ -115,8 +117,8 @@ char	**token_init(char *str, char *st);
 void	redirection_builting(t_token *token, t_data *data);
 void	ft_echo(char **str, t_data *data, t_token *token);
 int		ft_pwd(char **strs, t_data *data, t_token *token);
-void	ft_env(t_data *data, char **str, t_token *token);
-void	cd_end(t_data *data, char **str);
+void	ft_env(t_data *data, t_token *token);
+void	cd_end(t_data *data);
 int		ft_cd(char **str, int i, t_data *data, t_token *token);
 void	ft_export(char **strs, t_data *data, int i, t_token *token);
 void	ft_export_2(char **strs, t_data *data);
@@ -126,7 +128,7 @@ void	ft_test(char *buffer_old, t_data *data, t_token *token);
 void	ft_exit(t_data *data, int i, char **str);
 void	ft_trie_export(t_data *data, t_token *token);
 void	ft_export_modif(char *token, t_env *env);
-void	ft_end(t_data *data, char **str);
+void	ft_end(t_data *data);
 int		ft_strlen_export(char *str, char c);
 
 // partie laura
@@ -136,6 +138,7 @@ void	fill_token_list(t_token *token_list, char *str);
 t_token	*lexer(char *str);
 void	add_token(t_token *token_list, t_token_type type, char *str, int i);
 void	destroy_token_list(t_token *token_list);
+void	destroy_str(t_token *token_list);
 void	get_token(t_token *token_list, char *str, int *i, int *j);
 void	get_word(t_token *token_list, char *str, int *i, int *index);
 char	*get_str(char *line, int *j, char *word, int *nb_quote);

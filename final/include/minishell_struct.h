@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/28 16:44:53 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 12:53:33 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ HEREDOC,  // <<
 typedef struct s_token
 {
 	int					index;
+	char				**str;
 	t_token_type		type;
 	char				*value;
 	int					fd_out;

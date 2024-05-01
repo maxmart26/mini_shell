@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:52:41 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/26 16:39:40 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:02:56 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_unset(char **str, t_data *data, int i)
 {
 	if (i == 0)
 	{
-		ft_end(data, str);
+		ft_end(data);
 		exit(155);
 	}
 	data->exit = 0;

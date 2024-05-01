@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:54 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/29 15:47:19 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 11:29:32 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_token	*open_fd_great(t_token *token)
 	}
 	token = new_token(token);
 	if (!token)
-		return (NULL);
+		return (close(fd), NULL);
 	while (token->prev && token->prev->type != PIPE)
 		token = token->prev;
 	close_fd_next(1, fd, token);

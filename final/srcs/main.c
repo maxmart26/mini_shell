@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/29 16:09:58 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:31:12 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	parse_and_execute(t_data *tools)
 	g_status = 1;
 	lexer_and_parser(tools);
 	init_data(tools->lexer_list, tools);
-	if (g_status != 258 && tools->lexer_list->value != NULL)
+	if (g_status != 258 && tools->lexer_list && tools->lexer_list->value != NULL)
 		ft_main(tools);
 	else
 		destroy_token_list(tools->lexer_list);

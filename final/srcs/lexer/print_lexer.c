@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:35:30 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/24 18:25:20 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:37:24 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,29 @@ void	ft_print_lexer(t_token *list)
 		printf("  \033[38;5;214m%d :\033[0m \
 			\033[0;92m[%s]\033[0m \033[0;91m[%s]\033[0m\n",
 			tmp->index, what_type(tmp), tmp->value);
+		tmp = tmp->next;
+	}
+	printf("%c", '\n');
+}
+
+void	ft_print_lexer_str(t_token *list)
+{
+	t_token	*tmp;
+	int	i;
+
+	i = 0;
+	tmp = list;
+	while (tmp)
+	{
+		printf("  \033[38;5;214m%d :\033[0m \
+			\033[0;92m[%s]\033[0m \033[0;91m[%s]\033[0m\n",
+			tmp->index, what_type(tmp), tmp->value);
+		i = 0;
+		while (tmp->str && tmp->str[i])
+		{
+			printf("\t%s\n\n",tmp->str[i]);
+			i++;
+		}
 		tmp = tmp->next;
 	}
 	printf("%c", '\n');

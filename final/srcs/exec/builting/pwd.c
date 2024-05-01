@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:51:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/28 18:41:37 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:04:29 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	ft_end2(t_data *data, t_token *token)
 	free(data);
 }
 
-void	ft_end(t_data *data, char **str)
+void	ft_end(t_data *data)
 {
 	t_token	*token;
 
 	token = data->lexer_list;
-	ft_free_tab(str);
+	destroy_str(data->lexer_list);
 	free(data->pid);
 	while (data->nb_pipe >= 1)
 	{
@@ -77,7 +77,7 @@ int	ft_pwd(char **strs, t_data *data, t_token *token)
 		printf("%s %s", "bash: pwd: ", strs[1]);
 		g_status = 258;
 		printf(INV_OPT);
-		ft_end(data, strs);
+		ft_end(data);
 		free(str);
 		exit(1);
 	}
@@ -85,7 +85,7 @@ int	ft_pwd(char **strs, t_data *data, t_token *token)
 	{
 		printf("%s\n", str);
 		free(str);
-		ft_end(data, strs);
+		ft_end(data);
 		exit(0);
 	}
 }

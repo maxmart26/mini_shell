@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:53:08 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/25 16:14:00 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:02:56 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_print_echo(char **str, int n)
 	while (str[n + 1])
 	{
 		printf("%s", str[n + 1]);
-		if (str[n + 2])
+		if (str[n + 2] != NULL)
 			printf(" ");
 		n++;
 	}
@@ -57,10 +57,10 @@ void	ft_echo(char **str, t_data *data, t_token *token)
 	if (str[1] == NULL)
 	{
 		printf("\n");
-		ft_end(data, str);
+		ft_end(data);
 		exit(0);
 	}
-	while (ft_verif_echo(str[n + 1]) == 0 && str[n + 1])
+	while (str[n + 1] && ft_verif_echo(str[n + 1]) == 0)
 	{
 		n++;
 	}
@@ -68,9 +68,9 @@ void	ft_echo(char **str, t_data *data, t_token *token)
 		ft_print_echo(str, n);
 	else
 	{
-		ft_end(data, str);
+		ft_end(data);
 		exit(1);
 	}
-	ft_end(data, str);
+	ft_end(data);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:10:45 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/29 16:11:28 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:04:37 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_cd(char **str, int i, t_data *data, t_token *token)
 	char *(buffer) = NULL;
 	data->k = 1;
 	if (i == 0)
-		cd_end(data, str);
+		cd_end(data);
 	if (str[1] && str[2])
 	{
 		data->exit = 1;

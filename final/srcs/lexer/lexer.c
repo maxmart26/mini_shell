@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:27 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/29 15:47:43 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:01:08 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,20 @@ void	fill_token_list(t_token *token_list, char *str)
 			i++;
 	}
 }
+void	destroy_str(t_token *token_list)
+{
+	t_token	*tmp;
+	t_token	*next_node;
 
+	tmp = token_list;
+	while (tmp)
+	{
+		if (tmp->type == WORD)
+			ft_free_tab(tmp->str);
+		next_node = tmp->next;
+		tmp = next_node;
+	}
+}
 void	destroy_token_list(t_token *token_list)
 {
 	t_token	*tmp;
@@ -90,6 +103,8 @@ void	destroy_token_list(t_token *token_list)
 	tmp = token_list;
 	while (tmp)
 	{
+		if (tmp->type == WORD)
+			ft_free_tab(tmp->str);
 		next_node = tmp->next;
 		free(tmp->value);
 		free(tmp);

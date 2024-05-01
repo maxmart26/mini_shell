@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:52:51 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/28 18:10:33 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 11:31:59 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,11 @@ int	verif_open(t_token *token)
 		token = token->next;
 	}
 	return (0);
+}
+void	close_end(int  fd, int  fd2)
+{
+	if (fd > 2)
+		close(fd);
+	if (fd2 > 2)
+		close(fd2);
 }
