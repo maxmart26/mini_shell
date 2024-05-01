@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/01 13:31:12 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:16:51 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	lexer_and_parser(t_data *tools)
 		tools->lexer_list = tmp;
 		tools->lexer_list = remove_sep(tools->lexer_list);
 		env_var_expand(tools);
-		remove_quotes(tools->lexer_list);
 		if (tools->lexer_list->value == NULL)
 			return ;
 		tools->std_out = 1;
@@ -69,6 +68,7 @@ void	init_minishell(t_data *tools, char **env)
 	tools->exit = 0;
 	g_status = 1;
 	tools->first_call = 1;
+	tools->in_file = 0;
 	show_ctrl(1);
 	handle_signal();
 }
@@ -81,7 +81,12 @@ void	parse_and_execute(t_data *tools)
 	if (g_status != 258 && tools->lexer_list && tools->lexer_list->value != NULL)
 		ft_main(tools);
 	else
-		destroy_token_list(tools->lexer_list);
+	{
+		if (tools->in_file != 1)
+			ft_printf_error("bash: : command not found\n");
+		if (tools->lexer_list)
+			destroy_token_list(tools->lexer_list);
+	}
 }
 
 int	minishell(t_data *tools, char **env)

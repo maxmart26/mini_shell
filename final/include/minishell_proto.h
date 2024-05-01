@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/01 14:03:50 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 18:42:35 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,25 @@
 # include "minishell_include.h"
 # include "minishell_struct.h"
 
-// pour les tests
+// expand
+void	env_var_expand(t_data *tools);
+char	*expand_word(char *str, t_data *tools);
+void	expand_backslash(char *str, int *i, char **result);
+void	remove_sq(char *str, int *i, char **result);
+void	get_char(char *str, int *i, char **result);
+char	*expand_env_var(char *str, int *i, char *result, t_data *tools);
+void	expand_backslash_dq(char *str, int *i, char **result);
+char	*env_var(char *str, t_data *tools);
+char	*replace_env_var(char *line, int *i, char **result, char **tmp);
+int		check_end_of_string(char str, int inside_quotes);
+char	*skip_non_env_var(char *line, int *i, char **result, int in_quotes);
+char	*expand_env_var_dq(char *line, char *result, int *j, t_data *tools);
+char	*remove_dq(char *str, int *i, t_data *tools);
+char	*expand_dq(char *str, int *i, char *result, t_data *tools);
+char	*expand_exit_status(int *i, char **expanded, char *exit_status);
 
-void	init_test(t_token *token);
-t_token	*init_token(t_token *prev);
+	// pour les tests
+
 int		open_file(char *s, int i);
 void	open_fd(t_data *data, t_token *token);
 void	parse_and_execute(t_data *tools);
@@ -34,7 +49,7 @@ char	*print_result(char *tmp, char *result, char *var, int i);
 char	*only_dollar(char *result);
 char	*display_exit_status(t_data *tools, char *result);
 char	*check_after_exit_status(char *str, int j, char *result, int i);
-void	close_end(int  fd, int  fd2);
+void	close_end(int fd, int fd2);
 void	ft_print_lexer_str(t_token *list);
 
 // init_data.c
@@ -166,7 +181,7 @@ int		ft_error(int error);
 t_env	*new_env(void);
 void	env_var_expand(t_data *tools);
 char	*replace_exit_status(char *str, t_data *tools, int i, char *tmp);
-char	*replace_env_var(char *str, t_data *tools);
+// char	*replace_env_var(char *str, t_data *tools);
 int		is_env_var(char *str, t_data *tools, char *env_var);
 char	*find_env_var(char *str, t_env *env);
 char	*is_still_env_var(char *str, t_data *tools, char *tmp);

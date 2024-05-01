@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:54:00 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/29 17:00:11 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:26:52 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,89 @@
 void	env_var_expand(t_data *tools)
 {
 	t_token	*tmp;
-	char	*str;
 
-	str = NULL;
 	tmp = tools->lexer_list;
 	while (tmp)
 	{
 		if (tmp->type == PIPE)
 			break ;
 		else if (tmp->type == WORD)
-		{
-			if (ft_strnstr(tmp->value, "$?", 2))
-			{
-				tmp->value = replace_exit_status(tmp->value, tools, 0, NULL);
-			}
-			else if (tmp->value[0] != '\'' && tmp->value[0] != '\\'
-				&& is_env_var(tmp->value, tools, NULL) == 1)
-				tmp->value = replace_env_var(tmp->value, tools);
-			tmp = tmp->next;
-		}
-		else
-			tmp = tmp->next;
+			tmp->value = expand_word(tmp->value, tools);
+		tmp = tmp->next;
 	}
+}
+
+char	*expand_word(char *str, t_data *tools)
+{
+	int		i;
+	char	*result;
+
+	i = 0;
+	result = NULL;
+	while (str[i])
+	{
+		if (str[i] == '\\')
+			expand_backslash(str, &i, &result);
+		else if (str[i] == '\'')
+			remove_sq(str, &i, &result);
+		else if (str[i] == '\"')
+			result = expand_dq(str, &i, result, tools);
+		else if (str[i] == '$')
+			result = expand_env_var(str, &i, result, tools);
+		else
+			get_char(str, &i, &result);
+	}
+	return (result);
+}
+
+void	expand_backslash(char *str, int *i, char **result)
+{
+	int		j;
+	char	*tmp1;
+	char	*tmp;
+
+	tmp = NULL;
+	tmp1 = NULL;
+	j = *i;
+	while (str[j] == '\\')
+	{
+		tmp1 = *result;
+		tmp = ft_substr(str, j + 1, 1);
+		*result = ft_strjoin(*result, tmp);
+		free(tmp1);
+		free(tmp);
+		j += 2;
+	}
+	*i = j;
+}
+
+void	remove_sq(char *str, int *i, char **result)
+{
+	int		j;
+	char	*tmp1;
+	char	*tmp;
+
+	(*i)++;
+	j = *i;
+	while (str[j] != '\'')
+		j++;
+	tmp1 = *result;
+	tmp = ft_substr(str, *i, j - *i);
+	*result = ft_strjoin(*result, tmp);
+	free(tmp);
+	free(tmp1);
+	*i = j + 1;
+}
+
+void	get_char(char *str, int *i, char **result)
+{
+	char	*tmp1;
+	char	*tmp;
+
+	tmp1 = *result;
+	tmp = ft_substr(str, *i, 1);
+	*result = ft_strjoin(*result, tmp);
+	free(tmp1);
+	free(tmp);
+	(*i)++;
 }

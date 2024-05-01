@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_quotes2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 12:08:14 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/29 17:19:45 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:25:09 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	remove_quotes(t_token *lexer_list)
 	{
 		if (tmp->type == WORD)
 		{
-			tmp->value = delete_sep(tmp->value, NULL);
+			if (quote_in_str(tmp->value) == 0)
+				tmp->value = delete_sep(tmp->value, NULL);
 			while (quote_in_str(tmp->value) == 1)
 			{
 				tmp->value = delete_quotes(tmp->value);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_lexer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:35:30 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/01 13:37:24 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:21:08 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_print_lexer_str(t_token *list)
 		i = 0;
 		while (tmp->str && tmp->str[i])
 		{
-			printf("\t%s\n\n",tmp->str[i]);
+			printf("\t-%s-\n\n",tmp->str[i]);
 			i++;
 		}
 		tmp = tmp->next;

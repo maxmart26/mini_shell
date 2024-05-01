@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:27 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/01 14:01:08 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:32:29 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_token	*first_token(void)
 	new_token->next = NULL;
 	new_token->type = NONE;
 	new_token->value = ft_strdup("NONE");
+	new_token->str = NULL;
 	if (!new_token->value)
 	{
 		free(new_token);
@@ -47,6 +48,7 @@ void	add_token(t_token *token_list, t_token_type type, char *str, int i)
 	tmp->next->index = i;
 	tmp->next->type = type;
 	tmp->next->value = ft_strdup(str);
+	tmp->next->str = NULL;
 	if (!tmp->next->value)
 	{
 		free(tmp->next->value);
@@ -81,6 +83,7 @@ void	fill_token_list(t_token *token_list, char *str)
 			i++;
 	}
 }
+
 void	destroy_str(t_token *token_list)
 {
 	t_token	*tmp;
@@ -95,6 +98,7 @@ void	destroy_str(t_token *token_list)
 		tmp = next_node;
 	}
 }
+
 void	destroy_token_list(t_token *token_list)
 {
 	t_token	*tmp;
@@ -104,7 +108,10 @@ void	destroy_token_list(t_token *token_list)
 	while (tmp)
 	{
 		if (tmp->type == WORD)
-			ft_free_tab(tmp->str);
+		{
+			if (tmp->str != NULL)
+				ft_free_tab(tmp->str);
+		}
 		next_node = tmp->next;
 		free(tmp->value);
 		free(tmp);

@@ -14,7 +14,7 @@ SRCS = srcs/main.c\
 		srcs/exec/execution/exec_abs.c srcs/exec/execution/exec.c srcs/exec/execution/utils_bonus2.c srcs/exec/execution/dup2.c \
 		srcs/exec/herdoc/herdoc.c srcs/exec/builting/cd2.c \
 		srcs/exec/init/init_data.c srcs/exec/init/token_init.c srcs/exec/init/init_path.c\
-		srcs/expand/expand.c srcs/expand/expand2.c srcs/expand/expand3.c \
+		srcs/expand/expand.c srcs/expand/expand2.c srcs/expand/expand3.c srcs/expand/expand4.c srcs/expand/expand_dq.c \
 		srcs/exec/init/open_fd.c\
 		srcs/exec/init/init_data_env.c\
 		srcs/fd/open_next.c\

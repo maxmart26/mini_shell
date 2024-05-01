@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:42:44 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/29 17:09:05 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:19:22 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*only_dollar(char *result)
 	return (tmp_result);
 }
 
-char	*replace_env_var(char *str, t_data *tools)
+/*char	*replace_env_var(char *str, t_data *tools)
 {
 	char	*value;
 
@@ -36,7 +36,7 @@ char	*replace_env_var(char *str, t_data *tools)
 		value = is_still_env_var(value, tools, NULL);
 	}
 	return (value);
-}
+}*/
 
 char	*replace_exit_status(char *str, t_data *tools, int i, char *tmp)
 {
