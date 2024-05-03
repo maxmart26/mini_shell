@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/01 14:20:13 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:24:06 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ int	open_file(char *s, int i)
 
 void	after(t_data *data, t_token *token)
 {
-	if (token->fd_int == -1 || token->fd_out == -1)
+	if (token->fd_int == -1 || token->fd_out == -1 || !token->value)
 	{
+		if (!token->value)
+			printf("%s\n", "bash: command not found");
 		ft_destroy_env(data->env);
 		destroy_token_list(data->lexer_list);
 		while (data->nb_pipe >= 1)

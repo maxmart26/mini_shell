@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/01 19:16:51 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:43:47 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	lexer_and_parser(t_data *tools)
 		tmp->prev = NULL;
 		tools->lexer_list = tmp;
 		tools->lexer_list = remove_sep(tools->lexer_list);
-		env_var_expand(tools);
-		if (tools->lexer_list->value == NULL)
+		if (check_pipe(tools) == 1)
 			return ;
+		env_var_expand(tools);
 		tools->std_out = 1;
 		tools->std_int = 0;
 		if (g_status == 258)
@@ -40,7 +40,30 @@ void	lexer_and_parser(t_data *tools)
 		while (verif_open(tools->lexer_list) == 1)
 			tools->lexer_list = open_fd_test(tools);
 		list_gathering(tools);
+		delete_null_token(tools);
 		parsing(tools);
+	}
+}
+
+void	delete_null_token(t_data *tools)
+{
+	t_token	*token;
+	t_token *tmp;
+
+	token = tools->lexer_list;
+	while (token)
+	{
+		if (token->next && token->next->value == NULL)
+		{
+			tmp = token->next;
+			token->next = token->next->next;
+			if (token->next != NULL)
+				token->next->prev = token;
+			if (tmp->str)
+				ft_free_tab(tmp->str);
+			free(tmp);
+		}
+		token = token->next;
 	}
 }
 
@@ -77,16 +100,13 @@ void	parse_and_execute(t_data *tools)
 {
 	g_status = 1;
 	lexer_and_parser(tools);
-	init_data(tools->lexer_list, tools);
-	if (g_status != 258 && tools->lexer_list && tools->lexer_list->value != NULL)
-		ft_main(tools);
-	else
+	if (g_status != 258 && g_status != 6 && tools->lexer_list)
 	{
-		if (tools->in_file != 1)
-			ft_printf_error("bash: : command not found\n");
-		if (tools->lexer_list)
-			destroy_token_list(tools->lexer_list);
+		init_data(tools->lexer_list, tools);
+		ft_main(tools);
 	}
+	else
+		destroy_token_list(tools->lexer_list);
 }
 
 int	minishell(t_data *tools, char **env)
@@ -108,6 +128,8 @@ int	minishell(t_data *tools, char **env)
 			add_history(tools->args);
 			if (tools->nl_error == 0)
 				parse_and_execute(tools);
+			else if (tools->nl_error == 2)
+				ft_printf_error("bash: no matching quote \n");
 		}
 		free(tools->args);
 	}

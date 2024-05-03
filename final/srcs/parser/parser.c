@@ -3,44 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:44 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/29 14:48:30 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:52:37 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_include.h"
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
-
-int	check_dir(t_data *tools)
-{
-	t_token	*tmp;
-
-	tmp = tools->lexer_list;
-	if ((strncmp(tmp->value, "/", 1) == 0 || strncmp(tmp->value, ".", 1) == 0)
-		&& tmp->next->type == NEWL)
-	{
-		printf("%s %s", "bash: ", tmp->value);
-		g_status = 258;
-		return (printf(DIR_ERR), 1);
-	}
-	else if ((strncmp(tmp->value, "\\", 1) == 0 || strncmp(tmp->value, "-",
-				1) == 0) && tmp->next->type == NEWL)
-	{
-		printf("%s %s", "bash: ", tmp->value);
-		g_status = 258;
-		return (printf(CMD_ERR), 1);
-	}
-	else if (strncmp(tmp->value, "|", 1) == 0)
-	{
-		printf(SYNTAX_ERR);
-		g_status = 258;
-		return (printf("%s'\n", tmp->value), 1);
-	}
-	return (0);
-}
 
 int	check_spe_char(t_data *tools)
 {
@@ -49,7 +21,7 @@ int	check_spe_char(t_data *tools)
 	tmp = tools->lexer_list;
 	if (!tmp)
 		return (0);
-	if (strncmp(tmp->value, "&", 1) == 0)
+	if (tmp->value && strncmp(tmp->value, "&", 1) == 0)
 	{
 		printf(SYNTAX_ERR);
 		g_status = 258;
@@ -60,6 +32,98 @@ int	check_spe_char(t_data *tools)
 		printf(SYNTAX_ERR);
 		g_status = 258;
 		return (printf("%s'\n", ";"), 1);
+	}
+	return (0);
+}
+
+void	print_error_message(int type)
+{
+	if (type == 0)
+		return ;
+	else if (type == 1)
+	{
+		ft_printf_error("bash: syntax error near unexpected token `>'\n");
+		return ;
+	}
+	else if (type == 2)
+	{
+		ft_printf_error("bash: syntax error near unexpected token `<'\n");
+		return ;
+	}
+	else if (type == 3)
+	{
+		ft_printf_error("bash: syntax error near unexpected token `<<'\n");
+		return ;
+	}
+	else if (type == 4)
+	{
+		ft_printf_error("bash: syntax error near unexpected token `>>'\n");
+		return ;
+	}
+	else
+		return ;
+}
+
+void	ft_free_pipe_fd(t_data *data)
+{
+	while (data->nb_pipe >= 1)
+	{
+		free(data->pipe_fd[data->nb_pipe - 1]);
+		if (data->nb_pipe == 1)
+			break ;
+		data->nb_pipe--;
+	}
+	if (data->nb_pipe > 0)
+		free(data->pipe_fd);
+}
+
+void	print_error(t_token *token, t_data *tools)
+{
+	t_token	*tmp;
+	int		type;
+
+	type = 0;
+	tmp = tools->lexer_list;
+	count_pipes(tmp, tools);
+	if (tools->nb_pipe > 0)
+	{
+		ft_printf_error("bash: syntax error near unexpected token `|'\n");
+		return ;
+	}
+	while (token)
+	{
+		if (token->type == GREAT)
+			type = 1;
+		else if (token->type == LESS)
+			type = 2;
+		else if (token->type == HEREDOC)
+			type = 3;
+		else if (token->type == APPEND)
+			type = 4;
+		token = token->next;
+	}
+	print_error_message(type);
+}
+
+int	check_pipe(t_data *tools)
+{
+	t_token	*tmp;
+
+	tmp = tools->lexer_list;
+	while (tmp)
+	{
+		if (tmp->type == PIPE || tmp->type == GREAT || tmp->type == LESS
+			|| tmp->type == HEREDOC || tmp->type == APPEND)
+		{
+			if ((!tmp->prev && !tmp->next) || !tmp->next || (tmp->next
+					&& tmp->next->type != WORD))
+			{
+				print_error(tmp, tools);
+				g_status = 258;
+				return (1);
+			}
+		}
+		tmp = tmp->next;
 	}
 	return (0);
 }
@@ -79,10 +143,26 @@ int	check_word_only(t_data *tools)
 	return (0);
 }
 
+int	check_null_list(t_data *tools)
+{
+	t_token	*tmp;
+
+	tmp = tools->lexer_list;
+	if (!tmp && g_status != 6 && g_status != 5)
+	{
+		printf("%s", "bash: ");
+		g_status = 258;
+		return (printf(CMD_ERR), 1);
+	}
+	return (0);
+}
+
 void	parsing(t_data *tools)
 {
 	if (check_syntax(tools))
 		return ;
 	if (check_spe_char(tools))
+		return ;
+	if (check_null_list(tools))
 		return ;
 }

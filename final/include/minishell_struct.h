@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:06:30 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/01 19:13:01 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/02 13:27:01 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,6 @@ typedef enum e_token_type
 	ARG,
 	OPT,
 }						t_token_type;
-
-/*
-HEREDOC,  // <<
-	APPEND,   // >>
-	GREAT,    // >
-	LESS,     // <
-	PIPE,     // |
-	S_QUOTE,  // '
-	D_QUOTE,  // "
-	WORD,     // mots
-	SEP,      // espace
-	NEWL,     // \n
-	NONE,     // rien
-	CMD,      // commande qui ne commance pas part un /
-	./,  // commande absolu qui commance par un /
-	CMD_BULT, // commande builtins
-	SEMI,     // ;
-	ARG,      // file1
-	OPT,      // -l*/
 
 typedef struct s_token
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/29 16:11:25 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:32:25 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_init_pwd_cd(t_env *env)
 	if (!buffer)
 		buffer = ft_env_pwd(env);
 	str = ft_strjoin(str, buffer);
-	free(buffer);
+	free(buffer); //TODO invalid free (pwd invalid)
 	return (str);
 }
 
@@ -92,7 +92,8 @@ void	ft_cd_end(char **str, char *buffer, t_data *data, t_token *token)
 
 void	ft_cd_vague(char *buffer, t_data *data, char **buff, t_token *token)
 {
-	buffer = ft_strjoin("/home/", getenv("LOGNAME"));
+	buffer = ft_strjoin("/home/", getenv("LOGNAME")); //TODO PROTECT (getenv("LOGNAME") can be null)
+	//TODO PROTECT ft_strjoin (mallc can fail)
 	chdir(buffer);
 	free(buffer);
 	buffer = ft_init_pwd_cd(data->env);

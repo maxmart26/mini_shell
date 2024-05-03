@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:06:12 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/29 16:04:00 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:24:32 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ void	ft_here_doc_put_in(t_data *data, char *av)
 		ret = get_next_line(0);
 		if (!ret)
 		{
-			g_status = 258;
-			printf("\n");
+			if (g_status == 5)
+				ft_printf_error("bash: warning: here-doc not delimited by end-of-file\n");
+			else
+				printf("\n");
+			close(data->f1);
 			return ;
 		}
 		if (ft_strncmp(ret, av, ft_strlen(av)) == 0
@@ -75,7 +78,8 @@ void	ft_herdoc(t_data *data, t_token *tmp, int i)
 		return ;
 	ft_here_doc_put_in(data, tmp->next->value);
 	close(data->f1);
-	data->f1 = open(data->itoa, O_RDONLY);
+	if (g_status != 5 && g_status != 6)
+		data->f1 = open(data->itoa, O_RDONLY);
 	unlink(data->itoa);
 	free(data->itoa);
 	data->std_int = data->f1;
@@ -83,7 +87,7 @@ void	ft_herdoc(t_data *data, t_token *tmp, int i)
 
 t_token	*open_heredoc(t_data *data, t_token *token)
 {
-	signal(SIGQUIT, &ft_signal_handler);
+	signal(SIGQUIT, SIG_IGN);
 	g_status = 5;
 	ft_herdoc(data, token, 0);
 	token = new_token(token);
@@ -101,6 +105,5 @@ t_token	*open_heredoc(t_data *data, t_token *token)
 		token->fd_int = data->std_int;
 		token = token->next;
 	}
-	g_status = 1;
 	return (token);
 }

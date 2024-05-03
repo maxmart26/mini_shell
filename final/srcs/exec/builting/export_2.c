@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:22:01 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/28 17:56:51 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:53:04 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_swap(char **env, int i, t_data *data, t_token *token)
 	{
 		nb = 0;
 		i = 0;
-		while (env[i + 1])
+		while (env[i + 1]) //TODO fix (quand len env == 0)
 		{
 			if (ft_strcmp(env[i], env[i + 1]) > 0)
 			{

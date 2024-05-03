@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:00:02 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/28 14:27:31 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/02 15:30:30 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ void	ft_tmp2(t_data *data, t_token *token, int result, pid_t *pid)
 		if (token->type == WORD)
 		{
 			waitpid(pid[i], &result, 0);
-			str = ft_split(token->value, ' ');
+			str = token->str;
 			ft_retry(data, result, str, token);
-			if (str != NULL)
-				ft_free_tab(str);
 			i++;
 		}
 		token = token->next;

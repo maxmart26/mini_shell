@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 14:51:08 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/01 19:31:11 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:28:58 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	free_minishell(t_data *tools)
 
 void	free_minishell_ctrld(t_data *tools)
 {
-	t_token	*token;
+	// t_token	*token;
 
-	token = tools->lexer_list;
+	// token = tools->lexer_list;
 	if (tools->envp)
 		ft_destroy_env(tools->env);
 	free(tools->args);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dup2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:16:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/28 18:00:49 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:28:23 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	ft_dup2_next(t_data *data, t_token *token)
 
 void	ft_dup2(t_data *data, t_token *token)
 {
-	int	i;
+	// int	i;
 
-	i = 2;
+	// i = 2;
 	if (data->nb_pipe > 0)
 	{
 		ft_close_useless(data, data->nb_cmd, data->nb_cmd);

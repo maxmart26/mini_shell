@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/01 17:47:52 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:56:01 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ int	count_quotes(char *str)
 	i = 0;
 	nb_sq = 0;
 	nb_dq = 0;
-	while (str[i] && str[i + 1])
+	while (str[i])
 	{
 		if (str[i] == 34)
 			i += find_matching_quote(str, i, &nb_dq, 34);
 		if (str[i] == 39)
 			i += find_matching_quote(str, i, &nb_sq, 39);
+		if (!str[i])
+			break ;
 		i++;
 	}
 	if ((nb_dq > 0 && nb_dq % 2 != 0) || (nb_sq > 0 && nb_sq % 2 != 0))
@@ -65,18 +67,22 @@ void	count_pipes(t_token *list, t_data *tools)
 
 int	is_env_var(char *str, t_data *tools, char *env_var)
 {
-	int (start) = 0;
-	int (i) = 0;
+	int(start) = 0;
+	int(i) = 0;
 	while (str[i])
 	{
 		if (str[i] == '$')
 		{
-			if (!str[i + 1])
+			i++;
+			start = i;
+			if (!str[i] || str[i] == '\"')
 				break ;
-			start = i + 1;
-			while (str[i] && (str[i] != ' ' || str[i] != '\"' || str[i] != '\''))
+			while (str[i] && (str[i] != ' ' && str[i] != '\"' && str[i] != '\''
+					&& str[i] != '.' && str[i] != '%' && str[i] != ';'
+					&& str[i] != '$' && str[i] != '!' && str[i] != ':'
+					&& str[i] != '*'))
 				i++;
-			while (str[i - 1] == '\"' || str[i] != '\'')
+			while (str[i - 1] == '\"' || str[i - 1] == '\'')
 				i--;
 			env_var = ft_substr(str, start, i - start);
 			if (!find_env_var(env_var, tools->env))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:52:41 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/01 14:02:56 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:12:51 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include "../../../include/minishell_proto.h"
 #include "../../../include/minishell_struct.h"
 
-void	ft_unset_next(t_env *env)
+void	ft_unset_next(t_env *env) //TODO: use double pointer bro (pour env = env->next;) (segfault qd remove premier elem)
 {
 	t_env	*tmp;
 
 	tmp = env;
 	if (!env->prev)
 	{
-		env->next->prev = NULL;
+		env->next->prev = NULL; //TODO fix: segfault (enpty env) (check next != NULL)
 		env = env->next;
 	}
 	else if (!env->next)

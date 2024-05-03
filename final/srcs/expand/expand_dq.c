@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 15:22:28 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/01 19:21:57 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:12:21 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ char	*expand_dq(char *str, int *i, char *result, t_data *tools)
 	if (tmp)
 	{
 		result = ft_strjoin(result, tmp);
-		//free(tmp);
+		if (tmp)
+			free(tmp);
 		free(tmp1);
 	}
 	return (result);

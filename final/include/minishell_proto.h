@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/01 18:42:35 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:33:13 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ char	*expand_env_var_dq(char *line, char *result, int *j, t_data *tools);
 char	*remove_dq(char *str, int *i, t_data *tools);
 char	*expand_dq(char *str, int *i, char *result, t_data *tools);
 char	*expand_exit_status(int *i, char **expanded, char *exit_status);
+void	print_error(t_token *token, t_data *tools);
+void	print_error_message(int type);
+void	ft_free_pipe_fd(t_data *data);
 
 	// pour les tests
 
@@ -107,6 +110,9 @@ void	ft_retry(t_data *data, int result, char **str, t_token *token);
 void	ft_tmp(t_data *data, t_token *token);
 void	init_minishell(t_data *tools, char **env);
 t_token	*new_token_after_fd(t_token *token);
+void	delete_null_token(t_data *tools);
+int		check_null_list(t_data *tools);
+int	check_pipe(t_data *tools);
 
 // herdoc.c
 
@@ -205,6 +211,7 @@ void	add_grep_args(t_token *token);
 
 // Utils
 
+void	ft_tmp_close(t_data *data, t_token *token);
 void	show_ctrl(int sig);
 int		handle_signal(void);
 void	ft_signal_handler(int signal);

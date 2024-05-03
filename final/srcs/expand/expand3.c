@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:54:00 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/01 19:26:52 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:12:03 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	*expand_word(char *str, t_data *tools)
 		else
 			get_char(str, &i, &result);
 	}
+	free(str);
 	return (result);
 }
 
@@ -85,9 +86,12 @@ void	remove_sq(char *str, int *i, char **result)
 		j++;
 	tmp1 = *result;
 	tmp = ft_substr(str, *i, j - *i);
-	*result = ft_strjoin(*result, tmp);
-	free(tmp);
-	free(tmp1);
+	if (tmp)
+	{
+		*result = ft_strjoin(*result, tmp);
+		free(tmp);
+		free(tmp1);
+	}
 	*i = j + 1;
 }
 

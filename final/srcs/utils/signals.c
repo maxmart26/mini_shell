@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:13:47 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/29 16:06:11 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:48:23 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	sig_handler_sa(int signal, siginfo_t *info, void *context)
 		rl_on_new_line();
 		if (g_status == 2)
 			printf("\n");
+		if (g_status == 5 && signal == SIGINT)
+			g_status = 6;
 		return ;
 	}
 	if (g_status == 5 && signal == SIGQUIT)
@@ -66,7 +68,6 @@ void	show_ctrl(int sig)
 
 void	ctrl_d(t_data *tools)
 {
-	printf("exit\n");
 	free_minishell_ctrld(tools);
 	exit (1);
 }

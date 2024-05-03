@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:18:21 by matorgue          #+#    #+#             */
-/*   Updated: 2024/03/27 14:12:24 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:28:03 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 \033[0;92m[TYPE]\033[0m \033[0;91m[TOKEN]\033[0m"
 
 # define SYNTAX_ERR "bash: syntax error near unexpected token `"
+# define QUOTE_ERR ": no matching quote `"
 # define DIR_ERR ": Is a directory\n"
 # define CMD_ERR ": command not found\n"
 # define INV_OPT ": invalid option\n"

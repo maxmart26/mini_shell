@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:25:03 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/28 18:09:40 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:46:00 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*show_prompt(void)
 	char	*str;
 	char	*user;
 
-	user = "lnunez-t";
+	user = "minishell";
 	str = ft_strjoin(user, "$");
 	return (str);
 }

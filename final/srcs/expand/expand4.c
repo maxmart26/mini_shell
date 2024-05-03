@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:48:21 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/01 18:42:26 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:26:02 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ char	*expand_env_var(char *str, int *i, char *result, t_data *tools)
 	char	*exit_status;
 
 	expanded = NULL;
-	if ((i == 0 || str[*i - 1] != '$') && str[*i + 1] == '?')
+	if (str[*i + 1] == '?')
 	{
-		exit_status = ft_itoa(tools->exit);
-		expanded = expand_exit_status(i, &result, exit_status);
-		free(exit_status);
+		if (*i == 0 || ((*i != 0) && str[*i - 1] != '$'))
+		{
+			exit_status = ft_itoa(tools->exit);
+			expanded = expand_exit_status(i, &result, exit_status);
+			free(exit_status);
+		}
 	}
 	else if (is_env_var(str + *i, tools, NULL))
 	{
@@ -75,7 +78,8 @@ char	*replace_env_var(char *line, int *i, char **result, char **tmp)
 
 	tmp1 = *result;
 	*result = ft_strjoin(*result, *tmp);
-	free(tmp1);
+	if (tmp1)
+		free(tmp1);
 	if (line[*i] == '$')
 		(*i)++;
 	if (line[*i] == '_')

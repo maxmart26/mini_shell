@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/04/28 18:06:40 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:39:49 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	exec_no_acc(t_data *data)
 {
 	ft_printf_error(" Is a directory\n");
 	free_tab(data->path);
-	free_tab(data->mycmdargs);
 	destroy_token_list(data->lexer_list);
 	ft_destroy_env(data->env);
 	while (data->nb_pipe >= 1)
@@ -91,7 +90,6 @@ void	exec(t_data *data, t_token *token)
 	if (data->path != NULL)
 		free_tab(data->path);
 	destroy_token_list(data->lexer_list);
-	free_tab(data->mycmdargs);
 	while (data->nb_pipe >= 1)
 	{
 		free(data->pipe_fd[data->nb_pipe - 1]);
@@ -110,7 +108,7 @@ char	*ft_exec(t_data *data, t_token *token)
 	int	i;
 
 	i = 0;
-	data->mycmdargs = ft_split(token->value, ' ');
+	data->mycmdargs = token->str;
 	data->path_from_envp = ft_path(data->env);
 	if (data->path_from_envp == NULL && data->r_path == TRUE)
 		return (exec_path(data));
