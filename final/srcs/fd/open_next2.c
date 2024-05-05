@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:52:51 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/01 11:31:59 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:27:36 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	verif_open(t_token *token)
 		return (0);
 	while (token)
 	{
+		if (token->fd_int < 0 || token->fd_out < 0)
+			return (0);
 		if (token->type == APPEND || token->type == GREAT || token->type == LESS
 			|| token->type == HEREDOC)
 			return (1);
@@ -37,7 +39,8 @@ int	verif_open(t_token *token)
 	}
 	return (0);
 }
-void	close_end(int  fd, int  fd2)
+
+void	close_end(int fd, int fd2)
 {
 	if (fd > 2)
 		close(fd);

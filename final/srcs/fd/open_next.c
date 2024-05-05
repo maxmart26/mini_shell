@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_next.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:54 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/03 15:23:50 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:27:54 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ t_token	*open_fd_test(t_data *data)
 {
 	t_token *(result) = data->lexer_list;
 	t_token *(tmp) = NULL;
-
 	data->in_file = 1;
 	while (data->lexer_list->next)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:36:04 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/02 17:56:42 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 16:58:12 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_env	*new_env(void)
 	new = malloc(sizeof(t_env));
 	if (new)
 	{
+		new->prev = NULL;
 		new->next = NULL;
 		new->value = NULL;
 	}

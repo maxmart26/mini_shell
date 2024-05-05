@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_un_error.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:52:31 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/02 18:30:05 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:31:41 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_putnbr_un_error(unsigned long nbr, int *len)
 		ft_putnbr_un_error((nbr / 10), len);
 		ft_putnbr_un_error((nbr % 10), len);
 	}
-	else if (nbr < 10)// && nbr >= 0)
+	else if (nbr < 10)
 	{
 		ft_putchar_error((nbr + '0'), len);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:35:52 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/02 18:28:39 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 15:48:08 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,9 @@ t_env	*init_env(t_data *data, int i)
 {
 	t_env	*env;
 	t_env	*result;
-	// char	**str;
 
 	env = NULL;
 	env = new_env();
-	// str = NULL;
 	if (!env)
 		return (NULL);
 	result = env;

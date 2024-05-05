@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:06:12 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/03 15:24:32 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:35:25 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_here_doc_put_in(t_data *data, char *av)
 		if (!ret)
 		{
 			if (g_status == 5)
-				ft_printf_error("bash: warning: here-doc not delimited by end-of-file\n");
+				ft_printf_error(ERROR_WRITE);
 			else
 				printf("\n");
 			close(data->f1);
@@ -78,8 +78,7 @@ void	ft_herdoc(t_data *data, t_token *tmp, int i)
 		return ;
 	ft_here_doc_put_in(data, tmp->next->value);
 	close(data->f1);
-	if (g_status != 5 && g_status != 6)
-		data->f1 = open(data->itoa, O_RDONLY);
+	data->f1 = open(data->itoa, O_RDONLY);
 	unlink(data->itoa);
 	free(data->itoa);
 	data->std_int = data->f1;
@@ -105,5 +104,6 @@ t_token	*open_heredoc(t_data *data, t_token *token)
 		token->fd_int = data->std_int;
 		token = token->next;
 	}
+	g_status = 1;
 	return (token);
 }

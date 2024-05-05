@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:52:41 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/03 17:12:51 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:31:04 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,32 @@
 #include "../../../include/minishell_proto.h"
 #include "../../../include/minishell_struct.h"
 
-void	ft_unset_next(t_env *env) //TODO: use double pointer bro (pour env = env->next;) (segfault qd remove premier elem)
+t_env	*ft_unset_next(t_env *env)
 {
-	t_env	*tmp;
-
-	tmp = env;
-	if (!env->prev)
+	t_env *(tmp) = env;
+	if (env->next && env->prev)
 	{
-		env->next->prev = NULL; //TODO fix: segfault (enpty env) (check next != NULL)
+		tmp->prev->next = tmp->next;
+		tmp->next->prev = tmp->prev;
+		env = env->prev;
+	}
+	else if (env->next && !env->prev)
+	{
+		tmp->next->prev = NULL;
 		env = env->next;
 	}
-	else if (!env->next)
-	{
-		env->prev->next = NULL;
-	}
+	else if (!env->next && !env->prev)
+		env = NULL;
 	else
 	{
-		env->prev->next = env->next;
-		env->next->prev = env->prev;
+		tmp->prev->next = NULL;
+		env = env->prev;
 	}
 	free(tmp->value);
 	free(tmp);
+	while (env && env->prev)
+		env = env->prev;
+	return (env);
 }
 
 void	ft_unset_end(char **str, t_data *data)
@@ -48,7 +53,7 @@ void	ft_unset_end(char **str, t_data *data)
 		if (ft_strncmp(str[1], env->value, ft_strlen(str[1])) == 0
 			&& env->value[ft_strlen(str[1])] == '=')
 		{
-			ft_unset_next(env);
+			data->env = ft_unset_next(env);
 			break ;
 		}
 		else

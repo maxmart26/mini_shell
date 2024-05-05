@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/03 15:43:47 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:31:18 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	lexer_and_parser(t_data *tools)
 void	delete_null_token(t_data *tools)
 {
 	t_token	*token;
-	t_token *tmp;
+	t_token	*tmp;
 
 	token = tools->lexer_list;
 	while (token)

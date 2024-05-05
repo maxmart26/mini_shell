@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/03 17:56:01 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:28:10 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	count_pipes(t_token *list, t_data *tools)
 
 int	is_env_var(char *str, t_data *tools, char *env_var)
 {
-	int(start) = 0;
-	int(i) = 0;
+	int (start) = 0;
+	int (i) = 0;
 	while (str[i])
 	{
 		if (str[i] == '$')

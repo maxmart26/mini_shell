@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/03 18:33:13 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:32:10 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print_error(t_token *token, t_data *tools);
 void	print_error_message(int type);
 void	ft_free_pipe_fd(t_data *data);
 
-	// pour les tests
+// pour les tests
 
 int		open_file(char *s, int i);
 void	open_fd(t_data *data, t_token *token);
@@ -112,7 +112,7 @@ void	init_minishell(t_data *tools, char **env);
 t_token	*new_token_after_fd(t_token *token);
 void	delete_null_token(t_data *tools);
 int		check_null_list(t_data *tools);
-int	check_pipe(t_data *tools);
+int		check_pipe(t_data *tools);
 
 // herdoc.c
 
@@ -147,7 +147,7 @@ int		verif_export_acsii(unsigned int i, char **str, t_data *data);
 void	ft_unset(char **str, t_data *data, int i);
 void	ft_test(char *buffer_old, t_data *data, t_token *token);
 void	ft_exit(t_data *data, int i, char **str);
-void	ft_trie_export(t_data *data, t_token *token);
+void	ft_trie_export(t_data *data, t_token *token, int k);
 void	ft_export_modif(char *token, t_env *env);
 void	ft_end(t_data *data);
 int		ft_strlen_export(char *str, char c);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:13 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/03 16:32:25 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 12:53:44 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ char	*ft_init_pwd_cd(t_env *env)
 	buffer = NULL;
 	buffer = getcwd(buffer, _SC_PASS_MAX);
 	if (!buffer)
-		buffer = ft_env_pwd(env);
+		buffer = ft_strdup(ft_env_pwd(env));
 	str = ft_strjoin(str, buffer);
-	free(buffer); //TODO invalid free (pwd invalid)
+	if (buffer != NULL)
+		free(buffer);
 	return (str);
 }
 
@@ -75,6 +76,7 @@ void	ft_cd_end(char **str, char *buffer, t_data *data, t_token *token)
 			data->exit = 1;
 			ft_printf_error("bash: cd: %s: No such file or directory\n",
 				str[1]);
+			free(buffer_old);
 		}
 		else
 		{
@@ -92,8 +94,7 @@ void	ft_cd_end(char **str, char *buffer, t_data *data, t_token *token)
 
 void	ft_cd_vague(char *buffer, t_data *data, char **buff, t_token *token)
 {
-	buffer = ft_strjoin("/home/", getenv("LOGNAME")); //TODO PROTECT (getenv("LOGNAME") can be null)
-	//TODO PROTECT ft_strjoin (mallc can fail)
+	buffer = ft_strjoin("/home/", getenv("LOGNAME"));
 	chdir(buffer);
 	free(buffer);
 	buffer = ft_init_pwd_cd(data->env);

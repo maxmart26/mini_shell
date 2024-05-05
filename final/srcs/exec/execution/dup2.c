@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dup2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:16:28 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/02 18:28:23 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:30:52 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,30 @@ void	ft_dup2_next(t_data *data, t_token *token)
 	if (token->fd_out != 1)
 		data->std_out = token->fd_out;
 	dup2(data->std_int, STDIN_FILENO);
-	dup2(data->std_out, STDOUT_FILENO);
+	if (dup2(data->std_out, STDOUT_FILENO) == -1)
+		printf("marche pas\n");
 	if (data->std_int > 2)
 		close(data->std_int);
 	if (data->std_out > 2)
 		close(data->std_out);
 }
 
+void	ft_end_dup(t_token *token)
+{
+	while (token->prev)
+		token = token->prev;
+	while (token)
+	{
+		if (token->fd_int > 2)
+			close(token->fd_int);
+		if (token->fd_out > 2)
+			close(token->fd_out);
+		token = token->next;
+	}
+}
+
 void	ft_dup2(t_data *data, t_token *token)
 {
-	// int	i;
-
-	// i = 2;
 	if (data->nb_pipe > 0)
 	{
 		ft_close_useless(data, data->nb_cmd, data->nb_cmd);
@@ -49,4 +61,5 @@ void	ft_dup2(t_data *data, t_token *token)
 	}
 	else
 		ft_dup2_next(data, token);
+	ft_end_dup(token);
 }

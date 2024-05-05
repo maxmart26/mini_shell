@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:50:34 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/03 18:39:49 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:29:24 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	exec(t_data *data, t_token *token)
 		exec_no_acc(data);
 	ft_printf_error("bash: %s: command not found\n", data->mycmdargs[0]);
 	ft_destroy_env(data->env);
+	ft_tmp_close(data, token);
 	free(data->pid);
 	if (data->path != NULL)
 		free_tab(data->path);

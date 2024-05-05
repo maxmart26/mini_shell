@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_include.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:18:21 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/02 16:28:03 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:35:13 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define DIR_ERR ": Is a directory\n"
 # define CMD_ERR ": command not found\n"
 # define INV_OPT ": invalid option\n"
+# define ERROR_WRITE "bash: warning: here-doc not delimited by end-of-file\n"
 
 # define GREEN "\e[1;32m"
 # define RESET "\e[0m"
