@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/05 18:28:10 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/06 13:46:53 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	is_env_var(char *str, t_data *tools, char *env_var)
 			while (str[i - 1] == '\"' || str[i - 1] == '\'')
 				i--;
 			env_var = ft_substr(str, start, i - start);
-			if (!find_env_var(env_var, tools->env))
+			if (find_env_var(env_var, tools->env) == NULL)
 			{
 				free(env_var);
 				break ;

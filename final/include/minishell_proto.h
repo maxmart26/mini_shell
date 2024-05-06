@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_proto.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/05 18:32:10 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/06 14:51:16 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*expand_exit_status(int *i, char **expanded, char *exit_status);
 void	print_error(t_token *token, t_data *tools);
 void	print_error_message(int type);
 void	ft_free_pipe_fd(t_data *data);
+int		check_dir(t_data *tools);
 
 // pour les tests
 

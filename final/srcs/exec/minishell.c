@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/03 15:24:06 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 16:03:05 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	open_file(char *s, int i)
 
 void	after(t_data *data, t_token *token)
 {
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (token->fd_int == -1 || token->fd_out == -1 || !token->value)
 	{
 		if (!token->value)
@@ -91,7 +93,9 @@ void	ft_retry(t_data *data, int result, char **str, t_token *token)
 
 int	ft_main(t_data *data)
 {
-	signal(SIGQUIT, &ft_signal_handler);
+	//signal(SIGQUIT, &ft_signal_handler);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	g_status = 2;
 	ft_tmp(data, data->lexer_list);
 	while (data->nb_pipe >= 1)

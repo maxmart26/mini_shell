@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:26:19 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/04/07 19:52:52 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 13:39:06 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		else
 			return (ft_strdup(s2));
 	}
+	else if (s1 && !s2)
+		return (ft_strdup(s1));
 	len = len + ft_strlen(s1);
 	s = (char *)malloc(sizeof(char) * (len + 1));
 	if (!s)
