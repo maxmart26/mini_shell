@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/06 16:03:05 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:08:32 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	ft_retry(t_data *data, int result, char **str, t_token *token)
 
 int	ft_main(t_data *data)
 {
-	//signal(SIGQUIT, &ft_signal_handler);
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	g_status = 2;

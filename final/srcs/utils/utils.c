@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:52:29 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/06 13:46:53 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:27:34 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,12 @@ int	is_env_var(char *str, t_data *tools, char *env_var)
 	int (i) = 0;
 	while (str[i])
 	{
-		if (str[i] == '$')
+		if (str[i++] == '$')
 		{
-			i++;
 			start = i;
 			if (!str[i] || str[i] == '\"')
 				break ;
-			while (str[i] && (str[i] != ' ' && str[i] != '\"' && str[i] != '\''
-					&& str[i] != '.' && str[i] != '%' && str[i] != ';'
-					&& str[i] != '$' && str[i] != '!' && str[i] != ':'
-					&& str[i] != '*'))
+			while (ft_check_symbol(i, str))
 				i++;
 			while (str[i - 1] == '\"' || str[i - 1] == '\'')
 				i--;

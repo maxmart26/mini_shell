@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:58:16 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/06 14:05:21 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:17:00 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*find_env_var(char *str, t_env *env)
 	{
 		if (ft_strncmp(str, env->value, ft_strlen(str)) == 0
 			&& env->value[ft_strlen(str)] == '=')
-				return (&env->value[ft_strlen(str) + 1]);
+			return (&env->value[ft_strlen(str) + 1]);
 		env = env->next;
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:26:19 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/06 13:39:06 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:20:22 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i;
-	int		len;
 	char	*s;
 
-	i = 0;
-	len = ft_strlen(s2);
+	size_t (i) = 0;
+	int (len) = ft_strlen(s2);
 	if (!s1)
 	{
 		if (!s2)

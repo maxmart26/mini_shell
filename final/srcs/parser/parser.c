@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:44 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/06 16:47:38 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:09:52 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,6 @@ int	check_pipe(t_data *tools)
 		if (tmp->type == PIPE || tmp->type == GREAT || tmp->type == LESS
 			|| tmp->type == HEREDOC || tmp->type == APPEND)
 		{
-			/*if (tmp->type == PIPE && tmp->next && (tmp->next->type == HEREDOC
-					|| tmp->next->type == GREAT || tmp->next->type == LESS
-					|| tmp->next->type == APPEND))
-				tmp = tmp->next;*/
 			if ((!tmp->prev && !tmp->next) || !tmp->next || (tmp->next
 					&& tmp->next->type != WORD) || (tmp->type == PIPE
 					&& !tmp->prev))
@@ -131,60 +127,4 @@ int	check_pipe(t_data *tools)
 		tmp = tmp->next;
 	}
 	return (0);
-}
-
-int	check_word_only(t_data *tools)
-{
-	t_token	*tmp;
-
-	tmp = tools->lexer_list;
-	if (tmp->type == WORD && tmp->next->type == NEWL)
-	{
-		printf("%s", "bash: ");
-		first_word(tmp->value);
-		g_status = 258;
-		return (printf(CMD_ERR), 1);
-	}
-	return (0);
-}
-
-int	check_null_list(t_data *tools)
-{
-	t_token	*tmp;
-
-	tmp = tools->lexer_list;
-	if (!tmp && g_status != 6 && g_status != 5)
-	{
-		g_status = 258;
-		return (1);
-	}
-	return (0);
-}
-
-int	check_dir(t_data *tools)
-{
-	t_token	*tmp;
-
-	tmp = tools->lexer_list;
-	if (tmp && tmp->type == WORD && ft_strncmp(tmp->value, ".",
-			ft_strlen(tmp->value)) == 0 && !tmp->next)
-	{
-		g_status = 258;
-		ft_printf_error("bash: .: filename argument required\n");
-		return (1);
-	}
-	else
-		return (0);
-}
-
-void	parsing(t_data *tools)
-{
-	if (check_syntax(tools))
-		return ;
-	if (check_spe_char(tools))
-		return ;
-	if (check_null_list(tools))
-		return ;
-	if (check_dir(tools))
-		return ;
 }

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/06 15:30:37 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:06:36 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,6 @@ void	lexer_and_parser(t_data *tools)
 		list_gathering(tools);
 		delete_null_token(tools);
 		parsing(tools);
-	}
-}
-
-void	delete_null_token(t_data *tools)
-{
-	t_token	*token;
-	t_token	*tmp;
-
-	token = tools->lexer_list;
-	while (token)
-	{
-		if (token->next && token->next->value == NULL)
-		{
-			tmp = token->next;
-			token->next = token->next->next;
-			if (token->next != NULL)
-				token->next->prev = token;
-			if (tmp->str)
-				ft_free_tab(tmp->str);
-			free(tmp);
-		}
-		token = token->next;
 	}
 }
 

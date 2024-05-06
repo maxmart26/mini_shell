@@ -22,10 +22,10 @@ SRCS = srcs/main.c\
 		srcs/parser/parser2.c\
 		srcs/lexer/cmd_args.c srcs/lexer/cmd_args2.c srcs/lexer/cmdbuilt_args.c srcs/lexer/gather_words.c srcs/lexer/get_token.c \
 		srcs/lexer/get_word.c srcs/lexer/lexer.c srcs/lexer/manage_quotes.c srcs/lexer/manage_quotes2.c srcs/lexer/manage_sep.c \
-		srcs/lexer/manage_type.c srcs/lexer/manage_type2.c srcs/lexer/print_lexer.c \
-		srcs/parser/parser.c  \
+		srcs/lexer/manage_type.c srcs/lexer/manage_type2.c srcs/lexer/print_lexer.c srcs/lexer/lexer2.c \
+		srcs/parser/parser.c srcs/parser/parser3.c \
 		srcs/utils/free.c srcs/utils/manage_env.c srcs/utils/newline.c srcs/utils/signals.c srcs/utils/utils.c srcs/utils/utils2.c \
-		srcs/utils/utils3.c
+		srcs/utils/utils3.c srcs/utils/utils4.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 	

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:01:46 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/03 15:30:35 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:13:43 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ int	list_gathering_next(t_token *token, char *str, t_token *tmp, char *concat)
 	}
 	return (1);
 }
+
 int	len_str(t_token *token)
 {
-	int(i) = 0;
+	int (i) = 0;
 	while (token && token->type != PIPE && token->type != SEMI)
 	{
 		token = token->next;
@@ -49,7 +50,7 @@ void	test(t_data *tools)
 {
 	t_token *(token) = tools->lexer_list;
 	t_token *(result) = NULL;
-	int(i) = 0;
+	int (i) = 0;
 	while (token)
 	{
 		i = 0;
@@ -70,6 +71,7 @@ void	test(t_data *tools)
 			token = token->next;
 	}
 }
+
 void	list_gathering(t_data *tools)
 {
 	t_token	*token;

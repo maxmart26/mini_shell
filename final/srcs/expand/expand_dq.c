@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 15:22:28 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/02 17:12:21 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:22:12 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,11 @@ char	*expand_env_var_dq(char *line, char *result, int *j,
 
 char	*remove_dq(char *str, int *i, t_data *tools)
 {
-	int		j;
-	char	*result;
-	char	*line;
 	char	*exit_status;
 
-	result = NULL;
-	j = *i + 1;
-	line = str;
+	char *(result) = NULL;
+	int (j) = *i + 1;
+	char *(line) = str;
 	while (line[j] != '\"')
 	{
 		if (line[j] == '\\')
@@ -87,8 +84,7 @@ char	*remove_dq(char *str, int *i, t_data *tools)
 				get_char(line, &j, &result);
 		}
 	}
-	j++;
-	*i = j;
+	*i = j + 1;
 	return (result);
 }
 

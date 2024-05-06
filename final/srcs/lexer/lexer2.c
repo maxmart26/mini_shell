@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   lexer2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 14:51:08 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/06 17:08:49 by lnunez-t         ###   ########.fr       */
+/*   Created: 2024/05/06 17:12:40 by lnunez-t          #+#    #+#             */
+/*   Updated: 2024/05/06 17:13:06 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,12 @@
 #include "../../include/minishell_proto.h"
 #include "../../include/minishell_struct.h"
 
-void	free_minishell(t_data *tools)
+t_token	*lexer(char *str)
 {
-	free(tools->args);
-	free_env(tools->envp);
-	ft_destroy_env(tools->env);
-	destroy_token_list(tools->lexer_list);
-	free(tools->pid);
-	free(tools);
-}
+	t_token	*token_list;
 
-void	free_minishell_ctrld(t_data *tools)
-{
-	if (tools->envp)
-		ft_destroy_env(tools->env);
-	free(tools->args);
-	free(tools);
+	token_list = NULL;
+	token_list = first_token();
+	fill_token_list(token_list, str);
+	return (token_list);
 }

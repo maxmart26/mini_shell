@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:42:44 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/01 16:19:22 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:28:28 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,6 @@ char	*only_dollar(char *result)
 		free(result);
 	return (tmp_result);
 }
-
-/*char	*replace_env_var(char *str, t_data *tools)
-{
-	char	*value;
-
-	value = NULL;
-	value = is_still_env_var(str, tools, NULL);
-	free(str);
-	while (is_env_var(value, tools, NULL) == 1)
-	{
-		value = is_still_env_var(value, tools, NULL);
-	}
-	return (value);
-}*/
 
 char	*replace_exit_status(char *str, t_data *tools, int i, char *tmp)
 {
@@ -91,4 +77,31 @@ char	*display_exit_status(t_data *tools, char *result)
 	free(exit_status);
 	free(result);
 	return (tmp);
+}
+
+char	*skip_non_env_var(char *line, int *i, char **result, int in_quotes)
+{
+	char *(tmp1) = NULL;
+	char *(tmp) = NULL;
+	(void)in_quotes;
+	if (line[*i] == '$' && !line[*i + 1])
+	{
+		tmp = *result;
+		*result = ft_strjoin(*result, "$");
+		free(tmp);
+		(*i)++;
+	}
+	else
+	{
+		while (ft_isalpha(line[*i]) || line[*i] == '$')
+		{
+			tmp = *result;
+			tmp1 = ft_substr(line, *i, 1);
+			*result = ft_strjoin(*result, tmp1);
+			free(tmp);
+			free(tmp1);
+			(*i)++;
+		}
+	}
+	return (*result);
 }

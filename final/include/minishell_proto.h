@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/06 14:51:16 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:30:01 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	print_error(t_token *token, t_data *tools);
 void	print_error_message(int type);
 void	ft_free_pipe_fd(t_data *data);
 int		check_dir(t_data *tools);
+int		ft_check_symbol(int i, char *str);
+t_token	*lexer(char *str);
 
 // pour les tests
 

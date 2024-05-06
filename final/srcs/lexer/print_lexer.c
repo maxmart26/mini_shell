@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:35:30 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/01 14:21:08 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:12:00 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_print_lexer(t_token *list)
 void	ft_print_lexer_str(t_token *list)
 {
 	t_token	*tmp;
-	int	i;
+	int		i;
 
 	i = 0;
 	tmp = list;
@@ -95,7 +95,7 @@ void	ft_print_lexer_str(t_token *list)
 		i = 0;
 		while (tmp->str && tmp->str[i])
 		{
-			printf("\t-%s-\n\n",tmp->str[i]);
+			printf("\t%s\n\n", tmp->str[i]);
 			i++;
 		}
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:27 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/03 18:28:22 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:13:02 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,4 @@ void	destroy_token_list(t_token *token_list)
 		free(tmp);
 		tmp = next_node;
 	}
-}
-
-t_token	*lexer(char *str)
-{
-	t_token	*token_list;
-
-	token_list = NULL;
-	token_list = first_token();
-	fill_token_list(token_list, str);
-	return (token_list);
 }

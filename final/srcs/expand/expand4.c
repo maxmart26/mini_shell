@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:48:21 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/06 16:51:37 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:17:22 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ char	*expand_exit_status(int *i, char **expanded, char *exit_status)
 char	*env_var(char *str, t_data *tools)
 {
 	char *(find_var) = NULL;
-	int(start) = 0;
-	int(i) = 0;
+	int (start) = 0;
+	int (i) = 0;
 	char *(result) = NULL;
 	if (str[i] == '$' && str[i + 1])
 	{
@@ -105,44 +105,4 @@ int	check_end_of_string(char str, int inside_quotes)
 			return (1);
 	}
 	return (0);
-}
-
-char	*skip_non_env_var(char *line, int *i, char **result, int in_quotes)
-{
-	char	*tmp1;
-	char	*tmp;
-	int		end_of_string;
-
-	end_of_string = 0;
-	tmp = NULL;
-	tmp1 = NULL;
-	(void)in_quotes;
-	/*end_of_string = check_end_of_string(line[*i + 1], in_quotes);
-	if (end_of_string)
-	{
-		tmp = *result;
-		tmp1 = ft_substr(line, *i, 1);
-		*result = ft_strjoin(*result, tmp1);
-		free(tmp);
-		free(tmp1);
-		(*i)++;
-	}*/
-	if (line[*i] == '$' && !line[*i + 1])
-	{
-		tmp = *result;
-		*result = ft_strjoin(*result, "$");
-		free(tmp);
-		(*i)++;
-	}
-	else
-		while (ft_isalpha(line[*i]) || line[*i] == '$')
-		{
-			tmp = *result;
-			tmp1 = ft_substr(line, *i, 1);
-			*result = ft_strjoin(*result, tmp1);
-			free(tmp);
-			free(tmp1);
-			(*i)++;
-		}
-	return (*result);
 }
