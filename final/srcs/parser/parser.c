@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:44 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/07 11:39:13 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/07 17:03:30 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,21 @@ int	check_spe_char(t_data *tools)
 	tmp = tools->lexer_list;
 	if (!tmp)
 		return (0);
-	if (tmp->value && strncmp(tmp->value, "&", 1) == 0)
+	while (tmp)
 	{
-		printf(SYNTAX_ERR);
-		g_status = 258;
-		return (printf("%s'\n", "&&"), 1);
-	}
-	else if (tmp->type == SEMI)
-	{
-		printf(SYNTAX_ERR);
-		g_status = 258;
-		return (printf("%s'\n", ";"), 1);
+		if (tmp->value && strncmp(tmp->value, "&", 1) == 0)
+		{
+			printf(SYNTAX_ERR);
+			g_status = 258;
+			return (printf("%s'\n", "&&"), 1);
+		}
+		else if (tmp->type == SEMI)
+		{
+			printf(SYNTAX_ERR);
+			g_status = 258;
+			return (printf("%s'\n", ";"), 1);
+		}
+		tmp = tmp->next;
 	}
 	return (0);
 }
@@ -110,6 +114,8 @@ int	check_pipe(t_data *tools)
 	t_token *(tmp) = tools->lexer_list;
 	while (tmp)
 	{
+		if (first_check(tmp))
+			return (1);
 		if (tmp->type == PIPE || tmp->type == GREAT || tmp->type == LESS
 			|| tmp->type == HEREDOC || tmp->type == APPEND)
 		{

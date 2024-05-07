@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:16:36 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/07 13:17:07 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:53:15 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		ft_check_symbol(int i, char *str);
 t_token	*lexer(char *str);
 int		ft_verif_pipe(t_token *token);
 char	*non_env_var(char **result, char *line, int *i);
+int		first_check(t_token *tmp);
 
 // pour les tests
 

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 18:04:37 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/07 10:14:12 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/07 17:03:37 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,27 @@ int	ft_verif_pipe(t_token *token)
 		return (0);
 	else
 		return (1);
+}
+
+int	first_check(t_token *tmp)
+{
+	if ((tmp->type == HEREDOC && (tmp->next->type == GREAT
+				|| tmp->next->type == HEREDOC)) || (tmp->type == APPEND
+			&& (tmp->next->type == APPEND || tmp->next->type == LESS)))
+	{
+		printf(SYNTAX_ERR);
+		g_status = 258;
+		return (printf("%s'\n", tmp->value), 1);
+	}
+	else if ((tmp->type == GREAT && (tmp->next->type == GREAT
+				|| tmp->next->type == HEREDOC || tmp->next->type == APPEND
+				|| tmp->next->type == LESS)) || (tmp->type == LESS
+			&& (tmp->next->type == LESS || tmp->next->type == HEREDOC
+				|| tmp->next->type == APPEND || tmp->next->type == GREAT)))
+	{
+		printf(SYNTAX_ERR);
+		g_status = 258;
+		return (printf("%s'\n", tmp->value), 1);
+	}
+	return (0);
 }
