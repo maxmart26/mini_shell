@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 17:07:02 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/06 17:09:16 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/07 12:28:35 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ int	check_null_list(t_data *tools)
 	t_token	*tmp;
 
 	tmp = tools->lexer_list;
-	if (!tmp && g_status != 6 && g_status != 5)
+	if ((!tmp && g_status != 6 && g_status != 5) || (tmp && !tmp->value))
 	{
+		if (tmp && !tmp->value)
+			ft_printf_error("bash: command not found\n");
 		g_status = 258;
 		return (1);
 	}

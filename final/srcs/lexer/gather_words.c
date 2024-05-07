@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:01:46 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/06 17:13:43 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:10:42 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ void	test(t_data *tools)
 	while (token)
 	{
 		i = 0;
-		if (!token->prev || token->prev->type == PIPE
-			|| token->prev->type == SEMI)
+		if (token->type == PIPE)
+			token = token->next;
+		else if ((!token->prev || token->prev->type == PIPE
+				|| token->prev->type == SEMI))
 		{
 			token->str = (malloc((len_str(token) + 1) * sizeof(char *)));
 			result = token;

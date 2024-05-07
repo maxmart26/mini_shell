@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 18:04:37 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/02 18:17:30 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/07 10:14:12 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,24 @@ int	check_syntax(t_data *tools)
 	else if (check_error_pipe(tmp))
 		return (printf("%s'\n", "|"), 1);
 	return (0);
+}
+
+int	ft_verif_pipe(t_token *token)
+{
+	int (i) = 0;
+	if (token->type == PIPE)
+		token = token->next;
+	while (token && token->type != PIPE)
+	{
+		if (token->type == WORD)
+			i++;
+		if (token->type == GREAT || token->type == LESS
+			|| token->type == HEREDOC || token->type == APPEND)
+			i--;
+		token = token->next;
+	}
+	if (i > 0)
+		return (0);
+	else
+		return (1);
 }

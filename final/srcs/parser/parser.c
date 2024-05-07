@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:44 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/06 17:09:52 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:39:13 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,15 @@ void	print_error(t_token *token, t_data *tools)
 
 int	check_pipe(t_data *tools)
 {
-	t_token	*tmp;
-
-	tmp = tools->lexer_list;
+	t_token *(tmp) = tools->lexer_list;
 	while (tmp)
 	{
 		if (tmp->type == PIPE || tmp->type == GREAT || tmp->type == LESS
 			|| tmp->type == HEREDOC || tmp->type == APPEND)
 		{
-			if ((!tmp->prev && !tmp->next) || !tmp->next || (tmp->next
-					&& tmp->next->type != WORD) || (tmp->type == PIPE
-					&& !tmp->prev))
+			if (((!tmp->prev && !tmp->next) || !tmp->next || (tmp->next
+						&& tmp->next->type == PIPE) || (tmp->type == PIPE
+						&& !tmp->prev)))
 			{
 				print_error(tmp, tools);
 				g_status = 258;

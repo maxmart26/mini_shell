@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:42:44 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/06 17:28:28 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:17:33 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ char	*display_exit_status(t_data *tools, char *result)
 
 char	*skip_non_env_var(char *line, int *i, char **result, int in_quotes)
 {
-	char *(tmp1) = NULL;
 	char *(tmp) = NULL;
 	(void)in_quotes;
 	if (line[*i] == '$' && !line[*i + 1])
@@ -91,17 +90,18 @@ char	*skip_non_env_var(char *line, int *i, char **result, int in_quotes)
 		free(tmp);
 		(*i)++;
 	}
+	else if (line[*i] == '$' && line[*i + 1])
+	{
+		(*i)++;
+		while (line[*i] != '$' && line[*i + 1])
+			(*i)++;
+		if (!line[*i + 1])
+			(*i)++;
+	}
 	else
 	{
 		while (ft_isalpha(line[*i]) || line[*i] == '$')
-		{
-			tmp = *result;
-			tmp1 = ft_substr(line, *i, 1);
-			*result = ft_strjoin(*result, tmp1);
-			free(tmp);
-			free(tmp1);
-			(*i)++;
-		}
+			*result = non_env_var(result, line, i);
 	}
 	return (*result);
 }

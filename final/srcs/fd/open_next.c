@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_next.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:48:54 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/05 18:27:54 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:18:42 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,17 @@ t_token	*open_fd_great(t_token *token)
 
 t_token	*open_fd_less(t_token *token)
 {
-	int	fd;
-
-	fd = open_file(token->next->value, 0);
+	int (fd) = open_file(token->next->value, 0);
 	if (fd == -1)
-	{
 		ft_printf_error("bash: %s: No such file or directory\n",
 			token->next->value);
-	}
 	token = new_token(token);
-	while (token->prev && token->prev->type != PIPE)
+	if (!token)
+	{
+		close (fd);
+		return (token);
+	}
+	while (token && token->prev && token->prev->type != PIPE)
 		token = token->prev;
 	if (token->fd_int > 2)
 		close(fd);

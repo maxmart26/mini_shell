@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
+/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:00:02 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/05 18:01:38 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:11:54 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,8 @@ int	ft_cmd(t_token *token)
 
 void	ft_tmp(t_data *data, t_token *token)
 {
-	int	result;
-
+	int (result) = -23;
 	data->nb_com = ft_cmd(token);
-	result = -23;
 	if (data->nb_com > 0)
 	{
 		data->pid = malloc(data->nb_com * sizeof(pid_t));
@@ -102,9 +100,10 @@ void	ft_tmp(t_data *data, t_token *token)
 			data->pid[data->nb_com] = fork();
 			if (data->pid[data->nb_com] == 0)
 				after(data, token);
-			data->nb_cmd++;
 			data->nb_com++;
 		}
+		else if (token->type == PIPE)
+			data->nb_cmd++;
 		token = token->next;
 	}
 	token = data->lexer_list;

@@ -6,7 +6,7 @@
 /*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 15:22:28 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/06 17:22:12 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:16:57 by lnunez-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,17 @@ char	*expand_dq(char *str, int *i, char *result, t_data *tools)
 		free(tmp1);
 	}
 	return (result);
+}
+
+char	*non_env_var(char **result, char *line, int *i)
+{
+	char *(tmp1) = NULL;
+	char *(tmp) = NULL;
+	tmp = *result;
+	tmp1 = ft_substr(line, *i, 1);
+	*result = ft_strjoin(*result, tmp1);
+	free(tmp);
+	free(tmp1);
+	(*i)++;
+	return (*result);
 }
