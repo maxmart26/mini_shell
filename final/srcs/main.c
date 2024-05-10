@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:16:49 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/07 16:44:01 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:41:37 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ void	parse_and_execute(t_data *tools)
 		ft_main(tools);
 	}
 	else
+	{
 		destroy_token_list(tools->lexer_list);
+	}
 }
 
 int	minishell(t_data *tools, char **env)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:42:44 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/07 17:03:30 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:29:08 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,11 @@ int	check_pipe(t_data *tools)
 		if (tmp->type == PIPE || tmp->type == GREAT || tmp->type == LESS
 			|| tmp->type == HEREDOC || tmp->type == APPEND)
 		{
-			if (((!tmp->prev && !tmp->next) || !tmp->next || (tmp->next
-						&& tmp->next->type == PIPE) || (tmp->type == PIPE
-						&& !tmp->prev)))
+			if ((!tmp->prev && !tmp->next) || !tmp->next || (tmp->next
+					&& tmp->next->type == PIPE) || (tmp->type == PIPE
+					&& !tmp->prev) || (tmp->type == PIPE && (tmp->type == GREAT
+						|| tmp->type == LESS || tmp->type == HEREDOC
+						|| tmp->type == APPEND) && !tmp->next->next))
 			{
 				print_error(tmp, tools);
 				g_status = 258;

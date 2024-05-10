@@ -20,6 +20,7 @@ SRCS = srcs/main.c\
 		srcs/fd/open_next.c\
 		srcs/fd/open_next2.c\
 		srcs/parser/parser2.c\
+		srcs/exec/builting/utils_long.c\
 		srcs/lexer/cmd_args.c srcs/lexer/cmd_args2.c srcs/lexer/cmdbuilt_args.c srcs/lexer/gather_words.c srcs/lexer/get_token.c \
 		srcs/lexer/get_word.c srcs/lexer/lexer.c srcs/lexer/manage_quotes.c srcs/lexer/manage_quotes2.c srcs/lexer/manage_sep.c \
 		srcs/lexer/manage_type.c srcs/lexer/manage_type2.c srcs/lexer/print_lexer.c srcs/lexer/lexer2.c \

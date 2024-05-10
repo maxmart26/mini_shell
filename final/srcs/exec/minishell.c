@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:47:18 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/07 18:07:09 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/10 11:59:38 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	after(t_data *data, t_token *token)
 	if (token->fd_int == -1 || token->fd_out == -1 || !token->value)
 	{
 		if (!token->value)
-			printf("%s\n", "bash: command not found");
+			ft_printf_error("%s\n", "bash: command not found");
 		ft_destroy_env(data->env);
 		destroy_token_list(data->lexer_list);
 		while (data->nb_pipe >= 1)

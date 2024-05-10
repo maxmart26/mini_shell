@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:00:02 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/07 13:11:54 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/10 10:30:22 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,25 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+
+void	ft_tmp_clos(t_data *data, t_token *token)
+{
+	int	i;
+
+	i = 0;
+	while (token)
+	{
+		if (token->fd_int > 2)
+			close(token->fd_int);
+		if (token->fd_out > 2)
+			close(token->fd_out);
+		token = token->next;
+	}
+	if (data->std_int > 2)
+		close(data->std_int);
+	if (data->std_out > 2)
+		close(data->std_out);
+}
 
 void	ft_tmp_close(t_data *data, t_token *token)
 {

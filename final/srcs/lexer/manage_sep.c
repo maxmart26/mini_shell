@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_sep.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:55:48 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/07 16:12:31 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:22:18 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_token	*index_first(t_token *list)
 		free(list->value);
 		free(list);
 		list = tmp;
+		list->prev = NULL;
 	}
 	result = list;
 	result->prev = NULL;
@@ -48,8 +49,7 @@ t_token	*index_first(t_token *list)
 
 t_token	*removee(t_token *list)
 {
-	t_token	*(tmp) = NULL;
-
+	t_token *(tmp) = NULL;
 	tmp = list->prev;
 	tmp->next = list->next;
 	tmp->next->prev = tmp;
@@ -61,9 +61,6 @@ t_token	*removee(t_token *list)
 
 t_token	*remove_sep(t_token *list)
 {
-	t_token	*result;
-
-	result = list;
 	while (list)
 	{
 		if (list->type == SEP)
@@ -77,13 +74,17 @@ t_token	*remove_sep(t_token *list)
 				break ;
 			}
 			else if (list->index == 0)
-				result = index_first(list);
+				list = index_first(list);
 			else
 				list = removee(list);
 		}
+		if (!list->next)
+			break ;
 		list = list->next;
 	}
-	return (result);
+	while (list->prev)
+		list = list->prev;
+	return (list);
 }
 
 char	*delete_sep(char *str, char *result)

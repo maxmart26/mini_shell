@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 14:09:54 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/01 14:02:56 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/10 07:12:08 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ void	ft_end_exit(char **str, t_data *data, int i)
 {
 	if (!str[1])
 		data->exit = 0;
+	else if (str[1] && str[1][0] == '-')
+		data->exit = ft_atoll(str[1]);
 	else
-		data->exit = ft_atoi(str[1]);
-	if (data->exit < 0)
-		data->exit = 156;
+		data->exit = ft_atoull(str[1]);
 	i = data->exit;
 	ft_end(data);
+	ft_printf_error("exit\n");
 	exit(i);
 }
 

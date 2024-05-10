@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 18:04:37 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/07 17:03:37 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:33:25 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ int	check_syntax(t_data *tools)
 	if (!tmp)
 		return (0);
 	if ((tmp->type == HEREDOC && (tmp->next->type == GREAT
+				|| tmp->next->type == LESS || tmp->next->type == APPEND
 				|| tmp->next->type == HEREDOC)) || (tmp->type == APPEND
-			&& (tmp->next->type == APPEND || tmp->next->type == LESS)))
+			&& (tmp->next->type == APPEND || tmp->next->type == LESS
+				|| tmp->next->type == GREAT || tmp->next->type == HEREDOC)))
 	{
 		printf(SYNTAX_ERR);
 		g_status = 258;
@@ -68,7 +70,7 @@ int	check_syntax(t_data *tools)
 
 int	ft_verif_pipe(t_token *token)
 {
-	int (i) = 0;
+	int(i) = 0;
 	if (token->type == PIPE)
 		token = token->next;
 	while (token && token->type != PIPE)
@@ -88,19 +90,22 @@ int	ft_verif_pipe(t_token *token)
 
 int	first_check(t_token *tmp)
 {
-	if ((tmp->type == HEREDOC && (tmp->next->type == GREAT
-				|| tmp->next->type == HEREDOC)) || (tmp->type == APPEND
-			&& (tmp->next->type == APPEND || tmp->next->type == LESS)))
+	if ((tmp->type == HEREDOC && (tmp->next && (tmp->next->type == GREAT
+					|| tmp->next->type == LESS || tmp->next->type == APPEND
+					|| tmp->next->type == HEREDOC))) || (tmp->type == APPEND
+			&& (tmp->next && (tmp->next->type == APPEND
+					|| tmp->next->type == LESS || tmp->next->type == GREAT
+					|| tmp->next->type == HEREDOC))))
 	{
 		printf(SYNTAX_ERR);
 		g_status = 258;
 		return (printf("%s'\n", tmp->value), 1);
 	}
-	else if ((tmp->type == GREAT && (tmp->next->type == GREAT
+	else if ((tmp->type == GREAT && (tmp->next && (tmp->next->type == GREAT
 				|| tmp->next->type == HEREDOC || tmp->next->type == APPEND
-				|| tmp->next->type == LESS)) || (tmp->type == LESS
-			&& (tmp->next->type == LESS || tmp->next->type == HEREDOC
-				|| tmp->next->type == APPEND || tmp->next->type == GREAT)))
+				|| tmp->next->type == LESS))) || (tmp->type == LESS
+			&& (tmp->next && (tmp->next->type == LESS || tmp->next->type == HEREDOC
+				|| tmp->next->type == APPEND || tmp->next->type == GREAT))))
 	{
 		printf(SYNTAX_ERR);
 		g_status = 258;

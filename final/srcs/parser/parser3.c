@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnunez-t <lnunez-t@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 17:07:02 by lnunez-t          #+#    #+#             */
-/*   Updated: 2024/05/07 15:40:29 by lnunez-t         ###   ########.fr       */
+/*   Updated: 2024/05/10 07:26:29 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	check_null_list(t_data *tools)
 	if ((!tmp && g_status != 6 && g_status != 5) || (tmp && !tmp->value))
 	{
 		if (tmp && !tmp->value)
+		{
+			tools->exit = 127;
 			ft_printf_error("bash: command not found\n");
+		}
 		g_status = 258;
 		return (1);
 	}

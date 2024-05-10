@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:52:41 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/05 18:31:04 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/10 12:08:02 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_env	*ft_unset_next(t_env *env)
 	return (env);
 }
 
-void	ft_unset_end(char **str, t_data *data)
+void	ft_unset_end(char **str, t_data *data, int i)
 {
 	t_env	*tmp;
 	t_env	*env;
@@ -50,8 +50,8 @@ void	ft_unset_end(char **str, t_data *data)
 	env = data->env;
 	while (env)
 	{
-		if (ft_strncmp(str[1], env->value, ft_strlen(str[1])) == 0
-			&& env->value[ft_strlen(str[1])] == '=')
+		if (ft_strncmp(str[i], env->value, ft_strlen(str[i])) == 0
+			&& env->value[ft_strlen(str[i])] == '=')
 		{
 			data->env = ft_unset_next(env);
 			break ;
@@ -83,8 +83,13 @@ void	ft_unset(char **str, t_data *data, int i)
 	}
 	else
 	{
-		if (ft_strncmp(str[1], "PATH", 5) == 0)
-			data->r_path = FALSE;
-		ft_unset_end(str, data);
+		i = 1;
+		while (str[i])
+		{
+			if (ft_strncmp(str[i], "PATH", 5) == 0)
+				data->r_path = FALSE;
+			ft_unset_end(str, data, i);
+			i++;
+		}
 	}
 }

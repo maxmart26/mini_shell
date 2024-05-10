@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:22:01 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/05 18:10:42 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/10 11:49:34 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ void	ft_export_modif(char *token, t_env *env)
 	env->value = ft_strdup(token);
 }
 
-int	verif_export_acsii(unsigned int i, char **str, t_data *data)
+int	verif_export_acsii(unsigned int i, char *str, t_data *data)
 {
 	if (i == '@' || i == '_' || i == '-' || i == '\\' || i == '%' || i == '+'
 		|| (i == '=' && i == '\0') || (i <= '9' && i >= '0'))
 	{
-		ft_printf_error("bash: export: `%s': not a valid identifier\n", str[1]);
+		ft_printf_error("bash: export: `%s': not a valid identifier\n", str);
 		data->exit = 1;
 		return (1);
 	}

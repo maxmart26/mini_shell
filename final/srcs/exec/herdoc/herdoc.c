@@ -6,7 +6,7 @@
 /*   By: matorgue <warthog2603@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:06:12 by matorgue          #+#    #+#             */
-/*   Updated: 2024/05/05 18:35:25 by matorgue         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:04:33 by matorgue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,14 @@ t_token	*open_heredoc(t_data *data, t_token *token)
 		close(data->std_int);
 		data->std_int = -1;
 	}
+	if (token->fd_int > 2)
+			close(token->fd_int);
 	while (token->next && token->next->type != PIPE)
 	{
 		token->fd_int = data->std_int;
 		token = token->next;
 	}
+	token->fd_int = data->std_int;
 	g_status = 1;
 	return (token);
 }
